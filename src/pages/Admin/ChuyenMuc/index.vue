@@ -12,9 +12,7 @@
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <SelectComponent label="Danh Mục" :options="danhMuc" v-model="addChuyenMuc.id_chuyen_muc_cha"></SelectComponent>
                         </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                             <SelectComponent label="Tình Trạng" v-model="addChuyenMuc.tinh_trang" :options="tinhTrang"></SelectComponent>
-                        </div>
                     </div>
                 </template>
                 <template #card-footer>
@@ -49,7 +47,7 @@
                                             <button class="btn btn-success" @click="changeStatus(value)" style="width: 120px;">Hiển Thị</button>
                                         </template>
                                         <template v-else>
-                                            <button class="btn btn-info" @click="changeStatus(value)" style="width: 120px;">Tạm Đóng</button>
+                                            <button class="btn btn  -info" @click="changeStatus(value)" style="width: 120px;">Tạm Đóng</button>
                                         </template>
                                     </td>
                                     <td class="text-center align-middle text-nowrap">
