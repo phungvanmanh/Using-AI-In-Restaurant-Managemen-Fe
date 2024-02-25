@@ -10,6 +10,7 @@ export default createStore({
         dataDanhMuc : [],
         dataKhuVuc  : [],
         dataMonAn :[],
+        dataDanhMuc : [],
     },
     getters : {
         toSlug: () => (str) => {

@@ -62,14 +62,14 @@ export default createStore({
                 console.error("Có lỗi xảy ra trong onFetchDanhnMuc:", error);
             }
         },
-        onFetchKhuVuc: async ({ commit }) => {
-            try {
-                const response = await axios.get("admin/khu-vuc/get-data");
-                commit('fecthKhuVuc', response.data.data);
-            } catch (error) {
-                console.error("Có lỗi xảy ra trong onFetchKhuVuc:", error);
-            }
-        },
+        // onFetchKhuVuc: async ({ commit }) => {
+        //     try {
+        //         const response = await axios.get("admin/khu-vuc/get-data");
+        //         commit('fecthKhuVuc', response.data.data);
+        //     } catch (error) {
+        //         console.error("Có lỗi xảy ra trong onFetchKhuVuc:", error);
+        //     }
+        // },
         onFetchMonAn: async ({ commit }) => {
             try {
                 const response = await axios.get("admin/mon-an/get-data");

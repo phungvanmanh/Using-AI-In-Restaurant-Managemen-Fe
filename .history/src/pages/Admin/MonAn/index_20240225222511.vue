@@ -14,7 +14,6 @@
                     </InputComponentVue>
                     <InputComponentVue
                         label="Price"
-                        type="number"
                         placeholder="Enter price..."
                         v-model="addMonAn.price"
                     >

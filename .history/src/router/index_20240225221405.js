@@ -21,7 +21,7 @@ const routes = [
                 path: "khu-vuc",
                 component: KhuVuc,
             },
-            {
+           {
               path: "mon-an",
               component: MonAn,
             },

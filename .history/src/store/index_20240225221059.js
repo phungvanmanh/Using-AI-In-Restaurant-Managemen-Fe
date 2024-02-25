@@ -10,6 +10,7 @@ export default createStore({
         dataDanhMuc : [],
         dataKhuVuc  : [],
         dataMonAn :[],
+        dataDanhMuc : [],
     },
     getters : {
         toSlug: () => (str) => {
@@ -78,5 +79,5 @@ export default createStore({
                 console.error("Có lỗi xảy ra trong onFetchMonAn:", error);
             }
         },
-    },
+    }
 });

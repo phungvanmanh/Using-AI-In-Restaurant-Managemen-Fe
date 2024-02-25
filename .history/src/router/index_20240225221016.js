@@ -21,13 +21,12 @@ const routes = [
                 path: "khu-vuc",
                 component: KhuVuc,
             },
-            {
+           {
               path: "mon-an",
               component: MonAn,
             },
         ],
     },
-]
 const router = new createRouter({
     history: createWebHistory(),
     routes,

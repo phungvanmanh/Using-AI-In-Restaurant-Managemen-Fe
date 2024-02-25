@@ -58,26 +58,6 @@
                         </a>
                     </router-link>
                 </li>
-                <li class="nav-item">
-                    <router-link to="/mon-an">
-                        <a class="nav-link">
-                            <div class="parent-icon">
-                                <i class="bx bx-cookie"></i>
-                            </div>
-                            <div class="menu-title">Dish</div>
-                        </a>
-                    </router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link to="/khu-vuc">
-                        <a class="nav-link">
-                            <div class="parent-icon">
-                                <i class="bx bx-cookie"></i>
-                            </div>
-                            <div class="menu-title">Area</div>
-                        </a>
-                    </router-link>
-                </li>
             </ul>
         </nav>
     </div>

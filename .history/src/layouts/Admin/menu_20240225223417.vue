@@ -49,32 +49,12 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <router-link to="/danh-muc">
+                    <router-link to="">
                         <a class="nav-link">
                             <div class="parent-icon">
                                 <i class="bx bx-cookie"></i>
                             </div>
-                            <div class="menu-title">Category</div>
-                        </a>
-                    </router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link to="/mon-an">
-                        <a class="nav-link">
-                            <div class="parent-icon">
-                                <i class="bx bx-cookie"></i>
-                            </div>
-                            <div class="menu-title">Dish</div>
-                        </a>
-                    </router-link>
-                </li>
-                <li class="nav-item">
-                    <router-link to="/khu-vuc">
-                        <a class="nav-link">
-                            <div class="parent-icon">
-                                <i class="bx bx-cookie"></i>
-                            </div>
-                            <div class="menu-title">Area</div>
+                            <div class="menu-title">Widgets</div>
                         </a>
                     </router-link>
                 </li>

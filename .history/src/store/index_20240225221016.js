@@ -10,6 +10,7 @@ export default createStore({
         dataDanhMuc : [],
         dataKhuVuc  : [],
         dataMonAn :[],
+        dataDanhMuc : [],
     },
     getters : {
         toSlug: () => (str) => {
@@ -68,8 +69,6 @@ export default createStore({
                 commit('fecthKhuVuc', response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchKhuVuc:", error);
-            }
-        },
         onFetchMonAn: async ({ commit }) => {
             try {
                 const response = await axios.get("admin/mon-an/get-data");
