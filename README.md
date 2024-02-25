@@ -1,4 +1,4 @@
-# quan-ly-trang-suc-fe
+# Restaurant Food
 
 ## Project setup
 ```
