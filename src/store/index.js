@@ -9,6 +9,8 @@ export default createStore({
         danh_muc_select : [],
         dataDanhMuc : [],
         dataKhuVuc  : [],
+        dataMonAn :[],
+        dataDanhMuc : [],
     },
     getters : {
         toSlug: () => (str) => {
@@ -39,7 +41,10 @@ export default createStore({
 
         fecthKhuVuc(state, data) {
             state.dataKhuVuc = data;
-        }
+        },
+        fecthMonAn (state, data){
+            state.dataMonAn = data;
+        },
     },
     actions: {
         onFetchChuyenMuc: async ({ commit }) => {
@@ -64,6 +69,12 @@ export default createStore({
                 commit('fecthKhuVuc', response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchKhuVuc:", error);
+        onFetchMonAn: async ({ commit }) => {
+            try {
+                const response = await axios.get("admin/mon-an/get-data");
+                commit('fecthMonAn', response.data.data);
+            } catch (error) {
+                console.error("Có lỗi xảy ra trong onFetchMonAn:", error);
             }
         },
     },
