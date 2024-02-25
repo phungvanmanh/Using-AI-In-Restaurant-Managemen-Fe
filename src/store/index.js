@@ -8,8 +8,9 @@ export default createStore({
         ],
 
         danh_muc_select : [],
-
-        dataDanhMuc : []
+        dataMonAn :[],
+        dataDanhMuc : [],
+    
     },
     getters : {
         toSlug: () => (str) => {
@@ -33,6 +34,9 @@ export default createStore({
         fecthChuyenMuc (state, data){
             state.danh_muc_select = [{text : "Root", value : "0", tinh_trang : 1}, ...data.map(item => ({ text: item.ten_chuyen_muc, value: item.id, tinh_trang : item.tinh_trang }))];
             state.dataDanhMuc = [...data];
+        },
+        fecthMonAn (state, data){
+            state.dataMonAn = data;
         }
     },
     actions: {
@@ -42,6 +46,14 @@ export default createStore({
                 commit('fecthChuyenMuc', response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchChuyenMuc:", error);
+            }
+        },
+        onFetchMonAn: async ({ commit }) => {
+            try {
+                const response = await axios.get("admin/mon-an/get-data");
+                commit('fecthMonAn', response.data.data);
+            } catch (error) {
+                console.error("Có lỗi xảy ra trong onFetchMonAn:", error);
             }
         },
     },
