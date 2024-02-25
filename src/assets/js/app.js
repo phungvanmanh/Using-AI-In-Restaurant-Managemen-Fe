@@ -1,3 +1,14 @@
+(function() {
+	var originalAddEventListener = EventTarget.prototype.addEventListener;
+  
+	EventTarget.prototype.addEventListener = function(type, listener, options) {
+		if (type === "wheel" || type === "mousewheel" || type === "touchstart" || type === "touchmove") {
+			options = options || {};
+			options.passive = true; // Force passive listeners
+		}
+		return originalAddEventListener.call(this, type, listener, options);
+	};
+})();
 import PerfectScrollbar from 'perfect-scrollbar';
 import $ from 'jquery';
 $(function () {

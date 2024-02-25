@@ -9,6 +9,9 @@ module.exports = defineConfig({
         jQuery: 'jquery',
         'window.jQuery': 'jquery'
       }),
+      new webpack.DefinePlugin({
+        __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: 'false',
+      })
     ],
   },
 })

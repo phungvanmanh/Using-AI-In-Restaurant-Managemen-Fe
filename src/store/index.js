@@ -6,11 +6,11 @@ export default createStore({
             {text : "Hiển Thị", value : 1},
             {text : "Tạm Đóng", value : 0},
         ],
-
         danh_muc_select : [],
+        dataDanhMuc : [],
+        dataKhuVuc  : [],
         dataMonAn :[],
         dataDanhMuc : [],
-    
     },
     getters : {
         toSlug: () => (str) => {
@@ -35,9 +35,16 @@ export default createStore({
             state.danh_muc_select = [{text : "Root", value : "0", tinh_trang : 1}, ...data.map(item => ({ text: item.ten_chuyen_muc, value: item.id, tinh_trang : item.tinh_trang }))];
             state.dataDanhMuc = [...data];
         },
+        fecthDanhMuc(state, data) {
+            state.dataDanhMuc = data;
+        },
+
+        fecthKhuVuc(state, data) {
+            state.dataKhuVuc = data;
+        },
         fecthMonAn (state, data){
             state.dataMonAn = data;
-        }
+        },
     },
     actions: {
         onFetchChuyenMuc: async ({ commit }) => {
@@ -48,6 +55,20 @@ export default createStore({
                 console.error("Có lỗi xảy ra trong onFetchChuyenMuc:", error);
             }
         },
+        onFetchDanhMuc: async ({ commit }) => {
+            try {
+                const response = await axios.get("admin/danh-muc/get-data");
+                commit('fecthDanhMuc', response.data.data);
+            } catch (error) {
+                console.error("Có lỗi xảy ra trong onFetchDanhnMuc:", error);
+            }
+        },
+        onFetchKhuVuc: async ({ commit }) => {
+            try {
+                const response = await axios.get("admin/khu-vuc/get-data");
+                commit('fecthKhuVuc', response.data.data);
+            } catch (error) {
+                console.error("Có lỗi xảy ra trong onFetchKhuVuc:", error);
         onFetchMonAn: async ({ commit }) => {
             try {
                 const response = await axios.get("admin/mon-an/get-data");
