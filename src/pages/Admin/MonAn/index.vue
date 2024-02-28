@@ -41,7 +41,7 @@
             </CardComponentVue>
         </div>
         <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
-            <CardComponentVue :required="0">
+            <CardComponentVue :required="false">
                 <template #card-header>
                     <b> List of dishes</b>
                 </template>
@@ -125,7 +125,7 @@
                                     <td
                                         class="text-center align-middle text-nowrap"
                                     >
-                                        {{ value.id_category }}
+                                        {{ value.name_category }}
                                     </td>
                                     <td
                                         class="text-center align-middle text-nowrap"
@@ -186,8 +186,7 @@
                                             </template>
                                         </ModalComponentVue>
                                         <ModalComponentVue
-                                            class="text-center"
-                                            titleId="xoaMonAn"
+                                            titleId="xoa_mon_an"
                                             @click="
                                                 Object.assign(
                                                     deletemonan,

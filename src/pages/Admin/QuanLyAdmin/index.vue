@@ -1,95 +1,151 @@
 <template>
     <div class="row">
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-            <div class="card">
-                <div class="card-header">Thêm Mới Admin</div>
-                <div class="card-body"> 
-                    <InputComponent v-model="add.ho_va_ten" id="ho_va_ten" label="Họ Và Tên" type="text" placeholder="Nhập vào họ và tên"></InputComponent>
-                    <CheckBoxComponent v-model="add.check" id="check-box-1" label="Danh Mục"></CheckBoxComponent>
-                    <CheckBoxComponent id="check-box-2" label="Danh Mục 1"></CheckBoxComponent>
-                    <CheckBoxComponent id="check-box-3" label="Danh Mục 2"></CheckBoxComponent>
-                    <CheckBoxComponent id="check-box-4" label="Danh Mục 3"></CheckBoxComponent>
-                    <RadioComponent id="radio-1" v-model="add.check1" label="Radio 1"></RadioComponent>
-                    <RadioComponent id="radio-2" label="Radio 2"></RadioComponent>
-                    <RadioComponent id="radio-3" label="Radio 3"></RadioComponent>
-                    <SelectComponent v-model="add.tinh_trang" label="Tình Trạng" :options="options"></SelectComponent>
-                </div>
-                <div class="card-footer">
-                    <button class="btn btn-primary float-end" @click="ThemMoi()">Thêm Mới</button>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    Danh Sách Tài Khoản
-                </div>
-                <div class="card-body">
-                    <div class="table-responsive">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th class="text-center align-middle text-nowrap">#</th>
-                                    <th class="text-center align-middle text-nowrap">#</th>
-                                    <th class="text-center align-middle text-nowrap">#</th>
-                                    <th class="text-center align-middle text-nowrap">#</th>
-                                    <th class="text-center align-middle text-nowrap">#</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-                        </table>
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+            <CardComponent :required="false">
+                <template #card-header>
+                    <div
+                        class="row d-flex justify-content-between align-items-center"
+                    >
+                        <div class="col">
+                            <span><b>List of Admin</b></span>
+                        </div>
+                        <div class="col text-end">
+                            <ModalComponent
+                                color="primary"
+                                label="Add news"
+                                titleId="add_news"
+                                sizeModal="modal-lg"
+                            >
+                                <template #modal-header>
+                                    <span><b>Add news admin</b></span>
+                                </template>
+                                <template #modal-body>
+                                    <div
+                                        class="row d-flex justify-content-between align-items-center"
+                                    >
+                                        <div class="col">
+                                            <InputComponent
+                                                v-model="
+                                                    addAmin.first_last_name
+                                                "
+                                                label="First and last name"
+                                                placeholder="Enter your first and last name..."
+                                            />
+                                        </div>
+                                        <div class="col">
+                                            <InputComponent
+                                                v-model="addAmin.email"
+                                                label="Email"
+                                                type="email"
+                                                placeholder="example@gmail.com"
+                                            />
+                                        </div>
+                                    </div>
+                                    <div
+                                        class="row d-flex justify-content-between align-items-center"
+                                    >
+                                        <div class="col">
+                                            <InputComponent
+                                                v-model="addAmin.phone_number"
+                                                label="Phone number"
+                                                placeholder="(999) 999-9999"
+                                            />
+                                        </div>
+                                        <div class="col">
+                                            <InputComponent
+                                                v-model="addAmin.date_birth"
+                                                label="Date of birth"
+                                                type="date"
+                                            />
+                                        </div>
+                                    </div>
+                                    <InputComponent
+                                        v-model="addAmin.password"
+                                        label="Password"
+                                        type="text"
+                                        placeholder="Enter your password..."
+                                    />
+                                    <div
+                                        class="row d-flex justify-content-between align-items-center"
+                                    >
+                                        <div class="col">
+                                            <SelectComponent
+                                                label="Permission"
+                                                :options="dataQuyen"
+                                                v-model="addAmin.id_permission"
+                                            />
+                                        </div>
+                                        <div class="col">
+                                            <SelectComponent
+                                                label="Status"
+                                                :options="status"
+                                                v-model="addAmin.status"
+                                            />
+                                        </div>
+                                    </div>
+                                </template>
+                                <template #modal-footer>
+                                    <button
+                                        class="btn btn-primary"
+                                        @click="addNew()"
+                                    >
+                                        Add new
+                                    </button>
+                                    <button
+                                        class="btn btn-secondary"
+                                        data-bs-dismiss="modal"
+                                    >
+                                        Close
+                                    </button>
+                                </template>
+                            </ModalComponent>
+                        </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-3">
-            <CardComponent :required="1" newClass="text-end">
-                <template #card-header>
-                    <span>Thêm Mới Danh Mục</span>
-                </template>
-                <template #card-body>
-                    <InputComponent v-model="add.ho_va_ten" id="ho_va_ten" label="Họ Và Tên" type="text" placeholder="Nhập vào họ và tên"></InputComponent>
-                    <CheckBoxComponent v-model="add.check" id="check-box-1" label="Danh Mục"></CheckBoxComponent>
-                    <CheckBoxComponent id="check-box-2" label="Danh Mục 1"></CheckBoxComponent>
-                    <CheckBoxComponent id="check-box-3" label="Danh Mục 2"></CheckBoxComponent>
-                    <CheckBoxComponent id="check-box-4" label="Danh Mục 3"></CheckBoxComponent>
-                    <RadioComponent id="radio-1" v-model="add.check1" label="Radio 1"></RadioComponent>
-                    <RadioComponent id="radio-2" label="Radio 2"></RadioComponent>
-                    <RadioComponent id="radio-3" label="Radio 3"></RadioComponent>
-                    <SelectComponent v-model="add.tinh_trang" label="Tình Trạng" :options="options"></SelectComponent>
-                </template>
-                <template #card-footer>
-                    <ModalComponent titleId="test_123" label="Thêm Mới"></ModalComponent>
-                </template>
-            </CardComponent>
-        </div>
-        <div class="col-9">
-            <CardComponent :required="0">
-                <template #card-header>
-                    Danh Sách Danh Mục
                 </template>
                 <template #card-body>
                     <TableComponent>
                         <template #thead>
                             <tr>
-                                <th class="text-center align-middle text-nowrap">#</th>
-                                <th class="text-center align-middle text-nowrap">#</th>
-                                <th class="text-center align-middle text-nowrap">#</th>
-                                <th class="text-center align-middle text-nowrap">#</th>
-                                <th class="text-center align-middle text-nowrap">#</th>
-                            </tr>
-                        </template>
-                        <template #tbody>
-                            <tr>
-                                <th class="text-center align-middle text-nowrap">1</th>
-                                <td class="text-center align-middle text-nowrap">2</td>
-                                <td class="text-center align-middle text-nowrap">3</td>
-                                <td class="text-center align-middle text-nowrap">4</td>
-                                <td class="text-center align-middle text-nowrap">5</td>
+                                <th
+                                    class="text-center align-middle text-nowrap"
+                                >
+                                    #
+                                </th>
+                                <th
+                                    class="text-center align-middle text-nowrap"
+                                >
+                                    First And Last Name
+                                </th>
+                                <th
+                                    class="text-center align-middle text-nowrap"
+                                >
+                                    Email
+                                </th>
+                                <th
+                                    class="text-center align-middle text-nowrap"
+                                >
+                                    Phone Number
+                                </th>
+                                <th
+                                    class="text-center align-middle text-nowrap"
+                                >
+                                    Date Birth
+                                </th>
+                                <th
+                                    class="text-center align-middle text-nowrap"
+                                >
+                                    Status
+                                </th>
+                                <th
+                                    class="text-center align-middle text-nowrap"
+                                >
+                                    Permission
+                                </th>
+                                <th
+                                    class="text-center align-middle text-nowrap"
+                                >
+                                    Action
+                                </th>
                             </tr>
                         </template>
                     </TableComponent>
@@ -97,98 +153,50 @@
             </CardComponent>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <BarChartComponent :chartData="dataChart"></BarChartComponent>
-                </div>
-            </div>
-        </div>
-        <div class="col-12">
-            <PieChartComponent :chartData="dataChartPie" :titleChart="titleChart"></PieChartComponent>
-        </div>
-    </div>
-    <div class="row">
-        <div class="card">
-            <div class="card-body">
-                <CalendarComponent/>
-            </div>
-        </div>
-    </div>
 </template>
 
 <script>
-import CheckBoxComponent from '@/components/CheckBoxComponent.vue';
-import InputComponent from '@/components/InputComponent.vue';
-import RadioComponent from '@/components/RadioComponent.vue';
-import SelectComponent from '@/components/SelectComponent.vue';
-import CardComponent from '@/components/CardComponent.vue';
-import ModalComponent from '@/components/ModalComponent.vue';
-import TableComponent from '@/components/TableComponent.vue';
-import BarChartComponent from '@/components/BarChartComponent.vue';
-import PieChartComponent from '@/components/PieChartComponent.vue';
-import CalendarComponent from '@/components/CalendarComponent.vue';
-import { ref } from 'vue';
+import CardComponent from "@/components/CardComponent.vue";
+import InputComponent from "@/components/InputComponent.vue";
+import SelectComponent from "@/components/SelectComponent.vue";
+import TableComponent from "@/components/TableComponent.vue";
+import ModalComponent from "@/components/ModalComponent.vue";
+import { computed, onMounted, ref } from "vue";
+import { useStore } from "vuex";
+// import axios from "@/axiosConfig";
+// import Toast from "@/toastConfig";
+// import $ from "jquery";
 export default {
-    name: 'quan-ly-admin',
+    name: "quan-ly-admin",
     components: {
-        InputComponent,
-        CheckBoxComponent,
-        RadioComponent,
-        SelectComponent,
         CardComponent,
-        ModalComponent,
+        InputComponent,
         TableComponent,
-        BarChartComponent,
-        PieChartComponent,
-        CalendarComponent
+        SelectComponent,
+        ModalComponent,
     },
     setup() {
-        const add = ref({});
-        const titleChart = "Pie Chart";
-        const dataChartPie = ref({
-            labels: ["Africa", "Asia", "Europe", "Latin America", "North America"],
-            datasets: [{
-                // label: "Population (millions)",
-                backgroundColor: ["#0d6efd", "#212529", "#17a00e", "#f41127", "#ffc107"],
-                data: [2478, 5267, 734, 784, 433],
-            }]
-        });
+        const store = useStore();
+        const addAmin = ref({});
+        const status = computed(() => store.state.tinh_trang);
+        const dataQuyen = computed(() =>
+            store.state.dataQuyen
+                .filter((item) => item.status == 1)
+                .map((item) => ({
+                    text: item.name_permission,
+                    value: item.id,
+                    tinh_trang: item.status,
+                }))
+        );
 
-        const dataChart = ref({
-            labels: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
-            datasets: [
-                {
-                    data: [1,2,3,4,5,6,9],
-                    label: 'Google',
-                    barPercentage: .5,
-                    backgroundColor: "#0d6efd"
-                }, 
-                // {
-                //     label: 'Facebook',
-                //     data: [1,2,3,4,5,6,9],
-                //     barPercentage: .5,
-                //     backgroundColor: "#f41127"
-                // }
-            ],
-            backgroundColor : [],
-            borderColor : [],
-            borderWidth: 1,
+        onMounted(() => {
+            store.dispatch("onFetchQuyen");
+            store.dispatch("onFetchAdmin");
         })
 
-        const options = ref([
-            { text: 'One', value: '1' },
-            { text: 'Two', value: '2' },
-            { text: 'Three', value: '3' },
-        ]);
-
-        function ThemMoi() {
-            console.log(add.value);
-        }
-        return { add, options, dataChart, titleChart, dataChartPie, ThemMoi }
-    }
-}
+        return { status, dataQuyen, addAmin };
+    },
+};
 </script>
-<style scoped>
-</style>
+
+<style></style>
