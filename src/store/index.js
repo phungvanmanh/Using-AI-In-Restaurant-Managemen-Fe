@@ -127,7 +127,7 @@ export default createStore({
         onFetchAdmin: async ({ commit }) => {
             try {
                 const response = await axios.get("admin/get-data");
-                commit("fecthAdmin", response.data.data.data);
+                commit("fecthAdmin", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchAdmin:", error);
             }

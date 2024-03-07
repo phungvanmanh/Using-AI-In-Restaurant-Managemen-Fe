@@ -68,7 +68,7 @@
                             <div class="parent-icon">
                                 <i class="bx bx-cookie"></i>
                             </div>
-                            <div class="menu-title">Decentralization</div>
+                            <div class="menu-title">Permission</div>
                         </a>
                     </router-link>
                 </li>
