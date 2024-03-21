@@ -13,6 +13,7 @@ export default createStore({
         dataBan : [],
         dataQuyen : [],
         dataAdmin : [],
+        dataStaff : [],
     },
     getters: {
         toSlug: () => (str) => {
@@ -67,6 +68,9 @@ export default createStore({
 
         fecthAdmin(state, data) {
             state.dataAdmin = data;
+        },
+        fecthStaff(state, data) {
+            state.dataStaff = data;
         },
     },
     actions: {
@@ -130,6 +134,14 @@ export default createStore({
                 commit("fecthAdmin", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchAdmin:", error);
+            }
+        },
+        onFetchStaff: async ({ commit }) => {
+            try {
+                const response = await axios.get("admin/staff/get-data");
+                commit("fecthStaff", response.data.data);
+            } catch (error) {
+                console.error("Có lỗi xảy ra trong onFetchStaff:", error);
             }
         },
     },
