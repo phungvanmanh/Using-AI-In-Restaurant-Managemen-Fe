@@ -220,42 +220,37 @@
                                             </template>
                                             <template #modal-body>
                                                 <InputComponent
-                                                    v-model="editStaff.ho_va_ten"
-                                                    @keyup="
-                                                        convertToSlug(editStaff)
-                                                    "
+                                                    v-model="editStaff.ho_ten"
+                                                    
                                                     label="Name area"
                                                     placeholder="Enter the area name..."
                                                 />
                                                 <InputComponent
-                                                    v-model="editStaff.dien_thoai"
+                                                    v-model="editStaff.so_dien_thoai"
                                                     label="Phone Number"
                                                     placeholder="Enter the Phone Number..."
-                                                    :disabled="true"
                                                 />
                                                 <InputComponent
                                                     v-model="editStaff.ngay_sinh"
                                                     label="Date of Birth"
+                                                    type = "date"
                                                     placeholder="Enter the Date of Birth..."
-                                                    :disabled="true"
                                                 />
                                                 <InputComponent
                                                     v-model="editStaff.email"
                                                     label="Email"
                                                     placeholder="Enter the Email..."
-                                                    :disabled="true"
                                                 />
                                                 <InputComponent
-                                                    v-model="editStaff.code_staff"
+                                                    v-model="editStaff.ma_nv"
                                                     label="Code Staff"
                                                     placeholder="Enter the Code Staff..."
-                                                    :disabled="true"
                                                 />
                                             </template>
                                             <template #modal-footer>
                                                 <button
                                                     class="btn btn-primary"
-                                                    @click="updateKhuVuc()"
+                                                    @click="updateStaff()"
                                                 >
                                                     Update
                                                 </button>
@@ -293,7 +288,7 @@
                                             <template #modal-footer>
                                                 <button
                                                     class="btn btn-danger"
-                                                    @click="deleteKhuVuc()"
+                                                    @click="deleteNhanVien()"
                                                 >
                                                     Delete
                                                 </button>
@@ -352,7 +347,7 @@ export default {
 
         // const convertToSlug = (obj) => {
         //     obj.slug_staff = store.getters.toSlug(obj.name_staff);
-        // };
+        // }
 
         const addNew = () => {
             axios
@@ -378,7 +373,7 @@ export default {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         addStaff.value = {};
-                        store.dispatch("onFetchKhuVuc");
+                        store.dispatch("onFetchStaff");
                     }
                 })
                 .catch((res) => {
