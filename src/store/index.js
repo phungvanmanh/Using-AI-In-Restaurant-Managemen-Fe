@@ -70,12 +70,6 @@ export default createStore({
         fecthAdmin(state, data) {
             state.dataAdmin = data;
         },
-        fecthStaff(state, data) {
-            state.dataStaff = data;
-        },
-        fecthKhachHang(state, data) {
-            state.dataKhachHang = data;
-        },
     },
     actions: {
         onFetchChuyenMuc: async ({ commit }) => {
@@ -138,22 +132,6 @@ export default createStore({
                 commit("fecthAdmin", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchAdmin:", error);
-            }
-        },
-        onFetchStaff: async ({ commit }) => {
-            try {
-                const response = await axios.get("admin/staff/get-data");
-                commit("fecthStaff", response.data.data);
-            } catch (error) {
-                console.error("Có lỗi xảy ra trong onFetchStaff:", error);
-            }
-        },
-        onFetchKhachHang: async ({ commit }) => {
-            try {
-                const response = await axios.get("admin/khach-hang/get-data");
-                commit("fecthKhachHang", response.data.data);
-            } catch (error) {
-                console.error("Có lỗi xảy ra trong onFetchKhachHang:", error);
             }
         },
     },
