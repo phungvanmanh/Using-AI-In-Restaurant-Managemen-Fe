@@ -63,6 +63,26 @@
                     </router-link>
                 </li>
                 <li class="nav-item">
+                    <router-link to="/staff">
+                        <a class="nav-link">
+                            <div class="parent-icon">
+                                <i class="bx bx-cookie"></i>
+                            </div>
+                            <div class="menu-title">Staff</div>
+                        </a>
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link to="/khach-hang">
+                        <a class="nav-link">
+                            <div class="parent-icon">
+                                <i class="bx bx-cookie"></i>
+                            </div>
+                            <div class="menu-title">Khách Hàng</div>
+                        </a>
+                    </router-link>
+                </li>
+                <li class="nav-item">
                     <router-link to="/quyen">
                         <a class="nav-link">
                             <div class="parent-icon">

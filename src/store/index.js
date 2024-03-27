@@ -13,6 +13,7 @@ export default createStore({
         dataBan : [],
         dataQuyen : [],
         dataAdmin : [],
+        dataStaff : [],
         dataKhachHang : [],
     },
     getters: {
