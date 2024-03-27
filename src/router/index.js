@@ -9,6 +9,7 @@ import DanhMuc from "@/pages/Admin/DanhMuc";
 import KhuVuc from "@/pages/Admin/KhuVuc";
 import MonAn from '@/pages/Admin/MonAn';
 import Ban from "@/pages/Admin/Ban";
+import LichLamViec from "@/pages/Staff/LichLamViec";
 const routes = [
     {
         path: "/",
@@ -52,6 +53,16 @@ const routes = [
             },
         ],
     },
+    {
+        path: "/nhan-vien",
+        component: AdminMaster,
+        children: [
+            {
+                path: "lich-lam-viec",
+                component: LichLamViec,
+            },
+        ]
+    }
 ]
 const router = new createRouter({
     history: createWebHistory(),
