@@ -15,6 +15,7 @@ export default createStore({
         dataAdmin : [],
         dataStaff : [],
         dataKhachHang : [],
+        dataUser      : {},
     },
     getters: {
         toSlug: () => (str) => {
@@ -70,11 +71,15 @@ export default createStore({
         fecthAdmin(state, data) {
             state.dataAdmin = data;
         },
+
+        FetchUserLogin(state, data) {
+            state.dataUser = data;
+        },
     },
     actions: {
         onFetchChuyenMuc: async ({ commit }) => {
             try {
-                const response = await axios.get("admin/chuyen-muc/get-data");
+                const response = await axios.get("admin/chuyen-muc/get-data", 'admin');
                 commit("fecthChuyenMuc", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchChuyenMuc:", error);
@@ -83,7 +88,7 @@ export default createStore({
 
         onFetchDanhMuc: async ({ commit }) => {
             try {
-                const response = await axios.get("admin/danh-muc/get-data");
+                const response = await axios.get("admin/danh-muc/get-data", 'admin');
                 commit("fecthDanhMuc", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchDanhnMuc:", error);
@@ -92,7 +97,7 @@ export default createStore({
 
         onFetchKhuVuc: async ({ commit }) => {
             try {
-                const response = await axios.get("admin/khu-vuc/get-data");
+                const response = await axios.get("admin/khu-vuc/get-data", 'admin');
                 commit("fecthKhuVuc", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchKhuVuc:", error);
@@ -101,7 +106,7 @@ export default createStore({
 
         onFetchMonAn: async ({ commit }) => {
             try {
-                const response = await axios.get("admin/mon-an/get-data");
+                const response = await axios.get("admin/mon-an/get-data", 'admin');
                 commit("fecthMonAn", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchMonAn:", error);
@@ -110,7 +115,7 @@ export default createStore({
 
         onFetchBan: async ({ commit }) => {
             try {
-                const response = await axios.get("admin/ban/get-data");
+                const response = await axios.get("admin/ban/get-data", 'admin');
                 commit("fecthBan", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchBan:", error);
@@ -119,7 +124,7 @@ export default createStore({
 
         onFetchQuyen: async ({ commit }) => {
             try {
-                const response = await axios.get("admin/quyen/get-data");
+                const response = await axios.get("admin/quyen/get-data", 'admin');
                 commit("fecthQuyen", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchQuyen:", error);
@@ -128,10 +133,20 @@ export default createStore({
         
         onFetchAdmin: async ({ commit }) => {
             try {
-                const response = await axios.get("admin/get-data");
+                const response = await axios.get("admin/get-data", 'admin');
                 commit("fecthAdmin", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchAdmin:", error);
+            }
+        },
+
+        onFetchUserLogin: async ({ commit }) => {
+            try {
+                const response = await axios.get('admin/get-user', 'admin');
+                console.log("Đang lấy user: ", response.data);
+                commit("FetchUserLogin", response.data);
+            } catch (error) {
+                console.error("Có lỗi xảy ra trong onFetchUserLogin:", error);
             }
         },
     },

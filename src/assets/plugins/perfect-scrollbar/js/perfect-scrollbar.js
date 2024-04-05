@@ -4,9 +4,16 @@
  * @license MIT
  */
 (function (global, factory) {
-	typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-	typeof define === 'function' && define.amd ? define(factory) :
-	(global.PerfectScrollbar = factory());
+  // Check for CommonJS environment (Node.js)
+  if (typeof exports === 'object' && typeof module !== 'undefined') {
+      module.exports = factory();
+  // Check for AMD environment (RequireJS)
+  } else if (typeof define === 'function' && define.amd) {
+      define(factory);
+  // If neither CommonJS nor AMD, export to global object
+  } else {
+      global.PerfectScrollbar = factory();
+  }
 }(this, (function () { 'use strict';
 
 function get(element) {

@@ -1,7 +1,14 @@
 <template>
     <CardComponent :required="false">
         <template #card-header>
-            <span><b>Calendar</b></span>
+            <div class="row">
+                <span><b>Calendar</b></span>
+            </div>
+            <div class="row">
+                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                    <SelectComponent></SelectComponent>
+                </div>
+            </div>
         </template>
         <template #card-body>
             <TableComponent>
@@ -97,25 +104,31 @@
 <script>
 import CardComponent from "@/components/CardComponent.vue";
 import TableComponent from "@/components/TableComponent.vue";
-import { onMounted, ref } from "vue";
+import SelectComponent from "@/components/SelectComponent.vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import axios from "@/axiosConfig";
 import moment from "moment";
 import Toast from "@/toastConfig";
 import $ from "jquery";
-
+import { io } from "socket.io-client";
+import { useStore } from "vuex";
 export default {
     name: "lich-lam-viec",
     components: {
         CardComponent,
         TableComponent,
+        SelectComponent,
     },
     setup() {
+        const store = useStore();
+        const socket = io("http://localhost:3000");
         const time = ref(["8h00 - 16h00", "17h00 - 22h00"]);
         const days = ref([]);
         const data = ref([]);
         const type = ref(-1);
         const today = ref(new Date());
         const nv_lam = ref([]);
+        const user = computed(() => store.state.dataUser);
         const rank = ref([
             "Monday",
             "Tuesday",
@@ -125,8 +138,6 @@ export default {
             "Saturday",
             "Sunday",
         ]);
-
-        const list = ref([1, 2, 3, 4, 5, 6, 7]);
 
         function date_format(now) {
             return moment(now).format("DD/MM/yyyy");
@@ -158,11 +169,12 @@ export default {
 
         const getDays = () => {
             axios
-                .get("admin/lich-lam-viec/get-days/" + type.value)
+                .get("admin/lich-lam-viec/get-days/" + type.value, "admin")
                 .then((res) => {
                     days.value = res.data.days;
                     data.value = res.data.data;
                     nv_lam.value = res.data.data;
+                    console.log(user.value.id);
                 });
         };
 
@@ -173,10 +185,15 @@ export default {
             });
 
             axios
-                .post("admin/lich-lam-viec/dang-ky/store", payload.value)
+                .post(
+                    "admin/lich-lam-viec/dang-ky/store",
+                    payload.value,
+                    "admin"
+                )
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
+                        socket.emit("actionPerformed");
                     } else {
                         Toast("error", res.data.message);
                     }
@@ -192,14 +209,14 @@ export default {
         const updateBuoiLamViec = (id) => {
             var payload = {
                 id: id,
-                id_user: 1, //sau lấy user đang login
+                id_user: user.value.id, //sau lấy user đang login
             };
-
             axios
-                .post("admin/lich-lam-viec/dang-ky/update", payload)
+                .post("admin/lich-lam-viec/dang-ky/update", payload, "admin")
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
+                        socket.emit("actionPerformed");
                     } else {
                         Toast("error", res.data.message);
                     }
@@ -211,18 +228,26 @@ export default {
                     });
                 });
         };
-
         onMounted(() => {
+            // Gọi getDays lần đầu tiên component được mounted
+            store.dispatch("onFetchUserLogin");
             getDays();
+            socket.on("updateData", () => {
+                // Gọi lại hàm getDays để cập nhật dữ liệu
+                getDays();
+            });
+        });
+        onUnmounted(() => {
+            socket.disconnect();
         });
         return {
+            user,
             time,
             days,
             data,
             today,
             rank,
             nv_lam,
-            list,
             isToday,
             date_format,
             themBuoiLamViec,

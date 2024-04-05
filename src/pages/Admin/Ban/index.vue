@@ -223,7 +223,6 @@ export default {
                     });
                 });
         };
-
         onMounted(() => {
             store.dispatch("onFetchKhuVuc");
             store.dispatch("onFetchBan");

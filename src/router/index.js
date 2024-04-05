@@ -6,13 +6,20 @@ import KhachHang from "@/pages/Admin/KhachHang";
 import Quyen from "@/pages/Admin/Quyen";
 import DanhMuc from "@/pages/Admin/DanhMuc";
 import KhuVuc from "@/pages/Admin/KhuVuc";
-import MonAn from '@/pages/Admin/MonAn';
+import MonAn from "@/pages/Admin/MonAn";
 import Ban from "@/pages/Admin/Ban";
 import LichLamViec from "@/pages/Staff/LichLamViec";
+import Login from "@/pages/Login";
 const routes = [
+    {
+        path: "/login",
+        name: "login",
+        component: Login,
+    },
     {
         path: "/",
         component: AdminMaster,
+        meta: { requiresAuth: true },
         children: [
             {
                 path: "",
@@ -20,6 +27,7 @@ const routes = [
             },
             {
                 path: "admin",
+                name: "admin",
                 component: Admin,
             },
             {
@@ -39,12 +47,16 @@ const routes = [
                 component: KhuVuc,
             },
             {
-              path: "mon-an",
-              component: MonAn,
+                path: "mon-an",
+                component: MonAn,
             },
             {
                 path: "ban",
                 component: Ban,
+            },
+            {
+                path: "lich-lam-viec",
+                component: LichLamViec,
             },
         ],
     },
@@ -56,11 +68,26 @@ const routes = [
                 path: "lich-lam-viec",
                 component: LichLamViec,
             },
-        ]
-    }
-]
-const router = new createRouter({
+        ],
+    },
+];
+const loggedIn = () => {
+    return localStorage.getItem('admin') !== null;
+};
+
+// Tạo và cấu hình router
+const router = createRouter({
     history: createWebHistory(),
-    routes,
+    routes, // Sử dụng mảng `routes` đã khai báo
 });
+
+// Sử dụng hook beforeEach để kiểm soát quyền truy cập
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn()) { // Gọi hàm `loggedIn()`
+        next('/login');
+    } else {
+        next();
+    }
+});
+
 export default router;

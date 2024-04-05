@@ -392,8 +392,8 @@
                         role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="../../assets/images/avatars/avatar-2.png" class="user-img" alt="user avatar">
                         <div class="user-info ps-3">
-                            <p class="user-name mb-0">Pauline Seitz</p>
-                            <p class="designattion mb-0">Web Designer</p>
+                            <p class="user-name mb-0">{{ admin.first_last_name }}</p>
+                            <p class="designattion mb-0">{{ admin.name_permission }}</p>
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
@@ -415,7 +415,7 @@
                         <li>
                             <div class="dropdown-divider mb-0"></div>
                         </li>
-                        <li><a class="dropdown-item" href="javascript:;"><i
+                        <li><a class="dropdown-item" href="javascript:;" @click="logout()"><i
                                     class='bx bx-log-out-circle'></i><span>Logout</span></a>
                         </li>
                     </ul>
@@ -425,7 +425,37 @@
     </header>
 </template>
 <script>
+import axios from "@/axiosConfig";
+import Toast from "@/toastConfig";
+import $ from "jquery";
+import { useRouter } from 'vue-router';
+import { computed } from 'vue';
+import { useStore } from 'vuex';
+  
 export default {
-    name: 'admin-header'
+    name: 'admin-header',
+    setup() {
+        const router = useRouter();
+        const logout = async () => {
+            try {
+                const response = await axios.post('admin/logout');
+                if(response.data.status === 1) {
+                    localStorage.removeItem('admin');
+                    router.push({ name: 'login' })
+                    Toast("success", response.data.message);
+                }
+            } catch (error) {
+                $.each(error.response.data.errors, function (k, v) {
+                    Toast("error", v[0]);
+                });
+            }
+        };
+        const store = useStore();
+        const admin = computed(()=> store.state.dataUser)
+        return {
+            logout,
+            admin
+        }
+    }
 }
 </script>

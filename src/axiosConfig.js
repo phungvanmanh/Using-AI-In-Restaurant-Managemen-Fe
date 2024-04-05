@@ -4,12 +4,10 @@ const apiUrl = 'http://127.0.0.1:8000/api/';
 
 export default {
     getHeader(tokenName) {
-        const token = window.localStorage.getItem(tokenName);
-        if (token) {
-            return { Authorization: 'Bearer ' + token };
-        }
-        return {};
+        const token = tokenName && JSON.parse(window.localStorage.getItem(tokenName))?.access_token;
+        return token ? { Authorization: `Bearer ${token}` } : {};
     },
+    
     get(url, tokenName, additionalHeaders = {}) {
         const headers = { ...this.getHeader(tokenName), ...additionalHeaders };
         return axios.get(apiUrl + url, { headers });

@@ -14,8 +14,12 @@ import $ from 'jquery';
 $(function () {
 	"use strict";
 	/* perfect scrol bar */
-	new PerfectScrollbar('.header-message-list');
-	new PerfectScrollbar('.header-notifications-list');
+	if (document.querySelector('.header-message-list')) {
+		new PerfectScrollbar('.header-message-list');
+	}
+	if (document.querySelector('.header-notifications-list')) {
+		new PerfectScrollbar('.header-notifications-list');
+	}
 	// search bar
 	$(".mobile-search-icon").on("click", function () {
 		$(".search-bar").addClass("full-search-bar");
@@ -139,7 +143,18 @@ $(function () {
 		$("html").removeClass("headercolor1 headercolor2 headercolor4 headercolor5 headercolor6 headercolor7 headercolor3");
 	});
 
-
+	$("#show_hide_password a").on('click', function (event) {
+		event.preventDefault();
+		if ($('#show_hide_password input').attr("type") == "text") {
+			$('#show_hide_password input').attr('type', 'password');
+			$('#show_hide_password i').addClass("bx-hide");
+			$('#show_hide_password i').removeClass("bx-show");
+		} else if ($('#show_hide_password input').attr("type") == "password") {
+			$('#show_hide_password input').attr('type', 'text');
+			$('#show_hide_password i').removeClass("bx-hide");
+			$('#show_hide_password i').addClass("bx-show");
+		}
+	});
 
 
 
