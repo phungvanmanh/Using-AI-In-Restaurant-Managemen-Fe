@@ -20,6 +20,8 @@ import menuVue from './menu.vue';
 import footerVue from './footer.vue';
 import 'perfect-scrollbar/dist/perfect-scrollbar';
 import '../../assets/js/app.js';
+import { onMounted } from 'vue';
+import { useStore } from 'vuex';
 // import { useStore } from 'vuex';
 export default {
     name: 'admin-master',
@@ -29,6 +31,10 @@ export default {
         footerVue,
     },
     setup() {
+        const store = useStore();
+        onMounted(() => {
+            store.dispatch("onFetchUserLogin");
+        })
     }
 }
 </script>
