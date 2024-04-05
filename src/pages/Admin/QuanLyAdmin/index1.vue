@@ -385,7 +385,6 @@ export default {
             for (let i = 0; i < addFile.value.length; i++) {
                 formData.append(`files[]`, addFile.value[i]);
             }
-            console.log(formData);
             axios
                 .post("upload", formData, "admin", {
                     headers: {
@@ -396,6 +395,7 @@ export default {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                     }
+                    getDataUpload();
                 })
                 .catch((res) => {
                     $.each(res.response.data.errors, function (k, v) {

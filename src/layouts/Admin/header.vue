@@ -428,20 +428,21 @@
 import axios from "@/axiosConfig";
 import Toast from "@/toastConfig";
 import $ from "jquery";
-import { useRouter } from 'vue-router';
+// import { useRouter } from 'vue-router';kk
 import { computed } from 'vue';
 import { useStore } from 'vuex';
   
 export default {
     name: 'admin-header',
     setup() {
-        const router = useRouter();
+        // const router = useRouter();
         const logout = async () => {
             try {
                 const response = await axios.post('admin/logout');
                 if(response.data.status === 1) {
                     localStorage.removeItem('admin');
-                    router.push({ name: 'login' })
+                    // router.push({ name: 'login' })
+                    window.location.href = "/login";
                     Toast("success", response.data.message);
                 }
             } catch (error) {
