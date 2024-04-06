@@ -5,7 +5,7 @@
                 <span><b>Calendar</b></span>
             </div>
             <div class="row">
-                <div class="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3">
                     <SelectComponent></SelectComponent>
                 </div>
             </div>
@@ -82,14 +82,25 @@
                                         </template>
                                         <template v-else>
                                             <td
-                                                class="align-middle"
                                                 v-on:click="
                                                     themBuoiLamViec(
                                                         index_time,
                                                         index
                                                     )
                                                 "
-                                            ></td>
+                                            >
+                                            <template
+                                                v-for="(
+                                                    v_name, i_name
+                                                ) in v.list"
+                                                :key="i_name"
+                                            >
+                                                <span>
+                                                    {{ v_name }}
+                                                </span>
+                                                <br />
+                                            </template>
+                                            </td>
                                         </template>
                                     </template>
                                 </template>
@@ -121,7 +132,8 @@ export default {
     },
     setup() {
         const store = useStore();
-        const socket = io("http://localhost:3000");
+        // const socket = io("http://localhost:3000");
+        const socket = io("http://192.168.7.104:3000");
         const time = ref(["8h00 - 16h00", "17h00 - 22h00"]);
         const days = ref([]);
         const data = ref([]);

@@ -1,7 +1,7 @@
 import axios from "axios";
 import router from "./router";
-// const apiUrl = 'http://192.168.1.174:8000/api/';
-const apiUrl = "http://127.0.0.1:8000/api/";
+const apiUrl = 'http://192.168.7.104:8000/api/';
+// const apiUrl = "http://127.0.0.1:8000/api/";
 axios.interceptors.response.use(
     (response) => {
         return response;

@@ -30,12 +30,12 @@ export default {
         menuVue,
         footerVue,
     },
-    setup() {
-        // const store = useStore();
-        // onMounted(() => {
-        //     store.dispatch("onFetchUserLogin");
-        // })
-    }
+    // setup() {
+    //     const store = useStore();
+    //     onMounted(() => {
+    //         store.dispatch("onFetchUserLogin");
+    //     })
+    // }
 }
 </script>
 <style scoped>

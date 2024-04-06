@@ -102,9 +102,8 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn()) { // Gọi hàm `loggedIn()`
         next('/login');
     } else {
-        store.dispatch('onFetchUserLogin').then(() => {
-            next();
-        });
+        store.dispatch("onFetchUserLogin");
+        next();
     }
 });
 
