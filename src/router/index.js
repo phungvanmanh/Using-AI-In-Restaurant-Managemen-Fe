@@ -10,6 +10,9 @@ import MonAn from "@/pages/Admin/MonAn";
 import Ban from "@/pages/Admin/Ban";
 import LichLamViec from "@/pages/Staff/LichLamViec";
 import Login from "@/pages/Login";
+import NhaCungCap from "@/pages/Admin/NhaCungCap";
+import ChuyenMucBaiViet from "@/pages/Admin/ChuyenMucBaiViet";
+import BaiViet from "@/pages/Admin/BaiViet";
 const routes = [
     {
         path: "/login",
@@ -53,6 +56,18 @@ const routes = [
             {
                 path: "ban",
                 component: Ban,
+            },
+            {
+                path: "nha-cung-cap",
+                component: NhaCungCap,
+            },
+            {
+                path: "chuyen-muc-bai-viet",
+                component: ChuyenMucBaiViet,
+            },
+            {
+                path: "bai-viet",
+                component: BaiViet,
             },
             {
                 path: "lich-lam-viec",
