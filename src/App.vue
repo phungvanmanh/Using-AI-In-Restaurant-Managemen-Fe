@@ -4,15 +4,15 @@
 
 <script>
 import { onMounted } from 'vue';
-import { useStore } from 'vuex';
+// import { useStore } from 'vuex';
 export default {
   name: 'App',
   setup() {
-    const store = useStore();
+    // const store = useStore();
     onMounted(() => {
-      if(localStorage.getItem('admin')){
-        store.dispatch("onFetchUserLogin");
-      }
+      // if(localStorage.getItem('admin')){
+      //   store.dispatch("onFetchUserLogin");
+      // }
     })
   }
 }

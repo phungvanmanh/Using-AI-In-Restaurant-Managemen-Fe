@@ -13,6 +13,7 @@ import Login from "@/pages/Login";
 import NhaCungCap from "@/pages/Admin/NhaCungCap";
 import ChuyenMucBaiViet from "@/pages/Admin/ChuyenMucBaiViet";
 import BaiViet from "@/pages/Admin/BaiViet";
+import store from "@/store";
 const routes = [
     {
         path: "/login",
@@ -101,7 +102,9 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn()) { // Gọi hàm `loggedIn()`
         next('/login');
     } else {
-        next();
+        store.dispatch('onFetchUserLogin').then(() => {
+            next();
+        });
     }
 });
 
