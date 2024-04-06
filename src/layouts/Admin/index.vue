@@ -22,6 +22,7 @@ import 'perfect-scrollbar/dist/perfect-scrollbar';
 import '../../assets/js/app.js';
 import { onMounted } from 'vue';
 import { useStore } from 'vuex';
+// import { useStore } from 'vuex';
 export default {
     name: 'admin-master',
     components: {
@@ -33,7 +34,7 @@ export default {
         const store = useStore();
         onMounted(() => {
             store.dispatch("onFetchUserLogin");
-        });
+        })
     }
 }
 </script>

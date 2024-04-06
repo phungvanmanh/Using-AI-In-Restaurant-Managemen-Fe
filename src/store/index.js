@@ -16,6 +16,9 @@ export default createStore({
         dataStaff : [],
         dataKhachHang : [],
         dataUser      : {},
+        dataNhaCungCap:[],
+        dataChuyenMucBaiViet:[],
+        dataBaiViet:[],
     },
     getters: {
         toSlug: () => (str) => {
@@ -74,6 +77,15 @@ export default createStore({
 
         FetchUserLogin(state, data) {
             state.dataUser = data;
+        },
+        fecthNhaCungCap(state, data) {
+            state.dataNhaCungCap = data;
+        },
+        fecthChuyenMucBaiViet(state, data) {
+            state.dataChuyenMucBaiViet = data;
+        },
+        fecthBaiViet(state, data) {
+            state.dataBaiViet = data;
         },
     },
     actions: {
@@ -147,6 +159,30 @@ export default createStore({
                 commit("FetchUserLogin", response.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchUserLogin:", error);
+            }
+        },
+        onFetchNhaCungCap: async ({ commit }) => {
+            try {
+                const response = await axios.get("admin/nha-cung-cap/get-data");
+                commit("fecthNhaCungCap", response.data.data);
+            } catch (error) {
+                console.error("Có lỗi xảy ra trong onFetchNhaCungCap:", error);
+            }
+        },
+        onFetchChuyenMucBaiViet: async ({ commit }) => {
+            try {
+                const response = await axios.get("admin/chuyen-muc-bai-viet/get-data");
+                commit("fecthChuyenMucBaiViet", response.data.data);
+            } catch (error) {
+                console.error("Có lỗi xảy ra trong onFetchChuyenMucBaiViet:", error);
+            }
+        },
+        onFetchBaiViet: async ({ commit }) => {
+            try {
+                const response = await axios.get("admin/bai-viet/get-data");
+                commit("fecthBaiViet", response.data.data);
+            } catch (error) {
+                console.error("Có lỗi xảy ra trong onFetchBaiViet:", error);
             }
         },
     },

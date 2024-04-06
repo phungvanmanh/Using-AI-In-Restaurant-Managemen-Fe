@@ -53,7 +53,7 @@
 import "perfect-scrollbar/dist/perfect-scrollbar";
 import "../../assets/js/app.js";
 import { onBeforeUnmount, onMounted, ref } from "vue";
-import { useRouter } from "vue-router";
+// import { useRouter } from "vue-router";
 import AuthService from "@/services/AuthService";
 import Toast from "@/toastConfig";
 import $ from "jquery";
@@ -62,7 +62,7 @@ export default {
     setup() {
         const email = ref("");
         const password = ref("");
-        const router = useRouter();
+        // const router = useRouter();
         const className = 'bg-login';
         const login = async () => {
             try {
@@ -70,10 +70,9 @@ export default {
                     email: email.value,
                     password: password.value,
                 });
-				router.push({ name: "admin" });
-				setTimeout(() => {
-					Toast("success", "Đăng nhập thành công!");
-				}, 2000);
+				// router.push({ name: "admin" });
+				window.location.href = "/admin";
+				Toast("success", "Đăng nhập thành công!");
             } catch (error) {
                 $.each(error.response.data.errors, function (k, v) {
                     Toast("error", v[0]);
