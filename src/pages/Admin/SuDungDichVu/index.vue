@@ -164,13 +164,14 @@
                                                                     <input  v-on:change="updateMonAn(value)" v-model="value.don_gia" type="number" class="form-control">
                                                                 </td>
                                                                 <td class="align-middle">
-                                                                    <input  v-on:change="updateMonAn(value)" type="number" class="form-control">
+                                                                    <input  v-on:change="updateMonAn(value)" v-model="value.phan_tram_giam" type="number" class="form-control">
                                                                 </td>
                                                                 <td class="align-middle">
-                                                                    {{formatToVN(value.thanh_tien) }}
+                                                                    <!-- {{formatToVN(value.thanh_tien) }} -->
+                                                                    {{  value.thanh_tien }}
                                                                 </td>
                                                                 <td class="align-middle">
-                                                                    <input  v-on:change="updateMonAn(value)" type="text" class="form-control">
+                                                                    <input  v-on:change="updateMonAn(value)" v-model="value.ghi_chu" type="text" class="form-control">
                                                                 </td>
                                                                 <td class="align-middle">
                                                                     <button v-on:click="deleteChiTiet(value)" class="btn btn-danger">Xóa</button>
@@ -196,9 +197,9 @@
                                                                 <p><b>Tiền thực thu: </b></p>
                                                             </div>
                                                             <div class="col-6">
-                                                                <p><b>{{formatToVN(tong_tien) }}</b></p>
+                                                                <p><b>{{tong_tien }}</b></p>
                                                                 <input type="number" class="form-control">
-                                                                <p class="mt-3"><b>{{formatToVN(tien_thuc_thu) }}</b>
+                                                                <p class="mt-3"><b>{{tien_thuc_thu }}</b>
                                                                 </p>
                                                             </div>
                                                         </div>
@@ -256,7 +257,6 @@ export default {
         const tong_tien = ref(0);
         const tien_thuc_thu = ref(0);
         const phan_tram_giam_hoa_don=ref(0);
-
         const hoa_don = ref({});
 
         const getBanTheoKhuVuc = (v) => {
@@ -304,6 +304,7 @@ export default {
                 .then((res) => {
                     if (res.data.status == 1) {
                         hoa_don.value = res.data.hoa_don;
+                        tien_thuc_thu.value = hoa_don.value.tien_thuc_nhan;
                         getChiTietHoaDon(hoa_don.value.id)
                     }
                 })
@@ -326,8 +327,7 @@ export default {
                 .then((res) => {
                     if (res.data.status) {
                         Toast("success", res.data.message);
-                        tong_tien.value = res.data.tong_tien;
-                        tien_thuc_thu.value = res.data.tong_tien;
+                        getIdHoaDon(hoa_don.value.id_ban);
                         getChiTietHoaDon(hoa_don.value.id);
                     }
                     
@@ -351,31 +351,24 @@ export default {
             axios.post('admin/su-dung-dich-vu/get-chi-tiet', payload)
                 .then((res) => {
                     list_chi_tiet_ban_hang.value = res.data.data;
-                    console.log(list_chi_tiet_ban_hang.value);
+                    tong_tien.value = list_chi_tiet_ban_hang.value.map(item => item.thanh_tien || 0).reduce((acc, current) => acc + current, 0);
                 })
                 .catch((error) => {
                     console.error('Lỗi khi lấy chi tiết hóa đơn:', error);
                     // Xử lý lỗi nếu cần
                 });
         };
-        function formatToVN (number) {
-            number = parseInt(number);
-            return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-        }
-
-        onMounted(() => {
-            store.dispatch("onFetchBan");
-            store.dispatch("onFetchKhuVuc");
-            store.dispatch("onFetchMonAn");
-        });
+        // function formatToVN (number) {
+        //     number = parseInt(number);
+        //     return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+        // }
         const updateMonAn = (v) => {
-          
+          console.log(v);
             axios.post('admin/su-dung-dich-vu/update-chi-tiet-ban-hang', v)
                 .then((res) => {
                     if (res.data.status) {
                         Toast("success", res.data.message);
-                        tong_tien.value = res.data.tong_tien;
-                        tien_thuc_thu.value = res.data.tong_tien;
+                        getIdHoaDon(v.id_hoa_don)
                         getChiTietHoaDon(hoa_don.value.id);
                     }
                     
@@ -403,6 +396,13 @@ export default {
                     }
                 });
         };
+
+        onMounted(() => {
+            store.dispatch("onFetchBan");
+            store.dispatch("onFetchKhuVuc");
+            store.dispatch("onFetchMonAn");
+        });
+
         return {
             store,
             dataBan,
@@ -418,7 +418,7 @@ export default {
             getIdHoaDon,
             themMonAn,
             getChiTietHoaDon,
-            formatToVN,
+            // formatToVN,
             updateMonAn,
             deleteChiTiet,
         };
