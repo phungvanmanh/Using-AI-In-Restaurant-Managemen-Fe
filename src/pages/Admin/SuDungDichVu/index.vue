@@ -284,6 +284,7 @@ export default {
                     if (res.data.status == 1) {
                         Toast('success', res.data.message);
                         getIdHoaDon(payload.id_ban);
+                        store.dispatch("onFetchMonAn");
                         store.dispatch("onFetchBan");
                     }
                 })
@@ -305,7 +306,8 @@ export default {
                     if (res.data.status == 1) {
                         hoa_don.value = res.data.hoa_don;
                         tien_thuc_thu.value = hoa_don.value.tien_thuc_nhan;
-                        getChiTietHoaDon(hoa_don.value.id)
+                        getChiTietHoaDon(hoa_don.value.id);
+                        store.dispatch("onFetchMonAn");
                     }
                 })
                 .catch((res) => {
@@ -363,13 +365,12 @@ export default {
         //     return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
         // }
         const updateMonAn = (v) => {
-          console.log(v);
             axios.post('admin/su-dung-dich-vu/update-chi-tiet-ban-hang', v)
                 .then((res) => {
                     if (res.data.status) {
                         Toast("success", res.data.message);
-                        getIdHoaDon(v.id_hoa_don)
-                        getChiTietHoaDon(hoa_don.value.id);
+                        getIdHoaDon(hoa_don.value.id_ban);
+                        getChiTietHoaDon(v.id_hoa_don);
                     }
                     
                 })
