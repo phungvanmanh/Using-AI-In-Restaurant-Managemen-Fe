@@ -13,6 +13,7 @@ import Login from "@/pages/Login";
 import NhaCungCap from "@/pages/Admin/NhaCungCap";
 import ChuyenMucBaiViet from "@/pages/Admin/ChuyenMucBaiViet";
 import BaiViet from "@/pages/Admin/BaiViet";
+import SuDungDichVu from "@/pages/Admin/SuDungDichVu";
 import store from "@/store";
 const routes = [
     {
@@ -73,6 +74,10 @@ const routes = [
             {
                 path: "lich-lam-viec",
                 component: LichLamViec,
+            },
+            {
+                path: "su-dung-dich-vu",
+                component: SuDungDichVu,
             },
         ],
     },
