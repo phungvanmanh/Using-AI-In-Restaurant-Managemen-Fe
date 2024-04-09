@@ -184,7 +184,7 @@
                                             <div class="card-footer bg-white text-end">
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <textarea class="form-control" cols="30" rows="4"></textarea>
+                                                        <textarea @change="updateHoaDon()" v-model="ghi_chu_hoa_don" class="form-control" cols="30" rows="4"></textarea>
                                                     </div>
                                                     <div class="col-3">
                                                         <img style="width: 100%;" alt="">
@@ -198,7 +198,7 @@
                                                             </div>
                                                             <div class="col-6">
                                                                 <p><b>{{tong_tien }}</b></p>
-                                                                <input type="number" class="form-control">
+                                                                <input @change="updateHoaDon()" type="number" class="form-control" v-model="phan_tram_giam_hoa_don">
                                                                 <p class="mt-3"><b>{{tien_thuc_thu }}</b>
                                                                 </p>
                                                             </div>
@@ -258,7 +258,7 @@ export default {
         const tien_thuc_thu = ref(0);
         const phan_tram_giam_hoa_don=ref(0);
         const hoa_don = ref({});
-
+        const ghi_chu_hoa_don = ref("");
         const getBanTheoKhuVuc = (v) => {
             // console.log(v.id);
             axios
@@ -306,6 +306,8 @@ export default {
                     if (res.data.status == 1) {
                         hoa_don.value = res.data.hoa_don;
                         tien_thuc_thu.value = hoa_don.value.tien_thuc_nhan;
+                        phan_tram_giam_hoa_don.value = hoa_don.value.phan_tram_giam;
+                        ghi_chu_hoa_don.value = hoa_don.value.ghi_chu;
                         getChiTietHoaDon(hoa_don.value.id);
                         store.dispatch("onFetchMonAn");
                     }
@@ -385,18 +387,39 @@ export default {
                     }
                 });
         };
+
         const deleteChiTiet = (v) => {
             axios.post('admin/su-dung-dich-vu/xoa-chi-tiet', v)
                 .then((res) => {
                     if (res.data.status) {
                         Toast("success", res.data.message);
-                        tong_tien.value = res.data.tong_tien;
-                        tien_thuc_thu.value = res.data.tong_tien;
-                        phan_tram_giam_hoa_don.value = 0;
+                        getIdHoaDon(hoa_don.value.id_ban);
                         getChiTietHoaDon(hoa_don.value.id);
                     }
                 });
         };
+
+        const updateHoaDon = () => {
+            var payload = {
+                'id'             : hoa_don.value.id,
+                'id_ban'         : hoa_don.value.id_ban,
+                'phan_tram_giam' : phan_tram_giam_hoa_don.value,
+                'ghi_chu'        : ghi_chu_hoa_don.value,
+            }
+            axios
+                .post('admin/su-dung-dich-vu/update-hoa-don-ban-hang', payload)
+                .then((res) => {
+                    if (res.data.status == 1) {
+                        Toast('success', res.data.message);
+                        getIdHoaDon(hoa_don.value.id_ban);
+                    }
+                })
+                .catch((res) => {
+                    $.each(res.response.data.errors, function(k, v) {
+                        Toast('error', v[0]);
+                    });
+                });
+        }
 
         onMounted(() => {
             store.dispatch("onFetchBan");
@@ -413,6 +436,8 @@ export default {
             tong_tien,
             tien_thuc_thu,
             list_chi_tiet_ban_hang,
+            phan_tram_giam_hoa_don,
+            ghi_chu_hoa_don,
             loadDataBan,
             getBanTheoKhuVuc,
             openTable,
@@ -422,6 +447,7 @@ export default {
             // formatToVN,
             updateMonAn,
             deleteChiTiet,
+            updateHoaDon,
         };
     },
 };
