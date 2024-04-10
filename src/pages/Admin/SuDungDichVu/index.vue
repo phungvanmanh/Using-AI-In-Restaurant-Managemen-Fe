@@ -590,7 +590,7 @@ import { useStore } from "vuex";
 import axios from "@/axiosConfig";
 import Toast from "@/toastConfig";
 import $ from "jquery";
-import { apiUrl } from "@/globals";
+import { apiQRcode } from "@/globals";
 export default {
     name: "su-dung-dich-vu",
     components: {
@@ -793,7 +793,7 @@ export default {
             try {
                 const idBan = id_ban; // Thay thế bằng id_ban thực tế
                 const { data } = await axios.get(`admin/create-token/${idBan}`);
-                qrCodeData.value = apiUrl + data.url;
+                qrCodeData.value = apiQRcode + data.url;
             } catch (error) {
                 console.error("Lỗi khi tạo QR Code:", error);
             }
