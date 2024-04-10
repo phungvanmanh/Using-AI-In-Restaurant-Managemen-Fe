@@ -19,6 +19,7 @@ export default createStore({
         dataNhaCungCap:[],
         dataChuyenMucBaiViet:[],
         dataBaiViet:[],
+        TOKEN_ADMIN : '',
     },
     getters: {
         toSlug: () => (str) => {
@@ -39,6 +40,10 @@ export default createStore({
         },
     },
     mutations: {
+        setTokenAdmin(state, data) {
+            state.TOKEN_ADMIN = data;
+        },
+
         fecthChuyenMuc(state, data) {
             state.danh_muc_select = [
                 { text: "Root", value: "0", tinh_trang: 1 },
@@ -185,5 +190,8 @@ export default createStore({
                 console.error("Có lỗi xảy ra trong onFetchBaiViet:", error);
             }
         },
+        updateTokenAdmin({ commit }, token) {
+            commit('setTokenAdmin', token);
+        }
     },
 });

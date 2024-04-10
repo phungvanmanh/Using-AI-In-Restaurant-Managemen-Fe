@@ -1,5 +1,4 @@
 import axios from "@/axiosConfig";
-
 class AuthService {
     login(user) {
         return axios

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
             <div class="card">
-                <div class="card-header">Thêm Mới Admin</div>
+                <div class="card-header">Thêm Mới Admin {{ tokenAdmin }}</div>
                 <div class="card-body">
                     <InputComponent
                         v-model="add.ho_va_ten"
@@ -283,6 +283,54 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-lg-8 col-md-8 col-sm-8">
+                        <div class="card">
+                            <div class="card-header">Danh Sách Món Ăn</div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                img
+                                            </div>
+                                            <div class="card-footer">
+                                                <button class="btn btn-success float-end">Thêm</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                img
+                                            </div>
+                                            <div class="card-footer">
+                                                <button class="btn btn-success float-end">Thêm</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <div class="card">
+                            <div class="card-header">Xác Nhận</div>
+                            <div class="card-body">
+                                
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn btn-primary">Xác nhận</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -296,10 +344,11 @@ import TableComponent from "@/components/TableComponent.vue";
 import BarChartComponent from "@/components/BarChartComponent.vue";
 import PieChartComponent from "@/components/PieChartComponent.vue";
 import CalendarComponent from "@/components/CalendarComponent.vue";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import axios from "@/axiosConfig";
 import Toast from "@/toastConfig";
 import $ from "jquery";
+import { useStore } from 'vuex';
 export default {
     name: "quan-ly-admin",
     components: {
@@ -367,6 +416,8 @@ export default {
             { text: "Three", value: "3" },
         ]);
         const image = ref([]);
+        const store = useStore();
+        const tokenAdmin = computed(() => store.state.TOKEN_ADMIN);
         function ThemMoi() {
             console.log(add.value);
         }
@@ -427,7 +478,8 @@ export default {
             addFile,
             upLoad,
             image,
-            getImageUrl
+            getImageUrl,
+            tokenAdmin
         };
     },
 };

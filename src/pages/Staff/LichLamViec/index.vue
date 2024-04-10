@@ -107,6 +107,7 @@ import {
 import {
     useStore
 } from "vuex";
+import { apiSocket } from "@/globals"
 export default {
     name: "lich-lam-viec",
     components: {
@@ -117,7 +118,7 @@ export default {
     setup() {
         const store = useStore();
         // const socket = io("http://localhost:3000");
-        const socket = io("http://192.168.7.104:3000");
+        const socket = io(apiSocket);
         const time = ref(["8h00 - 16h00", "17h00 - 22h00"]);
         const days = ref([]);
         const data = ref([]);

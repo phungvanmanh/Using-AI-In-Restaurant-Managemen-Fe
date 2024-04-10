@@ -1,23 +1,5 @@
 import axios from "axios";
-import router from "./router";
-// const apiUrl = 'http://192.168.7.104:8000/api/';
-const apiUrl = "http://127.0.0.1:8000/api/";
-axios.interceptors.response.use(
-    (response) => {
-        return response;
-    },
-    (error) => {
-        if (
-            error.response &&
-            (error.response.status === 401 || error.response.status === 403)
-        ) {
-            // Xóa JWT từ localStorage hoặc cookies ở đây nếu bạn muốn
-            localStorage.removeItem("admin"); // Hoặc tên token phù hợp mà bạn đang sử dụng
-            router.push("/login");
-        }
-        return Promise.reject(error);
-    }
-);
+import {apiUrl} from '@/globals';
 export default {
     getHeader(tokenName) {
         const token =
@@ -28,13 +10,13 @@ export default {
 
     get(url, tokenName, additionalHeaders = {}) {
         const headers = { ...this.getHeader(tokenName), ...additionalHeaders };
-        return axios.get(apiUrl + url, { headers });
+        return axios.get((apiUrl + 'api/') + url, { headers });
     },
     post(url, data, tokenName, additionalHeaders = {}) {
         const headers = { ...this.getHeader(tokenName), ...additionalHeaders };
-        return axios.post(apiUrl + url, data, { headers });
+        return axios.post((apiUrl + 'api/') + url, data, { headers });
     },
     initialize() {
-        axios.defaults.baseURL = apiUrl;
+        axios.defaults.baseURL = (apiUrl + 'api/');
     },
 };

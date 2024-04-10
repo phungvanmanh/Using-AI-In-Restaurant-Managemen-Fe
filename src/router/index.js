@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import AdminMaster from "@/layouts/Admin";
+import Customer from "@/layouts/Customer";
 import Test from "@/pages/Admin/QuanLyAdmin/index1.vue";
 import Admin from "@/pages/Admin/QuanLyAdmin";
 import KhachHang from "@/pages/Admin/KhachHang";
@@ -15,14 +16,25 @@ import ChuyenMucBaiViet from "@/pages/Admin/ChuyenMucBaiViet";
 import BaiViet from "@/pages/Admin/BaiViet";
 import SuDungDichVu from "@/pages/Admin/SuDungDichVu";
 import store from "@/store";
+import MonAnCustomer from "@/pages/Customer/MonAn";
 const routes = [
+    {
+        path: "/",
+        component: Customer,
+        children: [
+            {
+                path: 'mon-an/:id_ban',
+                component: MonAnCustomer,
+            },
+        ]
+    },
     {
         path: "/login",
         name: "login",
         component: Login,
     },
     {
-        path: "/",
+        path: "/admin",
         component: AdminMaster,
         meta: { requiresAuth: true },
         children: [
@@ -92,24 +104,41 @@ const routes = [
         ],
     },
 ];
-const loggedIn = () => {
-    return localStorage.getItem('admin') !== null;
-};
-
 // Tạo và cấu hình router
 const router = createRouter({
     history: createWebHistory(),
+    base: process.env.BASE_URL,
     routes, // Sử dụng mảng `routes` đã khai báo
 });
 
 // Sử dụng hook beforeEach để kiểm soát quyền truy cập
 router.beforeEach((to, from, next) => {
-    if (to.matched.some(record => record.meta.requiresAuth) && !loggedIn()) { // Gọi hàm `loggedIn()`
-        next('/login');
+    const isLoggedIn = localStorage.getItem('admin') !== null;
+
+    if (isLoggedIn && to.path === '/login') {
+        // Thay đổi '/dashboard' bằng đường dẫn bạn muốn chuyển hướng người dùng đã đăng nhập
+        next('/admin/lich-lam-viec');
+        return; // Đảm bảo không thực hiện các điều kiện kiểm tra tiếp theo
+    }
+    
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!isLoggedIn) {
+            // Nếu yêu cầu xác thực nhưng không tìm thấy token đăng nhập
+            next('/login');
+        } else {
+            // Người dùng đã đăng nhập
+            updateTokenAndFetchUser();
+            next();
+        }
     } else {
-        store.dispatch("onFetchUserLogin");
         next();
     }
 });
+
+function updateTokenAndFetchUser() {
+    const token = JSON.parse(localStorage.getItem('admin'))?.access_token;
+    store.dispatch('updateTokenAdmin', token);
+    store.dispatch("onFetchUserLogin");
+}
 
 export default router;
