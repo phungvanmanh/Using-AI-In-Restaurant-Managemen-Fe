@@ -43,13 +43,13 @@
                     <tr>
                         <th class="align-middle text-center">{{ key+1 }}</th>
                         <td class="align-middle text-center">{{value.name_table  }}</td>
-                        <td class="align-middle text-start"></td>
+                        <td class="align-middle text-start">{{ value.first_last_name }}</td>
                         <td class="align-middle text-end">{{ formatToVND(value.tong_tien_truoc_giam) }}</td>
                         <td class="align-middle text-center">{{ value.phan_tram_giam }}</td>
                         <td class="align-middle text-end">{{ formatToVND(value.tien_thuc_nhan) }}</td>
                         <td class="align-middle text-center">
                             <button
-                            $click="ghi_chu=value.ghi_chu"
+                            @click="ghi_chu=value.ghi_chu"
                                 type="button"
                                 class="btn btn-light"
                                 data-bs-toggle="modal"
@@ -219,7 +219,7 @@ export default {
         const date = ref("");
         function loadData() {
             axios
-                .post("admin/hoa-don/chi-tiet-hoa-don", tk)
+                .post("admin/hoa-don/hoa-don", tk.value)
                 .then((res) => {
                     list.value = res.data.data;
                     tong_tien.value = res.data.tong_tien;
