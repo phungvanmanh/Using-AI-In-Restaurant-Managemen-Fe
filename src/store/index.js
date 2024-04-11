@@ -20,6 +20,7 @@ export default createStore({
         dataChuyenMucBaiViet:[],
         dataBaiViet:[],
         TOKEN_ADMIN : '',
+        dataNguyenLieu:[],
     },
     getters: {
         toSlug: () => (str) => {
@@ -91,6 +92,9 @@ export default createStore({
         },
         fecthBaiViet(state, data) {
             state.dataBaiViet = data;
+        },
+        fecthNguyenLieu(state, data) {
+            state.dataNguyenLieu = data;
         },
     },
     actions: {
@@ -192,6 +196,14 @@ export default createStore({
         },
         updateTokenAdmin({ commit }, token) {
             commit('setTokenAdmin', token);
-        }
+        },
+        onFetchNguyenLieu: async ({ commit }) => {
+            try {
+                const response = await axios.get("admin/nguyen-lieu/get-nguyen-lieu");
+                commit("fecthNguyenLieu", response.data.data);
+            } catch (error) {
+                console.error("Có lỗi xảy ra trong onFetchNguyenLieu:", error);
+            }
+        },
     },
 });

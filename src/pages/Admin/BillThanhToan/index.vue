@@ -1,0 +1,227 @@
+<template>
+    <section id="invoice">
+        <div class="container my-5 py-5">
+            <div class="text-center">
+                <img
+                    width="0"
+                    src="https://trangchudulich.com/wp-content/uploads/2023/11/logo-img.png"
+                    alt=""
+                />
+            </div>
+            <div class="text-center border-top border-bottom my-5 py-3">
+                <h2 class="display-5 fw-bold">Hóa Đơn Thanh Toán</h2>
+                <p class="m-0">
+                    Bàn : <b class="text-danger">{{ hoa_don.name_table }}</b
+                    >, Ngày: <b class="text-danger">{{ date }}</b>
+                </p>
+            </div>
+            <table class="table border my-5">
+                <thead>
+                    <tr class="bg-primary-subtle">
+                        <th scope="col" class="text-center">#</th>
+                        <th scope="col">Tên Món</th>
+                        <th scope="col">Giá</th>
+                        <th scope="col">Số Lượng</th>
+                        <th scope="col">Phần Trăm Giảm</th>
+                        <th scope="col">Thành Tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <template
+                        v-for="(value, key) in list_chi_tiet_ban_hang"
+                        :key="key"
+                    >
+                        <tr>
+                            <th scope="row" class="text-center">
+                                {{ key + 1 }}
+                            </th>
+                            <td>{{ value.food_name }}</td>
+                            <td>{{ formatToVND(value.price) }}</td>
+                            <td>{{ value.so_luong }}</td>
+                            <td>{{ value.phan_tram_giam }}</td>
+                            <td>{{ formatToVND(value.thanh_tien) }}</td>
+                        </tr>
+                    </template>
+                    <tr>
+                        <th></th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="">Tổng Tiền Hóa Đơn</td>
+                        <td>{{ formatToVND(hoa_don.tong_tien_truoc_giam) }}</td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="">Phần Trăm Giảm</td>
+                        <td>{{ hoa_don.phan_tram_giam }}</td>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="text-primary fw-bold">
+                            Tổng Tiền Thanh Toán
+                        </td>
+                        <td class="text-primary fw-bold">
+                            {{ formatToVND(hoa_don.tien_thuc_nhan) }}
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="d-md-flex justify-content-between my-5">
+                <div>
+                    <h5 class="fw-bold my-4">Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <iconify-icon
+                                class="social-icon text-primary fs-5 me-2"
+                                icon="ic:baseline-email"
+                                style="vertical-align: text-bottom"
+                            ></iconify-icon>
+                            Nhà Hàng Food
+                        </li>
+                        <li>
+                            <iconify-icon
+                                class="social-icon text-primary fs-5 me-2"
+                                icon="mdi:location"
+                                style="vertical-align: text-bottom"
+                            ></iconify-icon>
+                            204 Núi Thành,Hoà Cường Bắc,Đà Nẵng
+                        </li>
+                        <li>
+                            <iconify-icon
+                                class="social-icon text-primary fs-5 me-2"
+                                icon="solar:phone-bold"
+                                style="vertical-align: text-bottom"
+                            ></iconify-icon>
+                            0397757013
+                        </li>
+                        <li>
+                            <iconify-icon
+                                class="social-icon text-primary fs-5 me-2"
+                                icon="ic:baseline-email"
+                                style="vertical-align: text-bottom"
+                            ></iconify-icon>
+                            tronglinhluong@gmail.com
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="fw-bold my-4">Thông Tin Thanh Toán</h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <span class="fw-semibold">Account No: </span>
+                            0397757013
+                        </li>
+                        <li>
+                            <span class="fw-semibold">Account Name: </span>
+                            Lương Trọng Linh
+                        </li>
+                        <li>
+                            <span class="fw-semibold">Bank Name: </span> MB Bank
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="footer-bottom">
+                <div class="container border-top">
+                    <div class="row mt-3">
+                        <div class="col-md-6 copyright">
+                            <p>
+                                © 2024 Duy Tân.
+                                <a
+                                    href="#"
+                                    target="_blank"
+                                    class="text-decoration-none text-black-50"
+                                    >Terms &amp; Support</a
+                                >
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <p>
+                                Design By:
+                                <a
+                                    href="https://templatesjungle.com/"
+                                    target="_blank"
+                                    class="text-decoration-none text-black-50"
+                                    >Linh-Full-Stack</a
+                                >
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</template>
+
+<script>
+import {
+    ref,
+    // computed,
+    onMounted,
+} from "vue";
+import { useStore } from "vuex";
+import axios from "@/axiosConfig";
+import Toast from "@/toastConfig";
+import $ from "jquery";
+import { useRoute } from "vue-router";
+export default {
+    name: "bill-thanh-toan",
+    setup() {
+        const store = useStore();
+        const route = useRoute();
+        const id_hoa_don_ban_hang = route.params.id_hoa_don_ban_hang;
+        const list_chi_tiet_ban_hang = ref([]);
+        const hoa_don = ref({});
+        const date = ref("");
+
+        const getData = () => {
+            const payload = {
+                id_hoa_don_ban_hang,
+            };
+            axios
+                .post('admin/hoa-don/data-bill', payload)
+                .then((res) => {
+                    if (res.data.status == 1) {
+                        hoa_don.value = res.data.hoa_don;
+                        console.log(hoa_don.value);
+                        list_chi_tiet_ban_hang.value = res.data.data;
+                    }
+                })
+                .catch((res) => {
+                    $.each(res.response.data.errors, function(k, v) {
+                        Toast('error', v[0]);
+                    });
+                });
+ 
+        };
+        function formatToVND(number) {
+            number = parseInt(number);
+            return number.toLocaleString("vi-VN", {
+                style: "currency",
+                currency: "VND",
+            });
+        }
+        onMounted(() => {
+            getData();
+            date.value = new Date().toISOString().slice(0, 10);
+        });
+        return {
+            id_hoa_don_ban_hang,
+            list_chi_tiet_ban_hang,
+            hoa_don,
+            store,
+            date,
+            getData,
+            formatToVND,
+        };
+    },
+};
+</script>
+
+<style></style>

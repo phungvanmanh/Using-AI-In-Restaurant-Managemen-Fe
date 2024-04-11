@@ -75,41 +75,51 @@
                                                     <h4 class="my-1">
                                                         {{ value.name_table }}
                                                     </h4>
-                                                    <button
-                                                        class="btn btn-secondary me-2"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#qrModal"
-                                                        @click="generateQRCode(value.id)"
-                                                    >
-                                                        QR Login
-                                                    </button>
-                                                    <button
+                                                    <template
                                                         v-if="
                                                             value.is_open_table ==
                                                             0
                                                         "
-                                                        @click="
-                                                            openTable(value.id)
-                                                        "
-                                                        class="btn btn-primary"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#mobanModal"
                                                     >
-                                                        Mở Bàn
-                                                    </button>
-                                                    <button
-                                                        v-else
-                                                        class="btn btn-success"
-                                                        @click="
-                                                            getIdHoaDon(
-                                                                value.id
-                                                            )
-                                                        "
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#mobanModal"
-                                                    >
-                                                        Thanh Toán
-                                                    </button>
+                                                        <button
+                                                            @click="
+                                                                openTable(
+                                                                    value.id
+                                                                )
+                                                            "
+                                                            class="btn btn-primary"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#mobanModal"
+                                                        >
+                                                            Mở Bàn
+                                                        </button>
+                                                    </template>
+                                                    <template v-else>
+                                                        <button
+                                                            class="btn btn-secondary me-2"
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#qrModal"
+                                                            @click="
+                                                                generateQRCode(
+                                                                    value.id
+                                                                )
+                                                            "
+                                                        >
+                                                            QR Login
+                                                        </button>
+                                                        <button
+                                                            class="btn btn-success"
+                                                            @click="
+                                                                getIdHoaDon(
+                                                                    value.id
+                                                                )
+                                                            "
+                                                            data-bs-toggle="modal"
+                                                            data-bs-target="#mobanModal"
+                                                        >
+                                                            Thanh Toán
+                                                        </button>
+                                                    </template>
                                                 </div>
                                             </div>
                                         </div>
@@ -507,7 +517,8 @@
                                     </button>
                                     <router-link
                                         :to="
-                                            '/admin/bill/' + id_hoa_don_ban_hang
+                                            '/admin/bill-thanh-toan/' +
+                                            id_hoa_don_ban_hang
                                         "
                                         target="_blank"
                                     >
@@ -537,7 +548,7 @@
                         aria-labelledby="exampleModalLabel"
                         aria-hidden="true"
                     >
-                        <div class="modal-dialog" style="max-width: 400px;">
+                        <div class="modal-dialog" style="max-width: 400px">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h1
@@ -555,7 +566,11 @@
                                 </div>
                                 <div class="modal-body">
                                     <div class="d-flex justify-content-center">
-                                        <VueQRCodeComponent :class="float-center" :text="qrCodeData" :size="300" />
+                                        <VueQRCodeComponent
+                                            :class="float - center"
+                                            :text="qrCodeData"
+                                            :size="300"
+                                        />
                                     </div>
                                 </div>
                                 <div class="modal-footer">
@@ -585,7 +600,7 @@
 
 <script>
 import { ref, computed, onMounted } from "vue";
-import VueQRCodeComponent from 'vue-qrcode-component'
+import VueQRCodeComponent from "vue-qrcode-component";
 import { useStore } from "vuex";
 import axios from "@/axiosConfig";
 import Toast from "@/toastConfig";
@@ -664,6 +679,7 @@ export default {
                         phan_tram_giam_hoa_don.value =
                             hoa_don.value.phan_tram_giam;
                         ghi_chu_hoa_don.value = hoa_don.value.ghi_chu;
+                        id_hoa_don_ban_hang.value = hoa_don.value.id;
                         getChiTietHoaDon(hoa_don.value.id);
                         store.dispatch("onFetchMonAn");
                     }

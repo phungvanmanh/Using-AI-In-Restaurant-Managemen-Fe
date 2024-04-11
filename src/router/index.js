@@ -17,6 +17,9 @@ import BaiViet from "@/pages/Admin/BaiViet";
 import SuDungDichVu from "@/pages/Admin/SuDungDichVu";
 import store from "@/store";
 import MonAnCustomer from "@/pages/Customer/MonAn";
+import HoaDonBanHang from "@/pages/Admin/HoaDonBanHang";
+import BillThanhToan from "@/pages/Admin/BillThanhToan";
+import NguyenLieu from "@/pages/Admin/NguyenLieu";
 const routes = [
     {
         path: "/",
@@ -91,6 +94,18 @@ const routes = [
                 path: "su-dung-dich-vu",
                 component: SuDungDichVu,
             },
+            {
+                path: "hoa-don-ban-hang",
+                component: HoaDonBanHang,
+            },
+            {
+                path:"nguyen-lieu",
+                component:NguyenLieu,
+            },
+            {
+                path:"bill-thanh-toan/:id_hoa_don_ban_hang",
+                component:BillThanhToan,
+            }
         ],
     },
     {

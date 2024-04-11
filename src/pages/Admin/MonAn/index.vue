@@ -1,250 +1,161 @@
 <template>
-    <div class="row">
-        <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
-            <CardComponentVue>
-                <template #card-header>
-                    <span><b>Dish</b></span>
-                </template>
-                <template #card-body>
-                    <InputComponentVue
-                        label="Food's name"
-                        v-model="addMonAn.food_name"
-                        placeholder=" Enter food's name..."
-                    >
-                    </InputComponentVue>
-                    <InputComponentVue
-                        label="Price"
-                        type="number"
-                        placeholder="Enter price..."
-                        v-model="addMonAn.price"
-                    >
-                    </InputComponentVue>
-                    <SelectComponentVue
-                        v-model="addMonAn.status"
-                        label="Tình Trạng"
-                        :options="tinhTrang"
-                    ></SelectComponentVue>
-                    <SelectComponentVue
-                        v-model="addMonAn.id_category"
-                        label="Category"
-                        :options="id_danhmuc"
-                    ></SelectComponentVue>
-                </template>
-                <template #card-footer>
-                    <button
-                        class="btn btn-primary float-end"
-                        @click="createMonAn()"
-                    >
-                        Add New
-                    </button>
-                </template>
-            </CardComponentVue>
-        </div>
-        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
-            <CardComponentVue :required="false">
-                <template #card-header>
-                    <b> List of dishes</b>
-                </template>
-                <template #card-body>
-                    <TableComponentVue>
-                        <template #thead>
+<div class="row">
+    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
+        <CardComponentVue>
+            <template #card-header>
+                <span><b>Dish</b></span>
+            </template>
+            <template #card-body>
+                <InputComponentVue label="Food's name" v-model="addMonAn.food_name" placeholder=" Enter food's name...">
+                </InputComponentVue>
+                <InputComponentVue label="Price" type="number" placeholder="Enter price..." v-model="addMonAn.price">
+                </InputComponentVue>
+                <InputComponentVue label="Image" placeholder="Enter Image..." v-model="addMonAn.image">
+                </InputComponentVue>
+                <SelectComponentVue v-model="addMonAn.status" label="Tình Trạng" :options="tinhTrang"></SelectComponentVue>
+                <SelectComponentVue v-model="addMonAn.id_category" label="Category" :options="id_danhmuc"></SelectComponentVue>
+            </template>
+            <template #card-footer>
+                <button class="btn btn-primary float-end" @click="createMonAn()">
+                    Add New
+                </button>
+            </template>
+        </CardComponentVue>
+    </div>
+    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
+        <CardComponentVue :required="false">
+            <template #card-header>
+                <b> List of dishes</b>
+            </template>
+            <template #card-body>
+                <TableComponentVue>
+                    <template #thead>
+                        <tr>
+                            <th class="text-center align-middle text-nowrap">
+                                #
+                            </th>
+                            <th class="text-center align-middle text-nowrap">
+                                Food's name
+                            </th>
+                            <th class="text-center align-middle text-nowrap">
+                                Price
+                            </th>
+                            <th class="text-center align-middle text-nowrap">
+                                Image
+                            </th>
+                            <th class="text-center align-middle text-nowrap">
+                                Tình Trạng
+                            </th>
+                            <th class="text-center align-middle text-nowrap">
+                                Category
+                            </th>
+                            <th class="text-center align-middle text-nowrap">
+                                Action
+                            </th>
+                        </tr>
+                    </template>
+                    <template #tbody>
+                        <template v-for="(value, index) in dataMonAn" :key="index">
                             <tr>
-                                <th
-                                    class="text-center align-middle text-nowrap"
-                                >
-                                    #
-                                </th>
-                                <th
-                                    class="text-center align-middle text-nowrap"
-                                >
-                                    Food's name
-                                </th>
-                                <th
-                                    class="text-center align-middle text-nowrap"
-                                >
-                                    Price
-                                </th>
-                                <th
-                                    class="text-center align-middle text-nowrap"
-                                >
-                                    Tình Trạng
-                                </th>
-                                <th
-                                    class="text-center align-middle text-nowrap"
-                                >
-                                    Category
-                                </th>
-                                <th
-                                    class="text-center align-middle text-nowrap"
-                                >
-                                    Action
-                                </th>
-                            </tr>
-                        </template>
-                        <template #tbody>
-                            <template
-                                v-for="(value, index) in dataMonAn"
-                                :key="index"
-                            >
-                                <tr>
-                                    <td
-                                        class="text-center align-middle text-nowrap"
-                                    >
-                                        {{ index + 1 }}
-                                    </td>
-                                    <td
-                                        class="text-center align-middle text-nowrap"
-                                    >
-                                        {{ value.food_name }}
-                                    </td>
-                                    <td
-                                        class="text-center align-middle text-nowrap"
-                                    >
-                                        {{ value.price }}
-                                    </td>
-                                    <td
-                                        class="text-center align-middle text-nowrap"
-                                    >
-                                        <template v-if="value.status == 1">
-                                            <button
-                                                @click="changeStatus(value)"
-                                                class="btn btn-success"
-                                            >
-                                                Hiển thị
-                                            </button>
-                                        </template>
-                                        <template v-else>
-                                            <button
-                                                @click="changeStatus(value)"
-                                                class="btn btn-info"
-                                            >
-                                                Tạm Tắt
-                                            </button>
-                                        </template>
-                                    </td>
-                                    <td
-                                        class="text-center align-middle text-nowrap"
-                                    >
-                                        {{ value.name_category }}
-                                    </td>
-                                    <td
-                                        class="text-center align-middle text-nowrap"
-                                    >
-                                        <ModalComponentVue
-                                            titleId="edit_monan"
-                                            color="info"
-                                            label="Edit Dish"
-                                            @click="
+                                <td class="text-center align-middle text-nowrap">
+                                    {{ index + 1 }}
+                                </td>
+                                <td class="text-center align-middle text-nowrap">
+                                    {{ value.food_name }}
+                                </td>
+                                <td class="text-center align-middle text-nowrap">
+                                    {{ value.price }}
+                                </td>
+                                <td class="text-center align-middle text-nowrap">
+                                    <img v-bind:src="value.image" height="50" alt="">
+                                </td>
+                                <td class="text-center align-middle text-nowrap">
+                                    <template v-if="value.status == 1">
+                                        <button @click="changeStatus(value)" class="btn btn-success">
+                                            Hiển thị
+                                        </button>
+                                    </template>
+                                    <template v-else>
+                                        <button @click="changeStatus(value)" class="btn btn-info">
+                                            Tạm Tắt
+                                        </button>
+                                    </template>
+                                </td>
+                                <td class="text-center align-middle text-nowrap">
+                                    {{ value.name_category }}
+                                </td>
+                                <td class="text-center align-middle text-nowrap">
+                                    <ModalComponentVue titleId="edit_monan" color="info" label="Edit Dish" @click="
                                                 Object.assign(editMonAn, value)
-                                            "
-                                        >
-                                            <template #modal-header
-                                                >Chỉnh Sửa</template
-                                            >
-                                            <template #modal-body>
-                                                <InputComponentVue
-                                                    label="Food's name"
-                                                    v-model="
+                                            ">
+                                        <template #modal-header>Chỉnh Sửa</template>
+                                        <template #modal-body>
+                                            <InputComponentVue label="Food's name" v-model="
                                                         editMonAn.food_name
-                                                    "
-                                                    placeholder=" Enter food's name..."
-                                                >
-                                                </InputComponentVue>
-                                                <InputComponentVue
-                                                    label="Price"
-                                                    placeholder="Enter price..."
-                                                    v-model="editMonAn.price"
-                                                >
-                                                </InputComponentVue>
-                                                <SelectComponentVue
-                                                    v-model="editMonAn.status"
-                                                    label="Tình Trạng"
-                                                    :options="tinhTrang"
-                                                ></SelectComponentVue>
-                                                <SelectComponentVue
-                                                    v-model="
+                                                    " placeholder=" Enter food's name...">
+                                            </InputComponentVue>
+                                            <InputComponentVue label="Price" placeholder="Enter price..." v-model="editMonAn.price">
+                                            </InputComponentVue>
+                                            <SelectComponentVue v-model="editMonAn.status" label="Tình Trạng" :options="tinhTrang"></SelectComponentVue>
+                                            <SelectComponentVue v-model="
                                                         editMonAn.id_category
-                                                    "
-                                                    label="Category"
-                                                    :options="id_danhmuc"
-                                                ></SelectComponentVue>
-                                            </template>
-                                            <template #modal-footer>
-                                                <button
-                                                    style="margin-right: 10px"
-                                                    @click="updateMonAn()"
-                                                    class="btn btn-primary"
-                                                >
-                                                    Update
-                                                </button>
-                                                <button
-                                                    class="btn btn-danger"
-                                                    data-bs-dismiss="modal"
-                                                >
-                                                    Close
-                                                </button>
-                                            </template>
-                                        </ModalComponentVue>
-                                        <ModalComponentVue
-                                            titleId="xoa_mon_an"
-                                            @click="
+                                                    " label="Category" :options="id_danhmuc"></SelectComponentVue>
+                                        </template>
+                                        <template #modal-footer>
+                                            <button style="margin-right: 10px" @click="updateMonAn()" class="btn btn-primary">
+                                                Update
+                                            </button>
+                                            <button class="btn btn-danger" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </template>
+                                    </ModalComponentVue>
+                                    <ModalComponentVue titleId="xoa_mon_an" @click="
                                                 Object.assign(
                                                     deletemonan,
                                                     value
                                                 )
-                                            "
-                                            color="danger"
-                                            label="Delete Dish"
-                                        >
-                                            <template #modal-header
-                                                >Xóa Món</template
-                                            >
-                                            <template #modal-body>
-                                                Bạn có chắc chắn muốn xóa
-                                                <span
-                                                    ><b
-                                                        ><i
-                                                            class="text-danger"
-                                                            >{{
+                                            " color="danger" label="Delete Dish">
+                                        <template #modal-header>Xóa Món</template>
+                                        <template #modal-body>
+                                            Bạn có chắc chắn muốn xóa
+                                            <span><b><i class="text-danger">{{
                                                                 deletemonan.food_name
-                                                            }}</i
-                                                        ></b
-                                                    ></span
-                                                >
-                                                ra khỏi danh sách hay không?
-                                            </template>
-                                            <template #modal-footer>
-                                                <button
-                                                    class="btn btn-success"
-                                                    @click="deleteMonAn()"
-                                                >
-                                                    Accept
-                                                </button>
-                                                <button
-                                                    class="btn btn-danger"
-                                                    data-bs-dismiss="modal"
-                                                >
-                                                    Close
-                                                </button>
-                                            </template>
-                                        </ModalComponentVue>
-                                    </td>
-                                </tr>
-                            </template>
+                                                            }}</i></b></span>
+                                            ra khỏi danh sách hay không?
+                                        </template>
+                                        <template #modal-footer>
+                                            <button class="btn btn-success" @click="deleteMonAn()">
+                                                Accept
+                                            </button>
+                                            <button class="btn btn-danger" data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                        </template>
+                                    </ModalComponentVue>
+                                </td>
+                            </tr>
                         </template>
-                    </TableComponentVue>
-                </template>
-            </CardComponentVue>
-        </div>
+                    </template>
+                </TableComponentVue>
+            </template>
+        </CardComponentVue>
     </div>
+</div>
 </template>
 
 <script>
 import CardComponentVue from "@/components/CardComponent.vue";
 import InputComponentVue from "@/components/InputComponent.vue";
 import SelectComponentVue from "@/components/SelectComponent.vue";
-import { ref, computed, onMounted } from "vue";
-import { useStore } from "vuex";
+import {
+    ref,
+    computed,
+    onMounted
+} from "vue";
+import {
+    useStore
+} from "vuex";
 import axios from "@/axiosConfig";
 import Toast from "@/toastConfig";
 import $ from "jquery";
@@ -325,6 +236,7 @@ export default {
                     });
                 });
         }
+
         function deleteMonAn(value) {
             axios
                 .post("admin/mon-an/delete", value)

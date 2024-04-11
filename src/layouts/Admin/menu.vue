@@ -36,116 +36,202 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item">
-                <router-link to="/admin">
-                    <a class="nav-link">
-                        <div class="parent-icon">
-                            <i class="bx bx-cookie"></i>
-                        </div>
-                        <div class="menu-title">Admin</div>
-                    </a>
-                </router-link>
+            <li class="nav-item dropdown">
+                <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
+                    <div class="parent-icon">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <div class="menu-title">Admin</div>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <router-link to="/admin/admin">
+                            <a class="dropdown-item" href="/admin/admin"><i class="bx bx-right-arrow-alt"></i>Quản lí tài khoản</a>
+
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/admin/lich-lam-viec">
+                            <a class="dropdown-item" href="/admin/lich-lam-viec"><i class="bx bx-right-arrow-alt"></i>Lịch Làm Việc</a>
+
+                        </router-link>
+                    </li>
+                   
+                   
+                </ul>
             </li>
             <!-- <li class="nav-item">
-                        <router-link to="/staff">
-                            <a class="nav-link">
-                                <div class="parent-icon">
-                                    <i class="bx bx-cookie"></i>
-                                </div>
-                                <div class="menu-title">Staff</div>
-                            </a>
-                        </router-link>
-                    </li> -->
+                            <router-link to="/admin/staff">
+                                <a class="nav-link">
+                                    <div class="parent-icon">
+                                        <i class="bx bx-cookie"></i>
+                                    </div>
+                                    <div class="menu-title">Staff</div>
+                                </a>
+                            </router-link>
+                        </li> -->
             <li class="nav-item">
-                <router-link to="/khach-hang">
+                <router-link to="/admin/khach-hang">
                     <a class="nav-link">
                         <div class="parent-icon">
-                            <i class="bx bx-cookie"></i>
+                            <i class="fa-solid fa-user-tie"></i>
                         </div>
                         <div class="menu-title">Khách Hàng</div>
                     </a>
                 </router-link>
             </li>
             <li class="nav-item">
-                <router-link to="/quyen">
+                <router-link to="/admin/quyen">
                     <a class="nav-link">
                         <div class="parent-icon">
-                            <i class="bx bx-cookie"></i>
+                            <i class="fa-solid fa-user-lock"></i>
                         </div>
                         <div class="menu-title">Permission</div>
                     </a>
                 </router-link>
             </li>
+            <li class="nav-item dropdown">
+                <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
+                    <div class="parent-icon">
+                        <i class="fa-solid fa-memory"></i>
+                    </div>
+                    <div class="menu-title">Quản lí khu</div>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <router-link to="/admin/khu-vuc">
+                            <a class="dropdown-item" href="/admin/khu-vuc"><i class="bx bx-right-arrow-alt"></i>Area</a>
+
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/admin/ban">
+                            <a class="dropdown-item" href="/admin/ban"><i class="bx bx-right-arrow-alt"></i>Table</a>
+
+                        </router-link>
+                    </li>
+                   
+                   
+                </ul>
+            </li>
             <li class="nav-item">
-                <router-link to="/danh-muc">
+                <router-link to="/admin/danh-muc">
                     <a class="nav-link">
                         <div class="parent-icon">
-                            <i class="bx bx-cookie"></i>
+                            <i class="fas fa-list"></i>
                         </div>
                         <div class="menu-title">Category</div>
                     </a>
                 </router-link>
             </li>
-            <li class="nav-item">
-                <router-link to="/mon-an">
+             <li class="nav-item">
+                <router-link to="/admin/nha-cung-cap">
                     <a class="nav-link">
                         <div class="parent-icon">
-                            <i class="bx bx-cookie"></i>
-                        </div>
-                        <div class="menu-title">Dish</div>
-                    </a>
-                </router-link>
-            </li>
-            <li class="nav-item">
-                <router-link to="/khu-vuc">
-                    <a class="nav-link">
-                        <div class="parent-icon">
-                            <i class="bx bx-cookie"></i>
-                        </div>
-                        <div class="menu-title">Area</div>
-                    </a>
-                </router-link>
-            </li>
-            <li class="nav-item">
-                <router-link to="/ban">
-                    <a class="nav-link">
-                        <div class="parent-icon">
-                            <i class="bx bx-cookie"></i>
-                        </div>
-                        <div class="menu-title">Table</div>
-                    </a>
-                </router-link>
-            </li>
-            <li class="nav-item">
-                <router-link to="/nha-cung-cap">
-                    <a class="nav-link">
-                        <div class="parent-icon">
-                            <i class="bx bx-cookie"></i>
+                            <i class="fa-solid fa-warehouse"></i>
                         </div>
                         <div class="menu-title">Suppliers</div>
                     </a>
                 </router-link>
             </li>
             <li class="nav-item">
-                <router-link to="/chuyen-muc-bai-viet">
+                <router-link to="/admin/bai-viet">
                     <a class="nav-link">
                         <div class="parent-icon">
-                            <i class="bx bx-cookie"></i>
-                        </div>
-                        <div class="menu-title">Article Categories</div>
-                    </a>
-                </router-link>
-            </li>
-            <li class="nav-item">
-                <router-link to="/bai-viet">
-                    <a class="nav-link">
-                        <div class="parent-icon">
-                            <i class="bx bx-cookie"></i>
+                            <i class="fa-solid fa-book"></i>
                         </div>
                         <div class="menu-title">Article</div>
                     </a>
                 </router-link>
             </li>
+            <li class="nav-item">
+                <router-link to="/admin/chuyen-muc-bai-viet">
+                    <a class="nav-link">
+                        <div class="parent-icon">
+                            <i class="fa-solid fa-book-open-reader"></i>
+                        </div>
+                        <div class="menu-title">Article Categories</div>
+                    </a>
+                </router-link>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
+                    <div class="parent-icon">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                    <div class="menu-title">Quản lí bán hàng</div>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <router-link to="/admin/su-dung-dich-vu">
+                            <a class="dropdown-item" href="/admin/su-dung-dich-vu"><i class="bx bx-right-arrow-alt"></i>Sử dụng dịch vụ</a>
+
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/admin/hoa-don-ban-hang">
+                            <a class="dropdown-item" href="/admin/hoa-don-ban-hang"><i class="bx bx-right-arrow-alt"></i>Hóa Đơn Bán Hàng</a>
+
+                        </router-link>
+                    </li>
+
+                </ul>
+            </li>
+
+            <!-- <li class="nav-item dropdown">
+                <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
+                    <div class="parent-icon">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                    <div class="menu-title">Quản lí Nhập Kho</div>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                       
+                            <a class="dropdown-item" href=""><i class="bx bx-right-arrow-alt"></i>Nhập Kho</a>
+
+                        
+                    </li>
+                    <li>
+                      
+                            <a class="dropdown-item" href=""><i class="bx bx-right-arrow-alt"></i>Hóa Đơn Nhập Kho</a>
+
+                      
+                    </li>
+
+                </ul>
+            </li> -->
+            <li class="nav-item dropdown">
+                <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
+                    <div class="parent-icon">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                    <div class="menu-title">Quản lí món ăn</div>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <router-link to="/admin/nguyen-lieu">
+                            <a class="dropdown-item" href="/admin/nguyen-lieu"><i class="bx bx-right-arrow-alt"></i>Nguyên Liệu</a>
+
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/admin/danh-muc">
+                            <a class="dropdown-item" href="/admin/danh-muc"><i class="bx bx-right-arrow-alt"></i>Danh Mục Món Ăn</a>
+
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/admin/mon-an">
+                            <a class="dropdown-item" href="/admin/mon-an"><i class="bx bx-right-arrow-alt"></i>Món Ăn</a>
+
+                        </router-link>
+                    </li>
+                   
+                </ul>
+            </li>
+           
         </ul>
     </nav>
 </div>
@@ -155,5 +241,6 @@
 <script>
 export default {
     name: "admin-menu",
+    
 };
 </script>
