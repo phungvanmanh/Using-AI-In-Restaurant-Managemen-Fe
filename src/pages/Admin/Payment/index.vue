@@ -20,6 +20,8 @@ export default {
         const amount = ref(0);
         const bill_id = ref("");
         const checkingTransaction = ref(false);
+        const BANK_ID = '970422';
+        const ACCOUNT_NO = '9704229206656928914';
         const link_qr = ref(
             "https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
         );
@@ -30,7 +32,7 @@ export default {
             }
         };
         function updateQRCode() {
-            link_qr.value = `https://img.vietqr.io/image/970422-9704229206656928914-compact2.png?amount=${amount.value}&addInfo=${bill_id.value}&accountName=PHUNG_VAN_MANH`;
+            link_qr.value = `https://img.vietqr.io/image/${BANK_ID}-${ACCOUNT_NO}-compact2.png?amount=${amount.value}&addInfo=${bill_id.value}&accountName=PHUNG_VAN_MANH`;
         }
 
         function checkTransaction() {
