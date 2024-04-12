@@ -1,132 +1,82 @@
 <template>
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
-                        <li
-                            class="nav-item"
-                            role="presentation"
-                            v-on:click="loadDataBan()"
-                        >
-                            <a
-                                class="nav-link active"
-                                data-bs-toggle="tab"
-                                href="#primaryhome"
-                                role="tab"
-                                aria-selected="true"
-                            >
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
+                    <li class="nav-item" role="presentation" v-on:click="loadDataBan()">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab" aria-selected="true">
+                            <div class="d-flex align-items-center">
+                                <div class="tab-icon">
+                                    <i class="bx bx-comment-detail font-18 me-1"></i>
+                                </div>
+                                <div class="tab-title">Tất Cả</div>
+                            </div>
+                        </a>
+                    </li>
+                    <template v-for="(value, key) in dataKhuVuc" :key="key">
+                        <li class="nav-item" role="presentation" v-on:click="getBanTheoKhuVuc(value)">
+                            <a class="nav-link" data-bs-toggle="tab" v-bind:href="'#primaryhome' + key" role="tab" aria-selected="false" tabindex="-1">
                                 <div class="d-flex align-items-center">
                                     <div class="tab-icon">
-                                        <i
-                                            class="bx bx-comment-detail font-18 me-1"
-                                        ></i>
+                                        <i class="bx bx-bookmark-alt font-18 me-1"></i>
                                     </div>
-                                    <div class="tab-title">Tất Cả</div>
+                                    <div class="tab-title">
+                                        {{ value.name_area }}
+                                    </div>
                                 </div>
                             </a>
                         </li>
-                        <template v-for="(value, key) in dataKhuVuc" :key="key">
-                            <li
-                                class="nav-item"
-                                role="presentation"
-                                v-on:click="getBanTheoKhuVuc(value)"
-                            >
-                                <a
-                                    class="nav-link"
-                                    data-bs-toggle="tab"
-                                    v-bind:href="'#primaryhome' + key"
-                                    role="tab"
-                                    aria-selected="false"
-                                    tabindex="-1"
-                                >
-                                    <div class="d-flex align-items-center">
-                                        <div class="tab-icon">
-                                            <i
-                                                class="bx bx-bookmark-alt font-18 me-1"
-                                            ></i>
-                                        </div>
-                                        <div class="tab-title">
-                                            {{ value.name_area }}
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </template>
-                    </ul>
-                    <div class="tab-content pt-3">
-                        <div class="row">
-                            <template
-                                v-for="(value, key) in dataBan"
-                                :key="key"
-                            >
-                                <template v-if="value.status == 1">
-                                    <div class="col-2">
-                                        <div class="card radius-10">
-                                            <div class="card-body">
-                                                <div class="text-center">
-                                                    <div
-                                                        class="widgets-icons rounded-circle mx-auto bg-light-primary text-primary mb-3"
-                                                    >
-                                                        <i
-                                                            class="fa-solid fa-couch"
-                                                        ></i>
-                                                    </div>
-                                                    <h4 class="my-1">
-                                                        {{ value.name_table }}
-                                                    </h4>
-                                                    <template
-                                                        v-if="
+                    </template>
+                </ul>
+                <div class="tab-content pt-3">
+                    <div class="row">
+                        <template v-for="(value, key) in dataBan" :key="key">
+                            <template v-if="value.status == 1">
+                                <div class="col-2">
+                                    <div class="card radius-10">
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                <div class="widgets-icons rounded-circle mx-auto bg-light-primary text-primary mb-3">
+                                                    <i class="fa-solid fa-couch"></i>
+                                                </div>
+                                                <h4 class="my-1">
+                                                    {{ value.name_table }}
+                                                </h4>
+                                                <template v-if="
                                                             value.is_open_table ==
                                                             0
-                                                        "
-                                                    >
-                                                        <button
-                                                            @click="
+                                                        ">
+                                                    <button @click="
                                                                 openTable(
                                                                     value.id
                                                                 )
-                                                            "
-                                                            class="btn btn-primary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#mobanModal"
-                                                        >
-                                                            Mở Bàn
-                                                        </button>
-                                                    </template>
-                                                    <template v-else>
-                                                        <button
-                                                            class="btn btn-secondary me-2"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#qrModal"
-                                                            @click="
+                                                            " class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mobanModal">
+                                                        Mở Bàn
+                                                    </button>
+                                                </template>
+                                                <template v-else>
+                                                    <button class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#qrModal" @click="
                                                                 generateQRCode(
                                                                     value.id
                                                                 )
-                                                            "
-                                                        >
-                                                            QR Login
-                                                        </button>
-                                                        <button
-                                                            class="btn btn-success"
-                                                            @click="
+                                                            ">
+                                                        QR Login
+                                                    </button>
+                                                    <button class="btn btn-success" @click="
                                                                 getIdHoaDon(
                                                                     value.id
                                                                 )
-                                                            "
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#mobanModal"
-                                                        >
-                                                            Thanh Toán
-                                                        </button>
-                                                    </template>
-                                                </div>
+                                                            " data-bs-toggle="modal" data-bs-target="#mobanModal">
+                                                        Thanh Toán
+                                                    </button>
+                                                </template>
                                             </div>
                                         </div>
                                     </div>
-                                </template>
+                                </div>
                             </template>
-                        </div>
+                        </template>
                     </div>
                     <div
                         class="modal fade"
@@ -501,6 +451,7 @@
                                                                         </p>
                                                                     </div>
                                                                 </div>
+
                                                             </div>
                                                         </div>
                                                     </div>
@@ -558,57 +509,36 @@
                                         </button>
                                     </template>
                                 </div>
+
                             </div>
                         </div>
                     </div>
-                    <div
-                        class="modal fade"
-                        id="qrModal"
-                        tabindex="-1"
-                        aria-labelledby="exampleModalLabel"
-                        aria-hidden="true"
-                    >
-                        <div class="modal-dialog" style="max-width: 400px">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1
-                                        class="modal-title fs-5"
-                                        id="exampleModalLabel"
-                                    >
-                                        QR Code
-                                    </h1>
-                                    <button
-                                        type="button"
-                                        class="btn-close"
-                                        data-bs-dismiss="modal"
-                                        aria-label="Close"
-                                    ></button>
+                </div>
+                <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="max-width: 400px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    QR Code
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-flex justify-content-center">
+                                    <VueQRCodeComponent :class="float - center" :text="qrCodeData" :size="300" />
                                 </div>
-                                <div class="modal-body">
-                                    <div class="d-flex justify-content-center">
-                                        <VueQRCodeComponent
-                                            :class="float - center"
-                                            :text="qrCodeData"
-                                            :size="300"
-                                        />
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button
-                                        type="button"
-                                        class="btn btn-secondary"
-                                        data-bs-dismiss="modal"
-                                    >
-                                        Đóng
-                                    </button>
-                                    <!-- <button
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Đóng
+                                </button>
+                                <!-- <button
                                         type="button"
                                         class="btn btn-primary"
                                         @click="generateQRCode"
                                     >
                                         Tạo QR Login
                                     </button> -->
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -616,15 +546,23 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
-import { ref, computed, onMounted } from "vue";
+import {
+    ref,
+    computed,
+    onMounted
+} from "vue";
 import VueQRCodeComponent from "vue-qrcode-component";
-import { useStore } from "vuex";
+import {
+    useStore
+} from "vuex";
 import axios from "@/axiosConfig";
 import Toast from "@/toastConfig";
 import $ from "jquery";
+
 import { apiQRcode } from "@/globals";
 import BillComponent from "@/pages/Admin/BillThanhToan";
 export default {
@@ -919,7 +857,9 @@ export default {
         async function generateQRCode(id_ban) {
             try {
                 const idBan = id_ban; // Thay thế bằng id_ban thực tế
-                const { data } = await axios.get(`admin/create-token/${idBan}`);
+                const {
+                    data
+                } = await axios.get(`admin/create-token/${idBan}`);
                 qrCodeData.value = apiQRcode + data.url;
             } catch (error) {
                 console.error("Lỗi khi tạo QR Code:", error);
