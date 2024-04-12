@@ -1,6 +1,6 @@
 <template>
     <section id="invoice">
-        <div class="container my-5 py-5">
+        <div class="container">
             <div class="text-center">
                 <img
                     width="0"
@@ -15,63 +15,58 @@
                     >, Ngày: <b class="text-danger">{{ date }}</b>
                 </p>
             </div>
-            <table class="table border my-5">
-                <thead>
-                    <tr class="bg-primary-subtle">
-                        <th scope="col" class="text-center">#</th>
-                        <th scope="col">Tên Món</th>
-                        <th scope="col">Giá</th>
-                        <th scope="col">Số Lượng</th>
-                        <th scope="col">Phần Trăm Giảm</th>
-                        <th scope="col">Thành Tiền</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <template
-                        v-for="(value, key) in list_chi_tiet_ban_hang"
-                        :key="key"
-                    >
-                        <tr>
-                            <th scope="row" class="text-center">
-                                {{ key + 1 }}
-                            </th>
-                            <td>{{ value.food_name }}</td>
-                            <td>{{ formatToVND(value.price) }}</td>
-                            <td>{{ value.so_luong }}</td>
-                            <td>{{ value.phan_tram_giam }}</td>
-                            <td>{{ formatToVND(value.thanh_tien) }}</td>
+            <div class="table-responsive">
+                <table class="table border my-5">
+                    <thead>
+                        <tr class="bg-primary-subtle">
+                            <th scope="col" class="text-center">#</th>
+                            <th scope="col">Tên Món</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">Số Lượng</th>
+                            <th scope="col">Phần Trăm Giảm</th>
+                            <th scope="col">Thành Tiền</th>
                         </tr>
-                    </template>
-                    <tr>
-                        <th></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="">Tổng Tiền Hóa Đơn</td>
-                        <td>{{ formatToVND(hoa_don.tong_tien_truoc_giam) }}</td>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="">Phần Trăm Giảm</td>
-                        <td>{{ hoa_don.phan_tram_giam }}</td>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td class="text-primary fw-bold">
-                            Tổng Tiền Thanh Toán
-                        </td>
-                        <td class="text-primary fw-bold">
-                            {{ formatToVND(hoa_don.tien_thuc_nhan) }}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <template
+                            v-for="(value, key) in list_chi_tiet_ban_hang"
+                            :key="key"
+                        >
+                            <tr>
+                                <th style="width: 70px;" scope="row" class="text-center">
+                                    {{ key + 1 }}
+                                </th>
+                                <td style="width: 120px;">{{ value.food_name }}</td>
+                                <td style="width: 120px;">{{ formatToVND(value.price) }}</td>
+                                <td style="width: 70px;">{{ value.so_luong }}</td>
+                                <td style="width: 120px;">{{ value.phan_tram_giam }}</td>
+                                <td style="width: 150px;">{{ formatToVND(value.thanh_tien) }}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4"></td>
+                            <td class="">Tổng Tiền Hóa Đơn</td>
+                            <td>{{ formatToVND(hoa_don.tong_tien_truoc_giam) }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"></td>
+                            <td class="" style="max-width: 120px; min-width: 120px;">Phần Trăm Giảm</td>
+                            <td>{{ hoa_don.phan_tram_giam }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4"></td>
+                            <td class="text-primary fw-bold">
+                                Tổng Tiền Thanh Toán
+                            </td>
+                            <td class="text-primary fw-bold">
+                                {{ formatToVND(hoa_don.tien_thuc_nhan) }}
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
             <div class="d-md-flex justify-content-between my-5">
                 <div>
                     <h5 class="fw-bold my-4">Contact Us</h5>
@@ -126,6 +121,9 @@
                         </li>
                     </ul>
                 </div>
+                <template v-if="required == true">
+                    <slot name="image" />
+                </template>
             </div>
             <div id="footer-bottom">
                 <div class="container border-top">
@@ -162,7 +160,6 @@
 <script>
 import {
     ref,
-    // computed,
     onMounted,
 } from "vue";
 import { useStore } from "vuex";
@@ -172,10 +169,21 @@ import $ from "jquery";
 import { useRoute } from "vue-router";
 export default {
     name: "bill-thanh-toan",
-    setup() {
+    props : {
+        id : {
+            type : Number,
+            required: false
+        },
+        required : {
+            type : Boolean,
+            default : false,
+        }
+    },
+    setup(props) {
         const store = useStore();
         const route = useRoute();
-        const id_hoa_don_ban_hang = route.params.id_hoa_don_ban_hang;
+        const id_hoa_don_ban_hang = route.params.id_hoa_don_ban_hang || props.id;
+        
         const list_chi_tiet_ban_hang = ref([]);
         const hoa_don = ref({});
         const date = ref("");

@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import AdminMaster from "@/layouts/Admin";
 import Customer from "@/layouts/Customer";
+import BootStrap from "@/layouts/Boststrap";
 import Test from "@/pages/Admin/QuanLyAdmin/index1.vue";
 import Admin from "@/pages/Admin/QuanLyAdmin";
 import KhachHang from "@/pages/Admin/KhachHang";
@@ -46,6 +47,17 @@ const routes = [
         path: "/login",
         name: "login",
         component: Login,
+    },
+    {
+        path: "/admin",
+        component: BootStrap,
+        meta: { requiresAuth: true },
+        children: [
+            {
+                path:"bill-thanh-toan/:id_hoa_don_ban_hang",
+                component:BillThanhToan,
+            }
+        ]
     },
     {
         path: "/admin",
@@ -113,10 +125,10 @@ const routes = [
                 path:"nguyen-lieu",
                 component:NguyenLieu,
             },
-            {
-                path:"bill-thanh-toan/:id_hoa_don_ban_hang",
-                component:BillThanhToan,
-            }
+            // {
+            //     path:"bill-thanh-toan/:id_hoa_don_ban_hang",
+            //     component:BillThanhToan,
+            // }
         ],
     },
     {
