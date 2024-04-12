@@ -16,7 +16,7 @@
                         <thead>
                             <tr>
                                 <th colspan="100%">
-                                    <div class="input-group mb-3"><input type="text" class="form-control" placeholder="Enter what you're looking for"><button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button></div>
+                                    <div  class="input-group mb-3"><input  v-on:keyup.enter="searchNhaCungCap()" v-model="search.abc" type="text" class="form-control" placeholder="Enter what you're looking for"><button v-on:click="searchNhaCungCap()" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button></div>
                                 </th>
                             </tr>
                             <tr>
@@ -44,7 +44,7 @@
                                     <td class="text-center align-middle text-nowrap"><button v-on:click="dia_chi = value" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#diaChiModal"><i class="fa-solid fa-circle-info"></i></button></td>
                                     <td class="text-center align-middle text-nowrap">{{value.ten_goi_nho}}</td>
                                     <td class="text-center align-middle text-nowrap">
-                                    
+
                                         <button @:click="changeStatus(value)" v-if="value.tinh_trang == 1" class="btn btn-success">Activity</button>
                                         <button @:click="changeStatus(value)" v-else class="btn btn-warning">Pause</button>
                                     </td>
@@ -65,17 +65,17 @@
                                 <div class="row">
                                     <div class="row">
                                         <div class="col-4"><label class="form-label">Tax ID</label><input v-model="editNhacungcap.ma_so_thue" type="text" class="form-control" placeholder="Enter your tax ID"></div>
-                                        <div class="col-4"><label class="form-label">Company Name</label><input  v-model="editNhacungcap.ten_cong_ty" type="text" class="form-control" placeholder="Enter your company name"></div>
-                                        <div class="col-4"><label class="form-label">Representative</label><input  v-model="editNhacungcap.ten_nguoi_dai_dien" type="text" class="form-control" placeholder="Enter a delegate's name"></div>
+                                        <div class="col-4"><label class="form-label">Company Name</label><input v-model="editNhacungcap.ten_cong_ty" type="text" class="form-control" placeholder="Enter your company name"></div>
+                                        <div class="col-4"><label class="form-label">Representative</label><input v-model="editNhacungcap.ten_nguoi_dai_dien" type="text" class="form-control" placeholder="Enter a delegate's name"></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-4"><label class="form-label mt-3">Telephone numberi</label><input  v-model="editNhacungcap.so_dien_thoai" type="number" class="form-control" placeholder="Enter your phone number"></div>
-                                        <div class="col-4"><label class="form-label mt-3">Email</label><input  v-model="editNhacungcap.email" type="email" class="form-control" placeholder="Enter Email"></div>
-                                        <div class="col-4"><label class="form-label mt-3">Address</label><input  v-model="editNhacungcap.dia_chi" type="email" class="form-control" placeholder="Enter the address"></div>
+                                        <div class="col-4"><label class="form-label mt-3">Telephone numberi</label><input v-model="editNhacungcap.so_dien_thoai" type="number" class="form-control" placeholder="Enter your phone number"></div>
+                                        <div class="col-4"><label class="form-label mt-3">Email</label><input v-model="editNhacungcap.email" type="email" class="form-control" placeholder="Enter Email"></div>
+                                        <div class="col-4"><label class="form-label mt-3">Address</label><input v-model="editNhacungcap.dia_chi" type="email" class="form-control" placeholder="Enter the address"></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><label class="form-label mt-3">Name remembered</label><input  v-model="editNhacungcap.ten_goi_nho" type="text" class="form-control" placeholder="Enter a reminiscent name"></div>
-                                        <div class="col-6"><label class="form-label mt-3">Status</label><select  v-model="editNhacungcap.tinh_trang" class="form-control">
+                                        <div class="col-6"><label class="form-label mt-3">Name remembered</label><input v-model="editNhacungcap.ten_goi_nho" type="text" class="form-control" placeholder="Enter a reminiscent name"></div>
+                                        <div class="col-6"><label class="form-label mt-3">Status</label><select v-model="editNhacungcap.tinh_trang" class="form-control">
                                                 <option value="0">Pause</option>
                                                 <option value="1">Activity</option>
                                             </select></div>
@@ -177,14 +177,13 @@ export default {
     setup() {
         const store = useStore();
         const status = computed(() => store.state.tinh_trang);
+        const dataNhaCungCap = computed(() => store.state.dataNhaCungCap);
         const addNhaCungCap = ref({});
         const editNhacungcap = ref({});
         const delete_nhacungcap = ref({});
         const dia_chi = ref('');
+        const search = ref({})
 
-        const dataNhaCungCap = computed(() => {
-            return store.state.dataNhaCungCap;
-        });
 
         const addNew = () => {
             axios
@@ -220,7 +219,7 @@ export default {
                     });
                 });
         };
-        
+
         const changeStatus = (value) => {
             axios
                 .post("admin/nha-cung-cap/change-status", value)
@@ -254,6 +253,15 @@ export default {
                     });
                 });
         };
+
+        function searchNhaCungCap() {
+            axios
+                .post('admin/nha-cung-cap/tim-nha-cung-cap', search.value)
+                .then((res) => {
+                    console.log(res.data.data);
+                    store.commit('fecthNhaCungCap', res.data.data);
+                });
+        }
         onMounted(() => {
             store.dispatch("onFetchNhaCungCap");
         });
@@ -269,6 +277,8 @@ export default {
             changeStatus,
             delete_nhacungcap,
             deleteNhaCungCap,
+            search,
+            searchNhaCungCap,
 
         };
     },
