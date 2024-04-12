@@ -15,12 +15,12 @@ module.exports = defineConfig({
     ],
   },
   devServer: {
-    proxy: {
-      '/socket.io': {
-        target: 'http://localhost:3000',
-        ws: true,
-        changeOrigin: true,
-      },
-    },
+    // proxy: {
+    //   '/socket.io': {
+    //     target: 'http://localhost:3000',
+    //     ws: true,
+    //     changeOrigin: true,
+    //   },
+    // },
   },
 })

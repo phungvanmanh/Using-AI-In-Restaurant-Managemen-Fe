@@ -20,7 +20,18 @@ import MonAnCustomer from "@/pages/Customer/MonAn";
 import HoaDonBanHang from "@/pages/Admin/HoaDonBanHang";
 import BillThanhToan from "@/pages/Admin/BillThanhToan";
 import NguyenLieu from "@/pages/Admin/NguyenLieu";
+import PayMent from "@/pages/Admin/Payment";
 const routes = [
+    {
+        path: "/",
+        component: Customer,
+        children: [
+            {
+                path: 'payment',
+                component: PayMent,
+            },
+        ]
+    },
     {
         path: "/",
         component: Customer,

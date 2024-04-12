@@ -294,21 +294,25 @@
                                 <div class="row">
                                     <div class="col-6">
                                         <div class="card">
-                                            <div class="card-body">
-                                                img
-                                            </div>
+                                            <div class="card-body">img</div>
                                             <div class="card-footer">
-                                                <button class="btn btn-success float-end">Thêm</button>
+                                                <button
+                                                    class="btn btn-success float-end"
+                                                >
+                                                    Thêm
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-6">
                                         <div class="card">
-                                            <div class="card-body">
-                                                img
-                                            </div>
+                                            <div class="card-body">img</div>
                                             <div class="card-footer">
-                                                <button class="btn btn-success float-end">Thêm</button>
+                                                <button
+                                                    class="btn btn-success float-end"
+                                                >
+                                                    Thêm
+                                                </button>
                                             </div>
                                         </div>
                                     </div>
@@ -319,16 +323,31 @@
                     <div class="col-lg-4 col-md-4 col-sm-4">
                         <div class="card">
                             <div class="card-header">Xác Nhận</div>
-                            <div class="card-body">
-                                
-                            </div>
+                            <div class="card-body"></div>
                             <div class="card-footer">
-                                <button class="btn btn-primary">Xác nhận</button>
+                                <button class="btn btn-primary">
+                                    Xác nhận
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <button @click="createTransaction">Tạo giao dịch</button>
+        <button @click="getTransactionHistory">Lịch sử giao dịch</button>
+        <div v-if="transactionHistory">
+            <ul>
+                <li
+                    v-for="transaction in transactionHistory"
+                    :key="transaction.id"
+                >
+                    {{ transaction.id }} - {{ transaction.amount }} -
+                    {{ transaction.description }}
+                </li>
+            </ul>
         </div>
     </div>
 </template>
@@ -348,7 +367,7 @@ import { computed, onMounted, ref } from "vue";
 import axios from "@/axiosConfig";
 import Toast from "@/toastConfig";
 import $ from "jquery";
-import { useStore } from 'vuex';
+import { useStore } from "vuex";
 export default {
     name: "quan-ly-admin",
     components: {
@@ -417,6 +436,41 @@ export default {
         ]);
         const image = ref([]);
         const store = useStore();
+
+        function createTransaction() {
+            // Gửi yêu cầu tạo giao dịch đến Backend
+            this.$http
+                .post("/api/transactions", {
+                    amount: 1000, // Số tiền thanh toán
+                    description: "Mua hàng", // Mô tả giao dịch
+                    // Thêm các thông tin khác cần thiết
+                })
+                .then((response) => {
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+
+        function getTransactionHistory() {
+            // Gửi yêu cầu lấy lịch sử giao dịch đến Backend
+            this.$http
+                .get("/api/transactions/history", {
+                    params: {
+                        start_date: "2022-01-01",
+                        end_date: "2022-12-31",
+                        // Thêm các thông tin khác cần thiết
+                    },
+                })
+                .then((response) => {
+                    this.transactionHistory = response.data;
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+
         const tokenAdmin = computed(() => store.state.TOKEN_ADMIN);
         function ThemMoi() {
             console.log(add.value);
@@ -479,7 +533,9 @@ export default {
             upLoad,
             image,
             getImageUrl,
-            tokenAdmin
+            tokenAdmin,
+            createTransaction,
+            getTransactionHistory,
         };
     },
 };
