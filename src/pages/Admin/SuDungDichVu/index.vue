@@ -82,8 +82,10 @@
                         class="modal fade"
                         id="mobanModal"
                         tabindex="-1"
-                        aria-labelledby="exampleModalLabel"
+                        aria-labelledby="staticBackdropLabel"
                         aria-hidden="true"
+                        data-bs-backdrop="static"
+                        data-bs-keyboard="false"
                     >
                         <div
                             class="modal-dialog modal-xl"
@@ -93,7 +95,7 @@
                                 <div class="modal-header">
                                     <h1
                                         class="modal-title fs-5"
-                                        id="exampleModalLabel"
+                                        id="staticBackdropLabel"
                                     >
                                         Mở Bàn
                                     </h1>
@@ -473,6 +475,7 @@
                                             type="button"
                                             class="btn btn-secondary"
                                             data-bs-dismiss="modal"
+                                            @click="activityView = true; checkingTransaction = false"
                                         >
                                             Đóng
                                         </button>
@@ -647,6 +650,7 @@ export default {
                                     .then(res => {
                                         console.log(res.data.status);
                                         if(res.status == 200) {
+                                            checkingTransaction.value = false;
                                             $('#mobanModal').modal('hide');
                                             loadDataBan();
                                             Toast(
