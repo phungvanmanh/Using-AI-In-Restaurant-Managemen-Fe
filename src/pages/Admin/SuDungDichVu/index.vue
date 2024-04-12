@@ -48,7 +48,7 @@
                                                             0
                                                         ">
                                                     <button @click="
-                                                                openTable(
+                                                                activityView =true;openTable(
                                                                     value.id
                                                                 )
                                                             " class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mobanModal">
@@ -78,33 +78,14 @@
                             </template>
                         </template>
                     </div>
-                    <div
-                        class="modal fade"
-                        id="mobanModal"
-                        tabindex="-1"
-                        aria-labelledby="staticBackdropLabel"
-                        aria-hidden="true"
-                        data-bs-backdrop="static"
-                        data-bs-keyboard="false"
-                    >
-                        <div
-                            class="modal-dialog modal-xl"
-                            style="max-width: 100%"
-                        >
+                    <div class="modal fade" id="mobanModal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+                        <div class="modal-dialog modal-xl" style="max-width: 100%">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h1
-                                        class="modal-title fs-5"
-                                        id="staticBackdropLabel"
-                                    >
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">
                                         Mở Bàn
                                     </h1>
-                                    <button
-                                        type="button"
-                                        class="btn-close"
-                                        data-bs-dismiss="modal"
-                                        aria-label="Close"
-                                    ></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
                                     <template v-if="activityView === true">
@@ -116,83 +97,56 @@
                                                     </div>
                                                     <div class="card-body">
                                                         <div class="mb-3">
-                                                            <div
-                                                                class="table-responsive"
-                                                                style="
+                                                            <div class="table-responsive" style="
                                                                     max-height: 450px;
-                                                                "
-                                                            >
-                                                                <table
-                                                                    class="table table-bordered"
-                                                                >
+                                                                ">
+                                                                <table class="table table-bordered">
                                                                     <thead>
                                                                         <tr>
-                                                                            <th
-                                                                                class="align-middle text-center"
-                                                                            >
+                                                                            <th class="align-middle text-center">
                                                                                 #
                                                                             </th>
-                                                                            <th
-                                                                                class="align-middle text-center"
-                                                                            >
+                                                                            <th class="align-middle text-center">
                                                                                 Tên
                                                                                 Hàng
                                                                             </th>
-                                                                            <th
-                                                                                class="align-middle text-center"
-                                                                            >
+                                                                            <th class="align-middle text-center">
                                                                                 Hình
                                                                                 Ảnh
                                                                             </th>
-                                                                            <th
-                                                                                class="align-middle text-center"
-                                                                            >
+                                                                            <th class="align-middle text-center">
                                                                                 Action
                                                                             </th>
                                                                         </tr>
                                                                     </thead>
                                                                     <tbody>
-                                                                        <template
-                                                                            v-for="(
+                                                                        <template v-for="(
                                                                                 value,
                                                                                 key
-                                                                            ) in dataMonAn"
-                                                                            :key="
+                                                                            ) in dataMonAn" :key="
                                                                                 key
-                                                                            "
-                                                                        >
+                                                                            ">
                                                                             <tr>
-                                                                                <td
-                                                                                    class="align-middle text-center"
-                                                                                >
+                                                                                <td class="align-middle text-center">
                                                                                     {{
                                                                                         key +
                                                                                         1
                                                                                     }}
                                                                                 </td>
-                                                                                <td
-                                                                                    class="align-middle text-center"
-                                                                                >
+                                                                                <td class="align-middle text-center">
                                                                                     {{
                                                                                         value.food_name
                                                                                     }}
                                                                                 </td>
-                                                                                <td
-                                                                                    class="align-middle text-center"
-                                                                                >
+                                                                                <td class="align-middle text-center">
                                                                                     1
                                                                                 </td>
-                                                                                <td
-                                                                                    class="align-middle text-center"
-                                                                                >
-                                                                                    <button
-                                                                                        v-on:click="
+                                                                                <td class="align-middle text-center">
+                                                                                    <button v-on:click="
                                                                                             themMonAn(
                                                                                                 value
                                                                                             )
-                                                                                        "
-                                                                                        class="btn btn-primary"
-                                                                                    >
+                                                                                        " class="btn btn-primary">
                                                                                         Thêm
                                                                                     </button>
                                                                                 </td>
@@ -211,159 +165,99 @@
                                                         Món ăn sử dụng
                                                     </div>
                                                     <div class="card-body">
-                                                        <table
-                                                            class="table table-bordered"
-                                                        >
+                                                        <table class="table table-bordered">
                                                             <thead>
                                                                 <tr>
-                                                                    <th
-                                                                        class="text-center align-middle"
-                                                                    >
+                                                                    <th class="text-center align-middle">
                                                                         #
                                                                     </th>
-                                                                    <th
-                                                                        class="text-center align-middle"
-                                                                    >
+                                                                    <th class="text-center align-middle">
                                                                         Tên món ăn
                                                                     </th>
-                                                                    <th
-                                                                        class="text-center align-middle"
-                                                                    >
+                                                                    <th class="text-center align-middle">
                                                                         Số lượng
                                                                     </th>
-                                                                    <th
-                                                                        class="text-center align-middle"
-                                                                    >
+                                                                    <th class="text-center align-middle">
                                                                         Đơn giá
                                                                     </th>
-                                                                    <th
-                                                                        class="text-center align-middle"
-                                                                    >
+                                                                    <th class="text-center align-middle">
                                                                         % giảm giá
                                                                     </th>
-                                                                    <th
-                                                                        class="text-center align-middle"
-                                                                    >
+                                                                    <th class="text-center align-middle">
                                                                         Thành tiền
                                                                     </th>
-                                                                    <th
-                                                                        class="text-center align-middle"
-                                                                    >
+                                                                    <th class="text-center align-middle">
                                                                         Ghi chú
                                                                     </th>
-                                                                    <th
-                                                                        class="text-center align-middle"
-                                                                    >
+                                                                    <th class="text-center align-middle">
                                                                         Action
                                                                     </th>
                                                                 </tr>
                                                             </thead>
                                                             <tbody>
-                                                                <template
-                                                                    v-for="(
+                                                                <template v-for="(
                                                                         value, key
-                                                                    ) in list_chi_tiet_ban_hang"
-                                                                    :key="key"
-                                                                >
+                                                                    ) in list_chi_tiet_ban_hang" :key="key">
                                                                     <tr>
-                                                                        <th
-                                                                            class="align-middle"
-                                                                        >
+                                                                        <th class="align-middle">
                                                                             {{
                                                                                 key +
                                                                                 1
                                                                             }}
                                                                         </th>
-                                                                        <td
-                                                                            class="align-middle"
-                                                                        >
+                                                                        <td class="align-middle">
                                                                             {{
                                                                                 value.food_name
                                                                             }}
                                                                         </td>
-                                                                        <td
-                                                                            class="align-middle"
-                                                                        >
-                                                                            <input
-                                                                                v-on:change="
+                                                                        <td class="align-middle">
+                                                                            <input v-on:change="
                                                                                     updateMonAn(
                                                                                         value
                                                                                     )
-                                                                                "
-                                                                                v-model="
+                                                                                " v-model="
                                                                                     value.so_luong
-                                                                                "
-                                                                                type="number"
-                                                                                class="form-control"
-                                                                            />
+                                                                                " type="number" class="form-control" />
                                                                         </td>
-                                                                        <td
-                                                                            class="align-middle"
-                                                                        >
-                                                                            <input
-                                                                                v-on:change="
+                                                                        <td class="align-middle">
+                                                                            <input v-on:change="
                                                                                     updateMonAn(
                                                                                         value
                                                                                     )
-                                                                                "
-                                                                                v-model="
+                                                                                " v-model="
                                                                                     value.don_gia
-                                                                                "
-                                                                                type="number"
-                                                                                class="form-control"
-                                                                            />
+                                                                                " type="number" class="form-control" />
                                                                         </td>
-                                                                        <td
-                                                                            class="align-middle"
-                                                                        >
-                                                                            <input
-                                                                                v-on:change="
+                                                                        <td class="align-middle">
+                                                                            <input v-on:change="
                                                                                     updateMonAn(
                                                                                         value
                                                                                     )
-                                                                                "
-                                                                                v-model="
+                                                                                " v-model="
                                                                                     value.phan_tram_giam
-                                                                                "
-                                                                                type="number"
-                                                                                class="form-control"
-                                                                            />
+                                                                                " type="number" class="form-control" />
                                                                         </td>
-                                                                        <td
-                                                                            class="align-middle"
-                                                                        >
+                                                                        <td class="align-middle">
                                                                             <!-- {{formatToVN(value.thanh_tien) }} -->
                                                                             {{
                                                                                 value.thanh_tien
                                                                             }}
                                                                         </td>
-                                                                        <td
-                                                                            class="align-middle"
-                                                                        >
-                                                                            <input
-                                                                                v-on:change="
+                                                                        <td class="align-middle">
+                                                                            <input v-on:change="
                                                                                     updateMonAn(
                                                                                         value
                                                                                     )
-                                                                                "
-                                                                                v-model="
+                                                                                " v-model="
                                                                                     value.ghi_chu
-                                                                                "
-                                                                                type="text"
-                                                                                class="form-control"
-                                                                            />
+                                                                                " type="text" class="form-control" />
                                                                         </td>
-                                                                        <td
-                                                                            class="align-middle"
-                                                                        >
-                                                                            <button
-                                                                                v-on:click="
+                                                                        <td class="align-middle">
+                                                                            <button v-on:click="
                                                                                     deleteChiTiet(
                                                                                         value
                                                                                     )
-                                                                                "
-                                                                                class="btn btn-danger"
-                                                                            >
+                                                                                " class="btn btn-danger">
                                                                                 Xóa
                                                                             </button>
                                                                         </td>
@@ -372,81 +266,53 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    <div
-                                                        class="card-footer bg-white text-end"
-                                                    >
+                                                    <div class="card-footer bg-white text-end">
                                                         <div class="row">
                                                             <div class="col-6">
-                                                                <textarea
-                                                                    @change="
+                                                                <textarea @change="
                                                                         updateHoaDon()
-                                                                    "
-                                                                    v-model="
+                                                                    " v-model="
                                                                         ghi_chu_hoa_don
-                                                                    "
-                                                                    class="form-control"
-                                                                    cols="30"
-                                                                    rows="4"
-                                                                ></textarea>
+                                                                    " class="form-control" cols="30" rows="4"></textarea>
                                                             </div>
                                                             <div class="col-3">
-                                                                <img
-                                                                    style="
+                                                                <img style="
                                                                         width: 100%;
-                                                                    "
-                                                                    alt=""
-                                                                />
+                                                                    " alt="" />
                                                             </div>
                                                             <div class="col-3">
                                                                 <div class="row">
-                                                                    <div
-                                                                        class="col-6"
-                                                                    >
+                                                                    <div class="col-6">
                                                                         <p>
-                                                                            <b
-                                                                                >Tổng
+                                                                            <b>Tổng
                                                                                 thanh
-                                                                                toán:</b
-                                                                            >
+                                                                                toán:</b>
                                                                         </p>
-                                                                        <p
-                                                                            class="mt-3"
-                                                                        >
-                                                                            <b
-                                                                                >Phần
+                                                                        <p class="mt-3">
+                                                                            <b>Phần
                                                                                 trăm
                                                                                 giảm:
                                                                             </b>
                                                                         </p>
                                                                         <p>
-                                                                            <b
-                                                                                >Tiền
+                                                                            <b>Tiền
                                                                                 thực
                                                                                 thu:
                                                                             </b>
                                                                         </p>
                                                                     </div>
-                                                                    <div
-                                                                        class="col-6"
-                                                                    >
+                                                                    <div class="col-6">
                                                                         <p>
                                                                             <b>{{
                                                                                 tong_tien
                                                                             }}</b>
                                                                         </p>
-                                                                        <input
-                                                                            @change="
+                                                                        <input @change="
                                                                                 updateHoaDon()
-                                                                            "
-                                                                            type="number"
-                                                                            class="form-control"
-                                                                            v-model="
+                                                                            " type="number" class="form-control" v-model="
                                                                                 phan_tram_giam_hoa_don
-                                                                            "
-                                                                        />
-                                                                        <p
-                                                                            class="mt-3"
-                                                                        >
+                                                                            " />
+                                                                        <p class="mt-3">
                                                                             <b>{{
                                                                                 tien_thuc_thu
                                                                             }}</b>
@@ -471,43 +337,24 @@
                                 </div>
                                 <div class="modal-footer">
                                     <template v-if="activityView == true">
-                                        <button
-                                            type="button"
-                                            class="btn btn-secondary"
-                                            data-bs-dismiss="modal"
-                                            @click="activityView = true; checkingTransaction = false"
-                                        >
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="activityView = true; checkingTransaction = false">
                                             Đóng
                                         </button>
-                                        <router-link
-                                            :to="
+                                        <router-link :to="
                                                 '/admin/bill-thanh-toan/' +
                                                 id_hoa_don_ban_hang
-                                            "
-                                            target="_blank"
-                                        >
-                                            <button
-                                                type="button"
-                                                class="btn btn-danger"
-                                            >
+                                            " target="_blank">
+                                            <button type="button" class="btn btn-danger">
                                                 In Hóa Đơn
                                             </button>
                                         </router-link>
-    
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            @click="activityView = false; thanhToan()"
-                                        >
+
+                                        <button type="button" class="btn btn-primary" @click="activityView = false; thanhToan()">
                                             Thanh Toán
                                         </button>
                                     </template>
                                     <template v-else>
-                                        <button
-                                            type="button"
-                                            class="btn btn-primary"
-                                            @click="activityView = true; checkingTransaction = false"
-                                        >
+                                        <button type="button" class="btn btn-primary" @click="activityView = true; checkingTransaction = false">
                                             Quay lại
                                         </button>
                                     </template>
@@ -566,7 +413,9 @@ import axios from "@/axiosConfig";
 import Toast from "@/toastConfig";
 import $ from "jquery";
 
-import { apiQRcode } from "@/globals";
+import {
+    apiQRcode
+} from "@/globals";
 import BillComponent from "@/pages/Admin/BillThanhToan";
 export default {
     name: "su-dung-dich-vu",
@@ -638,19 +487,21 @@ export default {
                             };
 
                             // Đảm bảo đường dẫn API đến Laravel chính xác và có thể xử lý request
-                            const {data} = await axios.post(
+                            const {
+                                data
+                            } = await axios.post(
                                 "transactions",
                                 payload
                             );
-                            if(data.status == true) {
+                            if (data.status == true) {
                                 const Ob = {
-                                    'id_hoa_don_ban_hang' : id_hoa_don_ban_hang.value
+                                    'id_hoa_don_ban_hang': id_hoa_don_ban_hang.value
                                 }
                                 axios.post("admin/change-status-hoa-don", Ob)
                                     .then(res => {
                                         console.log(res.data.status);
-                                        if(res.status == 200) {
-                                            checkingTransaction.value = false;
+                                        if (res.status == 200) {
+                                            activityView.value = true;
                                             $('#mobanModal').modal('hide');
                                             loadDataBan();
                                             Toast(
@@ -662,7 +513,7 @@ export default {
                                     .catch(error => {
                                         console.error("There was an error!", error);
                                     });
-                               
+
                             } else {
                                 $('#mobanModal').modal('hidde');
                                 loadDataBan();
@@ -729,7 +580,7 @@ export default {
                         hoa_don.value = res.data.hoa_don;
                         tien_thuc_thu.value = hoa_don.value.tien_thuc_nhan;
                         phan_tram_giam_hoa_don.value =
-                        hoa_don.value.phan_tram_giam;
+                            hoa_don.value.phan_tram_giam;
                         ghi_chu_hoa_don.value = hoa_don.value.ghi_chu;
                         id_hoa_don_ban_hang.value = hoa_don.value.id;
                         bill_id.value = "HDBH" + hoa_don.value.id;
