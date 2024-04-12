@@ -1,128 +1,113 @@
 <template>
-    <CardComponent :required="false">
-        <template #card-header>
-            <div class="row">
-                <span><b>Calendar</b></span>
+<CardComponent :required="false">
+    <template #card-header>
+        <div class="row">
+            <span><b>Calendar</b></span>
+        </div>
+        <div class="row">
+            <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3">
+                <SelectComponent></SelectComponent>
             </div>
-            <div class="row">
-                <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3">
-                    <SelectComponent></SelectComponent>
-                </div>
-            </div>
-        </template>
-        <template #card-body>
-            <TableComponent>
-                <template #thead>
-                    <tr>
-                        <th
-                            class="text-center align-middle text-nowrap"
-                            style="width: 150px"
-                        ></th>
-                        <template v-for="(v_d, i_d) in days" :key="i_d">
-                            <td
-                                :class="[
+        </div>
+    </template>
+    <template #card-body>
+        <TableComponent>
+            <template #thead>
+                <tr>
+                    <th class="text-center align-middle text-nowrap" style="width: 150px"></th>
+                    <template v-for="(v_d, i_d) in days" :key="i_d">
+                        <td :class="[
                                     'text-center align-middle text-nowrap',
                                     {
                                         'bg-secondary': isToday(v_d),
                                         'text-white': isToday(v_d),
                                     },
-                                ]"
-                            >
-                                <span v-if="i_d == 6">{{ rank[6] }}</span>
-                                <span v-else>{{ rank[i_d] }}</span> -
-                                {{ date_format(v_d) }}
-                            </td>
-                        </template>
-                    </tr>
-                </template>
-                <template #tbody>
-                    <template
-                        v-for="(value_time, index_time) in time"
-                        :key="index_time"
-                    >
-                        <tr style="height: 300px">
-                            <td class="align-middle text-center">
-                                {{ value_time }}
-                            </td>
-                            <template
-                                v-for="(value, index) in data"
-                                :key="index"
-                            >
-                                <template v-for="(v, i) in value" :key="i">
-                                    <template v-if="i == index_time">
-                                        <template v-if="v.id">
-                                            <td
-                                                class="text-white bg-secondary"
-                                                @click="updateBuoiLamViec(v.id)"
-                                            >
-                                                <div>
-                                                    <input
-                                                        type="radio"
-                                                        class="float-end"
-                                                        style="
+                                ]">
+                            <span v-if="i_d == 6">{{ rank[6] }}</span>
+                            <span v-else>{{ rank[i_d] }}</span> -
+                            {{ date_format(v_d) }}
+                        </td>
+                    </template>
+                </tr>
+            </template>
+            <template #tbody>
+                <template v-for="(value_time, index_time) in time" :key="index_time">
+                    <tr style="height: 300px">
+                        <td class="align-middle text-center">
+                            {{ value_time }}
+                        </td>
+                        <template v-for="(value, index) in data" :key="index">
+                            <template v-for="(v, i) in value" :key="i">
+                                <template v-if="i == index_time">
+                                    <template v-if="v.id">
+                                        <td class="text-white bg-secondary" @click="updateBuoiLamViec(v.id)">
+                                            <div>
+                                                <input type="radio" class="float-end" style="
                                                             width: 25px;
                                                             height: 25px;
-                                                        "
-                                                    />
-                                                </div>
-                                                <div>
-                                                    <template
-                                                        v-for="(
+                                                        " />
+                                            </div>
+                                            <div>
+                                                <template v-for="(
                                                             v_name, i_name
-                                                        ) in v.list"
-                                                        :key="i_name"
-                                                    >
-                                                        <span>
-                                                            {{ v_name }}
-                                                        </span>
-                                                        <br />
-                                                    </template>
-                                                </div>
-                                            </td>
-                                        </template>
-                                        <template v-else>
-                                            <td
-                                                v-on:click="
+                                                        ) in v.list" :key="i_name">
+                                                    <span>
+                                                        {{ v_name }}
+                                                    </span>
+                                                    <br />
+                                                </template>
+                                            </div>
+                                        </td>
+                                    </template>
+                                    <template v-else>
+                                        <td v-on:click="
                                                     themBuoiLamViec(
                                                         index_time,
                                                         index
                                                     )
-                                                "
-                                            >
-                                            <template
-                                                v-for="(
+                                                ">
+                                            <template v-for="(
                                                     v_name, i_name
-                                                ) in v.list"
-                                                :key="i_name"
-                                            >
+                                                ) in v.list" :key="i_name">
                                                 <span>
                                                     {{ v_name }}
                                                 </span>
                                                 <br />
                                             </template>
-                                            </td>
-                                        </template>
+                                        </td>
                                     </template>
                                 </template>
                             </template>
-                        </tr>
-                    </template>
+                        </template>
+                    </tr>
                 </template>
-            </TableComponent>
-        </template>
-    </CardComponent>
+            </template>
+        </TableComponent>
+    </template>
+</CardComponent>
 </template>
+
 <script>
 import CardComponent from "@/components/CardComponent.vue";
 import TableComponent from "@/components/TableComponent.vue";
 import SelectComponent from "@/components/SelectComponent.vue";
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import {
+    computed,
+    onMounted,
+    onUnmounted,
+    ref
+} from "vue";
 import axios from "@/axiosConfig";
 import moment from "moment";
 import Toast from "@/toastConfig";
 import $ from "jquery";
-import { io } from "socket.io-client";
-import { useStore } from "vuex";
+import {
+    io
+} from "socket.io-client";
+import {
+    useStore
+} from "vuex";
+import { apiSocket } from "@/globals"
 export default {
     name: "lich-lam-viec",
     components: {
@@ -133,7 +118,7 @@ export default {
     setup() {
         const store = useStore();
         // const socket = io("http://localhost:3000");
-        const socket = io("http://192.168.7.104:3000");
+        const socket = io(apiSocket);
         const time = ref(["8h00 - 16h00", "17h00 - 22h00"]);
         const days = ref([]);
         const data = ref([]);
@@ -168,14 +153,14 @@ export default {
 
             // Chuyển đổi ngày truyền vào thành chuỗi ngày đúng định dạng
             const dateString =
-                date instanceof Date
-                    ? `${date.getFullYear()}-${(date.getMonth() + 1)
+                date instanceof Date ?
+                `${date.getFullYear()}-${(date.getMonth() + 1)
                           .toString()
                           .padStart(2, "0")}-${date
                           .getDate()
                           .toString()
-                          .padStart(2, "0")}`
-                    : date;
+                          .padStart(2, "0")}` :
+                date;
             return todayString === dateString;
         };
 
