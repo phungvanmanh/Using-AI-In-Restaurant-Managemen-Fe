@@ -46,13 +46,13 @@
                 <ul class="dropdown-menu">
                     <li>
                         <router-link to="/admin/admin">
-                            <a class="dropdown-item" href="/admin/admin"><i class="bx bx-right-arrow-alt"></i>Quản lí tài khoản</a>
+                            <a class="dropdown-item" href="/admin/admin"><i class="bx bx-right-arrow-alt"></i>Account Management</a>
 
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/admin/lich-lam-viec">
-                            <a class="dropdown-item" href="/admin/lich-lam-viec"><i class="bx bx-right-arrow-alt"></i>Lịch Làm Việc</a>
+                            <a class="dropdown-item" href="/admin/lich-lam-viec"><i class="bx bx-right-arrow-alt"></i>Work schedule</a>
 
                         </router-link>
                     </li>
@@ -75,7 +75,7 @@
                         <div class="parent-icon">
                             <i class="fa-solid fa-user-tie"></i>
                         </div>
-                        <div class="menu-title">Khách Hàng</div>
+                        <div class="menu-title">Client</div>
                     </a>
                 </router-link>
             </li>
@@ -158,18 +158,18 @@
                     <div class="parent-icon">
                         <i class="fa-solid fa-house"></i>
                     </div>
-                    <div class="menu-title">Quản lí bán hàng</div>
+                    <div class="menu-title">Sales Manager</div>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
                         <router-link to="/admin/su-dung-dich-vu">
-                            <a class="dropdown-item" href="/admin/su-dung-dich-vu"><i class="bx bx-right-arrow-alt"></i>Sử dụng dịch vụ</a>
+                            <a class="dropdown-item" href="/admin/su-dung-dich-vu"><i class="bx bx-right-arrow-alt"></i>Use of the service</a>
 
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/admin/hoa-don-ban-hang">
-                            <a class="dropdown-item" href="/admin/hoa-don-ban-hang"><i class="bx bx-right-arrow-alt"></i>Hóa Đơn Bán Hàng</a>
+                            <a class="dropdown-item" href="/admin/hoa-don-ban-hang"><i class="bx bx-right-arrow-alt"></i>Sales invoice</a>
 
                         </router-link>
                     </li>
@@ -203,24 +203,24 @@
                     <div class="parent-icon">
                         <i class="fa-solid fa-house"></i>
                     </div>
-                    <div class="menu-title">Quản lí món ăn</div>
+                    <div class="menu-title">Food Management</div>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
                         <router-link to="/admin/nguyen-lieu">
-                            <a class="dropdown-item" href="/admin/nguyen-lieu"><i class="bx bx-right-arrow-alt"></i>Nguyên Liệu</a>
+                            <a class="dropdown-item" href="/admin/nguyen-lieu"><i class="bx bx-right-arrow-alt"></i>Material</a>
 
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/admin/danh-muc">
-                            <a class="dropdown-item" href="/admin/danh-muc"><i class="bx bx-right-arrow-alt"></i>Danh Mục Món Ăn</a>
+                            <a class="dropdown-item" href="/admin/danh-muc"><i class="bx bx-right-arrow-alt"></i>Food Categories</a>
 
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/admin/mon-an">
-                            <a class="dropdown-item" href="/admin/mon-an"><i class="bx bx-right-arrow-alt"></i>Món Ăn</a>
+                            <a class="dropdown-item" href="/admin/mon-an"><i class="bx bx-right-arrow-alt"></i>Dish</a>
 
                         </router-link>
                     </li>

@@ -183,6 +183,7 @@ export default {
         const addChuyenMucBaiViet = ref({});
         const editChuyenMucBaiViet = ref({});
         const deletechuyenmucbaiviet = ref({});
+        const search = ref({})
 
         const dataChuyenMucBaiViet = computed(() => {
             return store.state.dataChuyenMucBaiViet;
@@ -259,6 +260,14 @@ export default {
                     });
                 });
         };
+        function searchChuyenMucBaiViet() {
+            axios
+                .post('admin/chuyen-muc-bai-viet/tim-chuyen-muc-bai-viet', search.value)
+                .then((res) => {
+                    console.log(res.data.data);
+                    store.commit('fecthChuyenMucBaiViet', res.data.data);
+                });
+        }
         onMounted(() => {
             store.dispatch("onFetchChuyenMucBaiViet");
         });
@@ -273,6 +282,8 @@ export default {
             status,
             convertToSlug,
             changeStatus,
+            searchChuyenMucBaiViet,
+            search,
         };
     },
 }
