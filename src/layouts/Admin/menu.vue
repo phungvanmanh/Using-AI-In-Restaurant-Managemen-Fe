@@ -1,8 +1,8 @@
 <template>
 <div class="nav-container primary-menu">
     <div class="mobile-topbar-header">
-        <div>
-            <img src="../../assets/images/logo-icon.png" class="logo-icon" alt="logo icon" />
+        <div style="background-color: red; display: inline-block; padding: 5px;">
+            <img src="https://designercomvn.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2018/09/03084908/thietke-logo-nha-hang-phuong-tay-dep-mat.jpg" class="logo-icon" alt="logo icon" />
         </div>
         <div>
             <h4 class="logo-text">
@@ -17,7 +17,7 @@
     </div>
     <nav class="navbar navbar-expand-xl w-100">
         <ul class="navbar-nav justify-content-start flex-grow-1 gap-1">
-            <li class="nav-item dropdown">
+            <!-- <li class="nav-item dropdown">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                     <div class="parent-icon">
                         <i class="bx bx-home-circle"></i>
@@ -35,7 +35,7 @@
                         <a class="dropdown-item" href="index3.html"><i class="bx bx-right-arrow-alt"></i>Graphical</a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
             <li class="nav-item dropdown">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                     <div class="parent-icon">
@@ -56,8 +56,7 @@
 
                         </router-link>
                     </li>
-                   
-                   
+
                 </ul>
             </li>
             <!-- <li class="nav-item">
@@ -110,11 +109,10 @@
 
                         </router-link>
                     </li>
-                   
-                   
+
                 </ul>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
                 <router-link to="/admin/danh-muc">
                     <a class="nav-link">
                         <div class="parent-icon">
@@ -123,8 +121,8 @@
                         <div class="menu-title">Category</div>
                     </a>
                 </router-link>
-            </li>
-             <li class="nav-item">
+            </li> -->
+            <li class="nav-item">
                 <router-link to="/admin/nha-cung-cap">
                     <a class="nav-link">
                         <div class="parent-icon">
@@ -188,16 +186,14 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                       
+
                             <a class="dropdown-item" href=""><i class="bx bx-right-arrow-alt"></i>Nhập Kho</a>
 
-                        
                     </li>
                     <li>
-                      
+
                             <a class="dropdown-item" href=""><i class="bx bx-right-arrow-alt"></i>Hóa Đơn Nhập Kho</a>
 
-                      
                     </li>
 
                 </ul>
@@ -228,19 +224,18 @@
 
                         </router-link>
                     </li>
-                   
+
                 </ul>
             </li>
-           
+
         </ul>
     </nav>
 </div>
 </template>
 
-    
 <script>
 export default {
     name: "admin-menu",
-    
+
 };
 </script>

@@ -1,504 +1,322 @@
 <template>
-    <div class="row">
-        <div class="col-12">
-            <div class="card">
-                <div class="card-body">
-                    <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
-                        <li
-                            class="nav-item"
-                            role="presentation"
-                            v-on:click="loadDataBan()"
-                        >
-                            <a
-                                class="nav-link active"
-                                data-bs-toggle="tab"
-                                href="#primaryhome"
-                                role="tab"
-                                aria-selected="true"
-                            >
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
+                    <li class="nav-item" role="presentation" v-on:click="loadDataBan()">
+                        <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab" aria-selected="true">
+                            <div class="d-flex align-items-center">
+                                <div class="tab-icon">
+                                    <i class="bx bx-comment-detail font-18 me-1"></i>
+                                </div>
+                                <div class="tab-title">Tất Cả</div>
+                            </div>
+                        </a>
+                    </li>
+                    <template v-for="(value, key) in dataKhuVuc" :key="key">
+                        <li class="nav-item" role="presentation" v-on:click="getBanTheoKhuVuc(value)">
+                            <a class="nav-link" data-bs-toggle="tab" v-bind:href="'#primaryhome' + key" role="tab" aria-selected="false" tabindex="-1">
                                 <div class="d-flex align-items-center">
                                     <div class="tab-icon">
-                                        <i
-                                            class="bx bx-comment-detail font-18 me-1"
-                                        ></i>
+                                        <i class="bx bx-bookmark-alt font-18 me-1"></i>
                                     </div>
-                                    <div class="tab-title">Tất Cả</div>
+                                    <div class="tab-title">
+                                        {{ value.name_area }}
+                                    </div>
                                 </div>
                             </a>
                         </li>
-                        <template v-for="(value, key) in dataKhuVuc" :key="key">
-                            <li
-                                class="nav-item"
-                                role="presentation"
-                                v-on:click="getBanTheoKhuVuc(value)"
-                            >
-                                <a
-                                    class="nav-link"
-                                    data-bs-toggle="tab"
-                                    v-bind:href="'#primaryhome' + key"
-                                    role="tab"
-                                    aria-selected="false"
-                                    tabindex="-1"
-                                >
-                                    <div class="d-flex align-items-center">
-                                        <div class="tab-icon">
-                                            <i
-                                                class="bx bx-bookmark-alt font-18 me-1"
-                                            ></i>
-                                        </div>
-                                        <div class="tab-title">
-                                            {{ value.name_area }}
-                                        </div>
-                                    </div>
-                                </a>
-                            </li>
-                        </template>
-                    </ul>
-                    <div class="tab-content pt-3">
-                        <div class="row">
-                            <template
-                                v-for="(value, key) in dataBan"
-                                :key="key"
-                            >
-                                <template v-if="value.status == 1">
-                                    <div class="col-2">
-                                        <div class="card radius-10">
-                                            <div class="card-body">
-                                                <div class="text-center">
-                                                    <div
-                                                        class="widgets-icons rounded-circle mx-auto bg-light-primary text-primary mb-3"
-                                                    >
-                                                        <i
-                                                            class="fa-solid fa-couch"
-                                                        ></i>
-                                                    </div>
-                                                    <h4 class="my-1">
-                                                        {{ value.name_table }}
-                                                    </h4>
-                                                    <template
-                                                        v-if="
+                    </template>
+                </ul>
+                <div class="tab-content pt-3">
+                    <div class="row">
+                        <template v-for="(value, key) in dataBan" :key="key">
+                            <template v-if="value.status == 1">
+                                <div class="col-2">
+                                    <div class="card radius-10">
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                <div class="widgets-icons rounded-circle mx-auto bg-light-primary text-primary mb-3">
+                                                    <i class="fa-solid fa-couch"></i>
+                                                </div>
+                                                <h4 class="my-1">
+                                                    {{ value.name_table }}
+                                                </h4>
+                                                <template v-if="
                                                             value.is_open_table ==
                                                             0
-                                                        "
-                                                    >
-                                                        <button
-                                                            @click="
+                                                        ">
+                                                    <button @click="
                                                                 openTable(
                                                                     value.id
                                                                 )
-                                                            "
-                                                            class="btn btn-primary"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#mobanModal"
-                                                        >
-                                                            Mở Bàn
-                                                        </button>
-                                                    </template>
-                                                    <template v-else>
-                                                        <button
-                                                            class="btn btn-secondary me-2"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#qrModal"
-                                                            @click="
+                                                            " class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mobanModal">
+                                                        Mở Bàn
+                                                    </button>
+                                                </template>
+                                                <template v-else>
+                                                    <button class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#qrModal" @click="
                                                                 generateQRCode(
                                                                     value.id
                                                                 )
-                                                            "
-                                                        >
-                                                            QR Login
-                                                        </button>
-                                                        <button
-                                                            class="btn btn-success"
-                                                            @click="
+                                                            ">
+                                                        QR Login
+                                                    </button>
+                                                    <button class="btn btn-success" @click="
                                                                 getIdHoaDon(
                                                                     value.id
                                                                 )
-                                                            "
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#mobanModal"
-                                                        >
-                                                            Thanh Toán
-                                                        </button>
-                                                    </template>
-                                                </div>
+                                                            " data-bs-toggle="modal" data-bs-target="#mobanModal">
+                                                        Thanh Toán
+                                                    </button>
+                                                </template>
                                             </div>
                                         </div>
                                     </div>
-                                </template>
-                            </template>
-                        </div>
-                    </div>
-                    <div
-                        class="modal fade"
-                        id="mobanModal"
-                        tabindex="-1"
-                        aria-labelledby="exampleModalLabel"
-                        aria-hidden="true"
-                    >
-                        <div
-                            class="modal-dialog modal-xl"
-                            style="max-width: 100%"
-                        >
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1
-                                        class="modal-title fs-5"
-                                        id="exampleModalLabel"
-                                    >
-                                        Mở Bàn
-                                    </h1>
-                                    <button
-                                        type="button"
-                                        class="btn-close"
-                                        data-bs-dismiss="modal"
-                                        aria-label="Close"
-                                    ></button>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col-md-4">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    <h6>Danh sách món ăn</h6>
-                                                </div>
-                                                <div class="card-body">
-                                                    <div class="mb-3">
-                                                        <div
-                                                            class="table-responsive"
-                                                            style="
+                            </template>
+                        </template>
+                    </div>
+                </div>
+                <div class="modal fade" id="mobanModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl" style="max-width: 100%">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    Mở Bàn
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h6>Danh sách món ăn</h6>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="mb-3">
+                                                    <div class="table-responsive" style="
                                                                 max-height: 450px;
-                                                            "
-                                                        >
-                                                            <table
-                                                                class="table table-bordered"
-                                                            >
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th
-                                                                            class="align-middle text-center"
-                                                                        >
-                                                                            #
-                                                                        </th>
-                                                                        <th
-                                                                            class="align-middle text-center"
-                                                                        >
-                                                                            Tên
-                                                                            Hàng
-                                                                        </th>
-                                                                        <th
-                                                                            class="align-middle text-center"
-                                                                        >
-                                                                            Hình
-                                                                            Ảnh
-                                                                        </th>
-                                                                        <th
-                                                                            class="align-middle text-center"
-                                                                        >
-                                                                            Action
-                                                                        </th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <template
-                                                                        v-for="(
+                                                            ">
+                                                        <table class="table table-bordered">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="align-middle text-center">
+                                                                        #
+                                                                    </th>
+                                                                    <th class="align-middle text-center">
+                                                                        Tên
+                                                                        Hàng
+                                                                    </th>
+                                                                    <th class="align-middle text-center">
+                                                                        Hình
+                                                                        Ảnh
+                                                                    </th>
+                                                                    <th class="align-middle text-center">
+                                                                        Action
+                                                                    </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <template v-for="(
                                                                             value,
                                                                             key
-                                                                        ) in dataMonAn"
-                                                                        :key="
+                                                                        ) in dataMonAn" :key="
                                                                             key
-                                                                        "
-                                                                    >
-                                                                        <tr>
-                                                                            <td
-                                                                                class="align-middle text-center"
-                                                                            >
-                                                                                {{
+                                                                        ">
+                                                                    <tr>
+                                                                        <td class="align-middle text-center">
+                                                                            {{
                                                                                     key +
                                                                                     1
                                                                                 }}
-                                                                            </td>
-                                                                            <td
-                                                                                class="align-middle text-center"
-                                                                            >
-                                                                                {{
+                                                                        </td>
+                                                                        <td class="align-middle text-center">
+                                                                            {{
                                                                                     value.food_name
                                                                                 }}
-                                                                            </td>
-                                                                            <td
-                                                                                class="align-middle text-center"
-                                                                            >
-                                                                                1
-                                                                            </td>
-                                                                            <td
-                                                                                class="align-middle text-center"
-                                                                            >
-                                                                                <button
-                                                                                    v-on:click="
+                                                                        </td>
+                                                                        <td class="align-middle text-center">
+                                                                            1
+                                                                        </td>
+                                                                        <td class="align-middle text-center">
+                                                                            <button v-on:click="
                                                                                         themMonAn(
                                                                                             value
                                                                                         )
-                                                                                    "
-                                                                                    class="btn btn-primary"
-                                                                                >
-                                                                                    Thêm
-                                                                                </button>
-                                                                            </td>
-                                                                        </tr>
-                                                                    </template>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
+                                                                                    " class="btn btn-primary">
+                                                                                Thêm
+                                                                            </button>
+                                                                        </td>
+                                                                    </tr>
+                                                                </template>
+                                                            </tbody>
+                                                        </table>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-8">
-                                            <div class="card">
-                                                <div class="card-header">
-                                                    Món ăn sử dụng
-                                                </div>
-                                                <div class="card-body">
-                                                    <table
-                                                        class="table table-bordered"
-                                                    >
-                                                        <thead>
-                                                            <tr>
-                                                                <th
-                                                                    class="text-center align-middle"
-                                                                >
-                                                                    #
-                                                                </th>
-                                                                <th
-                                                                    class="text-center align-middle"
-                                                                >
-                                                                    Tên món ăn
-                                                                </th>
-                                                                <th
-                                                                    class="text-center align-middle"
-                                                                >
-                                                                    Số lượng
-                                                                </th>
-                                                                <th
-                                                                    class="text-center align-middle"
-                                                                >
-                                                                    Đơn giá
-                                                                </th>
-                                                                <th
-                                                                    class="text-center align-middle"
-                                                                >
-                                                                    % giảm giá
-                                                                </th>
-                                                                <th
-                                                                    class="text-center align-middle"
-                                                                >
-                                                                    Thành tiền
-                                                                </th>
-                                                                <th
-                                                                    class="text-center align-middle"
-                                                                >
-                                                                    Ghi chú
-                                                                </th>
-                                                                <th
-                                                                    class="text-center align-middle"
-                                                                >
-                                                                    Action
-                                                                </th>
-                                                            </tr>
-                                                        </thead>
-                                                        <tbody>
-                                                            <template
-                                                                v-for="(
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                Món ăn sử dụng
+                                            </div>
+                                            <div class="card-body">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center align-middle">
+                                                                #
+                                                            </th>
+                                                            <th class="text-center align-middle">
+                                                                Tên món ăn
+                                                            </th>
+                                                            <th class="text-center align-middle">
+                                                                Số lượng
+                                                            </th>
+                                                            <th class="text-center align-middle">
+                                                                Đơn giá
+                                                            </th>
+                                                            <th class="text-center align-middle">
+                                                                % giảm giá
+                                                            </th>
+                                                            <th class="text-center align-middle">
+                                                                Thành tiền
+                                                            </th>
+                                                            <th class="text-center align-middle">
+                                                                Ghi chú
+                                                            </th>
+                                                            <th class="text-center align-middle">
+                                                                Action
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <template v-for="(
                                                                     value, key
-                                                                ) in list_chi_tiet_ban_hang"
-                                                                :key="key"
-                                                            >
-                                                                <tr>
-                                                                    <th
-                                                                        class="align-middle"
-                                                                    >
-                                                                        {{
+                                                                ) in list_chi_tiet_ban_hang" :key="key">
+                                                            <tr>
+                                                                <th class="align-middle">
+                                                                    {{
                                                                             key +
                                                                             1
                                                                         }}
-                                                                    </th>
-                                                                    <td
-                                                                        class="align-middle"
-                                                                    >
-                                                                        {{
+                                                                </th>
+                                                                <td class="align-middle">
+                                                                    {{
                                                                             value.food_name
                                                                         }}
-                                                                    </td>
-                                                                    <td
-                                                                        class="align-middle"
-                                                                    >
-                                                                        <input
-                                                                            v-on:change="
+                                                                </td>
+                                                                <td class="align-middle">
+                                                                    <input v-on:change="
                                                                                 updateMonAn(
                                                                                     value
                                                                                 )
-                                                                            "
-                                                                            v-model="
+                                                                            " v-model="
                                                                                 value.so_luong
-                                                                            "
-                                                                            type="number"
-                                                                            class="form-control"
-                                                                        />
-                                                                    </td>
-                                                                    <td
-                                                                        class="align-middle"
-                                                                    >
-                                                                        <input
-                                                                            v-on:change="
+                                                                            " type="number" class="form-control" />
+                                                                </td>
+                                                                <td class="align-middle">
+                                                                    <input v-on:change="
                                                                                 updateMonAn(
                                                                                     value
                                                                                 )
-                                                                            "
-                                                                            v-model="
+                                                                            " v-model="
                                                                                 value.don_gia
-                                                                            "
-                                                                            type="number"
-                                                                            class="form-control"
-                                                                        />
-                                                                    </td>
-                                                                    <td
-                                                                        class="align-middle"
-                                                                    >
-                                                                        <input
-                                                                            v-on:change="
+                                                                            " type="number" class="form-control" />
+                                                                </td>
+                                                                <td class="align-middle">
+                                                                    <input v-on:change="
                                                                                 updateMonAn(
                                                                                     value
                                                                                 )
-                                                                            "
-                                                                            v-model="
+                                                                            " v-model="
                                                                                 value.phan_tram_giam
-                                                                            "
-                                                                            type="number"
-                                                                            class="form-control"
-                                                                        />
-                                                                    </td>
-                                                                    <td
-                                                                        class="align-middle"
-                                                                    >
-                                                                        <!-- {{formatToVN(value.thanh_tien) }} -->
-                                                                        {{
+                                                                            " type="number" class="form-control" />
+                                                                </td>
+                                                                <td class="align-middle">
+                                                                    <!-- {{formatToVN(value.thanh_tien) }} -->
+                                                                    {{
                                                                             value.thanh_tien
                                                                         }}
-                                                                    </td>
-                                                                    <td
-                                                                        class="align-middle"
-                                                                    >
-                                                                        <input
-                                                                            v-on:change="
+                                                                </td>
+                                                                <td class="align-middle">
+                                                                    <input v-on:change="
                                                                                 updateMonAn(
                                                                                     value
                                                                                 )
-                                                                            "
-                                                                            v-model="
+                                                                            " v-model="
                                                                                 value.ghi_chu
-                                                                            "
-                                                                            type="text"
-                                                                            class="form-control"
-                                                                        />
-                                                                    </td>
-                                                                    <td
-                                                                        class="align-middle"
-                                                                    >
-                                                                        <button
-                                                                            v-on:click="
+                                                                            " type="text" class="form-control" />
+                                                                </td>
+                                                                <td class="align-middle">
+                                                                    <button v-on:click="
                                                                                 deleteChiTiet(
                                                                                     value
                                                                                 )
-                                                                            "
-                                                                            class="btn btn-danger"
-                                                                        >
-                                                                            Xóa
-                                                                        </button>
-                                                                    </td>
-                                                                </tr>
-                                                            </template>
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                                <div
-                                                    class="card-footer bg-white text-end"
-                                                >
-                                                    <div class="row">
-                                                        <div class="col-6">
-                                                            <textarea
-                                                                @change="
+                                                                            " class="btn btn-danger">
+                                                                        Xóa
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </template>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <div class="card-footer bg-white text-end">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <textarea @change="
                                                                     updateHoaDon()
-                                                                "
-                                                                v-model="
+                                                                " v-model="
                                                                     ghi_chu_hoa_don
-                                                                "
-                                                                class="form-control"
-                                                                cols="30"
-                                                                rows="4"
-                                                            ></textarea>
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <img
-                                                                style="
+                                                                " class="form-control" cols="30" rows="4"></textarea>
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <img style="
                                                                     width: 100%;
-                                                                "
-                                                                alt=""
-                                                            />
-                                                        </div>
-                                                        <div class="col-3">
-                                                            <div class="row">
-                                                                <div
-                                                                    class="col-6"
-                                                                >
-                                                                    <p>
-                                                                        <b
-                                                                            >Tổng
-                                                                            thanh
-                                                                            toán:</b
-                                                                        >
-                                                                    </p>
-                                                                    <p
-                                                                        class="mt-3"
-                                                                    >
-                                                                        <b
-                                                                            >Phần
-                                                                            trăm
-                                                                            giảm:
-                                                                        </b>
-                                                                    </p>
-                                                                    <p>
-                                                                        <b
-                                                                            >Tiền
-                                                                            thực
-                                                                            thu:
-                                                                        </b>
-                                                                    </p>
-                                                                </div>
-                                                                <div
-                                                                    class="col-6"
-                                                                >
-                                                                    <p>
-                                                                        <b>{{
+                                                                " alt="" />
+                                                    </div>
+                                                    <div class="col-3">
+                                                        <div class="row">
+                                                            <div class="col-6">
+                                                                <p>
+                                                                    <b>Tổng
+                                                                        thanh
+                                                                        toán:</b>
+                                                                </p>
+                                                                <p class="mt-3">
+                                                                    <b>Phần
+                                                                        trăm
+                                                                        giảm:
+                                                                    </b>
+                                                                </p>
+                                                                <p>
+                                                                    <b>Tiền
+                                                                        thực
+                                                                        thu:
+                                                                    </b>
+                                                                </p>
+                                                            </div>
+                                                            <div class="col-6">
+                                                                <p>
+                                                                    <b>{{
                                                                             tong_tien
                                                                         }}</b>
-                                                                    </p>
-                                                                    <input
-                                                                        @change="
+                                                                </p>
+                                                                <input @change="
                                                                             updateHoaDon()
-                                                                        "
-                                                                        type="number"
-                                                                        class="form-control"
-                                                                        v-model="
+                                                                        " type="number" class="form-control" v-model="
                                                                             phan_tram_giam_hoa_don
-                                                                        "
-                                                                    />
-                                                                    <p
-                                                                        class="mt-3"
-                                                                    >
-                                                                        <b>{{
+                                                                        " />
+                                                                <p class="mt-3">
+                                                                    <b>{{
                                                                             tien_thuc_thu
                                                                         }}</b>
-                                                                    </p>
-                                                                </div>
+                                                                </p>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -507,88 +325,52 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="modal-footer">
-                                    <button
-                                        type="button"
-                                        class="btn btn-secondary"
-                                        data-bs-dismiss="modal"
-                                    >
-                                        Đóng
-                                    </button>
-                                    <router-link
-                                        :to="
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Đóng
+                                </button>
+                                <router-link :to="
                                             '/admin/bill-thanh-toan/' +
                                             id_hoa_don_ban_hang
-                                        "
-                                        target="_blank"
-                                    >
-                                        <button
-                                            type="button"
-                                            class="btn btn-danger"
-                                        >
-                                            In Hóa Đơn
-                                        </button>
-                                    </router-link>
-
-                                    <button
-                                        type="button"
-                                        class="btn btn-primary"
-                                        data-bs-dismiss="modal"
-                                    >
-                                        Thanh Toán
+                                        " target="_blank">
+                                    <button type="button" class="btn btn-danger">
+                                        In Hóa Đơn
                                     </button>
-                                </div>
+                                </router-link>
+
+                                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                                    Thanh Toán
+                                </button>
                             </div>
                         </div>
                     </div>
-                    <div
-                        class="modal fade"
-                        id="qrModal"
-                        tabindex="-1"
-                        aria-labelledby="exampleModalLabel"
-                        aria-hidden="true"
-                    >
-                        <div class="modal-dialog" style="max-width: 400px">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1
-                                        class="modal-title fs-5"
-                                        id="exampleModalLabel"
-                                    >
-                                        QR Code
-                                    </h1>
-                                    <button
-                                        type="button"
-                                        class="btn-close"
-                                        data-bs-dismiss="modal"
-                                        aria-label="Close"
-                                    ></button>
+                </div>
+                <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="max-width: 400px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    QR Code
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-flex justify-content-center">
+                                    <VueQRCodeComponent :class="float - center" :text="qrCodeData" :size="300" />
                                 </div>
-                                <div class="modal-body">
-                                    <div class="d-flex justify-content-center">
-                                        <VueQRCodeComponent
-                                            :class="float - center"
-                                            :text="qrCodeData"
-                                            :size="300"
-                                        />
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button
-                                        type="button"
-                                        class="btn btn-secondary"
-                                        data-bs-dismiss="modal"
-                                    >
-                                        Đóng
-                                    </button>
-                                    <!-- <button
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Đóng
+                                </button>
+                                <!-- <button
                                         type="button"
                                         class="btn btn-primary"
                                         @click="generateQRCode"
                                     >
                                         Tạo QR Login
                                     </button> -->
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -596,16 +378,25 @@
             </div>
         </div>
     </div>
+</div>
 </template>
 
 <script>
-import { ref, computed, onMounted } from "vue";
+import {
+    ref,
+    computed,
+    onMounted
+} from "vue";
 import VueQRCodeComponent from "vue-qrcode-component";
-import { useStore } from "vuex";
+import {
+    useStore
+} from "vuex";
 import axios from "@/axiosConfig";
 import Toast from "@/toastConfig";
 import $ from "jquery";
-import { apiQRcode } from "@/globals";
+import {
+    apiQRcode
+} from "@/globals";
 export default {
     name: "su-dung-dich-vu",
     components: {
@@ -808,7 +599,9 @@ export default {
         async function generateQRCode(id_ban) {
             try {
                 const idBan = id_ban; // Thay thế bằng id_ban thực tế
-                const { data } = await axios.get(`admin/create-token/${idBan}`);
+                const {
+                    data
+                } = await axios.get(`admin/create-token/${idBan}`);
                 qrCodeData.value = apiQRcode + data.url;
             } catch (error) {
                 console.error("Lỗi khi tạo QR Code:", error);
