@@ -538,34 +538,24 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </template>
-                                        <template v-else>
-                                            <BillComponent
-                                                :required="true"
-                                                :id="id_hoa_don_ban_hang"
-                                            >
-                                                <template #image>
-                                                    <img
-                                                        style="width: 30%"
-                                                        v-bind:src="link_qr"
-                                                        alt=""
-                                                    />
-                                                </template>
-                                            </BillComponent>
-                                        </template>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <template v-if="activityView == true">
-                                            <button
-                                                type="button"
-                                                class="btn btn-secondary"
-                                                data-bs-dismiss="modal"
-                                                @click="
-                                                    activityView = true;
-                                                    checkingTransaction = false;
-                                                "
-                                            >
-                                                Đóng
+                                        </div>
+                                    </template>
+                                    <template v-else>
+                                        <BillComponent :required="true" :id="id_hoa_don_ban_hang">
+                                            <template #image>
+                                                <img style="width: 30%" v-bind:src="link_qr" alt="" />
+                                            </template>
+                                        </BillComponent>
+                                    </template>
+                                </div>
+                                <div class="modal-footer">
+                                    <template v-if="activityView == true">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="activityView = true; updateCheckingTransaction()">
+                                            Đóng
+                                        </button>
+                                        <router-link :to="'/admin/bill-thanh-toan/'+id_hoa_don_ban_hang" target="_blank">
+                                            <button type="button" class="btn btn-danger">
+                                                In Hóa Đơn
                                             </button>
                                             <router-link
                                                 :to="
@@ -582,56 +572,32 @@
                                                 </button>
                                             </router-link>
 
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                @click="
-                                                    activityView = false;
-                                                    thanhToan();
-                                                "
-                                            >
-                                                Thanh Toán
-                                            </button>
-                                        </template>
-                                        <template v-else>
-                                            <button
-                                                type="button"
-                                                class="btn btn-primary"
-                                                @click="
-                                                    activityView = true;
-                                                    checkingTransaction = false;
-                                                "
-                                            >
-                                                Quay lại
-                                            </button>
-                                        </template>
-                                    </div>
+                                        <button type="button" class="btn btn-primary" @click="activityView = false; thanhToan()">
+                                            Thanh Toán
+                                        </button>
+                                    </template>
+                                    <template v-else>
+                                        <button type="button" class="btn btn-primary" @click="activityView = true; updateCheckingTransaction()">
+                                            Quay lại
+                                        </button>
+                                    </template>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div
-                        class="modal fade"
-                        id="qrModal"
-                        tabindex="-1"
-                        aria-labelledby="exampleModalLabel"
-                        aria-hidden="true"
-                    >
-                        <div class="modal-dialog" style="max-width: 400px">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1
-                                        class="modal-title fs-5"
-                                        id="exampleModalLabel"
-                                    >
-                                        QR Code
-                                    </h1>
-                                    <button
-                                        type="button"
-                                        class="btn-close"
-                                        data-bs-dismiss="modal"
-                                        aria-label="Close"
-                                    ></button>
+                </div>
+                <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="max-width: 400px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                    QR Code
+                                </h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="d-flex justify-content-center">
+                                    <VueQRCodeComponent :text="qrCodeData" :size="300" />
                                 </div>
                                 <div class="modal-body">
                                     <div class="d-flex justify-content-center">
@@ -702,9 +668,10 @@ export default {
         const activityView = ref(true);
         const checkingTransaction = ref(false);
         // Thông tin GD
-        const BANK_ID = "970422";
-        const ACCOUNT_NO = "9704229206656928914";
-        const id_hoa_don_ban_hang = ref("");
+
+        const BANK_ID = '970422';
+        const ACCOUNT_NO = '9704229206656928914';
+        const id_hoa_don_ban_hang = ref(0);
         const bill_id = ref("");
 
         const link_qr = ref(
@@ -717,19 +684,26 @@ export default {
 
         const thanhToan = async () => {
             updateQRCode();
-            if (!checkingTransaction.value) {
+            checkingTransaction.value = true;
+            if (checkingTransaction.value == true) {
                 checkTransaction();
             }
         };
 
+        const updateCheckingTransaction = async() => {
+            checkingTransaction.value = false;
+        }
+
         function checkTransaction() {
-            checkingTransaction.value = true; // Đánh dấu rằng chúng ta đã bắt đầu kiểm tra
+            // Đánh dấu rằng chúng ta đã bắt đầu kiểm tra'
             const intervalId = setInterval(async () => {
                 try {
                     // Thay đổi URL để sử dụng Laravel route đã cài đặt
                     const response = await axios.get("historyviettelpay");
                     const transactions = response.data.data.content; // Giả sử cấu trúc phản hồi đã được điều chỉnh phù hợp với cách Laravel gửi dữ liệu
-                    console.log(transactions[0]);
+                    if(checkingTransaction.value == false) {
+                        clearInterval(intervalId);
+                    }
                     if (transactions && transactions.length > 0) {
                         const latestTransaction = transactions[0]; // Giả sử giao dịch mới nhất ở đầu mảng
                         if (
@@ -753,12 +727,10 @@ export default {
                             );
                             if (data.status == true) {
                                 const Ob = {
-                                    id_hoa_don_ban_hang:
-                                        id_hoa_don_ban_hang.value,
-                                };
-                                axios
-                                    .post("admin/change-status-hoa-don", Ob)
-                                    .then((res) => {
+                                    'id_hoa_don_ban_hang': id_hoa_don_ban_hang.value
+                                }
+                                axios.post("admin/change-status-hoa-don", Ob, 'admin')
+                                    .then(res => {
                                         console.log(res.data.status);
                                         if (res.status == 200) {
                                             activityView.value = true;
@@ -1007,6 +979,7 @@ export default {
             updateHoaDon,
             generateQRCode,
             thanhToan,
+            updateCheckingTransaction,
         };
     },
 };

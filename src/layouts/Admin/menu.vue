@@ -227,7 +227,34 @@
 
                 </ul>
             </li>
+            <li class="nav-item dropdown">
+                <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
+                    <div class="parent-icon">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                    <div class="menu-title">Log</div>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <router-link to="/admin/lich-su-thanh-toan">
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Material</a>
+                        </router-link>
+                    </li>
+                    <!-- <li>
+                        <router-link to="/admin/danh-muc">
+                            <a class="dropdown-item" href="/admin/danh-muc"><i class="bx bx-right-arrow-alt"></i>Food Categories</a>
 
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/admin/mon-an">
+                            <a class="dropdown-item" href="/admin/mon-an"><i class="bx bx-right-arrow-alt"></i>Dish</a>
+
+                        </router-link>
+                    </li> -->
+
+                </ul>
+            </li>
         </ul>
     </nav>
 </div>
