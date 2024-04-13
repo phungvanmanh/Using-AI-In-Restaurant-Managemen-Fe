@@ -28,6 +28,21 @@
                     <TableComponent>
                         <template #thead>
                             <tr>
+                                    <th colspan="100%">
+                                        <div class="input-group mb-3">
+                                            <input  v-on:keyup.enter="searchDanhMuc()" v-model="search.abc"
+                                                type="text"
+                                                class="form-control"
+                                                placeholder="Nhập thông tin cần tìm"
+                                            /><button v-on:click="searchNguyenLieu()"  class="btn btn-primary">
+                                                <i
+                                                    class="fa-solid fa-magnifying-glass"
+                                                ></i>
+                                            </button>
+                                        </div>
+                                    </th>
+                                </tr>
+                            <tr>
                                 <th class="text-center align-middle text-nowrap">#</th>
                                 <th class="text-center align-middle text-nowrap">
                                     Name Category
@@ -39,8 +54,12 @@
                                 <th class="text-center align-middle text-nowrap">Action</th>
                             </tr>
                         </template>
+                        
                         <template #tbody>
+                            
+                            
                             <template v-for="(value, key) in dataDanhMuc" :key="key">
+                              
                                 <tr>
                                     <th class="text-center align-middle text-nowrap">
                                         {{ key + 1 }}
@@ -146,6 +165,7 @@ export default {
         const addCotegory = ref({});
         const editCotegory = ref({});
         const deleteCotegory = ref({});
+        const search = ref({});
         const dataDanhMuc = computed(() => {
             return store.state.dataDanhMuc;
         });
@@ -221,6 +241,14 @@ export default {
                     });
                 });
         };
+        function searchDanhMuc() {
+            axios
+                .post('admin/danh-muc/tim-danh-muc', search.value)
+                .then((res) => {
+                    console.log(res.data.data);
+                    store.commit('fecthDanhMuc', res.data.data);
+                });
+        }
 
         onMounted(() => {
             store.dispatch("onFetchDanhMuc");
@@ -237,6 +265,8 @@ export default {
             changeStatus,
             updateDanhMuc,
             deleteDanhMuc,
+            searchDanhMuc,
+            search,
         };
     },
 };

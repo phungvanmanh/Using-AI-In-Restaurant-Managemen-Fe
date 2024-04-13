@@ -18,7 +18,7 @@
                     <td class="align-middle text-center">
                         <button  v-on:click="loadData()" class="btn btn-primary">Thống Kê</button>
                     </td>
-                    <td class="align-middle" colspan="3"><b>Tổng Tiền:</b> {{ formatToVND(tong_tien) }}</td>
+                    <td class="align-middle" colspan="3"><b>Tổng Tiền Đã Nhận:</b> {{ formatToVND(tong_tien) }}</td>
                 </tr>
                 <tr>
                     <th class="align-middle text-center">#</th>
