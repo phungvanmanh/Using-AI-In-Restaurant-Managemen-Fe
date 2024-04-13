@@ -1,16 +1,12 @@
 <template>
 <div class="nav-container primary-menu">
     <div class="mobile-topbar-header">
-        <div style="background-color: red; display: inline-block; padding: 5px;">
-            <img src="https://designercomvn.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2018/09/03084908/thietke-logo-nha-hang-phuong-tay-dep-mat.jpg" class="logo-icon" alt="logo icon" />
-        </div>
-        <div>
-            <h4 class="logo-text">
-                <span class="text-danger">
-                    <b>Duy Tân</b>
-                </span>
-            </h4>
-        </div>
+        <!-- <img  style="width: 80px;" src="../../assets/images/logo-restaurent-food.png" class="logo-icon" alt="logo icon" /> -->
+        <h5 class="logo-text">
+            <span class="text-danger">
+                <b style="font-size: 20px;">Restaurant Food</b>
+            </span>
+        </h5>
         <div class="toggle-icon ms-auto">
             <i class="bx bx-arrow-to-left"></i>
         </div>
