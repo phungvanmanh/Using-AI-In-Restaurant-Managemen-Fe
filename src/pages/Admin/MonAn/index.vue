@@ -29,7 +29,18 @@
             </template>
             <template #card-body>
                 <TableComponentVue>
+
                     <template #thead>
+                        <tr>
+                            <th colspan="100%">
+                                <div class="input-group mb-3">
+                                    <input v-on:keyup.enter="searchMonAn()" v-model="search.abc" type="text" class="form-control" placeholder="Nhập thông tin cần tìm" /><button v-on:click="searchMonAn()" class="btn btn-primary">
+                                        <i class="fa-solid fa-magnifying-glass"></i>
+                                    </button>
+                                </div>
+                            </th>
+                        </tr>
+
                         <tr>
                             <th class="text-center align-middle text-nowrap">
                                 #
@@ -174,6 +185,7 @@ export default {
         const store = useStore();
         const addMonAn = ref({});
         const editMonAn = ref({});
+        const search = ref({});
         const deletemonan = ref({});
         const id_danhmuc = computed(() => {
             return store.state.dataDanhMuc
@@ -252,6 +264,15 @@ export default {
                     });
                 });
         }
+
+        function searchMonAn() {
+            axios
+                .post('admin/mon-an/tim-mon', search.value)
+                .then((res) => {
+                    console.log(res.data.data);
+                    store.commit('fecthMonAn', res.data.data);
+                });
+        }
         const dataMonAn = computed(() => store.state.dataMonAn);
 
         onMounted(() => {
@@ -270,6 +291,8 @@ export default {
             changeStatus,
             updateMonAn,
             deleteMonAn,
+            searchMonAn,
+            search,
         };
     },
 };

@@ -36,7 +36,7 @@ const routes = [
     },
     {
         path: "/",
-        component: Customer,
+        component:BootStrap ,
         children: [
             {
                 path: 'mon-an/:id_ban',

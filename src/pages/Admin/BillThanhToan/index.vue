@@ -53,7 +53,7 @@
                         <tr>
                             <td colspan="4"></td>
                             <td class="" style="max-width: 120px; min-width: 120px;">Phần Trăm Giảm</td>
-                            <td>{{ hoa_don.phan_tram_giam }}</td>
+                            <td>{{ hoa_don.phan_tram_giam }} %</td>
                         </tr>
                         <tr>
                             <td colspan="4"></td>

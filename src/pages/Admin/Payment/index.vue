@@ -12,7 +12,7 @@
 
 <script>
 import { ref } from "vue";
-import axios from "@/axiosConfig"; // Giả sử bạn đã cài đặt và cấu hình axios
+import axios from "@/axiosConfig"; 
 import Toast from "@/toastConfig";
 export default {
     name: "pay-ment",

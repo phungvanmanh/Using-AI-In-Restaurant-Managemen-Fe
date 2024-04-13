@@ -46,8 +46,8 @@
                                 <tr>
                                     <th colspan="100%">
                                         <div class="input-group mb-3">
-                                            <input type="text" class="form-control">
-                                            <button class="btn btn-primary">
+                                            <input v-on:keyup.enter="searchChuyenMucBaiViet()" v-model="search.abc" type="text" class="form-control">
+                                            <button v-on:click="searchChuyenMucBaiViet()" class="btn btn-primary">
                                                 <i class="fa-solid fa-magnifying-glass"></i>
                                             </button>
                                         </div>
