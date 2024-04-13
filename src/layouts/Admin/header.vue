@@ -4,7 +4,7 @@
             <nav class="navbar navbar-expand">
                 <div class="topbar-logo-header">
                     <div class="">
-                        <img style="width: 100px; border-radius: 50%;" src="https://designercomvn.s3.ap-southeast-1.amazonaws.com/wp-content/uploads/2018/09/03084908/thietke-logo-nha-hang-phuong-tay-dep-mat.jpg" class="logo-icon" alt="logo icon">
+                        <img style="width: 120px; border-radius: 50%;" src="../../assets/images/logo-restaurent-food.png" class="logo-icon" alt="logo icon">
 
                     </div>
                     <div class="">

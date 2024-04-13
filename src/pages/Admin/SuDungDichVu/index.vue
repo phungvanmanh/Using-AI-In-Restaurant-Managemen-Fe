@@ -266,9 +266,14 @@
                                                             </tbody>
                                                         </table>
                                                     </div>
-                                                    <div class="card-footer bg-white text-end">
+                                                    <div class="card-footer bg-white">
                                                         <div class="row">
-                                                            <div class="col-6">
+                                                            <div class="col-3">
+                                                                <InputComponentVue v-model="khach_hang.ten_khach_hang" label="First Last Name Customer"/>
+                                                                <InputComponentVue v-model="khach_hang.email_khach_hang" label="Email" type="email"/>
+                                                                <InputComponentVue v-model="khach_hang.so_dien_thoai" label="Phone Number"/>
+                                                            </div>
+                                                            <div class="col-3">
                                                                 <textarea @change="
                                                                         updateHoaDon()
                                                                     " v-model="
@@ -280,7 +285,7 @@
                                                                         width: 100%;
                                                                     " alt="" />
                                                             </div>
-                                                            <div class="col-3">
+                                                            <div class="col-3 text-end">
                                                                 <div class="row">
                                                                     <div class="col-6">
                                                                         <p>
@@ -409,16 +414,17 @@ import {
 import axios from "@/axiosConfig";
 import Toast from "@/toastConfig";
 import $ from "jquery";
-
 import {
     apiQRcode
 } from "@/globals";
 import BillComponent from "@/pages/Admin/BillThanhToan";
+import InputComponentVue from '@/components/InputComponent.vue';
 export default {
     name: "su-dung-dich-vu",
     components: {
         VueQRCodeComponent,
-        BillComponent
+        BillComponent,
+        InputComponentVue
     },
 
     setup() {
@@ -443,7 +449,7 @@ export default {
         const ACCOUNT_NO = '9704229206656928914';
         const id_hoa_don_ban_hang = ref(0);
         const bill_id = ref("");
-
+        const khach_hang = ref({});
         const link_qr = ref(
             "https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
         );
@@ -452,8 +458,14 @@ export default {
             link_qr.value = `https://img.vietqr.io/image/${BANK_ID}-${ACCOUNT_NO}-compact2.png?amount=${tien_thuc_thu.value}&addInfo=${bill_id.value}&accountName=PHUNG_VAN_MANH`;
         }
 
+        const storeCustomer = () => {
+            khach_hang.value.id_hoa_don = id_hoa_don_ban_hang.value;
+            axios.post('admin/khach-hang/store', khach_hang.value, 'admin')
+        }
+
         const thanhToan = async () => {
             updateQRCode();
+            storeCustomer();
             checkingTransaction.value = true;
             if (checkingTransaction.value == true) {
                 checkTransaction();
@@ -491,11 +503,10 @@ export default {
                             };
 
                             // Đảm bảo đường dẫn API đến Laravel chính xác và có thể xử lý request
-                            const {
-                                data
-                            } = await axios.post(
+                            const {data} = await axios.post(
                                 "transactions",
-                                payload
+                                payload,
+                                'admin'
                             );
                             if (data.status == true) {
                                 const Ob = {
@@ -636,6 +647,7 @@ export default {
                 .post("admin/su-dung-dich-vu/get-chi-tiet", payload, "admin")
                 .then((res) => {
                     list_chi_tiet_ban_hang.value = res.data.data;
+                    khach_hang.value = res.data.kh;
                     tong_tien.value = list_chi_tiet_ban_hang.value
                         .map((item) => item.thanh_tien || 0)
                         .reduce((acc, current) => acc + current, 0);
@@ -745,6 +757,7 @@ export default {
             qrCodeData,
             link_qr,
             activityView,
+            khach_hang,
             loadDataBan,
             getBanTheoKhuVuc,
             openTable,
