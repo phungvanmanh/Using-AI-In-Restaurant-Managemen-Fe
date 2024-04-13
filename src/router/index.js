@@ -22,6 +22,7 @@ import HoaDonBanHang from "@/pages/Admin/HoaDonBanHang";
 import BillThanhToan from "@/pages/Admin/BillThanhToan";
 import NguyenLieu from "@/pages/Admin/NguyenLieu";
 import PayMent from "@/pages/Admin/Payment";
+import LichSuThanhToan from "@/pages/Admin/Log/LichSuThanhToan";
 const routes = [
     {
         path: "/",
@@ -125,10 +126,10 @@ const routes = [
                 path:"nguyen-lieu",
                 component:NguyenLieu,
             },
-            // {
-            //     path:"bill-thanh-toan/:id_hoa_don_ban_hang",
-            //     component:BillThanhToan,
-            // }
+            {
+                path:"lich-su-thanh-toan",
+                component:LichSuThanhToan,
+            }
         ],
     },
     {

@@ -337,13 +337,10 @@
                                 </div>
                                 <div class="modal-footer">
                                     <template v-if="activityView == true">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="activityView = true; checkingTransaction = false">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="activityView = true; updateCheckingTransaction()">
                                             Đóng
                                         </button>
-                                        <router-link :to="
-                                                '/admin/bill-thanh-toan/' +
-                                                id_hoa_don_ban_hang
-                                            " target="_blank">
+                                        <router-link :to="'/admin/bill-thanh-toan/'+id_hoa_don_ban_hang" target="_blank">
                                             <button type="button" class="btn btn-danger">
                                                 In Hóa Đơn
                                             </button>
@@ -354,7 +351,7 @@
                                         </button>
                                     </template>
                                     <template v-else>
-                                        <button type="button" class="btn btn-primary" @click="activityView = true; checkingTransaction = false">
+                                        <button type="button" class="btn btn-primary" @click="activityView = true; updateCheckingTransaction()">
                                             Quay lại
                                         </button>
                                     </template>
@@ -375,7 +372,7 @@
                             </div>
                             <div class="modal-body">
                                 <div class="d-flex justify-content-center">
-                                    <VueQRCodeComponent :class="float - center" :text="qrCodeData" :size="300" />
+                                    <VueQRCodeComponent :text="qrCodeData" :size="300" />
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -444,7 +441,7 @@ export default {
         // Thông tin GD
         const BANK_ID = '970422';
         const ACCOUNT_NO = '9704229206656928914';
-        const id_hoa_don_ban_hang = ref("");
+        const id_hoa_don_ban_hang = ref(0);
         const bill_id = ref("");
 
         const link_qr = ref(
@@ -457,19 +454,26 @@ export default {
 
         const thanhToan = async () => {
             updateQRCode();
-            if (!checkingTransaction.value) {
+            checkingTransaction.value = true;
+            if (checkingTransaction.value == true) {
                 checkTransaction();
             }
         };
 
+        const updateCheckingTransaction = async() => {
+            checkingTransaction.value = false;
+        }
+
         function checkTransaction() {
-            checkingTransaction.value = true; // Đánh dấu rằng chúng ta đã bắt đầu kiểm tra
+            // Đánh dấu rằng chúng ta đã bắt đầu kiểm tra'
             const intervalId = setInterval(async () => {
                 try {
                     // Thay đổi URL để sử dụng Laravel route đã cài đặt
                     const response = await axios.get("historyviettelpay");
                     const transactions = response.data.data.content; // Giả sử cấu trúc phản hồi đã được điều chỉnh phù hợp với cách Laravel gửi dữ liệu
-                    console.log(transactions[0]);
+                    if(checkingTransaction.value == false) {
+                        clearInterval(intervalId);
+                    }
                     if (transactions && transactions.length > 0) {
                         const latestTransaction = transactions[0]; // Giả sử giao dịch mới nhất ở đầu mảng
                         if (
@@ -497,7 +501,7 @@ export default {
                                 const Ob = {
                                     'id_hoa_don_ban_hang': id_hoa_don_ban_hang.value
                                 }
-                                axios.post("admin/change-status-hoa-don", Ob)
+                                axios.post("admin/change-status-hoa-don", Ob, 'admin')
                                     .then(res => {
                                         console.log(res.data.status);
                                         if (res.status == 200) {
@@ -753,6 +757,7 @@ export default {
             updateHoaDon,
             generateQRCode,
             thanhToan,
+            updateCheckingTransaction,
         };
     },
 };
