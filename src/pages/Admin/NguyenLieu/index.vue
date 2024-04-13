@@ -135,11 +135,11 @@
                                 <tr>
                                     <th colspan="100%">
                                         <div class="input-group mb-3">
-                                            <input
+                                            <input v-on:keyup.enter="searchNguyenLieu()" v-model="search.abc"
                                                 type="text"
                                                 class="form-control"
                                                 placeholder="Nhập thông tin cần tìm"
-                                            /><button class="btn btn-primary">
+                                            /><button v-on:click="searchNguyenLieu()" class="btn btn-primary">
                                                 <i
                                                     class="fa-solid fa-magnifying-glass"
                                                 ></i>
@@ -511,6 +511,7 @@ export default {
         const addNguyenLieu = ref({});
         const updateNguyenLieu = ref({});
         const detete_nguyen_lieu = ref({});
+        const search = ref({});
         const convertToSlug = (obj) => {
             obj.slug_nguyen_lieu = store.getters.toSlug(obj.ten_nguyen_lieu);
         };
@@ -584,6 +585,14 @@ export default {
                     });
                 });
         }
+        function searchNguyenLieu() {
+            axios
+                .post('admin/nguyen-lieu/tim-nguyen-lieu', search.value)
+                .then((res) => {
+                    console.log(res.data.data);
+                    store.commit('fecthNguyenLieu', res.data.data);
+                });
+        }
         const tinhTrang = computed(() => store.state.tinh_trang);
         onMounted(() => {
             store.dispatch("onFetchNguyenLieu");
@@ -600,6 +609,8 @@ export default {
             capnhatNguyenLieu,
             changeStatus,
             deleteNguyenLieu,
+            searchNguyenLieu,
+            search,
         };
     },
 };

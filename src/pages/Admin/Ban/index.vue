@@ -31,6 +31,11 @@
                     <TableComponent>
                         <template #thead>
                             <tr>
+                                <th colspan="100%">
+                                    <div class="input-group mb-3"><input v-on:keyup.enter="searchBan()" v-model="search.abc"   type="text" class="form-control" placeholder="Nhập thông tin cần tìm"><button v-on:click="searchBan()" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button></div>
+                                </th>
+                            </tr>
+                            <tr>
                                 <th class="text-center align-middle text-nowrap">#</th>
                                 <th class="text-center align-middle text-nowrap">Name Table</th>
                                 <th class="text-center align-middle text-nowrap">Slug Table</th>
@@ -148,6 +153,7 @@ export default {
         const status = computed(() => store.state.tinh_trang);
         const addTable = ref({});
         const editTable = ref({});
+        const search = ref({});
         const deleteTable = ref({});
 
         const convertToSlug = (obj) => {
@@ -223,11 +229,19 @@ export default {
                     });
                 });
         };
+        function searchBan() {
+            axios
+                .post('admin/ban/tim-ban', search.value)
+                .then((res) => {
+                    console.log(res.data.data);
+                    store.commit('fecthBan', res.data.data);
+                });
+        }
         onMounted(() => {
             store.dispatch("onFetchKhuVuc");
             store.dispatch("onFetchBan");
         });
-        return { area, status, dataBan, addTable, editTable, deleteTable, convertToSlug, addNew, changeStatus, updateBan, deleteBan };
+        return { search,area, status, dataBan, addTable, editTable, deleteTable, convertToSlug, addNew, changeStatus, updateBan, deleteBan ,searchBan};
     },
 };
 </script>

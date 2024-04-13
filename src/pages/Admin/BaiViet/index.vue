@@ -50,7 +50,7 @@
                         <thead>
                             <tr>
                                 <th colspan="100%">
-                                    <div class="input-group mb-3"><input type="text" class="form-control" placeholder="Nhập thông tin cần tìm"><button class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button></div>
+                                    <div class="input-group mb-3"><input  v-on:keyup.enter="searchBaiViet()" v-model="search.abc" type="text" class="form-control" placeholder="Nhập thông tin cần tìm"><button v-on:click="searchBaiViet()" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button></div>
                                 </th>
                             </tr>
                             <tr>
@@ -191,6 +191,7 @@ export default {
         const editBaiViet = ref({});
         const deleteBaiViet = ref({});
         const mo_ta_chi_tiet_bai_viet = ref('');
+        const search = ref({});
         const dataBaiViet = computed(() => {
             return store.state.dataBaiViet;
         });
@@ -252,6 +253,14 @@ export default {
         const convertToSlug = (obj) => {
             obj.slug_bai_viet = store.getters.toSlug(obj.tieu_de_bai_viet);
         };
+        function searchBaiViet() {
+            axios
+                .post('admin/bai-viet/tim-bai-viet', search.value)
+                .then((res) => {
+                    console.log(res.data.data);
+                    store.commit('fecthBaiViet', res.data.data);
+                });
+        }
         onMounted(() => {
             store.dispatch("onFetchBaiViet");
             store.dispatch("onFetchChuyenMucBaiViet");
@@ -267,7 +276,10 @@ export default {
             editBaiViet,
             updateBaiViet,
             deleteBaiViet,
-            delete_baiviet
+            delete_baiviet,
+            searchBaiViet,
+            search,
+            
         };
     },
 }
