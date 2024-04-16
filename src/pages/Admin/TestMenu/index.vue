@@ -1,6 +1,8 @@
 <template>
     <div class="container-fulid">
-        <div class="row text-center">xxxxxx</div>
+        <div class="row text-center">
+            <slot name="thongbao"/>
+        </div>
     </div>
 <body>
 
@@ -36,6 +38,9 @@
                                     Lẩu Thái Hái Sản
                                 </h3>
                                 <p>120.000đ</p>
+                                <span class="d-flex justify-content-between">
+                                    <slot name="buttom"/>
+                                </span> 
                             </div>
                         </div>
                     </div>
