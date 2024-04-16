@@ -65,8 +65,8 @@
                                 </router-link> -->
                         </td>
                         <td>
-                           <p v-if="value.is_done==0">Chưa Thanh Toán</p>
-                           <p v-else>Đã Thanh Toán</p>
+                           <p v-if="value.is_done==0"> <b class="text-info">Chưa Thanh Toán</b></p>
+                           <p v-else><b class="text-success">Đã Thanh Toán</b></p>
 
                         </td>
                     </tr>

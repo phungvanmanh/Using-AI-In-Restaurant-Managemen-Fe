@@ -21,8 +21,10 @@ import MonAnCustomer from "@/pages/Customer/MonAn";
 import HoaDonBanHang from "@/pages/Admin/HoaDonBanHang";
 import BillThanhToan from "@/pages/Admin/BillThanhToan";
 import NguyenLieu from "@/pages/Admin/NguyenLieu";
+import TestMenu from "@/pages/Admin/TestMenu";
 import PayMent from "@/pages/Admin/Payment";
 import LichSuThanhToan from "@/pages/Admin/Log/LichSuThanhToan";
+
 const routes = [
     {
         path: "/",
@@ -129,7 +131,11 @@ const routes = [
             {
                 path:"lich-su-thanh-toan",
                 component:LichSuThanhToan,
-            }
+            },
+            {
+                path:"test-menu",
+                component:TestMenu,
+            },
         ],
     },
     {
