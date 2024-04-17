@@ -44,47 +44,37 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-2"></div>
-        <div class="col-8">
-            <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
-                <div class="input-group"><span class="input-group-text bg-transparent"> </span>
-                    <input type="text" class="form-control" placeholder="Search mail">
-                </div>
+    <div class="row" style="display: flex;">
+    <div class="col-2" style="display: flex; flex-direction: column;">
+        <div id="dp_menu" class="dp_menu">
+    <button id="menu_button"><span>Chuyên Mục</span></button>
+    <ul class="main-menu" style="display: none;">
+        <li><a href="#">Cá</a></li>
+        <li><a href="#">Bò</a></li>
+        <li><a href="#">Lẩu</a></li>
+        <li><a href="">Hải Sản</a></li>
+        <li><a href="">Liên hệ</a></li>
+    </ul>
+</div>
+
+
+    </div>
+    <div class="col-8" style="display: flex; flex-direction: column;">
+        <div class="flex-grow-1 mx-xl-2 my-2 my-xl-0">
+            <div class="input-group">
+                <span class="input-group-text bg-transparent"> </span>
+                <input style="width: 100%;" type="text" class="form-control" placeholder="Search mail">
             </div>
         </div>
-        <div class="col-2"></div>
     </div>
+    <div class="col-2"></div>
+</div>
+
     <div class="row mt-2">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary rounded">
-            <div class="container-fluid"> <a class="navbar-brand" href="#"></a>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent2">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-
-                        <li class="nav-item dropdown"> <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <b>Món Ăn</b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Cá</a>
-                                </li>
-                                <li><a class="dropdown-item" href="#">Bò</a>
-                                </li>
-                                <li><a class="dropdown-item" href="#">Lẩu</a>
-                                </li>
-                                <li><a class="dropdown-item" href="#">Bò</a>
-                                </li>
-                                <li><a class="dropdown-item" href="#">Bò</a>
-                                </li>
-
-                            </ul>
-                        </li>
-                    </ul>
-
-                </div>
-            </div>
-        </nav>
+      
+       
     </div>
+   
     <div class="row">
         <div class="col-4">
             <a href="">
@@ -102,6 +92,10 @@
         <title>Cards Hover2</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
+
+        
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Play&amp;display=swap" rel="stylesheet">
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -338,21 +332,30 @@
                                             <img src="assets/images/avatars/avatar-8.png" class="rounded-circle p-1 border" width="90" height="90" alt="...">
                                             <div class="flex-grow-1 ms-3">
                                                 <h5 class="mt-0 mb-1">List-based media object</h5>
-                                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla
+                                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+                                                scelerisque ante sollicitudin. Cras purus odio, vestibulum in
+                                                vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+                                                vulputate fringilla
                                             </div>
                                         </li>
                                         <li class="d-flex align-items-center my-4 border-bottom pb-2">
                                             <img src="assets/images/avatars/avatar-9.png" class="rounded-circle p-1 border" width="90" height="90" alt="...">
                                             <div class="flex-grow-1 ms-3">
                                                 <h5 class="mt-0 mb-1">List-based media object</h5>
-                                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla
+                                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+                                                scelerisque ante sollicitudin. Cras purus odio, vestibulum in
+                                                vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+                                                vulputate fringilla
                                             </div>
                                         </li>
                                         <li class="d-flex align-items-center">
                                             <img src="assets/images/avatars/avatar-10.png" class="rounded-circle p-1 border" width="90" height="90" alt="...">
                                             <div class="flex-grow-1 ms-3">
                                                 <h5 class="mt-0 mb-1">List-based media object</h5>
-                                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla
+                                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
+                                                scelerisque ante sollicitudin. Cras purus odio, vestibulum in
+                                                vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi
+                                                vulputate fringilla
                                             </div>
                                         </li>
                                     </ul>
@@ -374,6 +377,28 @@
 <script>
 export default {
     name: "test-menu",
+    setup() {
+        $(document).ready(function(){
+    $("#menu_button").click(function(){
+        $("#dp_menu > ul").toggle(500);
+        $("#dp_menu").toggleClass("show");
+    });
+});
+
+// Lắng nghe sự kiện cuộn trang
+window.addEventListener('scroll', function() {
+    var menu = document.getElementById('dp_menu');
+    var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Kiểm tra vị trí cuộn
+    if (scrollTop > 800) { // Thay 100 bằng chiều cao của menu hoặc vị trí mong muốn
+        menu.style.display = 'none'; // Ẩn menu khi cuộn trang lên
+    } else {
+        menu.style.display = 'block'; // Hiển thị menu khi cuộn trang xuống
+    }
+});
+
+    }
 };
 </script>
 
@@ -407,6 +432,7 @@ body {
     position: relative;
     border-radius: 10px;
     width: 100%;
+    height: ;
 
 }
 
@@ -540,5 +566,185 @@ i {
 
 .blinking {
     animation: blink 1s linear infinite;
+}
+
+body {
+    font-family: 'Play', sans-serif;
+}
+
+body:after {
+    display: table;
+    position: absolute;
+    right: 0;
+    bottom: 0
+}
+
+body:after {
+    display: table;
+    position: absolute;
+    right: 0;
+    bottom: 0
+}
+
+#dp_menu {
+    padding: 12px;
+    position: relative;
+    z-index: 999; /* Thiết lập z-index cao hơn */
+}
+
+
+#dp_menu button {
+    display: table;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+#dp_menu button span {
+    display: block;
+    padding: 12px;
+    float: left;
+    width: 172px;
+    background: #0086C5;
+    color: #FFF;
+}
+
+#dp_menu button:before {
+    content: "\2261";
+    display: table;
+    width: 24px;
+    padding: 12px;
+    font-weight: bold;
+    background: #B60101;
+    color: #FFF;
+    float: right
+}
+
+#dp_menu:before,
+#dp_menu:after,
+#dp_menu ul:before,
+#dp_menu ul:after {
+    content: " ";
+    clear: both;
+    display: block;
+    width: 0;
+    height: 0
+}
+
+#dp_menu ul,
+#dp_menu li {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+#dp_menu ul {
+    position: absolute;
+    width: 200px;
+    background: #CCC;
+}
+
+#dp_menu li {
+    display: block;
+    padding: 9px;
+    border-top: 1px solid #f6f6f6;
+    border-bottom: 1px solid #999;
+    text-align: center
+}
+
+html body:after {
+    content: "\0064\0061\0069\0070\0068\006F\002E\0063\006F\006D";
+}
+
+#dp_menu.show button {
+    border-radius: 7px 7px 0 0;
+}
+
+#dp_menu.show button:before {
+    content: "\0058";
+}
+
+#dp_menu .sub-menu {
+    display: none
+}
+
+
+#dp_menu button {
+    display: table;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    border-radius: 7px;
+    overflow: hidden;
+}
+
+#dp_menu button span {
+    display: block;
+    padding: 12px;
+    float: left;
+    width: 172px;
+    background: #0086C5;
+    color: #FFF;
+}
+
+#dp_menu button:before {
+    content: "\2261";
+    display: table;
+    width: 24px;
+    padding: 12px;
+    font-weight: bold;
+    background: #B60101;
+    color: #FFF;
+    float: right
+}
+
+#dp_menu:before,
+#dp_menu:after,
+#dp_menu ul:before,
+#dp_menu ul:after {
+    content: " ";
+    clear: both;
+    display: block;
+    width: 0;
+    height: 0
+}
+
+#dp_menu ul,
+#dp_menu li {
+    margin: 0;
+    padding: 0;
+    list-style: none
+}
+
+#dp_menu ul {
+    position: absolute;
+    width: 200px;
+    background: #CCC;
+}
+
+#dp_menu li {
+    display: block;
+    padding: 9px;
+    border-top: 1px solid #f6f6f6;
+    border-bottom: 1px solid #999;
+    text-align: center
+}
+
+html body:after {
+    content: "\0064\0061\0069\0070\0068\006F\002E\0063\006F\006D";
+}
+
+#dp_menu.show button {
+    border-radius: 7px 7px 0 0;
+}
+
+#dp_menu.show button:before {
+    content: "\0058";
+}
+
+#dp_menu .sub-menu {
+    display: none
 }
 </style>
