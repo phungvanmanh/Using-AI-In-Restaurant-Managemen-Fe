@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import AdminMaster from "@/layouts/Admin";
-import Customer from "@/layouts/Customer";
+// import Customer from "@/layouts/Customer";
 import BootStrap from "@/layouts/Boststrap";
 import Test from "@/pages/Admin/QuanLyAdmin/index1.vue";
 import Admin from "@/pages/Admin/QuanLyAdmin";
@@ -22,17 +22,27 @@ import HoaDonBanHang from "@/pages/Admin/HoaDonBanHang";
 import BillThanhToan from "@/pages/Admin/BillThanhToan";
 import NguyenLieu from "@/pages/Admin/NguyenLieu";
 import TestMenu from "@/pages/Admin/TestMenu";
-import PayMent from "@/pages/Admin/Payment";
+// import PayMent from "@/pages/Admin/Payment";
 import LichSuThanhToan from "@/pages/Admin/Log/LichSuThanhToan";
 
 const routes = [
+    // {
+    //     path: "/",
+    //     component: Customer,
+    //     children: [
+    //         {
+    //             path: 'payment',
+    //             component: PayMent,
+    //         },
+    //     ]
+    // },
     {
         path: "/",
-        component: Customer,
+        component: BootStrap,
         children: [
             {
-                path: 'payment',
-                component: PayMent,
+                path: '',
+                component: TestMenu,
             },
         ]
     },
