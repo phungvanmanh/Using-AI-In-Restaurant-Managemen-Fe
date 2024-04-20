@@ -8,6 +8,7 @@
                 <template #card-body>
                     <InputComponent label="Name Permission" v-model="addQuyen.name_permission"/>
                     <SelectComponent label="Status" v-model="addQuyen.status" :options="status"/>
+                    <InputComponent label="Enter the amount" v-model="addQuyen.amount" type="number"/>
                 </template>
                 <template #card-footer>
                     <button class="btn btn-inverse-primary float-end" @click="addNew()">Add news</button>
@@ -29,6 +30,7 @@
                                     </button>
                                 </th>
                                 <th class="text-center align-middle text-nowrap">Name Permission</th>
+                                <th class="text-center align-middle text-nowrap">Amount</th>
                                 <th class="text-center align-middle text-nowrap">Action</th>
                             </tr>
                         </template>
@@ -39,6 +41,7 @@
                                         <input type="checkbox" :id="'checkbox-' + key">
                                     </td>
                                     <td class="align-middle text-nowrap">{{ value.name_permission }}</td>
+                                    <td class="align-middle text-nowrap">{{ fortmatNumber(value.amount) }} VND </td>
                                     <td class="text-center align-middle text-nowrap">
                                         <button class="btn btn-success me-2">Grant of Permission</button>
                                         <ModalComponent color="info" titleId="edit_quyen" label="Edit" @click="Object.assign(editQuyen, value)">
@@ -48,6 +51,7 @@
                                             <template #modal-body>
                                                 <InputComponent label="Name Permission" v-model="editQuyen.name_permission"/>
                                                 <SelectComponent label="Status" v-model="editQuyen.status" :options="status"/>
+                                                <InputComponent label="Enter the amount" v-model="editQuyen.amount" type="number"/>
                                             </template>
                                             <template #modal-footer>
                                                 <button class="btn btn-primary" @click="updateQuyen()">
@@ -185,11 +189,17 @@ export default {
                 });
         }
 
+        const fortmatNumber = (number) => {
+            return  new Intl.NumberFormat('vi-VN').format(
+                number,
+            )
+        }
+ 
         onMounted(() => {
             store.dispatch("onFetchQuyen");
         })
 
-        return { status, dataQuyen, addQuyen, editQuyen, deletePermission, addNew, updateQuyen, deleteQuyen };
+        return { status, dataQuyen, addQuyen, editQuyen, deletePermission, addNew, updateQuyen, deleteQuyen,fortmatNumber };
     },
 };
 </script>
