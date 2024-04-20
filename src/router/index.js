@@ -24,7 +24,6 @@ import NguyenLieu from "@/pages/Admin/NguyenLieu";
 import TestMenu from "@/pages/Admin/TestMenu";
 // import PayMent from "@/pages/Admin/Payment";
 import LichSuThanhToan from "@/pages/Admin/Log/LichSuThanhToan";
-
 const routes = [
     // {
     //     path: "/",
@@ -78,7 +77,7 @@ const routes = [
         meta: { requiresAuth: true },
         children: [
             {
-                path: "",
+                path: "test",
                 component: Test,
             },
             {

@@ -335,7 +335,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
         <button @click="createTransaction">Tạo giao dịch</button>
         <button @click="getTransactionHistory">Lịch sử giao dịch</button>
         <div v-if="transactionHistory">
@@ -349,6 +349,60 @@
                 </li>
             </ul>
         </div>
+    </div> -->
+    <div class="row">
+        <table class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Mỗi hàng có một data-bs-target riêng để xác định nội dung sẽ hiển thị -->
+        <tr data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr id="collapseExample" class="collapse">
+            <td colspan="4">
+                <table class="table table-bordered">
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        <!-- Lặp lại cấu trúc này cho các hàng khác -->
+        <tr data-bs-toggle="collapse" data-bs-target="#collapseContent2" aria-expanded="false" aria-controls="collapseContent2">
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr id="collapseContent2" class="collapse">
+            <td colspan="4">
+                <div class="card">
+                    <div class="card-body">
+                        Nội dung dành cho hàng 2
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <!-- ...và tiếp tục cho các hàng khác -->
+    </tbody>
+</table>
+
     </div>
 </template>
 
