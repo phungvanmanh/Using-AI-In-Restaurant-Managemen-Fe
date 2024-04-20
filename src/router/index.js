@@ -21,7 +21,7 @@ import MonAnCustomer from "@/pages/Customer/MonAn";
 import HoaDonBanHang from "@/pages/Admin/HoaDonBanHang";
 import BillThanhToan from "@/pages/Admin/BillThanhToan";
 import NguyenLieu from "@/pages/Admin/NguyenLieu";
-import TestMenu from "@/pages/Admin/TestMenu";
+import TrangChu from "@/pages/TrangChu";
 // import PayMent from "@/pages/Admin/Payment";
 import LichSuThanhToan from "@/pages/Admin/Log/LichSuThanhToan";
 import TinhLuong from "@/pages/Admin/Log/TinhLuong";
@@ -42,7 +42,7 @@ const routes = [
         children: [
             {
                 path: '',
-                component: TestMenu,
+                component: TrangChu,
             },
         ]
     },
