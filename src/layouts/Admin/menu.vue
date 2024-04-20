@@ -42,13 +42,19 @@
                 <ul class="dropdown-menu">
                     <li>
                         <router-link to="/admin/admin">
-                            <a class="dropdown-item" href="/admin/admin"><i class="bx bx-right-arrow-alt"></i>Account Management</a>
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Account Management</a>
 
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/admin/lich-lam-viec">
-                            <a class="dropdown-item" href="/admin/lich-lam-viec"><i class="bx bx-right-arrow-alt"></i>Work schedule</a>
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Work schedule</a>
+
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/admin/tinh-luong">
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Employee salary</a>
 
                         </router-link>
                     </li>
@@ -95,13 +101,13 @@
                 <ul class="dropdown-menu">
                     <li>
                         <router-link to="/admin/khu-vuc">
-                            <a class="dropdown-item" href="/admin/khu-vuc"><i class="bx bx-right-arrow-alt"></i>Area</a>
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Area</a>
 
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/admin/ban">
-                            <a class="dropdown-item" href="/admin/ban"><i class="bx bx-right-arrow-alt"></i>Table</a>
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Table</a>
 
                         </router-link>
                     </li>
@@ -159,13 +165,13 @@
                 <ul class="dropdown-menu">
                     <li>
                         <router-link to="/admin/su-dung-dich-vu">
-                            <a class="dropdown-item" href="/admin/su-dung-dich-vu"><i class="bx bx-right-arrow-alt"></i>Use of the service</a>
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Use of the service</a>
 
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/admin/hoa-don-ban-hang">
-                            <a class="dropdown-item" href="/admin/hoa-don-ban-hang"><i class="bx bx-right-arrow-alt"></i>Sales invoice</a>
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Sales invoice</a>
 
                         </router-link>
                     </li>
@@ -204,19 +210,19 @@
                 <ul class="dropdown-menu">
                     <li>
                         <router-link to="/admin/nguyen-lieu">
-                            <a class="dropdown-item" href="/admin/nguyen-lieu"><i class="bx bx-right-arrow-alt"></i>Material</a>
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Material</a>
 
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/admin/danh-muc">
-                            <a class="dropdown-item" href="/admin/danh-muc"><i class="bx bx-right-arrow-alt"></i>Food Categories</a>
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Food Categories</a>
 
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/admin/mon-an">
-                            <a class="dropdown-item" href="/admin/mon-an"><i class="bx bx-right-arrow-alt"></i>Dish</a>
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Dish</a>
 
                         </router-link>
                     </li>

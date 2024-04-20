@@ -24,6 +24,7 @@ import NguyenLieu from "@/pages/Admin/NguyenLieu";
 import TestMenu from "@/pages/Admin/TestMenu";
 // import PayMent from "@/pages/Admin/Payment";
 import LichSuThanhToan from "@/pages/Admin/Log/LichSuThanhToan";
+import TinhLuong from "@/pages/Admin/Log/TinhLuong";
 const routes = [
     // {
     //     path: "/",
@@ -142,8 +143,8 @@ const routes = [
                 component:LichSuThanhToan,
             },
             {
-                path:"test-menu",
-                component:TestMenu,
+                path:"tinh-luong",
+                component:TinhLuong,
             },
         ],
     },
