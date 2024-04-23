@@ -25,6 +25,8 @@ import TrangChu from "@/pages/TrangChu";
 // import PayMent from "@/pages/Admin/Payment";
 import LichSuThanhToan from "@/pages/Admin/Log/LichSuThanhToan";
 import TinhLuong from "@/pages/Admin/Log/TinhLuong";
+import NhapKho from "@/pages/Admin/NhapKho";
+
 const routes = [
     // {
     //     path: "/",
@@ -145,6 +147,10 @@ const routes = [
             {
                 path:"tinh-luong",
                 component:TinhLuong,
+            },
+            {
+                path:"nhap-kho",
+                component:NhapKho,
             },
         ],
     },
