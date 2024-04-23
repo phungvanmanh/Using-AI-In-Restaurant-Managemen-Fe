@@ -39,7 +39,7 @@
                         <tr>
                             <th class="text-center align-middle text-nowrap">{{ key + 1 }}</th>
                             <td class="align-middle text-nowrap">{{ value.first_last_name }}</td>
-                            <td class="text-center align-middle text-nowrap">{{ value.so_buoi_lam }}</td>
+                            <td class="text-center align-middle text-nowrap">{{ value.so_buoi_lam }} - Session</td>
                             <td class="text-center align-middle text-nowrap">{{ value.amount }}</td>
                             <td class="text-center align-middle text-nowrap">
                                 <!-- <button class="btn btn-primary">Detail</button> -->
@@ -105,7 +105,7 @@
                                                             </div>
                                                         </td>
                                                     </tr>
-                                                </template>s
+                                                </template>
                                             </template>
                                         </TableComponent>
                                     </template>

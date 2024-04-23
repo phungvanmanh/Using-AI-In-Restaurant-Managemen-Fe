@@ -82,8 +82,7 @@ const routes = [
                 component: Test,
             },
             {
-                path: "admin",
-                name: "admin",
+                path: "quan-ly",
                 component: Admin,
             },
             {

@@ -41,7 +41,7 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <router-link to="/admin/admin">
+                        <router-link to="/admin/quan-ly">
                             <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Account Management</a>
 
                         </router-link>
