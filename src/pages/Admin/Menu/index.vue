@@ -24,7 +24,7 @@
                                     <p>120.000đ</p>
                                     <div class="row">
                                         <slot name="buttomName"></slot>
-                                        <!-- <div class="col">
+                                        <div class="col">
                                             <button
                                                 data-bs-toggle="modal"
                                                 data-bs-target="#exampleVerticallycenteredModal"
@@ -37,7 +37,7 @@
                                             <button class="btn btn-primary">
                                                 Add
                                             </button>
-                                        </div> -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -1,7 +1,7 @@
 <template>
 <nav id="nav_1">
     <div class="wrapper">
-        <div class="logo"><a href="#">Logo</a></div>
+        <div class="logo"><a href="#"><img style="width: 50px;height: 50px;" src="https://idodesign.vn/wp-content/uploads/2023/04/nhung-mau-thiet-ke-logo-nha-hang-quan-an-sang-tao-1.jpg" alt=""></a></div>
         <input type="radio" name="slider" id="menu-btn_1">
         <input type="radio" name="slider" id="close-btn_1">
         <ul class="nav-links" id="nav-links_1">
@@ -65,7 +65,6 @@
 </nav>
 <div class="body-text">
     <div class="title">Responsive Dropdown and Mega Menu</div>
-    <div class="sub-title">using only HTML & CSS</div>
 </div>
 <testMenu>
     <template #content-header>
@@ -116,7 +115,7 @@
             </div>
             <div class="row" style="display: flex">
                 <div class="col-2" style="display: flex; flex-direction: column">
-                    <div id="dp_menu" class="dp_menu">
+                    <!-- <div id="dp_menu" class="dp_menu">
                         <button id="menu_button">
                             <span>Chuyên Mục</span>
                         </button>
@@ -127,7 +126,7 @@
                             <li><a href="">Hải Sản</a></li>
                             <li><a href="">Liên hệ</a></li>
                         </ul>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="col-8 d-flex align-items-center mt-2">
                     <div class="input-group mb-3">
@@ -150,7 +149,7 @@
 </template>
 
 <script>
-import $ from "jquery";
+// import $ from "jquery";
 import testMenu from "@/pages/Admin/Menu";
 export default {
     name: "trang-chu",
@@ -158,29 +157,42 @@ export default {
         testMenu,
     },
     setup() {
-        $(document).ready(function () {
-            $("#menu_button").click(function () {
-                $("#dp_menu > ul").toggle(500);
-                $("#dp_menu").toggleClass("show");
-            });
-        });
+        document.addEventListener('DOMContentLoaded', function () {
+    const menuBtn = document.getElementById('menu-btn_1');
+    const closeBtn = document.getElementById('close-btn_1');
+    const navLinks = document.getElementById('nav-links_1');
+    const logo = document.querySelector('.logo a');
+    const wrapper = document.getElementById('wrapper'); // Phần tử wrapper
 
-        // Lắng nghe sự kiện cuộn trang
-        window.addEventListener("scroll", function () {
-            var menu = document.getElementById("dp_menu");
-            var scrollTop =
-                window.pageYOffset || document.documentElement.scrollTop;
+    menuBtn.addEventListener('click', function() {
+        navLinks.classList.toggle('show');
+    });
 
-            // Kiểm tra vị trí cuộn
-            if (scrollTop > 800) {
-                // Thay 100 bằng chiều cao của menu hoặc vị trí mong muốn
-                menu.style.display = "none"; // Ẩn menu khi cuộn trang lên
-            } else {
-                menu.style.display = "block"; // Hiển thị menu khi cuộn trang xuống
-            }
+    closeBtn.addEventListener('click', function() {
+        navLinks.classList.remove('show');
+    });
+
+    // Đóng menu khi click vào một liên kết
+    const navLinksItems = navLinks.querySelectorAll('li a');
+    navLinksItems.forEach(function(item) {
+        item.addEventListener('click', function() {
+            navLinks.classList.remove('show');
         });
-        return {};
-    },
+    });
+
+    // Đóng menu khi click vào logo
+    logo.addEventListener('click', function() {
+        navLinks.classList.remove('show');
+    });
+
+    // Đóng menu khi click vào phần tử wrapper
+    wrapper.addEventListener('click', function() {
+        navLinks.classList.remove('show');
+    });
+});
+
+
+    }
 };
 </script>
 
@@ -348,176 +360,7 @@ i {
     animation: blink 1s linear infinite;
 }
 
-body {
-    font-family: 'Play', sans-serif;
-}
 
-body:after {
-    display: table;
-    position: absolute;
-    right: 0;
-    bottom: 0
-}
-
-body:after {
-    display: table;
-    position: absolute;
-    right: 0;
-    bottom: 0
-}
-
-#dp_menu {
-    padding: 12px;
-    position: relative;
-    z-index: 999;
-    /* Thiết lập z-index cao hơn */
-}
-
-#dp_menu button {
-    display: table;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    border-radius: 7px;
-    overflow: hidden;
-}
-
-#dp_menu button span {
-    display: block;
-    padding: 12px;
-    float: left;
-    width: 172px;
-    background: #0086C5;
-    color: #FFF;
-}
-
-#dp_menu button:before {
-    content: "\2261";
-    display: table;
-    width: 24px;
-    padding: 12px;
-    font-weight: bold;
-    background: #B60101;
-    color: #FFF;
-    float: right
-}
-
-#dp_menu:before,
-#dp_menu:after,
-#dp_menu ul:before,
-#dp_menu ul:after {
-    content: " ";
-    clear: both;
-    display: block;
-    width: 0;
-    height: 0
-}
-
-#dp_menu ul,
-#dp_menu li {
-    margin: 0;
-    padding: 0;
-    list-style: none
-}
-
-#dp_menu ul {
-    position: absolute;
-    width: 200px;
-    background: #CCC;
-}
-
-#dp_menu li {
-    display: block;
-    padding: 9px;
-    border-top: 1px solid #f6f6f6;
-    border-bottom: 1px solid #999;
-    text-align: center
-}
-
-#dp_menu.show button {
-    border-radius: 7px 7px 0 0;
-}
-
-#dp_menu.show button:before {
-    content: "\0058";
-}
-
-#dp_menu .sub-menu {
-    display: none
-}
-
-#dp_menu button {
-    display: table;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    border-radius: 7px;
-    overflow: hidden;
-}
-
-#dp_menu button span {
-    display: block;
-    padding: 12px;
-    float: left;
-    width: 172px;
-    background: #0086C5;
-    color: #FFF;
-}
-
-#dp_menu button:before {
-    content: "\2261";
-    display: table;
-    width: 24px;
-    padding: 12px;
-    font-weight: bold;
-    background: #B60101;
-    color: #FFF;
-    float: right
-}
-
-#dp_menu:before,
-#dp_menu:after,
-#dp_menu ul:before,
-#dp_menu ul:after {
-    content: " ";
-    clear: both;
-    display: block;
-    width: 0;
-    height: 0
-}
-
-#dp_menu ul,
-#dp_menu li {
-    margin: 0;
-    padding: 0;
-    list-style: none
-}
-
-#dp_menu ul {
-    position: absolute;
-    width: 200px;
-    background: #CCC;
-}
-
-#dp_menu li {
-    display: block;
-    padding: 9px;
-    border-top: 1px solid #f6f6f6;
-    border-bottom: 1px solid #999;
-    text-align: center
-}
-
-#dp_menu.show button {
-    border-radius: 7px 7px 0 0;
-}
-
-#dp_menu.show button:before {
-    content: "\0058";
-}
-
-#dp_menu .sub-menu {
-    display: none
-}
 
 #nav_1 {
     position: fixed;
@@ -529,7 +372,6 @@ body:after {
 
 #nav_1 .wrapper {
     position: relative;
-    max-width: 1300px;
     padding: 0px 30px;
     height: 70px;
     line-height: 70px;
