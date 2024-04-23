@@ -50,7 +50,7 @@
                                         >Slug Nguyên Liệu</label
                                     ><input
                                         v-model="addNguyenLieu.slug_nguyen_lieu"
-                                        disabled=""
+                                        disabled
                                         type="text"
                                         class="form-control"
                                         placeholder="Nhập slug nguyên liệu"
@@ -69,18 +69,6 @@
                                 </div>
                                 <div class="col-6">
                                     <label class="form-label mt-3"
-                                        >Số Lượng</label
-                                    ><input
-                                        v-model="addNguyenLieu.so_luong"
-                                        type="number"
-                                        class="form-control"
-                                        placeholder="0"
-                                    />
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <label class="form-label mt-3"
                                         >Đơn Vị Tính</label
                                     >
                                     <input
@@ -90,7 +78,9 @@
                                         placeholder="Đơn vị tính"
                                     />
                                 </div>
-                                <div class="col-6">
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
                                     <label class="form-label mt-3"
                                         >Tình Trạng</label
                                     ><select
@@ -354,20 +344,6 @@
                                             </div>
                                             <div class="col-6">
                                                 <label class="form-label mt-3"
-                                                    >Số Lượng</label
-                                                ><input
-                                                    v-model="
-                                                        updateNguyenLieu.so_luong
-                                                    "
-                                                    type="number"
-                                                    class="form-control"
-                                                    placeholder="0"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <label class="form-label mt-3"
                                                     >Đơn Vị Tính</label
                                                 ><input
                                                     v-model="
@@ -378,7 +354,9 @@
                                                     placeholder="Đơn vị tính"
                                                 />
                                             </div>
-                                            <div class="col-6">
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
                                                 <label class="form-label mt-3"
                                                     >Tình Trạng</label
                                                 ><select
