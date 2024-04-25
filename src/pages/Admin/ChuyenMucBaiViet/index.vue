@@ -1,6 +1,17 @@
 <template>
-<div class="container-fulid">
-    <div class="row">
+<div class="row mb-4">
+    <div class="spinner1 ">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+
+<div class="container-fulid mt-2">
+    <div class="row mt-2">
         <div class="col-4">
             <div class="card">
                 <div class="card-header">
@@ -77,10 +88,10 @@
                                     <td class="text-center align-middle text-nowrap">{{value.ten_chuyen_muc}}</td>
                                     <td class="text-center align-middle text-nowrap">{{value.slug_chuyen_muc}}</td>
                                     <td class="text-center align-middle text-nowrap">
-                                        <button @click="changeStatus(value)"  v-if="value.tinh_trang == 1" class="btn btn-success">Display</button>
-                                        <button   @click="changeStatus(value)"  v-else class="btn btn-warning">Pause</button>
+                                        <button @click="changeStatus(value)" v-if="value.tinh_trang == 1" class="btn btn-success">Display</button>
+                                        <button @click="changeStatus(value)" v-else class="btn btn-warning">Pause</button>
                                     </td>
-                                    <td class="text-center align-middle text-nowrap"><button v-on:click="Object.assign(editChuyenMucBaiViet,value)"  class="btn btn-info" data-bs-toggle="modal" data-bs-target="#capNhatModal" style="width: 100px; margin-right: 4px;">Update</button><button v-on:click="Object.assign(deletechuyenmucbaiviet,value)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#xoaModal" style="width: 100px;">Delete</button></td>
+                                    <td class="text-center align-middle text-nowrap"><button v-on:click="Object.assign(editChuyenMucBaiViet,value)" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#capNhatModal" style="width: 100px; margin-right: 4px;">Update</button><button v-on:click="Object.assign(deletechuyenmucbaiviet,value)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#xoaModal" style="width: 100px;">Delete</button></td>
                                 </tr>
 
                             </tbody>
@@ -104,13 +115,13 @@
                                     <div class="row mt-2">
                                         <div class="col-12">
                                             <label for=""> Slug Article Categories</label>
-                                            <input  v-model="editChuyenMucBaiViet.slug_chuyen_muc" disabled type="text" class="form-control mt-2">
+                                            <input v-model="editChuyenMucBaiViet.slug_chuyen_muc" disabled type="text" class="form-control mt-2">
                                         </div>
                                     </div>
                                     <div class="row mt-2">
                                         <div class="col-12">
                                             <label for="">Status</label>
-                                            <select  v-model="editChuyenMucBaiViet.tinh_trang" class="form-control mt-2">
+                                            <select v-model="editChuyenMucBaiViet.tinh_trang" class="form-control mt-2">
                                                 <option value="1">Display</option>
                                                 <option value="0">Pause</option>
                                             </select>
@@ -260,6 +271,7 @@ export default {
                     });
                 });
         };
+
         function searchChuyenMucBaiViet() {
             axios
                 .post('admin/chuyen-muc-bai-viet/tim-chuyen-muc-bai-viet', search.value)
@@ -289,6 +301,61 @@ export default {
 }
 </script>
 
-<style >
+<style>
+.spinner1 {
+    width: 44px;
+    height: 44px;
+    animation: spinner1-y0fdc1 2s infinite ease;
+    transform-style: preserve-3d;
+}
 
+.spinner1>div {
+    background-color: rgb(255, 254, 254);
+    height: 100%;
+    position: absolute;
+    width: 100%;
+    border: 2px solid #ff0000;
+}
+
+.spinner1 div:nth-of-type(1) {
+    transform: translateZ(-22px) rotateY(180deg);
+}
+
+.spinner1 div:nth-of-type(2) {
+    transform: rotateY(-270deg) translateX(50%);
+    transform-origin: top right;
+}
+
+.spinner1 div:nth-of-type(3) {
+    transform: rotateY(270deg) translateX(-50%);
+    transform-origin: center left;
+}
+
+.spinner1 div:nth-of-type(4) {
+    transform: rotateX(90deg) translateY(-50%);
+    transform-origin: top center;
+}
+
+.spinner1 div:nth-of-type(5) {
+    transform: rotateX(-90deg) translateY(50%);
+    transform-origin: bottom center;
+}
+
+.spinner1 div:nth-of-type(6) {
+    transform: translateZ(22px);
+}
+
+@keyframes spinner1-y0fdc1 {
+    0% {
+        transform: rotate(45deg) rotateX(-25deg) rotateY(25deg);
+    }
+
+    50% {
+        transform: rotate(45deg) rotateX(-385deg) rotateY(25deg);
+    }
+
+    100% {
+        transform: rotate(45deg) rotateX(-385deg) rotateY(385deg);
+    }
+}
 </style>
