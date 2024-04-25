@@ -1,7 +1,6 @@
 <template>
 <div class="nav-container primary-menu">
     <div class="mobile-topbar-header">
-        <!-- <img  style="width: 80px;" src="../../assets/images/logo-restaurent-food.png" class="logo-icon" alt="logo icon" /> -->
         <h5 class="logo-text">
             <span class="text-danger">
                 <b style="font-size: 20px;">Restaurant Food</b>
@@ -13,25 +12,7 @@
     </div>
     <nav class="navbar navbar-expand-xl w-100">
         <ul class="navbar-nav justify-content-start flex-grow-1 gap-1">
-            <!-- <li class="nav-item dropdown">
-                <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
-                    <div class="parent-icon">
-                        <i class="bx bx-home-circle"></i>
-                    </div>
-                    <div class="menu-title">Dashboard</div>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="dropdown-item" href="index.html"><i class="bx bx-right-arrow-alt"></i>Default</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="index2.html"><i class="bx bx-right-arrow-alt"></i>Alternate</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="index3.html"><i class="bx bx-right-arrow-alt"></i>Graphical</a>
-                    </li>
-                </ul>
-            </li> -->
+          
             <li class="nav-item dropdown">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                     <div class="parent-icon">
@@ -61,16 +42,7 @@
 
                 </ul>
             </li>
-            <!-- <li class="nav-item">
-                            <router-link to="/admin/staff">
-                                <a class="nav-link">
-                                    <div class="parent-icon">
-                                        <i class="bx bx-cookie"></i>
-                                    </div>
-                                    <div class="menu-title">Staff</div>
-                                </a>
-                            </router-link>
-                        </li> -->
+         
             <li class="nav-item">
                 <router-link to="/admin/khach-hang">
                     <a class="nav-link">
@@ -114,16 +86,7 @@
 
                 </ul>
             </li>
-            <!-- <li class="nav-item">
-                <router-link to="/admin/danh-muc">
-                    <a class="nav-link">
-                        <div class="parent-icon">
-                            <i class="fas fa-list"></i>
-                        </div>
-                        <div class="menu-title">Category</div>
-                    </a>
-                </router-link>
-            </li> -->
+            
             <li class="nav-item">
                 <router-link to="/admin/nha-cung-cap">
                     <a class="nav-link">
@@ -134,6 +97,31 @@
                     </a>
                 </router-link>
             </li>
+            <li class="nav-item dropdown">
+                <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
+                    <div class="parent-icon">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                    <div class="menu-title">Quản lí nhập kho</div>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <router-link to="/admin/nhap-kho">
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Nhập Kho</a>
+
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/admin/hoa-don-nhap-kho">
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Hoá Đơn Nhập Kho</a>
+
+                        </router-link>
+                    </li>
+
+                </ul>
+            </li>
+
+            
             <li class="nav-item">
                 <router-link to="/admin/bai-viet">
                     <a class="nav-link">
@@ -179,27 +167,7 @@
                 </ul>
             </li>
 
-            <!-- <li class="nav-item dropdown">
-                <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
-                    <div class="parent-icon">
-                        <i class="fa-solid fa-house"></i>
-                    </div>
-                    <div class="menu-title">Quản lí Nhập Kho</div>
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-
-                            <a class="dropdown-item" href=""><i class="bx bx-right-arrow-alt"></i>Nhập Kho</a>
-
-                    </li>
-                    <li>
-
-                            <a class="dropdown-item" href=""><i class="bx bx-right-arrow-alt"></i>Hóa Đơn Nhập Kho</a>
-
-                    </li>
-
-                </ul>
-            </li> -->
+           
             <li class="nav-item dropdown">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                     <div class="parent-icon">
@@ -242,18 +210,7 @@
                             <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Material</a>
                         </router-link>
                     </li>
-                    <!-- <li>
-                        <router-link to="/admin/danh-muc">
-                            <a class="dropdown-item" href="/admin/danh-muc"><i class="bx bx-right-arrow-alt"></i>Food Categories</a>
-
-                        </router-link>
-                    </li>
-                    <li>
-                        <router-link to="/admin/mon-an">
-                            <a class="dropdown-item" href="/admin/mon-an"><i class="bx bx-right-arrow-alt"></i>Dish</a>
-
-                        </router-link>
-                    </li> -->
+                   
 
                 </ul>
             </li>
