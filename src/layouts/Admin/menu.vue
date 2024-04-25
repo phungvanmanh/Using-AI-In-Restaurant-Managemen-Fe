@@ -68,7 +68,7 @@
                     <div class="parent-icon">
                         <i class="fa-solid fa-memory"></i>
                     </div>
-                    <div class="menu-title">Quản lí khu</div>
+                    <div class="menu-title">Area management</div>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
@@ -102,18 +102,18 @@
                     <div class="parent-icon">
                         <i class="fa-solid fa-house"></i>
                     </div>
-                    <div class="menu-title">Quản lí nhập kho</div>
+                    <div class="menu-title">Warehouse management</div>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
                         <router-link to="/admin/nhap-kho">
-                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Nhập Kho</a>
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Enter warehouse</a>
 
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/admin/hoa-don-nhap-kho">
-                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Hoá Đơn Nhập Kho</a>
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Warehouse Invoice</a>
 
                         </router-link>
                     </li>
