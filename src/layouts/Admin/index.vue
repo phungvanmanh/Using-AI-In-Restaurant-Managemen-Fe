@@ -4,8 +4,9 @@
             <headerVue></headerVue>
             <menuVue></menuVue>
         </div>
-        <div class="page-wrapper">
+        <div class="page-wrapper" style="background-color:bisque;">
             <div class="page-content">
+                
                 <router-view></router-view>
             </div>
         </div>
@@ -50,4 +51,14 @@ export default {
 @import '../../assets/css/header-colors.css';
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css");
+body {
+        margin: 0;
+        padding: 0;
+        background-color: bisque;
+    }
+
+    .page-wrapper {
+        height: 100vh; /* Chiều cao của page-wrapper là 100% chiều cao của viewport */
+    }
+
 </style>
