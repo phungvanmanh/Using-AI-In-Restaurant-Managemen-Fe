@@ -55,7 +55,7 @@ const routes = [
         component:BootStrap ,
         children: [
             {
-                path: 'mon-an/:id_ban',
+                path: 'mon-an/:id_ban/:id_hoa_don',
                 component: MonAnCustomer,
             },
         ]

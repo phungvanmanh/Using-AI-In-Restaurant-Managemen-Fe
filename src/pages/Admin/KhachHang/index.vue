@@ -11,97 +11,7 @@
                             <span><b>List of User</b></span>
                         </div>
                         <div class="col text-end">
-                            <!-- Popup KhachHang add -->
-                            <ModalComponent
-                                color="primary"
-                                label="Add news"
-                                titleId="add_news"
-                                sizeModal="modal-lg"
-                            >
-                                <template #modal-header>
-                                    <span><b>Add news User</b></span>
-                                </template>
-                                <template #modal-body>
-                                    <div
-                                        class="row d-flex justify-content-between align-items-center"
-                                    >
-                                        <div class="col">
-                                            <InputComponent
-                                                
-                                                label="First and last name"
-                                                placeholder="Enter your first and last name..."
-                                            />
-                                        </div>
-                                        <div class="col">
-                                            <InputComponent
-                                                
-                                                label="Phone number"
-                                                placeholder="(999) 999-9999"
-                                                
-                                            />
-                                        </div>
-                                    </div>
-                                    <div
-                                        class="row d-flex justify-content-between align-items-center"
-                                    >
-                                        <div class="col">
-                                            <InputComponent
-                                                label="Date of birth"
-                                                type="date"
-                                            />
-                                        </div>
-                                        <div class="col">
-                                            <InputComponent
-                                                label="Email"
-                                                type="email"
-                                                placeholder="example@gmail.com"
-                                                
-                                            />
-                                        </div>
-                                    </div>
-                                    <!-- <InputComponent
-                                        label="Password"
-                                        type="text"
-                                        placeholder="Enter your password..."
-                                    /> -->
-                                    <div
-                                        class="row d-flex justify-content-between align-items-center"
-                                    >
-                                        <!-- <div class="col">
-                                            <SelectComponent
-                                                label="Permission"
-                                                
-                                            />
-                                        </div> -->
-                                        <InputComponent
-                                        
-                                        label="Code KhachHang"
-                                        type="text"
-                                    />
-                                        <div class="col">
-                                            <SelectComponent
-                                                label="Status"
-                                                :options="tinh_trang"
-                                            />
-                                        </div>
-                                    </div>
-                                </template>
-                                <template #modal-footer>
-                                    <button
-                                        class="btn btn-primary" 
-                                        @click="addNew()"
-                                    >
-                                        Add new
-                                    </button>
-                                    <button
-                                        class="btn btn-secondary"
-                                        data-bs-dismiss="modal"
-                                    >
-                                        Close
-                                    </button>
-                                </template>
-                            </ModalComponent>
-                            <!-- Popup KhachHang add -->
+                            <button class="btn btn-success" @click="exportExcel()">Export Excel</button>
                         </div>
                     </div>
                 </template>
@@ -148,26 +58,6 @@
                                 <th
                                     class="text-center align-middle text-nowrap"
                                 >
-                                    Ngày sinh
-                                </th>
-                                <th
-                                    class="text-center align-middle text-nowrap"
-                                >
-                                    Rank
-                                </th>
-                                <th
-                                    class="text-center align-middle text-nowrap"
-                                >
-                                    Lịch sử
-                                </th>
-                                <th
-                                    class="text-center align-middle text-nowrap"
-                                >
-                                    Điểm
-                                </th>
-                                <th
-                                    class="text-center align-middle text-nowrap"
-                                >
                                     Action
                                 </th>
                             </tr>
@@ -189,18 +79,6 @@
                                     </td>
                                     <td class="align-middle text-nowrap">
                                         {{ value.so_dien_thoai }}
-                                    </td>
-                                    <td class="align-middle text-nowrap">
-                                        {{ value.DateofBirth }}
-                                    </td>
-                                    <td class="align-middle text-nowrap">
-                                        {{ value.rank_khach_hang }}
-                                    </td>
-                                    <td class="align-middle text-nowrap">
-                                        {{ value.history_khach_hang }}
-                                    </td>
-                                    <td class="align-middle text-nowrap">
-                                        {{ value.score_khach_hang }}
                                     </td>
                                     <!-- <td
                                         class="text-center align-middle text-nowrap"
@@ -241,26 +119,19 @@
                                             </template>
                                             <template #modal-body>
                                                 <InputComponent
-                                                    
+                                                    v-model="editKhachHang.ten_khach_hang"
                                                     label="Name area"
                                                     placeholder="Enter the area name..."
                                                 />
                                                 <InputComponent
+                                                    v-model="editKhachHang.email_khach_hang"
                                                     label="Phone Number"
                                                     placeholder="Enter the Phone Number..."
                                                 />
                                                 <InputComponent
-                                                    label="Date of Birth"
-                                                    type = "date"
-                                                    placeholder="Enter the Date of Birth..."
-                                                />
-                                                <InputComponent
+                                                    v-model="editKhachHang.so_dien_thoai"
                                                     label="Email"
                                                     placeholder="Enter the Email..."
-                                                />
-                                                <InputComponent
-                                                    label="Code KhachHang"
-                                                    placeholder="Enter the Code KhachHang..."
                                                 />
                                             </template>
                                             <template #modal-footer>
@@ -337,7 +208,6 @@
 <script>
 import CardComponent from "@/components/CardComponent.vue";
 import InputComponent from "@/components/InputComponent.vue";
-import SelectComponent from "@/components/SelectComponent.vue";
 import TableComponent from "@/components/TableComponent.vue";
 import ModalComponent from "@/components/ModalComponent.vue";
 import { ref, computed, onMounted } from "vue";
@@ -345,13 +215,13 @@ import { useStore } from "vuex";
 import axios from "@/axiosConfig";
 import Toast from "@/toastConfig";
 import $ from "jquery";
+import { apiUrl } from "@/globals";
 export default {
     name: "khach-hang",
     components: {
         CardComponent,
         InputComponent,
         TableComponent,
-        SelectComponent,
         ModalComponent,
     },
     setup() {
@@ -364,15 +234,14 @@ export default {
         const dataKhachHang = computed(() => {
             return store.state.dataKhachHang;
         });
-
+        const editKhachHang = ref({});
 
         const changeStatus = (value) => {
             axios
-                .post("admin/KhachHang/change-status", value)
+                .post("admin/khach-hang/change-status", value)
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
-                        addKhachHang.value = {};
                         store.dispatch("onFetchKhachHang");
                     }
                 })
@@ -391,7 +260,6 @@ export default {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         $("#delete_KhachHang").modal("hide");
-                        addKhachHang.value = {};
                         store.dispatch("onFetchKhachHang");
                     }
                 })
@@ -399,6 +267,48 @@ export default {
                     $.each(res.response.data.errors, function (k, v) {
                         Toast("error", v[0]);
                     });
+                });
+        };
+
+        const updateKhachHang = () => {
+            axios
+                .post("admin/khach-hang/update", editKhachHang.value)
+                .then((res) => {
+                    if (res.data.status == 1) {
+                        Toast("success", res.data.message);
+                        $("#edit_KhachHang").modal('hide');
+                        store.dispatch("onFetchKhachHang");
+                    }
+                })
+                .catch((res) => {
+                    $.each(res.response.data.errors, function (k, v) {
+                        Toast("error", v[0]);
+                    });
+                });
+        }
+
+        const exportExcel = () => {
+            fetch(apiUrl + "api/admin/khach-hang/export")
+                .then((response) => {
+                    if (!response.ok) {
+                        // When the response is not ok, log the whole response for debugging
+                        console.error("Response:", response);
+                        throw new Error(`HTTP status ${response.status}`);
+                    }
+                    return response.blob();
+                })
+                .then((blob) => {
+                    const downloadUrl = window.URL.createObjectURL(blob);
+                    const link = document.createElement("a");
+                    link.href = downloadUrl;
+                    link.setAttribute("download", "khachhang.xlsx");
+                    document.body.appendChild(link);
+                    link.click();
+                    link.remove(); // This is the same as 'document.body.removeChild(link)'
+                    window.URL.revokeObjectURL(downloadUrl);
+                })
+                .catch((error) => {
+                    console.error("Download error:", error);
                 });
         };
 
@@ -410,8 +320,11 @@ export default {
             dataKhachHang,
             addKhachHang,
             deleteKhachHang,
+            editKhachHang,
+            updateKhachHang,
             changeStatus,
             deleteUser,
+            exportExcel
         };
     },
 };

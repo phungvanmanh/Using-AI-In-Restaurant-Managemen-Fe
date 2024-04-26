@@ -96,6 +96,9 @@ export default createStore({
         fecthNguyenLieu(state, data) {
             state.dataNguyenLieu = data;
         },
+        fecthKhachHang(state, data) {
+            state.dataKhachHang = data;
+        },
     },
     actions: {
         onFetchChuyenMuc: async ({ commit }) => {
@@ -203,6 +206,14 @@ export default createStore({
                 commit("fecthNguyenLieu", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchNguyenLieu:", error);
+            }
+        },
+        onFetchKhachHang: async ({ commit }) => {
+            try {
+                const response = await axios.get("admin/khach-hang/get-data");
+                commit("fecthKhachHang", response.data.data);
+            } catch (error) {
+                console.error("Có lỗi xảy ra trong onFetchKhachHang:", error);
             }
         },
     },
