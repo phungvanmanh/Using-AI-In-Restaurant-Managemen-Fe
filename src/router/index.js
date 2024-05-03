@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import AdminMaster from "@/layouts/Admin";
-// import Customer from "@/layouts/Customer";
 import BootStrap from "@/layouts/Boststrap";
-import Test from "@/pages/Admin/QuanLyAdmin/index1.vue";
 import Admin from "@/pages/Admin/QuanLyAdmin";
 import KhachHang from "@/pages/Admin/KhachHang";
 import Quyen from "@/pages/Admin/Quyen";
@@ -27,54 +25,37 @@ import LichSuThanhToan from "@/pages/Admin/Log/LichSuThanhToan";
 import TinhLuong from "@/pages/Admin/Log/TinhLuong";
 import NhapKho from "@/pages/Admin/NhapKho";
 import HoaDonNhapKho from "@/pages/Admin/HoaDonNhapKho";
-
-
+import ForgotPassword from "@/pages/Admin/ForgotPassword"
+import ChangePassword from "@/pages/Admin/ChangePassword"
 const routes = [
-    // {
-    //     path: "/",
-    //     component: Customer,
-    //     children: [
-    //         {
-    //             path: 'payment',
-    //             component: PayMent,
-    //         },
-    //     ]
-    // },
     {
-        path: "/",
-        component: BootStrap,
-        children: [
-            {
-                path: '',
-                component: TrangChu,
-            },
-        ]
-    },
-    {
-        path: "/",
-        component:BootStrap ,
-        children: [
-            {
-                path: 'mon-an/:id_ban/:id_hoa_don',
-                component: MonAnCustomer,
-            },
-        ]
-    },
-    {
-        path: "/login",
+        path: "/admin/login",
         name: "login",
         component: Login,
     },
     {
-        path: "/admin",
+        path: "/admin/forgot-password",
+        name: "forgotpassword",
+        component: ForgotPassword,
+    },
+    {
+        path: "/change-password/:uuid",
+        name: "changepassword",
+        component: ChangePassword,
+    },
+    {
+        path: "/",
         component: BootStrap,
-        meta: { requiresAuth: true },
         children: [
             {
-                path:"bill-thanh-toan/:id_hoa_don_ban_hang",
-                component:BillThanhToan,
-            }
-        ]
+                path: "",
+                component: TrangChu,
+            },
+            {
+                path: "mon-an/:id_ban/:id_hoa_don",
+                component: MonAnCustomer,
+            },
+        ],
     },
     {
         path: "/admin",
@@ -82,11 +63,7 @@ const routes = [
         meta: { requiresAuth: true },
         children: [
             {
-                path: "test",
-                component: Test,
-            },
-            {
-                path: "quan-ly",
+                path: "",
                 component: Admin,
             },
             {
@@ -138,24 +115,24 @@ const routes = [
                 component: HoaDonBanHang,
             },
             {
-                path:"nguyen-lieu",
-                component:NguyenLieu,
+                path: "nguyen-lieu",
+                component: NguyenLieu,
             },
             {
-                path:"lich-su-thanh-toan",
-                component:LichSuThanhToan,
+                path: "lich-su-thanh-toan",
+                component: LichSuThanhToan,
             },
             {
-                path:"tinh-luong",
-                component:TinhLuong,
+                path: "tinh-luong",
+                component: TinhLuong,
             },
             {
-                path:"nhap-kho",
-                component:NhapKho,
+                path: "nhap-kho",
+                component: NhapKho,
             },
             {
-                path:"hoa-don-nhap-kho",
-                component:HoaDonNhapKho,
+                path: "hoa-don-nhap-kho",
+                component: HoaDonNhapKho,
             },
         ],
     },
@@ -169,38 +146,40 @@ const routes = [
             },
         ],
     },
+    {
+        path: "/admin",
+        component: BootStrap,
+        meta: { requiresAuth: true },
+        children: [
+            {
+                path: "bill-thanh-toan/:id_hoa_don_ban_hang",
+                component: BillThanhToan,
+            },
+        ],
+    },
 ];
 // Tạo và cấu hình router
 const router = createRouter({
     history: createWebHistory(),
-    base: process.env.BASE_URL,
-    routes, // Sử dụng mảng `routes` đã khai báo
+    routes,
 });
 
-// Sử dụng hook beforeEach để kiểm soát quyền truy cập
 router.beforeEach((to, from, next) => {
-    const isLoggedIn = localStorage.getItem('admin') !== null;
-
-    if (isLoggedIn && to.path === '/login') {
-        // Thay đổi '/dashboard' bằng đường dẫn bạn muốn chuyển hướng người dùng đã đăng nhập
-        next('/admin/lich-lam-viec');
-        return; // Đảm bảo không thực hiện các điều kiện kiểm tra tiếp theo
+    const adminToken = localStorage.getItem("admin");
+    // Kiểm tra nếu người dùng đã có token 'admin' và cố gắng truy cập vào /admin/login, chuyển hướng họ đến /admin
+    if (adminToken && to.path === "/admin/login") {
+        updateTokenAndFetchUser();
+        next("/admin");
+        return;
     }
-    
-    if (to.matched.some(record => record.meta.requiresAuth)) {
-        if (!isLoggedIn) {
-            // Nếu yêu cầu xác thực nhưng không tìm thấy token đăng nhập
-            next('/login');
-        } else {
-            // Người dùng đã đăng nhập
-            updateTokenAndFetchUser();
-            next();
-        }
+
+    // Nếu một route yêu cầu xác thực và token 'admin' không tồn tại, chuyển hướng đến /admin/login
+    if (to.matched.some((record) => record.meta.requiresAuth) && !adminToken) {
+        next("/admin/login");
     } else {
         next();
     }
 });
-
 function updateTokenAndFetchUser() {
     const token = JSON.parse(localStorage.getItem('admin'))?.access_token;
     store.dispatch('updateTokenAdmin', token);

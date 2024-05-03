@@ -117,10 +117,9 @@ export default {
     },
     setup() {
         const store = useStore();
-        // const socket = io("http://localhost:3000");
         const socket = io(apiSocket);
         const time = ref(["8h00 - 16h00", "17h00 - 22h00"]);
-        const days = ref([]);
+        const days = ref(["Monday", "Tuesday ", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]);
         const data = ref([]);
         const type = ref(-1);
         const today = ref(new Date());

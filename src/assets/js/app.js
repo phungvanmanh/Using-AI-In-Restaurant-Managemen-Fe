@@ -9,6 +9,30 @@
 		return originalAddEventListener.call(this, type, listener, options);
 	};
 })();
+(function () {
+	var dropdownMenu;
+	$(window).on('show.bs.dropdown', function (e) {
+	dropdownMenu = $(e.target).find('.dropdown-menu');
+	$('body').append(dropdownMenu.detach());
+	var eOffset = $(e.target).offset();
+	dropdownMenu.css({
+		'display': 'block',
+			'top': eOffset.top + $(e.target).outerHeight(),
+			'left': eOffset.left
+	});
+	});
+	$(window).on('hide.bs.dropdown', function (e) {
+		$(e.target).append(dropdownMenu.detach());
+		dropdownMenu.hide();
+	});
+
+	$('.tbData').on('show.bs.dropdown', function () {
+		$('.dataTables_scrollBody').addClass('dropdown-visible');
+	})
+	.on('hide.bs.dropdown', function () {
+		$('.dataTables_scrollBody').removeClass('dropdown-visible');
+	});
+})();
 import PerfectScrollbar from 'perfect-scrollbar';
 import $ from 'jquery';
 $(function () {
