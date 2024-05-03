@@ -30,7 +30,10 @@
 													<label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
 												</div>
 											</div>
-											<div class="col-md-6 text-end">	<a href="authentication-forgot-password.html">Forgot Password ?</a>
+											<div class="col-md-6 text-end">
+												<router-link to="/admin/forgot-password">
+													<a>Forgot Password ?</a>
+												</router-link>
 											</div>
 											<div class="col-12">
 												<div class="d-grid">
@@ -94,15 +97,6 @@ export default {
 };
 </script>
 <style scoped>
-@import "../../assets/plugins/simplebar/css/simplebar.css";
-@import "../../assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css";
-@import "../../assets/css/bootstrap.min.css";
-@import "../../assets/css/bootstrap-extended.css";
-@import "../../assets/css/app.css";
-@import "../../assets/css/icons.css";
-@import "../../assets/css/dark-theme.css";
-@import "../../assets/css/semi-dark.css";
-@import "../../assets/css/header-colors.css";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css");
 </style>
