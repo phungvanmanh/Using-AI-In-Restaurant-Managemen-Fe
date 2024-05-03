@@ -171,21 +171,29 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    const adminToken = localStorage.getItem("admin");
+    const adminToken = JSON.parse(localStorage.getItem("admin"))?.access_token;
+
     // Kiểm tra nếu người dùng đã có token 'admin' và cố gắng truy cập vào /admin/login, chuyển hướng họ đến /admin
     if (adminToken && to.path === "/admin/login") {
-        updateTokenAndFetchUser();
         next("/admin");
         return;
     }
 
     // Nếu một route yêu cầu xác thực và token 'admin' không tồn tại, chuyển hướng đến /admin/login
-    if (to.matched.some((record) => record.meta.requiresAuth) && !adminToken) {
+    if (to.matched.some(record => record.meta.requiresAuth) && !adminToken) {
         next("/admin/login");
-    } else {
-        next();
+        return;
     }
+
+    // Kiểm tra nếu người dùng đã đăng nhập và đang cố gắng truy cập một trang cần xác thực
+    if (adminToken && to.matched.some(record => record.meta.requiresAuth)) {
+        // Gọi hàm cập nhật token và tải thông tin người dùng
+        updateTokenAndFetchUser();
+    }
+
+    next();
 });
+
 function updateTokenAndFetchUser() {
     const token = JSON.parse(localStorage.getItem('admin'))?.access_token;
     store.dispatch('updateTokenAdmin', token);
