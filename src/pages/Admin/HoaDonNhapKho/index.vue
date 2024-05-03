@@ -22,16 +22,16 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-6">Danh Sách Hóa Đơn Nhập Kho</div>
-                    <div class="col-6">
-                        <button class="btn btn-success float-end" @click="exportExcel()">
+                    <div class="col-md-6 col-sm-12 mb-2 mb-md-0">Danh Sách Hóa Đơn Nhập Kho</div>
+                    <div class="col-md-6 col-sm-12 text-md-end">
+                        <button class="btn btn-success" @click="exportExcel()">
                             Export Excel
                         </button>
                     </div>
                 </div>
             </div>
             <div class="card-body">
-                <div class="table-responsive"> <!-- Thêm class 'table-responsive' để bảng trở nên responsive -->
+                <div class="table-responsive">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
@@ -43,13 +43,10 @@
                                 <td class="align-middle">
                                     <input v-on:change="loadData()" v-model="tk.end" type="date" class="form-control" />
                                 </td>
-                                <td class="align-middle text-center">
+                                <td class="align-middle text-center" colspan="3">
                                     <button v-on:click="loadData()" class="btn btn-primary">
                                         Thống Kê
                                     </button>
-                                </td>
-                                <td class="align-middle" colspan="3">
-                                    Tổng Tiền: {{ formatToVND(tong_tien) }}
                                 </td>
                             </tr>
                             <tr class="text-center align-middle">
@@ -91,10 +88,68 @@
                         </tbody>
                     </table>
                 </div>
+                <div class="modal fade" id="ghiChuModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Ghi Chú</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                {{ ghi_chu }}
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade" id="chiTietModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Chi Tiết Hóa Đơn</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr class="text-center">
+                                                <th>#</th>
+                                                <th>Tên Nguyên Liệu</th>
+                                                <th>Ngày</th>
+                                                <th>Số Lượng</th>
+                                                <th>Đơn Giá</th>
+                                                <th>Thành Tiền</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <template v-for="(value, key) in chi_tiet" :key="key">
+                                                <tr>
+                                                    <th class="text-center">{{ key + 1 }}</th>
+                                                    <td>{{ value.ten_nguyen_lieu }}</td>
+                                                    <td class="text-center">{{ value.ngay }}</td>
+                                                    <td class="text-center">{{ value.so_luong }}</td>
+                                                    <td class="text-end">{{ formatToVND(value.don_gia) }}</td>
+                                                    <td class="text-end">{{ formatToVND(value.thanh_tien) }}</td>
+                                                </tr>
+                                            </template>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
 
 </template>
 
