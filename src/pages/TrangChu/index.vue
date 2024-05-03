@@ -7,9 +7,8 @@
         <ul class="nav-links" id="nav-links_1">
             <label for="close-btn_1" class="btn close-btn"><i class="fas fa-times"></i></label>
             <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
             <li>
-                <a href="#" class="desktop-item">Dropdown Menu</a>
+                <a href="#" class="desktop-item"> Menu</a>
                 <input type="checkbox" id="showDrop_1">
                 <label for="showDrop_1" class="mobile-item">Dropdown Menu</label>
                 <ul class="drop-menu" id="drop-menu_1">
@@ -19,46 +18,9 @@
                     <li><a href="#">Drop menu 4</a></li>
                 </ul>
             </li>
-            <li>
-                <a href="#" class="desktop-item">Mega Menu</a>
-                <input type="checkbox" id="showMega_1">
-                <label for="showMega_1" class="mobile-item">Mega Menu</label>
-                <div class="mega-box" id="mega-box_1">
-                    <div class="content">
-                        <div class="row">
-                            <img src="https://fadzrinmadu.github.io/hosted-assets/responsive-mega-menu-and-dropdown-menu-using-only-html-and-css/img.jpg" alt="">
-                        </div>
-                        <div class="row">
-                            <header>Design Services</header>
-                            <ul class="mega-links">
-                                <li><a href="#">Graphics</a></li>
-                                <li><a href="#">Vectors</a></li>
-                                <li><a href="#">Business cards</a></li>
-                                <li><a href="#">Custom logo</a></li>
-                            </ul>
-                        </div>
-                        <div class="row">
-                            <header>Email Services</header>
-                            <ul class="mega-links">
-                                <li><a href="#">Personal Email</a></li>
-                                <li><a href="#">Business Email</a></li>
-                                <li><a href="#">Mobile Email</a></li>
-                                <li><a href="#">Web Marketing</a></li>
-                            </ul>
-                        </div>
-                        <div class="row">
-                            <header>Security services</header>
-                            <ul class="mega-links">
-                                <li><a href="#">Site Seal</a></li>
-                                <li><a href="#">VPS Hosting</a></li>
-                                <li><a href="#">Privacy Seal</a></li>
-                                <li><a href="#">Website design</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </li>
-            <li><a href="#">Feedback</a></li>
+           
+            <li><a href="#">LOGIN</a></li>
+            <li><a href="#">LOGOUT</a></li>
         </ul>
         <label for="menu-btn_1" class="btn menu-btn"><i class="fas fa-bars"></i></label>
     </div>
