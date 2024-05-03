@@ -21,6 +21,7 @@ export default createStore({
         dataBaiViet:[],
         TOKEN_ADMIN : '',
         dataNguyenLieu:[],
+        dataMaGiamGia:[],
     },
     getters: {
         toSlug: () => (str) => {
@@ -98,6 +99,9 @@ export default createStore({
         },
         fecthKhachHang(state, data) {
             state.dataKhachHang = data;
+        },
+        fecthMaGiamGia(state, data) {
+            state.dataMaGiamGia = data;
         },
     },
     actions: {
@@ -214,6 +218,14 @@ export default createStore({
                 commit("fecthKhachHang", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchKhachHang:", error);
+            }
+        },
+        onFetchMaGiamGia: async ({ commit }) => {
+            try {
+                const response = await axios.get("admin/ma-giam-gia/lay-du-lieu");
+                commit("fecthMaGiamGia", response.data.data);
+            } catch (error) {
+                console.error("Có lỗi xảy ra trong onFetchMaGiamGia:", error);
             }
         },
     },

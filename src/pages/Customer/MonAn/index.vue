@@ -4,12 +4,12 @@
     </div>
     <Menu>
         <template #content>
+            
+            <hr>
             <template v-for="(value, index) in data" :key="index">
-                <div class="row">
-                  
+                
                     <div class="col">
-                        <h6 class="text-danger">Cá</h6>
-                        <hr>
+                       
                     <div class="card" style="max-width: 300px; ">
                         <div class="face face1">
                             <div class="content">
@@ -37,7 +37,6 @@
                             </div>
                         </div>
                     </div>
-                </div>
                 </div>
                
             </template>

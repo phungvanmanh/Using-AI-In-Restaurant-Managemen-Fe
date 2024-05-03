@@ -25,6 +25,7 @@ import LichSuThanhToan from "@/pages/Admin/Log/LichSuThanhToan";
 import TinhLuong from "@/pages/Admin/Log/TinhLuong";
 import NhapKho from "@/pages/Admin/NhapKho";
 import HoaDonNhapKho from "@/pages/Admin/HoaDonNhapKho";
+import MaGiamGia from "@/pages/Admin/MaGiamGia";
 import ForgotPassword from "@/pages/Admin/ForgotPassword"
 import ChangePassword from "@/pages/Admin/ChangePassword"
 const routes = [
@@ -134,6 +135,11 @@ const routes = [
                 path: "hoa-don-nhap-kho",
                 component: HoaDonNhapKho,
             },
+            {
+                path:"ma-giam-gia",
+                component:MaGiamGia,
+            },
+          
         ],
     },
     {
