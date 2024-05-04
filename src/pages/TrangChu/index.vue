@@ -1,197 +1,355 @@
 <template>
-<nav id="nav_1">
-    <div class="wrapper">
-        <div class="logo"><a href="#"><img style="width: 50px;height: 50px;" src="https://idodesign.vn/wp-content/uploads/2023/04/nhung-mau-thiet-ke-logo-nha-hang-quan-an-sang-tao-1.jpg" alt=""></a></div>
-        <input type="radio" name="slider" id="menu-btn_1">
-        <input type="radio" name="slider" id="close-btn_1">
-        <ul class="nav-links" id="nav-links_1">
-            <label for="close-btn_1" class="btn close-btn"><i class="fas fa-times"></i></label>
-            <li><a href="#">Home</a></li>
-            <li>
-                <a href="#" class="desktop-item"> Menu</a>
-                <input type="checkbox" id="showDrop_1">
-                <label for="showDrop_1" class="mobile-item">Dropdown Menu</label>
-                <ul class="drop-menu" id="drop-menu_1">
-                    <li><a href="#">Drop menu 1</a></li>
-                    <li><a href="#">Drop menu 2</a></li>
-                    <li><a href="#">Drop menu 3</a></li>
-                    <li><a href="#">Drop menu 4</a></li>
-                </ul>
-            </li>
-
-            <li><a href="#">LOGIN</a></li>
-            <li><a href="#">LOGOUT</a></li>
-        </ul>
-        <label for="menu-btn_1" class="btn menu-btn"><i class="fas fa-bars"></i></label>
-    </div>
-</nav>
-
-<div class="body-text">
-  
-</div>
-<testMenu>
-    <template #content-header>
-        <div class="container-fulid">
-            <div class="row mt-2">
-                <marquee width="200px" style="height: 50px" behavior="alternate" bgcolor="pink">
-                    <p><b>Cac su kien quan trong</b></p>
-                    <br />
-                </marquee>
+    <nav id="nav_1">
+        <div class="wrapper">
+            <div class="logo">
+                <a href="#"
+                    ><img
+                        style="width: 50px; height: 50px"
+                        src="https://idodesign.vn/wp-content/uploads/2023/04/nhung-mau-thiet-ke-logo-nha-hang-quan-an-sang-tao-1.jpg"
+                        alt=""
+                /></a>
             </div>
-            <div class="row mt-2">
-                <div id="carouselExampleFade" class="carousel slide carousel-fade">
-                    <div class="carousel-inner">
-                        <template v-for="(value,key) in dataBaiViet" :key="key">
-                            <div class="carousel-item active">
-                                <img v-bind:src="value.hinh_anh_bai_viet" style="width: 100%;height: 500px;" alt="">
-                            </div>
+            <input type="radio" name="slider" id="menu-btn_1" />
+            <input type="radio" name="slider" id="close-btn_1" />
+            <ul class="nav-links" id="nav-links_1">
+                <label for="close-btn_1" class="btn close-btn"
+                    ><i class="fas fa-times"></i
+                ></label>
+                <router-link to="">
+                    <li><a href="#">Home</a></li>
+                </router-link>
 
+                <li>
+                    <a href="#" class="desktop-item"> Menu</a>
+                    <input type="checkbox" id="showDrop_1" />
+                    <label for="showDrop_1" class="mobile-item"
+                        >Dropdown Menu</label
+                    >
+                    <ul class="drop-menu" id="drop-menu_1">
+                        <template
+                            v-for="(value, key) in dataDanhMuc"
+                            :key="key"
+                        >
+                            <li>
+                                <a href="">{{ value.name_category }}</a>
+                            </li>
                         </template>
+                    </ul>
+                </li>
 
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-            </div>
-            <div class="card mt-2" style="background-color: blanchedalmond">
-                <div class="row mt-2">
-                    <div class="col-2">
-                        <h5 class="blinking text-danger">
-                            *Chương Trình Khuyến Mãi:
-                        </h5>
-                    </div>
-                    <div class="col-2">
-                        <template v-for="(value,key) in dataBaiViet" :key="key">
-                            <p><b>{{ value.mo_ta_chi_tiet_bai_viet }}</b></p>
-
-                        </template>
-
-                    </div>
-                </div>
-            </div>
-            <div class="row" style="display: flex">
-                <div class="col-2" style="display: flex; flex-direction: column">
-
-                </div>
-                <div class="col-8 d-flex align-items-center mt-2">
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search dish" aria-label="Username" aria-describedby="basic-addon1">
-                        <span class="input-group-text" id="basic-addon1"><button class="btn btn-primary">Search</button></span>
-                    </div>
-                </div>
-                <div class="col-2"></div>
-            </div>
-            <div class="row mt-2"></div>
-
+                <li><a href="#">LOGIN</a></li>
+                <li><a href="#">LOGOUT</a></li>
+            </ul>
+            <label for="menu-btn_1" class="btn menu-btn"
+                ><i class="fas fa-bars"></i
+            ></label>
         </div>
-        <div class="container">
-            <a href="">
-                <h5>Món Nổi Bậc:</h5>
-            </a>
-            <div class="container">
-                <div class="row">
-                    <template v-for="(value,key) in dataMonAn" :key="key">
-                        <div class="col">
+    </nav>
 
-                            <div class="card" style="max-width: 300px; ">
-                                <div class="face face1">
-                                    <div class="content">
-                                        <div class="icon">
-                                            <img style="
-                                               width: 100%;
-                                               height: 100%;
-                                           " :src="value.image" alt="" />
+    <div class="body-text"></div>
+    <testMenu>
+        <template #content-header>
+            <div class="container-fulid">
+                <div class="row mt-2">
+                    <marquee
+                        width="200px"
+                        style="height: 50px"
+                        behavior="alternate"
+                        bgcolor="pink"
+                    >
+                        <p><b>Cac su kien quan trong</b></p>
+                        <br />
+                    </marquee>
+                </div>
+                <div class="row mt-2">
+                    <div
+                        id="carouselExampleFade"
+                        class="carousel slide carousel-fade"
+                    >
+                        <div class="carousel-inner">
+                            <template
+                                v-for="(value, key) in dataBaiViet"
+                                :key="key"
+                            >
+                                <div class="carousel-item active">
+                                    <img
+                                        v-bind:src="value.hinh_anh_bai_viet"
+                                        style="width: 100%; height: 500px"
+                                        alt=""
+                                    />
+                                </div>
+                            </template>
+                        </div>
+                        <button
+                            class="carousel-control-prev"
+                            type="button"
+                            data-bs-target="#carouselExampleFade"
+                            data-bs-slide="prev"
+                        >
+                            <span
+                                class="carousel-control-prev-icon"
+                                aria-hidden="true"
+                            ></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button
+                            class="carousel-control-next"
+                            type="button"
+                            data-bs-target="#carouselExampleFade"
+                            data-bs-slide="next"
+                        >
+                            <span
+                                class="carousel-control-next-icon"
+                                aria-hidden="true"
+                            ></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="card mt-2" style="background-color: blanchedalmond">
+                    <div class="row mt-2">
+                        <div class="col-2">
+                            <h5 class="blinking text-danger">
+                                *Chương Trình Khuyến Mãi:
+                            </h5>
+                        </div>
+                        <div class="col-2">
+                            <template
+                                v-for="(value, key) in dataBaiViet"
+                                :key="key"
+                            >
+                                <p>
+                                    <b>{{ value.mo_ta_chi_tiet_bai_viet }}</b>
+                                </p>
+                            </template>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="display: flex">
+                    <div
+                        class="col-2"
+                        style="display: flex; flex-direction: column"
+                    ></div>
+                    <div class="col-8 d-flex align-items-center mt-2">
+                        <div class="input-group mb-3">
+                            <input
+                                type="text"
+                                class="form-control"
+                                placeholder="Search dish"
+                                aria-label="Username"
+                                aria-describedby="basic-addon1"
+                            />
+                            <span class="input-group-text" id="basic-addon1"
+                                ><button class="btn btn-primary">
+                                    Search
+                                </button></span
+                            >
+                        </div>
+                    </div>
+                    <div class="col-2"></div>
+                </div>
+                <div class="row mt-2"></div>
+            </div>
+            <div class="container">
+                <a href="">
+                    <h5>Món Nổi Bậc:</h5>
+                </a>
+                <div class="container">
+                    <div class="row">
+                        <template v-for="(value, key) in dataMonAn" :key="key">
+                            <div class="col-3">
+                                <div class="card" style="max-width: 300px">
+                                    <div class="face face1">
+                                        <div class="content">
+                                            <div class="icon">
+                                                <img
+                                                    style="
+                                                        width: 100%;
+                                                        height: 100%;
+                                                    "
+                                                    :src="value.image"
+                                                    alt=""
+                                                />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="face face2">
+                                        <div class="content">
+                                            <h3>{{ value.food_name }}</h3>
+                                            <p>{{ value.price }}đ</p>
+                                            <div class="col text-center">
+                                                <button
+                                                    class="btn btn-primary"
+                                                    data-bs-toggle="modal"
+                                                    data-bs-target="#exampleModal"
+                                                >
+                                                    Đánh Giá
+                                                </button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="face face2">
-                                    <div class="content">
-                                        <h3>{{ value.food_name }}</h3>
-                                        <p>{{ value.price }}đ</p>
-                                        <div class="col text-center">
-                                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                Đánh Giá
-                                            </button>
-                                        </div>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+                <!-- Modal -->
+                <div
+                    class="modal fade"
+                    id="exampleModal"
+                    tabindex="-1"
+                    aria-labelledby="exampleModalLabel"
+                    aria-hidden="true"
+                >
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1
+                                    class="modal-title fs-5"
+                                    id="exampleModalLabel"
+                                >
+                                    Review
+                                </h1>
+                                <button
+                                    type="button"
+                                    class="btn-close"
+                                    data-bs-dismiss="modal"
+                                    aria-label="Close"
+                                ></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="card radius-10">
+                                    <div class="card-body">
+                                        <ul class="list-unstyled">
+                                            <li
+                                                class="d-flex align-items-center border-bottom pb-2"
+                                            >
+                                                <h5>Linh</h5>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h5 class="mt-0 mb-1">
+                                                        List-based media object
+                                                    </h5>
+                                                    Cras sit amet nibh libero,
+                                                    in gravida nulla. Nulla vel
+                                                    metus scelerisque ante
+                                                    sollicitudin. Cras purus
+                                                    odio, vestibulum in
+                                                    vulputate at, tempus viverra
+                                                    turpis. Fusce condimentum
+                                                    nunc ac nisi vulputate
+                                                    fringilla
+                                                </div>
+                                            </li>
+                                            <li
+                                                class="d-flex align-items-center my-4 border-bottom pb-2"
+                                            >
+                                                <h5>Mạnh</h5>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h5 class="mt-0 mb-1">
+                                                        List-based media object
+                                                    </h5>
+                                                    Cras sit amet nibh libero,
+                                                    in gravida nulla. Nulla vel
+                                                    metus scelerisque ante
+                                                    sollicitudin. Cras purus
+                                                    odio, vestibulum in
+                                                    vulputate at, tempus viverra
+                                                    turpis. Fusce condimentum
+                                                    nunc ac nisi vulputate
+                                                    fringilla
+                                                </div>
+                                            </li>
+                                            <li
+                                                class="d-flex align-items-center"
+                                            >
+                                                <h5>Linh</h5>
+                                                <div class="flex-grow-1 ms-3">
+                                                    <h5 class="mt-0 mb-1">
+                                                        List-based media object
+                                                    </h5>
+                                                    Cras sit amet nibh libero,
+                                                    in gravida nulla. Nulla vel
+                                                    metus scelerisque ante
+                                                    sollicitudin. Cras purus
+                                                    odio, vestibulum in
+                                                    vulputate at, tempus viverra
+                                                    turpis. Fusce condimentum
+                                                    nunc ac nisi vulputate
+                                                    fringilla
+                                                </div>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-bs-dismiss="modal"
+                                >
+                                    Đóng
+                                </button>
+                                <button
+                                    type="button"
+                                    class="btn btn-primary"
+                                    data-bs-toggle="modal"
+                                    data-bs-target="#danhgiaModal"
+                                >
+                                    Viết Đánh Giá
+                                </button>
                             </div>
                         </div>
-                    </template>
-
+                    </div>
                 </div>
             </div>
             <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg ">
+            <div
+                class="modal fade"
+                id="danhgiaModal"
+                tabindex="-1"
+                aria-labelledby="exampleModalLabel"
+                aria-hidden="true"
+            >
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Review</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">
+                                Viết Đánh Giá Của Bạn
+                            </h1>
+                            <button
+                                type="button"
+                                class="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
                         </div>
                         <div class="modal-body">
-                            <div class="card radius-10">
-                                <div class="card-body">
-                                    <ul class="list-unstyled">
-                                        <li class="d-flex align-items-center border-bottom pb-2">
-                                            <h5>Linh</h5>
-                                            <div class="flex-grow-1 ms-3">
-                                                <h5 class="mt-0 mb-1">List-based media object</h5>
-                                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla
-                                            </div>
-                                        </li>
-                                        <li class="d-flex align-items-center my-4 border-bottom pb-2">
-                                            <h5>Mạnh</h5>
-                                            <div class="flex-grow-1 ms-3">
-                                                <h5 class="mt-0 mb-1">List-based media object</h5>
-                                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla
-                                            </div>
-                                        </li>
-                                        <li class="d-flex align-items-center">
-                                            <h5>Linh</h5>
-                                            <div class="flex-grow-1 ms-3">
-                                                <h5 class="mt-0 mb-1">List-based media object</h5>
-                                                Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <input
+                                class="form-control"
+                                type="text"
+                                name=""
+                                id=""
+                                placeholder="Mời bạn viết đánh giá,lưu ý không có những hành động phá hoại"
+                            />
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#danhgiaModal">Viết Đánh Giá</button>
+                            <button
+                                type="button"
+                                class="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                            >
+                                Close
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                Đăng
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- Modal -->
-        <div class="modal fade" id="danhgiaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">Viết Đánh Giá Của Bạn</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <input class="form-control" type="text" name="" id="" placeholder="Mời bạn viết đánh giá,lưu ý không có những hành động phá hoại">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Đăng</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </template>
-</testMenu>
+        </template>
+    </testMenu>
 </template>
 
 <script>
@@ -199,11 +357,9 @@
 import {
     // ref,
     computed,
-    onMounted
-} from 'vue';
-import {
-    useStore
-} from "vuex";
+    onMounted,
+} from "vue";
+import { useStore } from "vuex";
 // import axios from '@/axiosConfig';
 // import Toast from '@/toastConfig';
 // import $ from 'jquery';
@@ -215,40 +371,38 @@ export default {
     },
 
     setup() {
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuBtn = document.getElementById("menu-btn_1");
+            const closeBtn = document.getElementById("close-btn_1");
+            const navLinks = document.getElementById("nav-links_1");
+            const logo = document.querySelector(".logo a");
+            const wrapper = document.getElementById("wrapper"); // Phần tử wrapper
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const menuBtn = document.getElementById('menu-btn_1');
-            const closeBtn = document.getElementById('close-btn_1');
-            const navLinks = document.getElementById('nav-links_1');
-            const logo = document.querySelector('.logo a');
-            const wrapper = document.getElementById('wrapper'); // Phần tử wrapper
-
-            menuBtn.addEventListener('click', function () {
-                navLinks.classList.toggle('show');
+            menuBtn.addEventListener("click", function () {
+                navLinks.classList.toggle("show");
             });
 
-            closeBtn.addEventListener('click', function () {
-                navLinks.classList.remove('show');
+            closeBtn.addEventListener("click", function () {
+                navLinks.classList.remove("show");
             });
 
             // Đóng menu khi click vào một liên kết
-            const navLinksItems = navLinks.querySelectorAll('li a');
+            const navLinksItems = navLinks.querySelectorAll("li a");
             navLinksItems.forEach(function (item) {
-                item.addEventListener('click', function () {
-                    navLinks.classList.remove('show');
+                item.addEventListener("click", function () {
+                    navLinks.classList.remove("show");
                 });
             });
 
             // Đóng menu khi click vào logo
-            logo.addEventListener('click', function () {
-                navLinks.classList.remove('show');
+            logo.addEventListener("click", function () {
+                navLinks.classList.remove("show");
             });
 
             // Đóng menu khi click vào phần tử wrapper
-            wrapper.addEventListener('click', function () {
-                navLinks.classList.remove('show');
+            wrapper.addEventListener("click", function () {
+                navLinks.classList.remove("show");
             });
-
         });
         const store = useStore();
 
@@ -258,16 +412,20 @@ export default {
         const dataMonAn = computed(() => {
             return store.state.dataMonAn;
         });
+        const dataDanhMuc = computed(() => {
+            return store.state.dataDanhMuc;
+        });
         onMounted(() => {
             store.dispatch("onFetchBaiViet");
             store.dispatch("onFetchMonAn");
-
+            store.dispatch("onFetchDanhMuc");
         });
         return {
             dataBaiViet,
             dataMonAn,
-        }
-    }
+            dataDanhMuc,
+        };
+    },
 };
 </script>
 
@@ -480,7 +638,7 @@ i {
 }
 
 #nav_1 .nav-links li a:hover {
-    background: #3A3B3C;
+    background: #3a3b3c;
 }
 
 #nav_1 .nav-links .mobile-item {
@@ -615,18 +773,18 @@ i {
     }
 
     ::-webkit-scrollbar-thumb {
-        background: #3A3B3C;
+        background: #3a3b3c;
     }
 
-    #menu-btn_1:checked~#nav-links_1 {
+    #menu-btn_1:checked ~ #nav-links_1 {
         left: 0%;
     }
 
-    #menu-btn_1:checked~.btn.menu-btn {
+    #menu-btn_1:checked ~ .btn.menu-btn {
         display: none;
     }
 
-    #close-btn_1:checked~.btn.menu-btn {
+    #close-btn_1:checked ~ .btn.menu-btn {
         display: block;
     }
 
@@ -653,8 +811,8 @@ i {
         transition: all 0.3s ease;
     }
 
-    #showDrop_1:checked~.drop-menu,
-    #showMega_1:checked~.mega-box {
+    #showDrop_1:checked ~ .drop-menu,
+    #showMega_1:checked ~ .mega-box {
         max-height: 100%;
     }
 
@@ -674,7 +832,7 @@ i {
     }
 
     #nav_1 .nav-links .mobile-item:hover {
-        background: #3A3B3C;
+        background: #3a3b3c;
     }
 
     #nav_1 .drop-menu li {
