@@ -1,123 +1,75 @@
 <template>
-    <nav id="nav_1">
-        <div class="wrapper">
-            <div class="logo">
-                <a href="#"
-                    ><img
-                        style="width: 50px; height: 50px"
-                        src="https://idodesign.vn/wp-content/uploads/2023/04/nhung-mau-thiet-ke-logo-nha-hang-quan-an-sang-tao-1.jpg"
-                        alt=""
-                /></a>
-            </div>
-            <input type="radio" name="slider" id="menu-btn_1" />
-            <input type="radio" name="slider" id="close-btn_1" />
-            <ul class="nav-links" id="nav-links_1">
-                <label for="close-btn_1" class="btn close-btn"
-                    ><i class="fas fa-times"></i
-                ></label>
-                <router-link to="">
-                    <li><a href="#">Home</a></li>
-                </router-link>
-
-                <li>
-                    <a href="#" class="desktop-item"> Menu</a>
-                    <input type="checkbox" id="showDrop_1" />
-                    <label for="showDrop_1" class="mobile-item"
-                        >Dropdown Menu</label
-                    >
-                    <ul class="drop-menu" id="drop-menu_1">
-                        <template
-                            v-for="(value, key) in dataDanhMuc"
-                            :key="key"
-                        >
-                            <li>
-                                <a href="">{{ value.name_category }}</a>
-                            </li>
-                        </template>
-                    </ul>
-                </li>
-
-                <li><a href="#">LOGIN</a></li>
-                <li><a href="#">LOGOUT</a></li>
-            </ul>
-            <label for="menu-btn_1" class="btn menu-btn"
-                ><i class="fas fa-bars"></i
-            ></label>
+<nav id="nav_1">
+    <div class="wrapper">
+        <div class="logo">
+            <a href="#"><img style="width: 50px; height: 50px" src="https://idodesign.vn/wp-content/uploads/2023/04/nhung-mau-thiet-ke-logo-nha-hang-quan-an-sang-tao-1.jpg" alt="" /></a>
         </div>
-    </nav>
+        <input type="radio" name="slider" id="menu-btn_1" />
+        <input type="radio" name="slider" id="close-btn_1" />
+        <ul class="nav-links" id="nav-links_1">
+            <label for="close-btn_1" class="btn close-btn"><i class="fas fa-times"></i></label>
 
-    <div class="body-text"></div>
-    <testMenu>
-        <template #content-header>
-            <div class="container-fulid">
-                <div class="row mt-2">
-                    <marquee
-                        width="200px"
-                        style="height: 50px"
-                        behavior="alternate"
-                        bgcolor="pink"
-                    >
-                        <p><b>Cac su kien quan trong</b></p>
-                        <br />
-                    </marquee>
-                </div>
-                <div class="row mt-2">
-                    <div
-                        id="carouselExampleFade"
-                        class="carousel slide carousel-fade"
-                    >
-                        <div class="carousel-inner">
-                            <template
-                                v-for="(value, key) in dataBaiViet"
-                                :key="key"
-                            >
-                                <div class="carousel-item active">
-                                    <img
-                                        v-bind:src="value.hinh_anh_bai_viet"
-                                        style="width: 100%; height: 500px"
-                                        alt=""
-                                    />
-                                </div>
-                            </template>
-                        </div>
-                        <button
-                            class="carousel-control-prev"
-                            type="button"
-                            data-bs-target="#carouselExampleFade"
-                            data-bs-slide="prev"
-                        >
-                            <span
-                                class="carousel-control-prev-icon"
-                                aria-hidden="true"
-                            ></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button
-                            class="carousel-control-next"
-                            type="button"
-                            data-bs-target="#carouselExampleFade"
-                            data-bs-slide="next"
-                        >
-                            <span
-                                class="carousel-control-next-icon"
-                                aria-hidden="true"
-                            ></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+            <li><a @click="handleClickDanhMuc('Home')" href="#">Home</a></li>
+
+            <li>
+                <a href="#" class="desktop-item"> Menu</a>
+                <input type="checkbox" id="showDrop_1" />
+                <label for="showDrop_1" class="mobile-item">Dropdown Menu</label>
+                <ul class="drop-menu" id="drop-menu_1">
+                    <template v-for="(value, key) in dataDanhMuc" :key="key">
+                        <li v-on:click="handleClickDanhMuc(value.id)">
+                            <a href="#">{{ value.name_category }}</a>
+                        </li>
+                    </template>
+                </ul>
+            </li>
+
+            <li><a href="#">LOGIN</a></li>
+            <li><a href="#">LOGOUT</a></li>
+        </ul>
+        <label for="menu-btn_1" class="btn menu-btn"><i class="fas fa-bars"></i></label>
+    </div>
+</nav>
+
+<div class="body-text"></div>
+<testMenu>
+    <template #content-header>
+        <div class="container">
+            <!-- <div class="row mt-2">
+                <marquee width="200px" style="height: 50px" behavior="alternate" bgcolor="pink">
+                    <p><b>Cac su kien quan trong</b></p>
+                    <br />
+                </marquee>
+            </div> -->
+            <div class="row mt-2">
+                <div id="carouselExampleFade" class="carousel slide carousel-fade">
+                    <div class="carousel-inner">
+                        <template v-for="(value, key) in dataBaiViet" :key="key">
+                            <div class="carousel-item active">
+                                <img v-bind:src="value.hinh_anh_bai_viet" style="width: 100%; height: 500px" alt="" />
+                            </div>
+                        </template>
                     </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
                 </div>
+            </div>
+            <marquee style="width: 100%; overflow: hidden;">
                 <div class="card mt-2" style="background-color: blanchedalmond">
                     <div class="row mt-2">
-                        <div class="col-2">
+                        <div class="col-3">
                             <h5 class="blinking text-danger">
                                 *Chương Trình Khuyến Mãi:
                             </h5>
                         </div>
-                        <div class="col-2">
-                            <template
-                                v-for="(value, key) in dataBaiViet"
-                                :key="key"
-                            >
+                        <div class="col-9">
+                            <template v-for="(value, key) in dataBaiViet" :key="key">
                                 <p>
                                     <b>{{ value.mo_ta_chi_tiet_bai_viet }}</b>
                                 </p>
@@ -125,242 +77,140 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" style="display: flex">
-                    <div
-                        class="col-2"
-                        style="display: flex; flex-direction: column"
-                    ></div>
-                    <div class="col-8 d-flex align-items-center mt-2">
-                        <div class="input-group mb-3">
-                            <input
-                                type="text"
-                                class="form-control"
-                                placeholder="Search dish"
-                                aria-label="Username"
-                                aria-describedby="basic-addon1"
-                            />
-                            <span class="input-group-text" id="basic-addon1"
-                                ><button class="btn btn-primary">
-                                    Search
-                                </button></span
-                            >
-                        </div>
+            </marquee>
+
+            <div class="row" style="display: flex">
+                <div class="col-2" style="display: flex; flex-direction: column"></div>
+                <div class="col-8 d-flex align-items-center mt-2">
+                    <div class="input-group mb-3">
+                        <input v-on:keyup.enter="searchMonAn()" v-model="search.abc" type="text" class="form-control" placeholder="Search dish" aria-label="Username" aria-describedby="basic-addon1" />
+                        <span class="input-group-text" id="basic-addon1"><button v-on:click="searchMonAn()" class="btn btn-primary">
+                                Search
+                            </button></span>
                     </div>
-                    <div class="col-2"></div>
                 </div>
-                <div class="row mt-2"></div>
+                <div class="col-2"></div>
+            </div>
+            <div class="row mt-2"></div>
+        </div>
+        <div class="container">
+            <div class="row text-center">
+                <h5>Món Nổi Bậc:</h5>
             </div>
             <div class="container">
-                <a href="">
-                    <h5>Món Nổi Bậc:</h5>
-                </a>
-                <div class="container">
-                    <div class="row">
-                        <template v-for="(value, key) in dataMonAn" :key="key">
-                            <div class="col-3">
-                                <div class="card" style="max-width: 300px">
-                                    <div class="face face1">
-                                        <div class="content">
-                                            <div class="icon">
-                                                <img
-                                                    style="
-                                                        width: 100%;
-                                                        height: 100%;
-                                                    "
-                                                    :src="value.image"
-                                                    alt=""
-                                                />
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="face face2">
-                                        <div class="content">
-                                            <h3>{{ value.food_name }}</h3>
-                                            <p>{{ value.price }}đ</p>
-                                            <div class="col text-center">
-                                                <button
-                                                    class="btn btn-primary"
-                                                    data-bs-toggle="modal"
-                                                    data-bs-target="#exampleModal"
-                                                >
-                                                    Đánh Giá
-                                                </button>
-                                            </div>
-                                        </div>
+                <div class="row mt-4">
+                    <template v-for="(value, index) in (isHomeSelected ? dataMonAn : monAnList)" :key="index">
+                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                            <div class="card4321">
+                                <div class="card-img4321">
+                                    <img style="height: 100%;width: 100%;" class="img-fluid" :src="value.image" alt="Hình ảnh món ăn" />
+                                </div>
+                                <div class="card-info4321">
+                                    <p class="text-title4321">{{ value.food_name }}</p>
+                                </div>
+                                <div class="card-footer4321">
+                                    <span class="text-title4321">
+                                        <b style="color: brown;">{{ value.price }}</b> đ
+                                    </span>
+                                    <div class="card-button4321">
+                                        <i class="fa-solid fa-arrows-to-eye" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
                                     </div>
                                 </div>
-                            </div>
-                        </template>
-                    </div>
-                </div>
-                <!-- Modal -->
-                <div
-                    class="modal fade"
-                    id="exampleModal"
-                    tabindex="-1"
-                    aria-labelledby="exampleModalLabel"
-                    aria-hidden="true"
-                >
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h1
-                                    class="modal-title fs-5"
-                                    id="exampleModalLabel"
-                                >
-                                    Review
-                                </h1>
-                                <button
-                                    type="button"
-                                    class="btn-close"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                ></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="card radius-10">
-                                    <div class="card-body">
-                                        <ul class="list-unstyled">
-                                            <li
-                                                class="d-flex align-items-center border-bottom pb-2"
-                                            >
-                                                <h5>Linh</h5>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <h5 class="mt-0 mb-1">
-                                                        List-based media object
-                                                    </h5>
-                                                    Cras sit amet nibh libero,
-                                                    in gravida nulla. Nulla vel
-                                                    metus scelerisque ante
-                                                    sollicitudin. Cras purus
-                                                    odio, vestibulum in
-                                                    vulputate at, tempus viverra
-                                                    turpis. Fusce condimentum
-                                                    nunc ac nisi vulputate
-                                                    fringilla
-                                                </div>
-                                            </li>
-                                            <li
-                                                class="d-flex align-items-center my-4 border-bottom pb-2"
-                                            >
-                                                <h5>Mạnh</h5>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <h5 class="mt-0 mb-1">
-                                                        List-based media object
-                                                    </h5>
-                                                    Cras sit amet nibh libero,
-                                                    in gravida nulla. Nulla vel
-                                                    metus scelerisque ante
-                                                    sollicitudin. Cras purus
-                                                    odio, vestibulum in
-                                                    vulputate at, tempus viverra
-                                                    turpis. Fusce condimentum
-                                                    nunc ac nisi vulputate
-                                                    fringilla
-                                                </div>
-                                            </li>
-                                            <li
-                                                class="d-flex align-items-center"
-                                            >
-                                                <h5>Linh</h5>
-                                                <div class="flex-grow-1 ms-3">
-                                                    <h5 class="mt-0 mb-1">
-                                                        List-based media object
-                                                    </h5>
-                                                    Cras sit amet nibh libero,
-                                                    in gravida nulla. Nulla vel
-                                                    metus scelerisque ante
-                                                    sollicitudin. Cras purus
-                                                    odio, vestibulum in
-                                                    vulputate at, tempus viverra
-                                                    turpis. Fusce condimentum
-                                                    nunc ac nisi vulputate
-                                                    fringilla
-                                                </div>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button
-                                    type="button"
-                                    class="btn btn-secondary"
-                                    data-bs-dismiss="modal"
-                                >
-                                    Đóng
-                                </button>
-                                <button
-                                    type="button"
-                                    class="btn btn-primary"
-                                    data-bs-toggle="modal"
-                                    data-bs-target="#danhgiaModal"
-                                >
-                                    Viết Đánh Giá
-                                </button>
                             </div>
                         </div>
-                    </div>
+
+                    </template>
                 </div>
+
             </div>
             <!-- Modal -->
-            <div
-                class="modal fade"
-                id="danhgiaModal"
-                tabindex="-1"
-                aria-labelledby="exampleModalLabel"
-                aria-hidden="true"
-            >
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                Viết Đánh Giá Của Bạn
+                                Review
                             </h1>
-                            <button
-                                type="button"
-                                class="btn-close"
-                                data-bs-dismiss="modal"
-                                aria-label="Close"
-                            ></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <input
-                                class="form-control"
-                                type="text"
-                                name=""
-                                id=""
-                                placeholder="Mời bạn viết đánh giá,lưu ý không có những hành động phá hoại"
-                            />
+                            <div class="card radius-10" style="width: 100%;">
+                                <div class="card-body">
+                                    <ul class="list-unstyled">
+                                        <li class="d-flex align-items-center border-bottom pb-2">
+                                            <h5>Linh</h5>
+                                            <div class="flex-grow-1 ms-3">
+
+                                                ngon tuyệt cú mèo
+                                            </div>
+                                        </li>
+                                        <li class="d-flex align-items-center my-4 border-bottom pb-2">
+                                            <h5>Thiện</h5>
+                                            <div class="flex-grow-1 ms-3">
+                                                ngon nhức cái nách
+                                            </div>
+                                        </li>
+                                        <li class="d-flex align-items-center">
+                                            <h5>Huy</h5>
+                                            <div class="flex-grow-1 ms-3">
+                                                cũng ra gì đó
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                         <div class="modal-footer">
-                            <button
-                                type="button"
-                                class="btn btn-secondary"
-                                data-bs-dismiss="modal"
-                            >
-                                Close
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                Đóng
                             </button>
-                            <button type="button" class="btn btn-primary">
-                                Đăng
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#danhgiaModal">
+                                Viết Đánh Giá
                             </button>
                         </div>
                     </div>
                 </div>
             </div>
-        </template>
-    </testMenu>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="danhgiaModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                            Viết Đánh Giá Của Bạn
+                        </h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <input class="form-control" type="text" name="" id="" placeholder="Mời bạn viết đánh giá,lưu ý không có những hành động phá hoại" />
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                            Đăng
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </template>
+</testMenu>
 </template>
 
 <script>
 // import $ from "jquery";
 import {
-    // ref,
+    ref,
     computed,
     onMounted,
 } from "vue";
-import { useStore } from "vuex";
-// import axios from '@/axiosConfig';
+import {
+    useStore
+} from "vuex";
+import axios from '@/axiosConfig';
 // import Toast from '@/toastConfig';
 // import $ from 'jquery';
 import testMenu from "@/pages/Admin/Menu";
@@ -404,6 +254,8 @@ export default {
                 navLinks.classList.remove("show");
             });
         });
+        const search = ref({});
+
         const store = useStore();
 
         const dataBaiViet = computed(() => {
@@ -415,180 +267,65 @@ export default {
         const dataDanhMuc = computed(() => {
             return store.state.dataDanhMuc;
         });
+        const isHomeSelected = ref(true); // Thêm biến này
         onMounted(() => {
             store.dispatch("onFetchBaiViet");
             store.dispatch("onFetchMonAn");
             store.dispatch("onFetchDanhMuc");
         });
+        const monAnList = ref([]);
+
+        const getMonAnById = (id) => {
+            axios.post('admin/mon-an/get-mon-id', {
+                    id: id
+                })
+                .then(response => {
+                    if (response.data.status == 1) {
+                        monAnList.value = response.data.monAn;
+                        console.log(monAnList.value); // Log dữ liệu ra console
+                    } else {
+                        console.error(response.data.message);
+                    }
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        };
+
+        function searchMonAn() {
+            axios
+                .post('admin/mon-an/tim-mon', search.value)
+                .then((res) => {
+                    console.log(res.data.data);
+                    store.commit('fecthMonAn', res.data.data);
+                });
+        }
+        const handleClickDanhMuc = (id) => {
+            if (id === 'Home') {
+                isHomeSelected.value = true;
+            } else {
+                isHomeSelected.value = false;
+                getMonAnById(id);
+            }
+        };
+
         return {
             dataBaiViet,
             dataMonAn,
             dataDanhMuc,
+            getMonAnById,
+            monAnList,
+            handleClickDanhMuc,
+            isHomeSelected,
+            search,
+            searchMonAn
+
         };
     },
 };
 </script>
 
 <style scoped>
-body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    background: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-family: sans-serif;
-    background-color: #f1f1f1;
-}
-
-.container {
-    max-width: 100%;
-    /* Sử dụng chiều rộng tối đa của body */
-    margin: 0 auto;
-    /* Căn giữa container */
-    display: flex;
-    justify-content: space-around;
-    /* Chia đều các phần tử trong container */
-    align-items: center;
-    flex-wrap: wrap;
-    /* Cho phép các item trên cùng 1 hàng */
-}
-
-.container .card {
-    position: relative;
-    border-radius: 10px;
-    width: 100%;
-}
-
-.container .card .icon {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #f00;
-    transition: 0.7s;
-    z-index: 1;
-}
-
-.container .card:nth-child(1) .icon {
-    background: #e07768;
-}
-
-.container .card:nth-child(2) .icon {
-    background: #6eadd4;
-}
-
-.container .card:nth-child(3) .icon {
-    background: #4aada9;
-}
-
-.container .card .icon .fa {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 80px;
-    transition: 0.7s;
-    color: #fff;
-}
-
-i {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 80px;
-    transition: 0.7s;
-    color: #fff;
-}
-
-.container .card .face {
-    width: 300px;
-    height: 200px;
-    transition: 0.5s;
-}
-
-.container .card .face.face1 {
-    position: relative;
-    background: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1;
-    transform: translateY(100px);
-}
-
-.container .card:hover .face.face1 {
-    background: #ff0057;
-    transform: translateY(0px);
-}
-
-.container .card .face.face1 .content {
-    opacity: 1;
-    transition: 0.5s;
-}
-
-.container .card:hover .face.face1 .content {
-    opacity: 1;
-}
-
-.container .card .face.face1 .content i {
-    max-width: 100px;
-}
-
-.container .card .face.face2 {
-    position: relative;
-    background: #fff;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    box-sizing: border-box;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-    transform: translateY(-100px);
-}
-
-.container .card:hover .face.face2 {
-    transform: translateY(0);
-}
-
-.container .card .face.face2 .content p {
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    color: #414141;
-}
-
-.container .card .face.face2 .content h3 {
-    margin: 0 0 10px 0;
-    padding: 0;
-    color: #fff;
-    font-size: 24px;
-    text-align: center;
-    color: #414141;
-}
-
-.container a {
-    text-decoration: none;
-    color: #414141;
-}
-
-@keyframes blink {
-    0% {
-        opacity: 1;
-    }
-
-    50% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
 .blinking {
     animation: blink 1s linear infinite;
 }
@@ -776,15 +513,15 @@ i {
         background: #3a3b3c;
     }
 
-    #menu-btn_1:checked ~ #nav-links_1 {
+    #menu-btn_1:checked~#nav-links_1 {
         left: 0%;
     }
 
-    #menu-btn_1:checked ~ .btn.menu-btn {
+    #menu-btn_1:checked~.btn.menu-btn {
         display: none;
     }
 
-    #close-btn_1:checked ~ .btn.menu-btn {
+    #close-btn_1:checked~.btn.menu-btn {
         display: block;
     }
 
@@ -811,8 +548,8 @@ i {
         transition: all 0.3s ease;
     }
 
-    #showDrop_1:checked ~ .drop-menu,
-    #showMega_1:checked ~ .mega-box {
+    #showDrop_1:checked~.drop-menu,
+    #showMega_1:checked~.mega-box {
         max-height: 100%;
     }
 
@@ -903,5 +640,92 @@ i {
 .body-text div {
     font-size: 45px;
     font-weight: 600;
+}
+
+/* tách */
+.card4321 {
+    width: 200px;
+    height: 280px;
+    padding: .8em;
+    background: #f5f5f5;
+    position: relative;
+    overflow: visible;
+    top: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    margin-bottom: 20px;
+    /* Thêm khoảng cách dưới mỗi card */
+}
+
+.card-img4321 {
+    background-color: #ffcaa6;
+    height: 40%;
+    width: 100%;
+    border-radius: .5rem;
+    transition: .3s ease;
+}
+
+.card-info4321 {
+    padding-top: 10%;
+}
+
+.svg-icon4321 {
+    width: 20px;
+    height: 20px;
+}
+
+.card-footer4321 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 10px;
+    border-top: 1px solid #ddd;
+}
+
+/*Text*/
+.text-title4321 {
+    font-weight: 900;
+    font-size: 1.2em;
+    line-height: 1.5;
+}
+
+.text-body4321 {
+    font-size: .9em;
+    padding-bottom: 10px;
+}
+
+/*Button*/
+.card-button4321 {
+    border: 1px solid #252525;
+    display: flex;
+    padding: .3em;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: .3s ease-in-out;
+}
+
+/*Hover*/
+.card-img4321:hover {
+    transform: translateY(-25%);
+    box-shadow: rgba(226, 196, 63, 0.25) 0px 13px 47px -5px, rgba(180, 71, 71, 0.3) 0px 8px 16px -8px;
+}
+
+.card-button4321:hover {
+    border: 1px solid #ffcaa6;
+    background-color: #ffcaa6;
+}
+
+.marquee-container {
+    width: 100%;
+    /* Đảm bảo chiều rộng tối đa cho marquee */
+    overflow: auto;
+    /* Cho phép cuộn nếu nội dung quá lớn */
+    white-space: nowrap;
+    /* Ngăn không cho nội dung xuống dòng */
+}
+
+.card {
+    display: inline-block;
+    /* Hiển thị các thẻ card cùng một hàng */
 }
 </style>
