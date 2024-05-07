@@ -14,7 +14,7 @@
             <li>
                 <a href="#" class="desktop-item"> Menu</a>
                 <input type="checkbox" id="showDrop_1" />
-                <label for="showDrop_1" class="mobile-item">Dropdown Menu</label>
+                <label for="showDrop_1" class="mobile-item"> Menu</label>
                 <ul class="drop-menu" id="drop-menu_1">
                     <template v-for="(value, key) in dataDanhMuc" :key="key">
                         <li v-on:click="handleClickDanhMuc(value.id)">
@@ -68,10 +68,10 @@
                                 *Chương Trình Khuyến Mãi:
                             </h5>
                         </div>
-                        <div class="col-9">
+                        <div class="col">
                             <template v-for="(value, key) in dataBaiViet" :key="key">
                                 <p>
-                                    <b>{{ value.mo_ta_chi_tiet_bai_viet }}</b>
+                                    <b><span>*</span>{{ value.mo_ta_chi_tiet_bai_viet }}</b>
                                 </p>
                             </template>
                         </div>
