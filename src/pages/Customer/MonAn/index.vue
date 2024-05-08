@@ -1,73 +1,135 @@
 <template>
-    <div class="row mt-4">
-        <h5>Các Món Nổi Bậc</h5>
-    </div>
-    <Menu>
-        <template #content>
-            
-            <hr>
-            <template v-for="(value, index) in data" :key="index">
-                
-                    <div class="col">
-                       
-                    <div class="card" style="max-width: 300px; ">
-                        <div class="face face1">
-                            <div class="content">
-                                <div class="icon">
-                                    <img
-                                        style="
+<div class="row mt-4">
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Món Đã Gọi</button>
+</div>
+<div class="row mt-4">
+    <h5>Các Món Nổi Bậc</h5>
+</div>
+<Menu>
+    <template #content>
+
+        <hr>
+        <template v-for="(value, index) in data" :key="index">
+
+            <div class="col">
+
+                <div class="card" style="max-width: 300px; ">
+                    <div class="face face1">
+                        <div class="content">
+                            <div class="icon">
+                                <img style="
                                             width: 100%;
                                             height: 100%;
-                                        "
-                                        :src="value.image"
-                                        alt=""
-                                    />
-                                </div>
+                                        " :src="value.image" alt="" />
                             </div>
                         </div>
-                        <div class="face face2">
-                            <div class="content">
-                                <h3>{{ value.food_name }}</h3>
-                                <p>{{ value.price }}đ</p>
-                                <div class="col text-center">
-                                    <button class="btn btn-primary" @click="themMonAn(value)">
-                                        Add
-                                    </button>
-                                </div>
+                    </div>
+                    <div class="face face2">
+                        <div class="content">
+                            <h3>{{ value.food_name }}</h3>
+                            <p>
+                                <b style="color: red;">{{ value.price }}</b> đ</p>
+                            <div class="col text-center">
+                                <button class="btn btn-primary" @click="themMonAn(value)">
+                                    Add
+                                </button>
                             </div>
                         </div>
                     </div>
                 </div>
-               
-            </template>
+            </div>
+
         </template>
-    </Menu>
+    </template>
+</Menu>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Món Đã Gọi</h1>
+                <button v-on:click="getChiTietHoaDon()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead class="text-center">
+                            <tr>
+                                <th>#</th>
+                                <th>Tên Món</th>
+                                <th>Số lượng</th>
+                                <th>Đơn Giá</th>
+                                <th>Thành Tiền</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody class="text-center">
+                            <template v-for="(value,key) in list_chi_tiet_ban_hang" :key="key">
+                                <tr>
+                                <th>{{ key+1 }}</th>
+                                <td>{{ value.food_name }}</td>
+                                <td>
+                                    <input type="number" disabled v-model="value.so_luong" class="form-control">
+                                </td>
+                                <td>{{value.don_gia}}đ</td>
+                                <td>{{ value.thanh_tien }}đ</td>
+                            </tr>
+                            </template>
+                           
+                        </tbody>
+                        <tfoot>
+                            <tr >
+                                <th colspan="4" class="text-end"> Tổng tiền</th>
+                                <td>
+                                   <b style="color: red">{{ tong_tien }} đ</b> 
+                                </td>
+                            </tr>
+
+                        </tfoot>
+                    </table>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
 </template>
+
 <script>
 import Menu from "@/pages/Admin/Menu";
-import { onMounted, ref } from 'vue';
+import {
+    onMounted,
+    ref
+} from 'vue';
 // import { useRouter } from 'vue-router';
 import $ from "jquery"
 import axios from "@/axiosConfig";
 import Toast from "@/toastConfig";
 export default {
     name: "mon-an-customer",
-    components : {
+    components: {
         Menu
     },
     setup() {
         const data = ref([]);
-        const parts  = window.location.href.split("/");
+        const parts = window.location.href.split("/");
         const id_hoa_don = parts[parts.length - 1].split('?')[0];
         const url = new URL(window.location.href);
         const token = url.searchParams.get('token');
+        const list_chi_tiet_ban_hang = ref([]);
+        const tong_tien = ref(0);
+        const khach_hang = ref({});
+
         // const token = router.query.token;
         const getMonAn = () => {
             axios
                 .get('get-data-mon-an/' + token)
                 .then((res) => {
                     console.log(res.data.status);
-                    if(res.data.status === false) {
+                    if (res.data.status === false) {
                         window.location.href = "/";
                     }
                     data.value = res.data.data;
@@ -75,8 +137,8 @@ export default {
         }
         const themMonAn = (value) => {
             var payload = {
-                'id_mon_an' : value.id,
-                'id_hoa_don' : id_hoa_don,
+                'id_mon_an': value.id,
+                'id_hoa_don': id_hoa_don,
             }
             axios
                 .post('them-mon-an', payload)
@@ -84,18 +146,47 @@ export default {
                     if (res.data.status == 1) {
                         Toast('success', res.data.message);
                     }
+                    getChiTietHoaDon();
                 })
                 .catch((res) => {
-                    $.each(res.response.data.errors, function(k, v) {
+                    $.each(res.response.data.errors, function (k, v) {
                         Toast('error', v[0]);
                     });
                 });
         }
-
-        onMounted(() =>{
-            getMonAn()
+        const getChiTietHoaDon = () => {
+            const payload = {
+                'id_hoa_don': id_hoa_don,
+            };
+            axios
+                .post("admin/su-dung-dich-vu/get-chi-tiet", payload, "admin")
+                .then((res) => {
+                    list_chi_tiet_ban_hang.value = res.data.data;
+                    console.log(list_chi_tiet_ban_hang.value)
+                    khach_hang.value = res.data.kh;
+                    tong_tien.value = list_chi_tiet_ban_hang.value
+                        .map((item) => item.thanh_tien || 0)
+                        .reduce((acc, current) => acc + current, 0);
+                })
+                
+                .catch((error) => {
+                    console.error("Lỗi khi lấy chi tiết hóa đơn:", error);
+                    // Xử lý lỗi nếu cần
+                });
+        };
+        
+        onMounted(() => {
+            getMonAn();
+            getChiTietHoaDon();
         })
-        return {data, themMonAn}
+        return {
+            data,
+            themMonAn,
+            list_chi_tiet_ban_hang,
+            getChiTietHoaDon,
+            khach_hang,
+            tong_tien,
+        }
     },
     // data() {
     //     return {
@@ -116,6 +207,7 @@ export default {
     // },
 };
 </script>
+
 <style scoped>
 body {
     margin: 0;
@@ -301,9 +393,9 @@ body:after {
 #dp_menu {
     padding: 12px;
     position: relative;
-    z-index: 999; /* Thiết lập z-index cao hơn */
+    z-index: 999;
+    /* Thiết lập z-index cao hơn */
 }
-
 
 #dp_menu button {
     display: table;
@@ -377,7 +469,6 @@ body:after {
 #dp_menu .sub-menu {
     display: none
 }
-
 
 #dp_menu button {
     display: table;
@@ -452,4 +543,3 @@ body:after {
     display: none
 }
 </style>
-

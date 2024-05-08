@@ -26,8 +26,11 @@ import TinhLuong from "@/pages/Admin/Log/TinhLuong";
 import NhapKho from "@/pages/Admin/NhapKho";
 import HoaDonNhapKho from "@/pages/Admin/HoaDonNhapKho";
 import MaGiamGia from "@/pages/Admin/MaGiamGia";
-import ForgotPassword from "@/pages/Admin/ForgotPassword"
-import ChangePassword from "@/pages/Admin/ChangePassword"
+import ForgotPassword from "@/pages/Admin/ForgotPassword";
+import ChangePassword from "@/pages/Admin/ChangePassword";
+import ThongKe from "@/pages/Admin/ThongKe";
+import TonKhoNguyenLieu from "@/pages/Admin/TonKhoNguyenLieu";
+import Test123 from "@/pages/Admin/Test123";
 const routes = [
     {
         path: "/admin/login",
@@ -138,6 +141,18 @@ const routes = [
             {
                 path:"ma-giam-gia",
                 component:MaGiamGia,
+            },
+            {
+                path:"thong-ke",
+                component:ThongKe,
+            },
+            {
+                path:"ton-kho-nguyen-lieu",
+                component:TonKhoNguyenLieu,
+            },
+            {
+                path:"test-123",
+                component:Test123,
             },
           
         ],
