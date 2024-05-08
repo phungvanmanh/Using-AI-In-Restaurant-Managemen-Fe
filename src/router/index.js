@@ -28,11 +28,16 @@ import HoaDonNhapKho from "@/pages/Admin/HoaDonNhapKho";
 import MaGiamGia from "@/pages/Admin/MaGiamGia";
 import ForgotPassword from "@/pages/Admin/ForgotPassword"
 import ChangePassword from "@/pages/Admin/ChangePassword"
+import LoginCustomer from "@/pages/Customer/Login"
 const routes = [
     {
         path: "/admin/login",
         name: "login",
         component: Login,
+    },
+    {
+        path: "/login",
+        component: LoginCustomer,
     },
     {
         path: "/admin/forgot-password",
