@@ -24,8 +24,12 @@
                 </ul>
             </li>
 
-            <li><a href="#">LOGIN</a></li>
-            <li><a href="#">LOGOUT</a></li>
+            <li>
+                <router-link to="/login">
+                    <a>LOGIN</a>
+                </router-link>
+            </li>
+            <li><a>LOGOUT</a></li>
         </ul>
         <label for="menu-btn_1" class="btn menu-btn"><i class="fas fa-bars"></i></label>
     </div>
@@ -269,6 +273,14 @@ export default {
         });
         const isHomeSelected = ref(true); // Thêm biến này
         onMounted(() => {
+            document.body.style.fontFamily = '';
+            document.body.style.backgroundColor = '';
+            document.body.style.margin = '';
+            document.body.style.padding = '';
+            document.body.style.display = '';
+            document.body.style.justifyContent = '';
+            document.body.style.alignItems = '';
+            document.body.style.height = '';
             store.dispatch("onFetchBaiViet");
             store.dispatch("onFetchMonAn");
             store.dispatch("onFetchDanhMuc");
