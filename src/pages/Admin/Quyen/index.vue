@@ -30,7 +30,7 @@
                                     </button>
                                 </th>
                                 <th class="text-center align-middle text-nowrap">Name Permission</th>
-                                <th class="text-center align-middle text-nowrap">Amount</th>
+                                <th class="text-center align-middle text-nowrap">Saraly</th>
                                 <th class="text-center align-middle text-nowrap">Action</th>
                             </tr>
                         </template>

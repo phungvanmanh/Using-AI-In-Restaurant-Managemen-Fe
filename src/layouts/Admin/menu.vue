@@ -106,6 +106,12 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
+                        <router-link to="/admin/ton-kho-nguyen-lieu">
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Tồn Kho Nguyên Liệu</a>
+
+                        </router-link>
+                    </li>
+                    <li>
                         <router-link to="/admin/nhap-kho">
                             <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Enter warehouse</a>
 
@@ -163,6 +169,12 @@
 
                         </router-link>
                     </li>
+                    <li>
+                        <router-link to="/admin/ma-giam-gia">
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Mã Giảm Giá</a>
+
+                        </router-link>
+                    </li>
 
                 </ul>
             </li>
@@ -213,6 +225,17 @@
                    
 
                 </ul>
+            </li>
+            
+            <li class="nav-item">
+                <router-link to="/admin/thong-ke">
+                    <a class="nav-link">
+                        <div class="parent-icon">
+                            <i class="fa-solid fa-chart-simple"></i>
+                        </div>
+                        <div class="menu-title">Statistics</div>
+                    </a>
+                </router-link>
             </li>
         </ul>
     </nav>

@@ -19,6 +19,9 @@
                         <button  v-on:click="loadData()" class="btn btn-primary">Thống Kê</button>
                     </td>
                     <td class="align-middle" colspan="3"><b>Tổng Tiền Đã Nhận:</b> {{ formatToVND(tong_tien) }}</td>
+                    <td class="text-center">
+                        <button @click="exportData" class="btn btn-success">ExportExcel</button>
+                    </td>
                 </tr>
                 <tr>
                     <th class="align-middle text-center">#</th>
@@ -167,6 +170,7 @@ import {
 import axios from "@/axiosConfig";
 import Toast from "@/toastConfig";
 import $ from "jquery";
+import { apiUrl } from "@/globals";
 export default {
     name: "hoa-don-ban-hang",
     setup() {
@@ -212,6 +216,44 @@ export default {
                 currency: "VND",
             });
         }
+        const exportData = () => {
+            fetch(apiUrl + "api/admin/hoa-don/export")
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error("Network response was not ok");
+                    }
+                    return response.blob();
+                })
+                .then((blob) => {
+                    const downloadUrl = window.URL.createObjectURL(blob);
+                    const link = document.createElement("a");
+                    link.href = downloadUrl;
+                    link.setAttribute("download", "hoa_don_ban_hangs.xlsx");
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+                    window.URL.revokeObjectURL(downloadUrl);
+                })
+                .catch((error) => {
+                    console.error("Download error:", error);
+                });
+            // có ssl thì dùng
+            // axios
+            //     .get("admin/export")
+            //     .then((response) => {
+            //         const data = response.data;
+            //         console.log(data); // Xem thông tin
+            //         const link = document.createElement("a");
+            //         link.href = data.url;
+            //         link.setAttribute("download", "admins.xlsx"); // Có thể bỏ qua nếu bạn không muốn set tên file
+            //         document.body.appendChild(link);
+            //         link.click();
+            //         document.body.removeChild(link);
+            //     })
+            //     .catch((error) => {
+            //         console.error("Error:", error);
+            //     });
+        };
         onMounted(() => {
             date.value = new Date();
             const subday = new Date().toISOString().slice(0, 10);
@@ -220,6 +262,7 @@ export default {
             loadData();
 
         });
+
 
         return {
             store,
@@ -232,6 +275,7 @@ export default {
             loadData,
             formatToVND,
             chitietHoaDon,
+            exportData
         };
     },
 };

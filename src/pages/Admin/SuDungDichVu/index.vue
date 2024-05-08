@@ -1,113 +1,187 @@
 <template>
-    <div class="row mb-4">
-        <div class="loader2">
-    <div id="first">
-        <div id="second">
-            <div id="third">
-            </div>
-        </div>
-    </div>
-</div>
-    </div>
-    
-<div class="row">
-    <div class="card">
-    <div class="card-body">
-        <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
-            <li class="nav-item" role="presentation" v-on:click="loadDataBan()">
-                <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab" aria-selected="true">
-                    <div class="d-flex align-items-center">
-                        <div class="tab-icon">
-                            <i class="bx bx-comment-detail font-18 me-1"></i>
-                        </div>
-                        <div class="tab-title">Tất Cả</div>
-                    </div>
-                </a>
-            </li>
-            <template v-for="(value, key) in dataKhuVuc" :key="key">
-                <li class="nav-item" role="presentation" v-on:click="getBanTheoKhuVuc(value)">
-                    <a class="nav-link" data-bs-toggle="tab" v-bind:href="'#primaryhome' + key" role="tab" aria-selected="false" tabindex="-1">
-                        <div class="d-flex align-items-center">
-                            <div class="tab-icon">
-                                <i class="bx bx-bookmark-alt font-18 me-1"></i>
-                            </div>
-                            <div class="tab-title">{{ value.name_area }}</div>
-                        </div>
-                    </a>
-                </li>
-            </template>
-        </ul>
-        <div class="tab-content pt-3">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
-                <template v-for="(value, key) in dataBan" :key="key">
-                    <template v-if="value.status == 1">
-                        <div class="col">
-                            <div class="card radius-10">
-                                <div class="card-body">
-                                    <div class="text-center">
-                                        <div class="widgets-icons rounded-circle mx-auto bg-light-primary text-primary mb-3">
-                                            <i class="fa-solid fa-couch"></i>
-                                        </div>
-                                        <h4 class="my-1">{{ value.name_table }}</h4>
-                                        <template v-if="value.is_open_table == 0">
-                                            <button @click="activityView = true; openTable(value.id);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mobanModal">
-                                                Mở Bàn
-                                            </button>
-                                        </template>
-                                        <template v-else>
-                                            <button class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#qrModal" @click="generateQRCode(value.id)">
-                                                QR Login
-                                            </button>
-                                            <button class="btn btn-success" @click="getIdHoaDon(value.id)" data-bs-toggle="modal" data-bs-target="#mobanModal">
-                                                Thanh Toán
-                                            </button>
-                                        </template>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </template>
-                </template>
+<div class="row mb-4">
+    <div class="loader2">
+        <div id="first">
+            <div id="second">
+                <div id="third">
+                </div>
             </div>
         </div>
     </div>
 </div>
 
-<div class="modal fade" id="mobanModal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog modal-xl" style="max-width: 100%">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="staticBackdropLabel">Mở Bàn</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <template v-if="activityView === true">
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="card">
-                                <div class="card-header">
-                                    <h6>Danh sách món ăn</h6>
+<div class="row">
+    <div class="card">
+        <div class="card-body">
+            <ul class="nav nav-tabs nav-primary mb-0" role="tablist">
+                <li class="nav-item" role="presentation" v-on:click="loadDataBan()">
+                    <a class="nav-link active" data-bs-toggle="tab" href="#primaryhome" role="tab" aria-selected="true">
+                        <div class="d-flex align-items-center">
+                            <div class="tab-icon">
+                                <i class="bx bx-comment-detail font-18 me-1"></i>
+                            </div>
+                            <div class="tab-title">Tất Cả</div>
+                        </div>
+                    </a>
+                </li>
+                <template v-for="(value, key) in dataKhuVuc" :key="key">
+                    <li class="nav-item" role="presentation" v-on:click="getBanTheoKhuVuc(value)">
+                        <a class="nav-link" data-bs-toggle="tab" v-bind:href="'#primaryhome' + key" role="tab" aria-selected="false" tabindex="-1">
+                            <div class="d-flex align-items-center">
+                                <div class="tab-icon">
+                                    <i class="bx bx-bookmark-alt font-18 me-1"></i>
                                 </div>
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <div class="table-responsive" style="max-height: 450px;">
+                                <div class="tab-title">{{ value.name_area }}</div>
+                            </div>
+                        </a>
+                    </li>
+                </template>
+            </ul>
+            <div class="tab-content pt-3">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
+                    <template v-for="(value, key) in dataBan" :key="key">
+                        <template v-if="value.status == 1">
+                            <div class="col">
+                                <div class="card radius-10">
+                                    <div class="card-body">
+                                        <div class="text-center">
+                                            <div class="widgets-icons rounded-circle mx-auto bg-light-primary text-primary mb-3">
+                                                <i class="fa-solid fa-couch"></i>
+                                            </div>
+                                            <h4 class="my-1">{{ value.name_table }}</h4>
+                                            <template v-if="value.is_open_table == 0">
+                                                <button @click="activityView = true; openTable(value.id);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mobanModal">
+                                                    Mở Bàn
+                                                </button>
+                                            </template>
+                                            <template v-else>
+                                                <button class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#qrModal" @click="generateQRCode(value.id)">
+                                                    QR Login
+                                                </button>
+                                                <button class="btn btn-success" @click="getIdHoaDon(value.id)" data-bs-toggle="modal" data-bs-target="#mobanModal">
+                                                    Thanh Toán
+                                                </button>
+                                            </template>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="mobanModal" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-xl" style="max-width: 100%">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Mở Bàn</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <template v-if="activityView === true">
+                        <div class="row mt-2">
+                            <div class="col-6">
+
+                            </div>
+                            <div class="col-3">
+                                <label style="margin-bottom: 10px;" for=""><b style="color: blue;">Gộp Bàn</b></label>
+                                <select name="" id="" class="form-control">
+                                    <option value="1">Bàn số 1</option>
+                                    <option value="1">Bàn số 2</option>
+                                    <option value="1">Bàn số 3</option>
+                                    <option value="1">Bàn số 4</option>
+
+                                </select>
+                            </div>
+                            <div class="col-3">
+                                <button style="margin-top: 30px;" class="btn btn-primary"> Xác Nhận</button>
+                            </div>
+
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h6>Danh sách món ăn</h6>
+                                    </div>
+
+                                    <div class="card-body">
+
+                                        <div class="mb-3">
+                                            <div class="table-responsive" style="max-height: 450px;">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr>
+                                                            <th colspan="100%">
+                                                                <div class="input-group mb-3"><input  v-on:keyup.enter="searchMonAn()" v-model="search.abc" type="text" class="form-control" placeholder="nhập món ăn cần tìm"><button @click="searchMonAn()" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button></div>
+                                                            </th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th class="align-middle text-center">#</th>
+                                                            <th class="align-middle text-center">Tên Hàng</th>
+                                                            <th class="align-middle text-center">Hình Ảnh</th>
+                                                            <th class="align-middle text-center">Action</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <template v-for="(value, key) in dataMonAn" :key="key">
+                                                            <tr>
+                                                                <td class="align-middle text-center">{{ key + 1 }}</td>
+                                                                <td class="align-middle text-center">{{ value.food_name }}</td>
+                                                                <td class="text-center align-middle text-nowrap"><img v-bind:src="value.image" width="100" height="100" alt=""></td>
+                                                                <td class="align-middle text-center">
+                                                                    <button v-on:click="themMonAn(value)" class="btn btn-primary">Thêm</button>
+                                                                </td>
+                                                            </tr>
+                                                        </template>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="card">
+                                    <div class="card-header">Món ăn sử dụng</div>
+                                    <div class="card-body">
+                                        <div class="table-responsive">
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
-                                                        <th class="align-middle text-center">#</th>
-                                                        <th class="align-middle text-center">Tên Hàng</th>
-                                                        <th class="align-middle text-center">Hình Ảnh</th>
-                                                        <th class="align-middle text-center">Action</th>
+                                                        <th class="text-center align-middle">#</th>
+                                                        <th class="text-center align-middle">Tên món ăn</th>
+                                                        <th class="text-center align-middle">Số lượng</th>
+                                                        <th class="text-center align-middle">Đơn giá</th>
+                                                        <th class="text-center align-middle">% giảm giá</th>
+                                                        <th class="text-center align-middle">Thành tiền</th>
+                                                        <th class="text-center align-middle">Ghi chú</th>
+                                                        <th class="text-center align-middle">Action</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <template v-for="(value, key) in dataMonAn" :key="key">
+                                                    <template v-for="(value, key) in list_chi_tiet_ban_hang" :key="key">
                                                         <tr>
-                                                            <td class="align-middle text-center">{{ key + 1 }}</td>
-                                                            <td class="align-middle text-center">{{ value.food_name }}</td>
-                                                            <td class="text-center align-middle text-nowrap"><img v-bind:src="value.image" width="100" height="100" alt=""></td>
-                                                            <td class="align-middle text-center">
-                                                                <button v-on:click="themMonAn(value)" class="btn btn-primary">Thêm</button>
+                                                            <td class="align-middle">{{ key + 1 }}</td>
+                                                            <td class="align-middle">{{ value.food_name }}</td>
+                                                            <td class="align-middle">
+                                                                <input v-on:change="updateMonAn(value)" v-model="value.so_luong" type="number" class="form-control" />
+                                                            </td>
+                                                            <td class="align-middle">
+                                                                <input v-on:change="updateMonAn(value)" v-model="value.don_gia" type="number" class="form-control" />
+                                                            </td>
+                                                            <td class="align-middle">
+                                                                <input v-on:change="updateMonAn(value)" v-model="value.phan_tram_giam" type="number" class="form-control" />
+                                                            </td>
+                                                            <td class="align-middle">{{ value.thanh_tien }}</td>
+                                                            <td class="align-middle">
+                                                                <input v-on:change="updateMonAn(value)" v-model="value.ghi_chu" type="text" class="form-control" />
+                                                            </td>
+                                                            <td class="align-middle">
+                                                                <button v-on:click="deleteChiTiet(value)" class="btn btn-danger">Xóa</button>
                                                             </td>
                                                         </tr>
                                                     </template>
@@ -115,127 +189,79 @@
                                             </table>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-8">
-                            <div class="card">
-                                <div class="card-header">Món ăn sử dụng</div>
-                                <div class="card-body">
-                                    <div class="table-responsive">
-                                        <table class="table table-bordered">
-                                            <thead>
-                                                <tr>
-                                                    <th class="text-center align-middle">#</th>
-                                                    <th class="text-center align-middle">Tên món ăn</th>
-                                                    <th class="text-center align-middle">Số lượng</th>
-                                                    <th class="text-center align-middle">Đơn giá</th>
-                                                    <th class="text-center align-middle">% giảm giá</th>
-                                                    <th class="text-center align-middle">Thành tiền</th>
-                                                    <th class="text-center align-middle">Ghi chú</th>
-                                                    <th class="text-center align-middle">Action</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <template v-for="(value, key) in list_chi_tiet_ban_hang" :key="key">
-                                                    <tr>
-                                                        <td class="align-middle">{{ key + 1 }}</td>
-                                                        <td class="align-middle">{{ value.food_name }}</td>
-                                                        <td class="align-middle">
-                                                            <input v-on:change="updateMonAn(value)" v-model="value.so_luong" type="number" class="form-control" />
-                                                        </td>
-                                                        <td class="align-middle">
-                                                            <input v-on:change="updateMonAn(value)" v-model="value.don_gia" type="number" class="form-control" />
-                                                        </td>
-                                                        <td class="align-middle">
-                                                            <input v-on:change="updateMonAn(value)" v-model="value.phan_tram_giam" type="number" class="form-control" />
-                                                        </td>
-                                                        <td class="align-middle">{{ value.thanh_tien }}</td>
-                                                        <td class="align-middle">
-                                                            <input v-on:change="updateMonAn(value)" v-model="value.ghi_chu" type="text" class="form-control" />
-                                                        </td>
-                                                        <td class="align-middle">
-                                                            <button v-on:click="deleteChiTiet(value)" class="btn btn-danger">Xóa</button>
-                                                        </td>
-                                                    </tr>
-                                                </template>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                                <div class="card-footer bg-white">
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <InputComponentVue v-model="khach_hang.ten_khach_hang" label="First Last Name Customer" />
-                                            <InputComponentVue v-model="khach_hang.email_khach_hang" label="Email" type="email" />
-                                            <InputComponentVue v-model="khach_hang.so_dien_thoai" label="Phone Number" />
+                                    <div class="card-footer bg-white">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <InputComponentVue v-model="khach_hang.ten_khach_hang" label="First Last Name Customer" />
+                                                <InputComponentVue v-model="khach_hang.email_khach_hang" label="Email" type="email" />
+                                                <InputComponentVue v-model="khach_hang.so_dien_thoai" label="Phone Number" />
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <textarea @change="updateHoaDon()" v-model="ghi_chu_hoa_don" class="form-control" cols="30" rows="4"></textarea>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <img style="width: 100%;" alt="" />
+                                            </div>
                                         </div>
-                                        <div class="col-lg-4">
-                                            <textarea @change="updateHoaDon()" v-model="ghi_chu_hoa_don" class="form-control" cols="30" rows="4"></textarea>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <img style="width: 100%;" alt="" />
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="col-lg-6">
-                                            <p><b>Tổng thanh toán:</b></p>
-                                            <input @change="updateHoaDon()" type="number" class="form-control" v-model="tong_tien" />
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <p><b>Phần trăm giảm:</b></p>
-                                            <input @change="updateHoaDon()" type="number" class="form-control" v-model="phan_tram_giam_hoa_don" />
-                                            <p class="mt-3"><b>Tiền thực thu:</b></p>
-                                            <p><b>{{ tien_thuc_thu }}</b></p>
+                                        <div class="row mt-3">
+                                            <div class="col-lg-6">
+                                                <p><b>Tổng thanh toán:</b></p>
+                                                <input @change="updateHoaDon()" type="number" class="form-control" v-model="tong_tien" />
+                                            </div>
+                                            <div class="col-lg-6">
+                                                <p><b>Phần trăm giảm:</b></p>
+                                                <input @change="updateHoaDon()" type="number" class="form-control" v-model="phan_tram_giam_hoa_don" />
+                                                <p class="mt-3"><b>Tiền thực thu:</b></p>
+                                                <p><b>{{ tien_thuc_thu }}</b></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </template>
-                <template v-else>
-                    <BillComponent :required="true" :id="id_hoa_don_ban_hang">
-                        <template #image>
-                            <img style="width: 30%" v-bind:src="link_qr" alt="" />
-                        </template>
-                    </BillComponent>
-                </template>
-            </div>
-            <div class="modal-footer">
-                <template v-if="activityView == true">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="activityView = true; updateCheckingTransaction();">Đóng</button>
-                    <router-link :to="'/admin/bill-thanh-toan/' + id_hoa_don_ban_hang" target="_blank">
-                        <button type="button" class="btn btn-danger">In Hóa Đơn</button>
-                    </router-link>
-                    <button type="button" class="btn btn-primary" @click="activityView = false; thanhToan();">Thanh Toán</button>
-                </template>
-                <template v-else>
-                    <button type="button" class="btn btn-primary" @click="activityView = true; updateCheckingTransaction();">Quay lại</button>
-                </template>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" style="max-width: 90vw; min-width: 300px;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">QR Code</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="d-flex justify-content-center">
-                    <VueQRCodeComponent :text="qrCodeData" :size="300" />
+                    </template>
+                    <template v-else>
+                        <BillComponent :required="true" :id="id_hoa_don_ban_hang">
+                            <template #image>
+                                <img style="width: 30%" v-bind:src="link_qr" alt="" />
+                            </template>
+                        </BillComponent>
+                    </template>
+                </div>
+                <div class="modal-footer">
+                    <template v-if="activityView == true">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="activityView = true; updateCheckingTransaction();">Đóng</button>
+                        <router-link :to="'/admin/bill-thanh-toan/' + id_hoa_don_ban_hang" target="_blank">
+                            <button type="button" class="btn btn-danger">In Hóa Đơn</button>
+                        </router-link>
+                        <button type="button" class="btn btn-primary" @click="activityView = false; thanhToan();">Thanh Toán</button>
+                    </template>
+                    <template v-else>
+                        <button type="button" class="btn btn-primary" @click="activityView = true; updateCheckingTransaction();">Quay lại</button>
+                    </template>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        </div>
+    </div>
+
+    <div class="modal fade" id="qrModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" style="max-width: 90vw; min-width: 300px;">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">QR Code</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-center">
+                        <VueQRCodeComponent :text="qrCodeData" :size="300" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 </div>
 </template>
@@ -275,6 +301,8 @@ export default {
         const loadDataBan = () => {
             store.dispatch("onFetchBan");
         };
+        const search = ref({});
+
         const tong_tien = ref(0);
         const tien_thuc_thu = ref(0);
         const phan_tram_giam_hoa_don = ref(0);
@@ -574,6 +602,14 @@ export default {
                 console.error("Lỗi khi tạo QR Code:", error);
             }
         }
+        function searchMonAn() {
+            axios
+                .post('admin/mon-an/tim-mon', search.value)
+                .then((res) => {
+                    console.log(res.data.data);
+                    store.commit('fecthMonAn', res.data.data);
+                });
+        }
 
         onMounted(() => {
             store.dispatch("onFetchBan");
@@ -608,153 +644,156 @@ export default {
             generateQRCode,
             thanhToan,
             updateCheckingTransaction,
+            searchMonAn,
+            search,
         };
     },
 };
 </script>
+
 <style>
 .loader2 {
-  background-color: black;
-  position: relative;
-  width: 2.5em;
-  height: 2.5em;
-  transform-origin: center;
-  transition: 1s;
-  border-radius: 50px;
-  box-shadow: inset 0px 0px 10px purple,
-  inset 5px 5px 12px rgba(44, 0, 114, 0.8),
-  inset 8px 8px 1px rgba(160, 120, 255, 0.7),
-  0px 0px 1px rgba(160, 120, 255, 0.6);
-  animation: 1.2s linear infinite 0s running first682;
+    background-color: black;
+    position: relative;
+    width: 2.5em;
+    height: 2.5em;
+    transform-origin: center;
+    transition: 1s;
+    border-radius: 50px;
+    box-shadow: inset 0px 0px 10px purple,
+        inset 5px 5px 12px rgba(44, 0, 114, 0.8),
+        inset 8px 8px 1px rgba(160, 120, 255, 0.7),
+        0px 0px 1px rgba(160, 120, 255, 0.6);
+    animation: 1.2s linear infinite 0s running first682;
 }
 
 .loader2 div {
-  width: inherit;
-  height: inherit;
-  position: absolute;
+    width: inherit;
+    height: inherit;
+    position: absolute;
 }
 
 #first {
-  transform: rotate(90deg)
+    transform: rotate(90deg)
 }
 
 #first::before {
-  --width: 1em;
-  --height: 1em;
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: calc(50% - var(--width)/2);
-  width: 1em;
-  height: 1em;
-  background-color: rgb(44, 0, 114);
-  box-shadow: inset 5px 5px 10px rgb(160, 120, 255),
-  0px 0px 2px white;
-  border-radius: 50px;
-  animation: 0.8s ease-in 0s infinite running jump2;
+    --width: 1em;
+    --height: 1em;
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: calc(50% - var(--width)/2);
+    width: 1em;
+    height: 1em;
+    background-color: rgb(44, 0, 114);
+    box-shadow: inset 5px 5px 10px rgb(160, 120, 255),
+        0px 0px 2px white;
+    border-radius: 50px;
+    animation: 0.8s ease-in 0s infinite running jump2;
 }
 
 #second {
-  transform: rotate(90deg);
+    transform: rotate(90deg);
 }
 
 #second::before {
-  --width: 1em;
-  --height: 1em;
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: calc(50% - var(--width)/2);
-  width: 1em;
-  height: 1em;
-  background-color: rgb(44, 0, 114);
-  box-shadow: inset 5px 5px 10px rgb(160, 120, 255),
-  0px 0px 2px white;
-  border-radius: 50px;
-  animation: 1.5s ease-in 0s infinite running jump2;
+    --width: 1em;
+    --height: 1em;
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: calc(50% - var(--width)/2);
+    width: 1em;
+    height: 1em;
+    background-color: rgb(44, 0, 114);
+    box-shadow: inset 5px 5px 10px rgb(160, 120, 255),
+        0px 0px 2px white;
+    border-radius: 50px;
+    animation: 1.5s ease-in 0s infinite running jump2;
 }
 
 #third {
-  transform: rotate(90deg)
+    transform: rotate(90deg)
 }
 
 #third::before {
-  --width: 1em;
-  --height: 1em;
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: calc(50% - var(--width)/2);
-  width: 1em;
-  height: 1em;
-  background-color: rgb(44, 0, 114);
-  box-shadow: inset 5px 5px 10px rgb(160, 120, 255),
-  0px 0px 2px white;
-  border-radius: 50px;
-  animation: 1.6s ease-in 0s infinite running jump2;
+    --width: 1em;
+    --height: 1em;
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: calc(50% - var(--width)/2);
+    width: 1em;
+    height: 1em;
+    background-color: rgb(44, 0, 114);
+    box-shadow: inset 5px 5px 10px rgb(160, 120, 255),
+        0px 0px 2px white;
+    border-radius: 50px;
+    animation: 1.6s ease-in 0s infinite running jump2;
 }
 
 .loader2::after {
-  --width: 1em;
-  --height: 1em;
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: calc(50% - var(--width)/2);
-  width: 1em;
-  height: 1em;
-  background-color: rgb(44, 0, 114);
-  box-shadow: inset 5px 5px 10px rgb(160, 120, 255),
-  0px 0px 2px white;
-  border-radius: 50px;
-  animation: 1.2s ease-in 1s alternate infinite running jump2;
+    --width: 1em;
+    --height: 1em;
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: calc(50% - var(--width)/2);
+    width: 1em;
+    height: 1em;
+    background-color: rgb(44, 0, 114);
+    box-shadow: inset 5px 5px 10px rgb(160, 120, 255),
+        0px 0px 2px white;
+    border-radius: 50px;
+    animation: 1.2s ease-in 1s alternate infinite running jump2;
 }
 
 @keyframes first682 {
-  0% {
-    transform: rotate(0deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
 
-  25% {
-    transform: rotate(0deg);
-    transform: rotate(90deg)
-  }
+    25% {
+        transform: rotate(0deg);
+        transform: rotate(90deg)
+    }
 
-  50% {
-    transform: rotate(90deg);
-    transform: rotate(180deg);
-  }
+    50% {
+        transform: rotate(90deg);
+        transform: rotate(180deg);
+    }
 
-  75% {
-    transform: rotate(180deg);
-    transform: rotate(270deg)
-  }
+    75% {
+        transform: rotate(180deg);
+        transform: rotate(270deg)
+    }
 
-  100% {
-    transform: rotate(270deg);
-    transform: rotate(360deg);
-  }
+    100% {
+        transform: rotate(270deg);
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes jump2 {
-  0% {
-    top: 100%;
-  }
+    0% {
+        top: 100%;
+    }
 
-  25% {
-    top: 230%
-  }
+    25% {
+        top: 230%
+    }
 
-  50% {
-    top: 100%;
-  }
+    50% {
+        top: 100%;
+    }
 
-  75% {
-    height: 0.6em
-  }
+    75% {
+        height: 0.6em
+    }
 
-  100% {
-    height: 1em
-  }
+    100% {
+        height: 1em
+    }
 }
 </style>

@@ -76,6 +76,7 @@ export default {
                 });
 				// router.push({ name: "admin" });
 				window.location.href = "/admin/lich-lam-viec";
+				
 				Toast("success", "Đăng nhập thành công!");
             } catch (error) {
                 $.each(error.response.data.errors, function (k, v) {
