@@ -87,17 +87,11 @@
 
                             </div>
                             <div class="col-3">
-                                <label style="margin-bottom: 10px;" for=""><b style="color: blue;">Gộp Bàn</b></label>
-                                <select name="" id="" class="form-control">
-                                    <option value="1">Bàn số 1</option>
-                                    <option value="1">Bàn số 2</option>
-                                    <option value="1">Bàn số 3</option>
-                                    <option value="1">Bàn số 4</option>
-
-                                </select>
+                                <!-- <label style="margin-bottom: 10px;" for=""><b style="color: blue;">Gộp Bàn</b></label> -->
+                                <SelectComponent v-model="id_ban_chuyen" label="Gộp Bàn" :options="dataBanChuyen"/>
                             </div>
                             <div class="col-3">
-                                <button style="margin-top: 30px;" class="btn btn-primary"> Xác Nhận</button>
+                                <button v-on:click="gopBan()" style="margin-top: 30px;" class="btn btn-primary"> Xác Nhận</button>
                             </div>
 
                         </div>
@@ -284,12 +278,14 @@ import {
 } from "@/globals";
 import BillComponent from "@/pages/Admin/BillThanhToan";
 import InputComponentVue from "@/components/InputComponent.vue";
+import SelectComponent from "@/components/SelectComponent.vue";
 export default {
     name: "su-dung-dich-vu",
     components: {
         VueQRCodeComponent,
         BillComponent,
         InputComponentVue,
+        SelectComponent
     },
 
     setup() {
@@ -301,6 +297,7 @@ export default {
         const loadDataBan = () => {
             store.dispatch("onFetchBan");
         };
+        const dataBanChuyen = ref([]);
         const search = ref({});
 
         const tong_tien = ref(0);
@@ -317,6 +314,7 @@ export default {
         const id_hoa_don_ban_hang = ref(0);
         const bill_id = ref("");
         const khach_hang = ref({});
+        const id_ban_chuyen = ref("");
         const link_qr = ref(
             "https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
         );
@@ -467,6 +465,14 @@ export default {
                         bill_id.value = "HDBH" + hoa_don.value.id;
                         getChiTietHoaDon(hoa_don.value.id);
                         store.dispatch("onFetchMonAn");
+                        dataBanChuyen.value = dataBan.value
+                                                    .filter(item => item.id !== hoa_don.value.id_ban && item.is_open_table == 1)
+                                                    .map(item => {
+                                                        return {
+                                                            text: item.name_table,
+                                                            value: item.id
+                                                        };
+                                                    });
                     }
                 })
                 .catch((res) => {
@@ -611,6 +617,34 @@ export default {
                 });
         }
 
+        const gopBan = () => {
+            var payload = {
+                id_ban_hien_tai: hoa_don.value.id_ban,
+                id_ban_can_gop:id_ban_chuyen.value
+               
+            };
+            axios
+                .post(
+                    "admin/ban/gop-ban",
+                    payload,
+                    "admin"
+                )
+                .then((res) => {
+                    if (res.data.status == 1) {
+                        Toast("success", res.data.message);
+                        getIdHoaDon(hoa_don.value.id_ban);
+                        getChiTietHoaDon(hoa_don.value.id);
+                        store.dispatch("onFetchBan");
+
+
+                    }
+                })
+                .catch((res) => {
+                    $.each(res.response.data.errors, function (k, v) {
+                        Toast("error", v[0]);
+                    });
+                });
+        };
         onMounted(() => {
             store.dispatch("onFetchBan");
             store.dispatch("onFetchKhuVuc");
@@ -630,6 +664,8 @@ export default {
             ghi_chu_hoa_don,
             qrCodeData,
             link_qr,
+            dataBanChuyen,
+            id_ban_chuyen,
             activityView,
             khach_hang,
             loadDataBan,
@@ -646,6 +682,7 @@ export default {
             updateCheckingTransaction,
             searchMonAn,
             search,
+            gopBan
         };
     },
 };
