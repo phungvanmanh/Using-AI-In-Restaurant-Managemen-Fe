@@ -26,8 +26,9 @@ import TinhLuong from "@/pages/Admin/Log/TinhLuong";
 import NhapKho from "@/pages/Admin/NhapKho";
 import HoaDonNhapKho from "@/pages/Admin/HoaDonNhapKho";
 import MaGiamGia from "@/pages/Admin/MaGiamGia";
-import ForgotPassword from "@/pages/Admin/ForgotPassword";
-import ChangePassword from "@/pages/Admin/ChangePassword";
+import ForgotPassword from "@/pages/Admin/ForgotPassword"
+import ChangePassword from "@/pages/Admin/ChangePassword"
+import LoginCustomer from "@/pages/Customer/Login"
 import ThongKe from "@/pages/Admin/ThongKe";
 import TonKhoNguyenLieu from "@/pages/Admin/TonKhoNguyenLieu";
 import Test123 from "@/pages/Admin/Test123";
@@ -36,6 +37,10 @@ const routes = [
         path: "/admin/login",
         name: "login",
         component: Login,
+    },
+    {
+        path: "/login",
+        component: LoginCustomer,
     },
     {
         path: "/admin/forgot-password",
