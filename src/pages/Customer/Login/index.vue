@@ -4,7 +4,7 @@
             <h2>Enter Email</h2>
             <form @submit.prevent="verifyEmail">
                 <input type="email" v-model="email" placeholder="Email" required>
-                <button v-if="isEmailComplete" type="submit">Continue</button>
+                <button v-if="isEmailComplete" type="submit" @click="sendOtp()">Continue</button>
             </form>
         </div>
 
@@ -22,15 +22,17 @@
                     maxlength="1"
                     @input="moveToNext(index + 1)"
                 />
-                <input type="submit" v-if="isOtpComplete" value="Login">
+                <input type="submit" v-if="isOtpComplete" value="Login" @click="Login">
             </div>
         </div>
     </div>
 </template>
 <script>
 import { verifyEmail, moveToNext, setupEventListeners } from '@/assets/js/login_customer';
-import { onBeforeMount, onMounted, ref } from 'vue';
-
+import { onMounted, ref } from 'vue';
+import axios from '@/axiosConfig';
+import Toast from "@/toastConfig";
+import $ from "jquery";
 export default {
     name: "Login-Customer",
     setup () {
@@ -48,10 +50,46 @@ export default {
             document.body.style.height = '100vh';
             setupEventListeners();
         });
-        onBeforeMount(() => {
-            
-        });
-        return { verifyEmail, moveToNext, step, email, otp };
+        const sendOtp = () => {
+            var payload = {
+                'email' : email.value
+            }
+            axios
+                .post('khach-hang/send-mail-otp', payload)
+                .then((res) => {
+                    if (res.data.status == 1) {
+                        Toast('success', res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    $.each(res.response.data.errors, function(k, v) {
+                        Toast('error', v[0]);
+                    });
+                });
+        }
+        const Login = () => {
+            var payload = {
+                'email'     : email.value,
+                'password'       : otp.value.join(""),
+            }
+            axios
+                .post('khach-hang/login', payload)
+                .then((res) => {
+                    if (res.data.status == 1) {
+                        Toast('success', res.data.message);
+                        localStorage.setItem('khach_hang', res.data.access_token);
+                        setInterval(() => {
+                            window.location.href = "/";
+                        }, 2000);
+                    }
+                })
+                .catch((res) => {
+                    $.each(res.response.data.errors, function(k, v) {
+                        Toast('error', v[0]);
+                    });
+                });
+        }
+        return { verifyEmail, moveToNext, step, email, otp, Login, sendOtp };
     },
     computed: {
         isOtpComplete() {

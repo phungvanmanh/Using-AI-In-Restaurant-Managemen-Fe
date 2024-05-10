@@ -23,13 +23,16 @@
                     </template>
                 </ul>
             </li>
-
-            <li>
-                <router-link to="/login">
-                    <a>LOGIN</a>
-                </router-link>
-            </li>
-            <li><a>LOGOUT</a></li>
+            <template v-if="isShow == false">
+                <li>
+                    <router-link to="/login">
+                        <a>LOGIN</a>
+                    </router-link>
+                </li>
+            </template>
+            <template v-else>
+                <li><a @click="logOut()">LOGOUT</a></li>
+            </template>
         </ul>
         <label for="menu-btn_1" class="btn menu-btn"><i class="fas fa-bars"></i></label>
     </div>
@@ -218,6 +221,7 @@ import axios from '@/axiosConfig';
 // import Toast from '@/toastConfig';
 // import $ from 'jquery';
 import testMenu from "@/pages/Admin/Menu";
+import Toast from "@/toastConfig";
 export default {
     name: "trang-chu",
     components: {
@@ -225,6 +229,7 @@ export default {
     },
 
     setup() {
+        const isShow = ref(false);
         document.addEventListener("DOMContentLoaded", function () {
             const menuBtn = document.getElementById("menu-btn_1");
             const closeBtn = document.getElementById("close-btn_1");
@@ -272,19 +277,7 @@ export default {
             return store.state.dataDanhMuc;
         });
         const isHomeSelected = ref(true); // Thêm biến này
-        onMounted(() => {
-            document.body.style.fontFamily = '';
-            document.body.style.backgroundColor = '';
-            document.body.style.margin = '';
-            document.body.style.padding = '';
-            document.body.style.display = '';
-            document.body.style.justifyContent = '';
-            document.body.style.alignItems = '';
-            document.body.style.height = '';
-            store.dispatch("onFetchBaiViet");
-            store.dispatch("onFetchMonAn");
-            store.dispatch("onFetchDanhMuc");
-        });
+        
         const monAnList = ref([]);
 
         const getMonAnById = (id) => {
@@ -320,7 +313,42 @@ export default {
                 getMonAnById(id);
             }
         };
+        const logOut = () => {
+            axios
+                .get('khach-hang/logout')
+                .then((res) => {
+                    if(res.data.status == 1) {
+                        localStorage.removeItem('khach_hang');
+                        Toast("success", res.data.message);
+                        setInterval(() => {
+                            window.location.href = "/";
+                        }, 2000);
+                    }
+                });
+        }
 
+        const checkLogin = () => {
+            // Nếu như có thì isShow == true;
+            if(!localStorage.getItem('khach_hang')) {
+                isShow.value = false;
+            } else {
+                isShow.value = true;
+            }
+        }
+        onMounted(() => {
+            document.body.style.fontFamily = '';
+            document.body.style.backgroundColor = '';
+            document.body.style.margin = '';
+            document.body.style.padding = '';
+            document.body.style.display = '';
+            document.body.style.justifyContent = '';
+            document.body.style.alignItems = '';
+            document.body.style.height = '';
+            store.dispatch("onFetchBaiViet");
+            store.dispatch("onFetchMonAn");
+            store.dispatch("onFetchDanhMuc");
+            checkLogin();
+        });
         return {
             dataBaiViet,
             dataMonAn,
@@ -330,7 +358,9 @@ export default {
             handleClickDanhMuc,
             isHomeSelected,
             search,
-            searchMonAn
+            searchMonAn,
+            isShow,
+            logOut
 
         };
     },

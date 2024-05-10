@@ -187,7 +187,7 @@
                                         <div class="row">
                                             <div class="col-lg-4">
                                                 <InputComponentVue v-model="khach_hang.ten_khach_hang" label="First Last Name Customer" />
-                                                <InputComponentVue v-model="khach_hang.email_khach_hang" label="Email" type="email" />
+                                                <InputComponentVue v-model="khach_hang.email" label="Email" type="email" />
                                                 <InputComponentVue v-model="khach_hang.so_dien_thoai" label="Phone Number" />
                                             </div>
                                             <div class="col-lg-4">

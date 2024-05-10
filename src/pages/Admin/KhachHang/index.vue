@@ -75,7 +75,7 @@
                                         {{ value.ten_khach_hang }}
                                     </td>
                                     <td class="align-middle text-nowrap">
-                                        {{ value.email_khach_hang }}
+                                        {{ value.email }}
                                     </td>
                                     <td class="align-middle text-nowrap">
                                         {{ value.so_dien_thoai }}
@@ -124,7 +124,7 @@
                                                     placeholder="Enter the area name..."
                                                 />
                                                 <InputComponent
-                                                    v-model="editKhachHang.email_khach_hang"
+                                                    v-model="editKhachHang.email"
                                                     label="Phone Number"
                                                     placeholder="Enter the Phone Number..."
                                                 />
