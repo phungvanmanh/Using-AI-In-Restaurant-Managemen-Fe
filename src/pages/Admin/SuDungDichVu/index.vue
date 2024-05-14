@@ -170,7 +170,7 @@
                                                             <td class="align-middle">
                                                                 <input v-on:change="updateMonAn(value)" v-model="value.phan_tram_giam" type="number" class="form-control" />
                                                             </td>
-                                                            <td class="align-middle">{{ value.thanh_tien }}</td>
+                                                            <td class="align-middle">{{ formatToVN(value.thanh_tien) }}</td>
                                                             <td class="align-middle">
                                                                 <input v-on:change="updateMonAn(value)" v-model="value.ghi_chu" type="text" class="form-control" />
                                                             </td>
@@ -206,7 +206,7 @@
                                                 <p><b>Phần trăm giảm:</b></p>
                                                 <input @change="updateHoaDon()" type="number" class="form-control" v-model="phan_tram_giam_hoa_don" />
                                                 <p class="mt-3"><b>Tiền thực thu:</b></p>
-                                                <p><b>{{ tien_thuc_thu }}</b></p>
+                                                <p><b>{{ formatToVN(tien_thuc_thu) }}</b></p>
                                             </div>
                                         </div>
                                     </div>
@@ -529,10 +529,10 @@ export default {
                     // Xử lý lỗi nếu cần
                 });
         };
-        // function formatToVN (number) {
-        //     number = parseInt(number);
-        //     return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
-        // }
+        function formatToVN (number) {
+            number = parseInt(number);
+            return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+        }
         const updateMonAn = (v) => {
             axios
                 .post(
@@ -682,7 +682,8 @@ export default {
             updateCheckingTransaction,
             searchMonAn,
             search,
-            gopBan
+            gopBan,
+            formatToVN
         };
     },
 };

@@ -33,6 +33,8 @@ import { onMounted, ref } from 'vue';
 import axios from '@/axiosConfig';
 import Toast from "@/toastConfig";
 import $ from "jquery";
+// import AuthService from "@/services/AuthService";
+
 export default {
     name: "Login-Customer",
     setup () {
@@ -77,7 +79,7 @@ export default {
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast('success', res.data.message);
-                        localStorage.setItem('khach_hang', res.data.access_token);
+                        localStorage.setItem("khach_hang", JSON.stringify(res.data));
                         setInterval(() => {
                             window.location.href = "/";
                         }, 2000);
@@ -89,6 +91,7 @@ export default {
                     });
                 });
         }
+        
         return { verifyEmail, moveToNext, step, email, otp, Login, sendOtp };
     },
     computed: {

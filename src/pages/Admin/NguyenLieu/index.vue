@@ -112,7 +112,7 @@
                                         {{ value.slug_nguyen_lieu }}
                                     </td>
                                     <td class="text-end align-middle text-nowrap">
-                                        {{ value.gia }}đ
+                                        {{ formatToVN(value.gia) }}
                                     </td>
                                    
                                     <td class="text-center align-middle text-nowrap">
@@ -368,7 +368,10 @@ export default {
         onMounted(() => {
             store.dispatch("onFetchNguyenLieu");
         });
-
+        function formatToVN (number) {
+            number = parseInt(number);
+            return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+        }
         return {
             addNguyenLieu,
             tinhTrang,
@@ -382,6 +385,7 @@ export default {
             deleteNguyenLieu,
             searchNguyenLieu,
             search,
+            formatToVN,
         };
     },
 };

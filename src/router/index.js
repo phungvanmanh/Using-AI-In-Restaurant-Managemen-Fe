@@ -32,6 +32,7 @@ import LoginCustomer from "@/pages/Customer/Login"
 import ThongKe from "@/pages/Admin/ThongKe";
 import TonKhoNguyenLieu from "@/pages/Admin/TonKhoNguyenLieu";
 import Test123 from "@/pages/Admin/Test123";
+import DoanhThu from "@/pages/Admin/DoanhThu";
 const routes = [
     {
         path: "/admin/login",
@@ -158,6 +159,10 @@ const routes = [
             {
                 path:"test-123",
                 component:Test123,
+            },
+            {
+                path:"doanh-thu",
+                component:DoanhThu,
             },
           
         ],

@@ -171,7 +171,7 @@
                     </li>
                     <li>
                         <router-link to="/admin/ma-giam-gia">
-                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Mã Giảm Giá</a>
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Code Voucher</a>
 
                         </router-link>
                     </li>
@@ -226,17 +226,28 @@
 
                 </ul>
             </li>
-            
-            <li class="nav-item">
-                <router-link to="/admin/thong-ke">
-                    <a class="nav-link">
-                        <div class="parent-icon">
-                            <i class="fa-solid fa-chart-simple"></i>
-                        </div>
-                        <div class="menu-title">Statistics</div>
-                    </a>
-                </router-link>
+            <li class="nav-item dropdown">
+                <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
+                    <div class="parent-icon">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                    <div class="menu-title">Statistics</div>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <router-link to="/admin/thong-ke">
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Statistics</a>
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/admin/doanh-thu">
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Turnover</a>
+                        </router-link>
+                    </li>
+
+                </ul>
             </li>
+           
         </ul>
     </nav>
 </div>

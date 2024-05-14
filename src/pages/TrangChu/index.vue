@@ -42,12 +42,7 @@
 <testMenu>
     <template #content-header>
         <div class="container">
-            <!-- <div class="row mt-2">
-                <marquee width="200px" style="height: 50px" behavior="alternate" bgcolor="pink">
-                    <p><b>Cac su kien quan trong</b></p>
-                    <br />
-                </marquee>
-            </div> -->
+
             <div class="row mt-2">
                 <div id="carouselExampleFade" class="carousel slide carousel-fade">
                     <div class="carousel-inner">
@@ -100,9 +95,38 @@
             </div>
             <div class="row mt-2"></div>
         </div>
-        <div class="container">
-            <div class="row text-center">
-                <h5>Món Nổi Bậc:</h5>
+        <div class="container mt-2  ">
+            <div class="row text-center mt-2">
+                <h5  style="color: blueviolet;" class="blink-text">Món Ăn Nổi Bậc</h5>
+            </div>
+            <div class="row mt-4">
+                <template v-for="(value, index) in dataMonNoiBac" :key="index">
+                    <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        <div class="card4321">
+                            <div class="card-img4321">
+                                <img style="height: 100%;width: 100%;" class="img-fluid" :src="value.image" alt="Hình ảnh món ăn" />
+                            </div>
+                            <div class="card-info4321">
+                                <p class="text-title4321">{{ value.food_name }}</p>
+                            </div>
+                            <div class="card-footer4321">
+                                <span class="text-title4321">
+                                    <b style="color: brown;">{{ formatToVN(value.price) }}</b> đ
+                                </span>
+                                <div class="card-button4321">
+                                    <button @click="getReview(value.id);setMonAnId(value.id)" class="fa-solid fa-arrows-to-eye" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </template>
+            </div>
+
+        </div>
+        <div class="container mt-3">
+            <div class="row text-center mt-3">
+                <h5  style="color: blueviolet;" class="blink-text">Món Ăn Ngon</h5>
             </div>
             <div class="container">
                 <div class="row mt-4">
@@ -117,10 +141,10 @@
                                 </div>
                                 <div class="card-footer4321">
                                     <span class="text-title4321">
-                                        <b style="color: brown;">{{ value.price }}</b> đ
+                                        <b style="color: brown;">{{ formatToVN(value.price) }}</b> đ
                                     </span>
                                     <div class="card-button4321">
-                                        <i class="fa-solid fa-arrows-to-eye" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                        <button @click="getReview(value.id);setMonAnId(value.id)" class="fa-solid fa-arrows-to-eye" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
                                     </div>
                                 </div>
                             </div>
@@ -144,36 +168,37 @@
                             <div class="card radius-10" style="width: 100%;">
                                 <div class="card-body">
                                     <ul class="list-unstyled">
-                                        <li class="d-flex align-items-center border-bottom pb-2">
-                                            <h5>Linh</h5>
-                                            <div class="flex-grow-1 ms-3">
-
-                                                ngon tuyệt cú mèo
-                                            </div>
-                                        </li>
-                                        <li class="d-flex align-items-center my-4 border-bottom pb-2">
-                                            <h5>Thiện</h5>
-                                            <div class="flex-grow-1 ms-3">
-                                                ngon nhức cái nách
-                                            </div>
-                                        </li>
-                                        <li class="d-flex align-items-center">
-                                            <h5>Huy</h5>
-                                            <div class="flex-grow-1 ms-3">
-                                                cũng ra gì đó
-                                            </div>
-                                        </li>
+                                        <div v-for="(value,key) in reviews" :key="key">
+                                            <li class="d-flex align-items-center border-bottom pb-2">
+                                                <h5>{{ value.ten_khach_hang }}</h5>
+                                                <div class="flex-grow-1 ms-3">
+                                                    : {{ value.binh_luan }}
+                                                </div>
+                                                <div class="dropdown ms-auto">
+                                                    <div class="dropdown-toggle dropdown-toggle-nocaret cursor-pointer text-end" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="bx bx-dots-horizontal-rounded font-22"></i>
+                                                    </div>
+                                                    <ul class="dropdown-menu dropdown-menu-end" style="">
+                                                        <li><a v-on:click="deleteReview(value.id)" class="dropdown-item" href="javascript:;">Xoá</a></li>
+                                                    </ul>
+                                                </div>
+                                            </li>
+                                        </div>
                                     </ul>
                                 </div>
                             </div>
+
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                                 Đóng
                             </button>
-                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#danhgiaModal">
-                                Viết Đánh Giá
-                            </button>
+                            <template v-if="isShow == true">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#danhgiaModal">
+                                    Viết Đánh Giá
+                                </button>
+                            </template>
+
                         </div>
                     </div>
                 </div>
@@ -190,19 +215,20 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input class="form-control" type="text" name="" id="" placeholder="Mời bạn viết đánh giá,lưu ý không có những hành động phá hoại" />
+                        <input v-model="binhLuan" class="form-control" type="text" name="" id="" placeholder="Mời bạn viết đánh giá,lưu ý không có những hành động phá hoại" />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                             Close
                         </button>
-                        <button type="button" class="btn btn-primary">
-                            Đăng
+                        <button v-on:click="taoDanhGia()" type="button" data-bs-dismiss="modal" class="btn btn-primary">
+                            Save
                         </button>
                     </div>
                 </div>
             </div>
         </div>
+      
     </template>
 </testMenu>
 </template>
@@ -229,7 +255,9 @@ export default {
     },
 
     setup() {
+        const reviews = ref([]);
         const isShow = ref(false);
+        const binhLuan = ref('');
         document.addEventListener("DOMContentLoaded", function () {
             const menuBtn = document.getElementById("menu-btn_1");
             const closeBtn = document.getElementById("close-btn_1");
@@ -266,10 +294,11 @@ export default {
         const search = ref({});
 
         const store = useStore();
-
+        const delete_danhgia = ref({});
         const dataBaiViet = computed(() => {
             return store.state.dataBaiViet;
         });
+        const dataMonNoiBac = ref([]);
         const dataMonAn = computed(() => {
             return store.state.dataMonAn;
         });
@@ -277,7 +306,7 @@ export default {
             return store.state.dataDanhMuc;
         });
         const isHomeSelected = ref(true); // Thêm biến này
-        
+
         const monAnList = ref([]);
 
         const getMonAnById = (id) => {
@@ -294,6 +323,18 @@ export default {
                 })
                 .catch(error => {
                     console.error(error);
+                });
+        };
+        const getMonAnNoiBac = () => {
+            axios
+                .get('get-mon-an-pho-bien') 
+                .then(response => {
+                    dataMonNoiBac.value = response.data.data;
+                    console.log( response.data.data);
+                })
+            
+                .catch(error => {
+                    console.error('Error fetching reviews:', error);
                 });
         };
 
@@ -317,7 +358,7 @@ export default {
             axios
                 .get('khach-hang/logout')
                 .then((res) => {
-                    if(res.data.status == 1) {
+                    if (res.data.status == 1) {
                         localStorage.removeItem('khach_hang');
                         Toast("success", res.data.message);
                         setInterval(() => {
@@ -329,11 +370,59 @@ export default {
 
         const checkLogin = () => {
             // Nếu như có thì isShow == true;
-            if(!localStorage.getItem('khach_hang')) {
+            if (!localStorage.getItem('khach_hang')) {
                 isShow.value = false;
             } else {
                 isShow.value = true;
             }
+        }
+        const getReview = (id_mon_an) => {
+            axios
+                .get(`review/${id_mon_an}`) // Sử dụng URL đúng theo định nghĩa route
+                .then(response => {
+                    reviews.value = response.data.reviews;
+                })
+                .catch(error => {
+                    console.error('Error fetching reviews:', error);
+                });
+        };
+        const currentMonAnId = ref(null);
+        const setMonAnId = (idMonAn) => {
+            currentMonAnId.value = idMonAn;
+        };
+        const taoDanhGia = () => {
+            const payload = {
+                binh_luan: binhLuan.value,
+                id_mon_an: currentMonAnId.value,
+            };
+
+            axios.post('review/tao-danh-gia', payload, "khach_hang")
+                .then((res) => {
+                    if (res.data.status == 1) {
+                        Toast("success", res.data.message);
+                        binhLuan.value = "";
+                        getReview(currentMonAnId.value);
+                    }
+                });
+        }
+        const deleteReview = (id_danh_gia) => {
+            axios
+                .post("review/xoa-danh-gia", {
+                    id_danh_gia
+                }, "khach_hang")
+                .then((res) => {
+                    if (res.data.status == 1) {
+                        Toast("success", res.data.message);
+
+                    }
+                })
+                .catch((error) => {
+                    Toast("error", error.response.data.message);
+                });
+        };
+         function formatToVN (number) {
+            number = parseInt(number);
+            return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
         }
         onMounted(() => {
             document.body.style.fontFamily = '';
@@ -348,6 +437,7 @@ export default {
             store.dispatch("onFetchMonAn");
             store.dispatch("onFetchDanhMuc");
             checkLogin();
+            getMonAnNoiBac();
         });
         return {
             dataBaiViet,
@@ -360,7 +450,17 @@ export default {
             search,
             searchMonAn,
             isShow,
-            logOut
+            logOut,
+            reviews,
+            getReview,
+            binhLuan,
+            taoDanhGia,
+            setMonAnId,
+            deleteReview,
+            delete_danhgia,
+            dataMonNoiBac,
+            getMonAnNoiBac,
+            formatToVN
 
         };
     },
@@ -770,4 +870,35 @@ export default {
     display: inline-block;
     /* Hiển thị các thẻ card cùng một hàng */
 }
+
+.review-item {
+    position: relative;
+    /* Thiết lập vị trí của mỗi dòng là tương đối */
+    margin-bottom: 10px;
+    /* Khoảng cách giữa các dòng */
+}
+
+.review-item::after {
+    content: '...';
+    /* Nội dung của dấu ba chấm */
+    position: absolute;
+    /* Thiết lập vị trí của dấu ba chấm là tuyệt đối */
+    right: 0;
+    /* Đặt dấu ba chấm ở bên phải cuối mỗi dòng */
+}
+@keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .blink-text {
+            animation: blink 1s infinite;
+        }
 </style>
