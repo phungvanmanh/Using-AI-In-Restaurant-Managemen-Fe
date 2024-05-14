@@ -88,7 +88,7 @@
                             </div>
                             <div class="col-3">
                                 <!-- <label style="margin-bottom: 10px;" for=""><b style="color: blue;">Gộp Bàn</b></label> -->
-                                <SelectComponent v-model="id_ban_chuyen" label="Gộp Bàn" :options="dataBanChuyen"/>
+                                <SelectComponent v-model="id_ban_chuyen" label="Gộp Bàn" :options="dataBanChuyen" />
                             </div>
                             <div class="col-3">
                                 <button v-on:click="gopBan()" style="margin-top: 30px;" class="btn btn-primary"> Xác Nhận</button>
@@ -110,7 +110,7 @@
                                                     <thead>
                                                         <tr>
                                                             <th colspan="100%">
-                                                                <div class="input-group mb-3"><input  v-on:keyup.enter="searchMonAn()" v-model="search.abc" type="text" class="form-control" placeholder="nhập món ăn cần tìm"><button @click="searchMonAn()" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button></div>
+                                                                <div class="input-group mb-3"><input v-on:keyup.enter="searchMonAn()" v-model="search.abc" type="text" class="form-control" placeholder="nhập món ăn cần tìm"><button @click="searchMonAn()" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button></div>
                                                             </th>
                                                         </tr>
                                                         <tr>
@@ -228,7 +228,7 @@
                         <router-link :to="'/admin/bill-thanh-toan/' + id_hoa_don_ban_hang" target="_blank">
                             <button type="button" class="btn btn-danger">In Hóa Đơn</button>
                         </router-link>
-                        <button type="button" class="btn btn-primary" @click="activityView = false; thanhToan();">Thanh Toán</button>
+                        <button type="button" class="btn btn-primary" @click= "thanhToan()">Thanh Toán</button>
                     </template>
                     <template v-else>
                         <button type="button" class="btn btn-primary" @click="activityView = true; updateCheckingTransaction();">Quay lại</button>
@@ -320,12 +320,27 @@ export default {
         );
 
         function updateQRCode() {
-            link_qr.value = `https://img.vietqr.io/image/${BANK_ID}-${ACCOUNT_NO}-compact2.png?amount=${tien_thuc_thu.value}&addInfo=${bill_id.value}&accountName=PHUNG_VAN_MANH`;
+            link_qr.value = `https://img.vietqr.io/image/${BANK_ID}-${ACCOUNT_NO}-compact2.png?amount=${tien_thuc_thu.value}&addInfo=${bill_id.value}`;
         }
 
+        // const storeCustomer = () => {
+        //     khach_hang.value.id_hoa_don = id_hoa_don_ban_hang.value;
+        //     axios.post("admin/khach-hang/store", khach_hang.value, "admin");
+        // };
         const storeCustomer = () => {
             khach_hang.value.id_hoa_don = id_hoa_don_ban_hang.value;
-            axios.post("admin/khach-hang/store", khach_hang.value, "admin");
+                axios.post("admin/khach-hang/store", khach_hang.value)
+                    .then(response => {
+                        if(response.data.status==1){
+                            activityView.value =false;
+                        }
+                        console.log(response.data); // Hoặc thực hiện các hành động khác
+                    })
+                    .catch((res) => {
+                    $.each(res.response.data.errors, function (k, v) {
+                        Toast("error", v[0]);
+                    });
+                });
         };
 
         const thanhToan = async () => {
@@ -466,13 +481,13 @@ export default {
                         getChiTietHoaDon(hoa_don.value.id);
                         store.dispatch("onFetchMonAn");
                         dataBanChuyen.value = dataBan.value
-                                                    .filter(item => item.id !== hoa_don.value.id_ban && item.is_open_table == 1)
-                                                    .map(item => {
-                                                        return {
-                                                            text: item.name_table,
-                                                            value: item.id
-                                                        };
-                                                    });
+                            .filter(item => item.id !== hoa_don.value.id_ban && item.is_open_table == 1)
+                            .map(item => {
+                                return {
+                                    text: item.name_table,
+                                    value: item.id
+                                };
+                            });
                     }
                 })
                 .catch((res) => {
@@ -589,6 +604,10 @@ export default {
                         Toast("success", res.data.message);
                         getIdHoaDon(hoa_don.value.id_ban);
                     }
+                    else{
+                        Toast("error", res.data.message);
+                        
+                    }
                 })
                 .catch((res) => {
                     $.each(res.response.data.errors, function (k, v) {
@@ -608,6 +627,7 @@ export default {
                 console.error("Lỗi khi tạo QR Code:", error);
             }
         }
+
         function searchMonAn() {
             axios
                 .post('admin/mon-an/tim-mon', search.value)
@@ -620,8 +640,8 @@ export default {
         const gopBan = () => {
             var payload = {
                 id_ban_hien_tai: hoa_don.value.id_ban,
-                id_ban_can_gop:id_ban_chuyen.value
-               
+                id_ban_can_gop: id_ban_chuyen.value
+
             };
             axios
                 .post(
@@ -635,7 +655,6 @@ export default {
                         getIdHoaDon(hoa_don.value.id_ban);
                         getChiTietHoaDon(hoa_don.value.id);
                         store.dispatch("onFetchBan");
-
 
                     }
                 })
