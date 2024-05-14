@@ -46,6 +46,8 @@
                                 <div class="modal-body">
                                     <label for="">Số Lượng Tồn</label>
                                     <input type="number" name="" id="" class="form-control">
+                                    <label for="">Ngày</label>
+                                    <input type="date" name="" id="" class="form-control">
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>

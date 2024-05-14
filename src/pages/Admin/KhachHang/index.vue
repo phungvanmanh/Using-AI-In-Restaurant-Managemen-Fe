@@ -22,11 +22,11 @@
                             <tr>
                                     <th colspan="100%">
                                         <div class="input-group mb-3">
-                                            <input
+                                            <input v-on:keyup.enter="searchKhachHang()" v-model="search.abc"
                                                 type="text"
                                                 class="form-control"
                                                 placeholder="Nhập thông tin cần tìm"
-                                            /><button  class="btn btn-primary">
+                                            /><button  v-on:click="searchKhachHang()" class="btn btn-primary">
                                                 <i
                                                     class="fa-solid fa-magnifying-glass"
                                                 ></i>
@@ -210,8 +210,14 @@ import CardComponent from "@/components/CardComponent.vue";
 import InputComponent from "@/components/InputComponent.vue";
 import TableComponent from "@/components/TableComponent.vue";
 import ModalComponent from "@/components/ModalComponent.vue";
-import { ref, computed, onMounted } from "vue";
-import { useStore } from "vuex";
+import {
+    ref,
+    computed,
+    onMounted
+} from "vue";
+import {
+    useStore
+} from "vuex";
 import axios from "@/axiosConfig";
 import Toast from "@/toastConfig";
 import $ from "jquery";
@@ -225,12 +231,15 @@ export default {
         ModalComponent,
     },
     setup() {
+
         const store = useStore();
         const addKhachHang = ref({});
         const deleteKhachHang = ref({});
-        // const tinh_trang = computed(() => {
-        //     return store.state.tinh_trang;
-        // });
+        const tinh_trang = computed(() => {
+            return store.state.tinh_trang;
+        });
+        const search = ref({});
+
         const dataKhachHang = computed(() => {
             return store.state.dataKhachHang;
         });
@@ -252,7 +261,7 @@ export default {
                 });
         };
 
-
+       
         const deleteUser = () => {
             axios
                 .post("admin/khach-hang/delete", deleteKhachHang.value)
@@ -311,12 +320,20 @@ export default {
                     console.error("Download error:", error);
                 });
         };
+        function searchKhachHang() {
+            axios
+                .post('admin/khach-hang/search-khach-hang', search.value)
+                .then((res) => {
+                    console.log(res.data.data);
+                    store.commit('fecthKhachHang', res.data.data);
+                });
+        }
 
         onMounted(() => {
             store.dispatch("onFetchKhachHang");
         });
         return {
-            // tinh_trang,
+            tinh_trang,
             dataKhachHang,
             addKhachHang,
             deleteKhachHang,
@@ -324,7 +341,9 @@ export default {
             updateKhachHang,
             changeStatus,
             deleteUser,
-            exportExcel
+            exportExcel,
+            searchKhachHang,
+            search,
         };
     },
 };
