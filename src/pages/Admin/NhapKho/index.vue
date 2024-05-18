@@ -12,10 +12,12 @@
                                         <th colspan="100%">
                                             <div class="input-group mb-3">
                                                 <input
+                                                v-on:keyup.enter="searchNguyenLieu()" v-model="search.abc"
                                                     type="text"
                                                     class="form-control"
                                                     placeholder="Nhập thông tin cần tìm"
                                                 /><button
+                                                @click="searchNguyenLieu()"
                                                     class="btn btn-primary"
                                                 >
                                                     <i
@@ -281,6 +283,7 @@ export default {
             return store.state.tinh_trang;
         });
         const dataNhapKho = ref([]);
+        const search =ref({});
         const tong_tien = ref("");
         const nhap_kho = ref({
             id_nha_cung_cap: 0,
@@ -378,6 +381,14 @@ export default {
                     });
                 });
         };
+        function searchNguyenLieu() {
+            axios
+                .post('admin/nguyen-lieu/tim-nguyen-lieu', search.value)
+                .then((res) => {
+                    console.log(res.data.data);
+                    store.commit('fecthNguyenLieu', res.data.data);
+                });
+        }
         onMounted(() => {
             store.dispatch("onFetchNguyenLieu");
             store.dispatch("onFetchNhaCungCap");
@@ -398,6 +409,8 @@ export default {
             deleteNguyenLieu,
             nhap_kho,
             createHoaDonNhapKho,
+            searchNguyenLieu,
+            search,
         };
     },
 };

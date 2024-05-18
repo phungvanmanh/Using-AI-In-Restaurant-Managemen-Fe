@@ -443,8 +443,10 @@ export default {
                 if(response.data.status === 1) {
                     localStorage.removeItem('admin');
                     // router.push({ name: 'login' })
-                    window.location.href = "/admin/login";
-                    Toast("success", response.data.message);
+                    setInterval(() => {
+                            window.location.href = "/admin/login";
+                        }, 1000);
+                        Toast("success", response.data.message);
                 }
             } catch (error) {
                 $.each(error.response.data.errors, function (k, v) {

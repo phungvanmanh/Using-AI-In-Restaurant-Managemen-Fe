@@ -131,7 +131,8 @@
             <div class="container">
                 <div class="row mt-4">
                     <template v-for="(value, index) in (isHomeSelected ? dataMonAn : monAnList)" :key="index">
-                        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                        <template v-if="value.status==1">
+                            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="card4321">
                                 <div class="card-img4321">
                                     <img style="height: 100%;width: 100%;" class="img-fluid" :src="value.image" alt="Hình ảnh món ăn" />
@@ -148,7 +149,8 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div></template>
+                        
 
                     </template>
                 </div>
