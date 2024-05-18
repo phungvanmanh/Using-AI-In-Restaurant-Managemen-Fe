@@ -53,16 +53,17 @@
                                             <h4 class="my-1">{{ value.name_table }}</h4>
                                             <template v-if="value.is_open_table == 0">
                                                 <button @click="activityView = true; openTable(value.id);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mobanModal">
-                                                    Mở Bàn
+                                                    Open table
                                                 </button>
                                             </template>
                                             <template v-else>
                                                 <button class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#qrModal" @click="generateQRCode(value.id)">
                                                     QR Login
                                                 </button>
-                                                <button class="btn btn-success" @click="getIdHoaDon(value.id)" data-bs-toggle="modal" data-bs-target="#mobanModal">
-                                                    Thanh Toán
+                                                <button class="btn btn-success me-2" @click="getIdHoaDon(value.id)" data-bs-toggle="modal" data-bs-target="#mobanModal">
+                                                    Payment
                                                 </button>
+                                                <button  v-on:click="closeTableId.id_ban=value.id;getIdHoaDon(value.id);"  class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#closeModal">Close Table</button>
                                             </template>
                                         </div>
                                     </div>
@@ -79,7 +80,7 @@
         <div class="modal-dialog modal-xl" style="max-width: 100%">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Mở Bàn</h1>
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel"> Open table</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -89,11 +90,10 @@
 
                             </div>
                             <div class="col-3">
-                                <!-- <label style="margin-bottom: 10px;" for=""><b style="color: blue;">Gộp Bàn</b></label> -->
                                 <SelectComponent v-model="id_ban_chuyen" label="Gộp Bàn" :options="dataBanChuyen" />
                             </div>
                             <div class="col-3">
-                                <button v-on:click="gopBan()" style="margin-top: 30px;" class="btn btn-primary"> Xác Nhận</button>
+                                <button v-on:click="gopBan()" style="margin-top: 30px;" class="btn btn-primary">Confirm</button>
                             </div>
 
                         </div>
@@ -101,7 +101,7 @@
                             <div class="col-lg-4">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h6>Danh sách món ăn</h6>
+                                        <h6>List of dishes</h6>
                                     </div>
 
                                     <div class="card-body">
@@ -117,8 +117,8 @@
                                                         </tr>
                                                         <tr>
                                                             <th class="align-middle text-center">#</th>
-                                                            <th class="align-middle text-center">Tên Hàng</th>
-                                                            <th class="align-middle text-center">Hình Ảnh</th>
+                                                            <th class="align-middle text-center">Row name</th>
+                                                            <th class="align-middle text-center">Image</th>
                                                             <th class="align-middle text-center">Action</th>
                                                         </tr>
                                                     </thead>
@@ -129,7 +129,7 @@
                                                                 <td class="align-middle text-center">{{ value.food_name }}</td>
                                                                 <td class="text-center align-middle text-nowrap"><img v-bind:src="value.image" width="100" height="100" alt=""></td>
                                                                 <td class="align-middle text-center">
-                                                                    <button v-on:click="themMonAn(value)" class="btn btn-primary">Thêm</button>
+                                                                    <button v-on:click="themMonAn(value)" class="btn btn-primary">Add</button>
                                                                 </td>
                                                             </tr>
                                                         </template>
@@ -142,19 +142,19 @@
                             </div>
                             <div class="col-lg-8">
                                 <div class="card">
-                                    <div class="card-header">Món ăn sử dụng</div>
+                                    <div class="card-header">Food used</div>
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th class="text-center align-middle">#</th>
-                                                        <th class="text-center align-middle">Tên món ăn</th>
-                                                        <th class="text-center align-middle">Số lượng</th>
-                                                        <th class="text-center align-middle">Đơn giá</th>
-                                                        <th class="text-center align-middle">% giảm giá</th>
-                                                        <th class="text-center align-middle">Thành tiền</th>
-                                                        <th class="text-center align-middle">Ghi chú</th>
+                                                        <th class="text-center align-middle">Dish</th>
+                                                        <th class="text-center align-middle">Amount</th>
+                                                        <th class="text-center align-middle">Price</th>
+                                                        <th class="text-center align-middle">% Percent</th>
+                                                        <th class="text-center align-middle">Into money</th>
+                                                        <th class="text-center align-middle">Note</th>
                                                         <th class="text-center align-middle">Action</th>
                                                     </tr>
                                                 </thead>
@@ -205,7 +205,7 @@
                                                 <input @change="updateHoaDon()" type="number" class="form-control" v-model="tong_tien" />
                                             </div>
                                             <div class="col-lg-6">
-                                                <p><b>Phần trăm giảm:</b></p>
+                                                <p><b>Percentage decrease:</b></p>
                                                 <input @change="updateHoaDon()" type="number" class="form-control" v-model="phan_tram_giam_hoa_don" />
                                                 <p class="mt-3"><b>Tiền thực thu:</b></p>
                                                 <p><b>{{ formatToVN(tien_thuc_thu) }}</b></p>
@@ -226,14 +226,14 @@
                 </div>
                 <div class="modal-footer">
                     <template v-if="activityView == true">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="activityView = true; updateCheckingTransaction();">Đóng</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" @click="activityView = true; updateCheckingTransaction();">Close</button>
                         <router-link :to="'/admin/bill-thanh-toan/' + id_hoa_don_ban_hang" target="_blank">
-                            <button type="button" class="btn btn-danger">In Hóa Đơn</button>
+                            <button type="button" class="btn btn-danger">Print an invoice</button>
                         </router-link>
-                        <button type="button" class="btn btn-primary" @click=" thanhToan();">Thanh Toán</button>
+                        <button type="button" class="btn btn-primary" @click=" thanhToan();">Payment</button>
                     </template>
                     <template v-else>
-                        <button type="button" class="btn btn-primary" @click="activityView = true; updateCheckingTransaction();">Quay lại</button>
+                        <button type="button" class="btn btn-primary" @click="activityView = true; updateCheckingTransaction();">Back</button>
                     </template>
                 </div>
             </div>
@@ -259,6 +259,26 @@
         </div>
     </div>
 
+<!-- Modal -->
+<div class="modal fade" id="closeModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Close Table</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+       <p style="color: red">
+        Note this may run out of deleted items,
+        Unable to complete!!</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button v-on:click="confirmCloseTable()" type="button" class="btn btn-primary" data-bs-dismiss="modal" >Confirm</button>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 </template>
 
@@ -310,6 +330,7 @@ export default {
         const qrCodeData = ref("");
         const activityView = ref(true);
         const checkingTransaction = ref(false);
+        const closeTableId = ref({});
         // Thông tin GD
         const BANK_ID = "970422";
         const ACCOUNT_NO = "9704229206656928914";
@@ -451,6 +472,30 @@ export default {
                         getIdHoaDon(payload.id_ban);
                         store.dispatch("onFetchMonAn");
                         store.dispatch("onFetchBan");
+                    }
+                })
+                .catch((res) => {
+                    $.each(res.response.data.errors, function (k, v) {
+                        Toast("error", v[0]);
+                    });
+                });
+        };
+       
+
+        const confirmCloseTable = () => {
+            
+            const payload = {
+                id_ban: closeTableId.value.id_ban,
+                id_hoa_don:hoa_don.value.id,
+            };
+            console.log(payload);
+            axios
+                .post("admin/su-dung-dich-vu/dong-ban", payload, "admin")
+                .then((res) => {
+                    if (res.data.status === 1) {
+                        Toast("success", res.data.message);
+                        store.dispatch("onFetchBan");
+                    
                     }
                 })
                 .catch((res) => {
@@ -700,7 +745,9 @@ export default {
             searchMonAn,
             search,
             gopBan,
-            formatToVN
+            formatToVN,
+            closeTableId,
+            confirmCloseTable
         };
     },
 };

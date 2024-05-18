@@ -16,7 +16,7 @@
 										<div class="row g-3">
 											<div class="col-12">
 												<label for="inputEmailAddress" class="form-label">New Password</label>
-												<input type="email" v-model="password" class="form-control" id="inputEmailAddress" placeholder="Email Address">
+												<input type="email" v-model="password" class="form-control" id="inputEmailAddress" placeholder=" Enter password ">
 											</div>
 											<div class="col-12">
 												<div class="d-grid">
