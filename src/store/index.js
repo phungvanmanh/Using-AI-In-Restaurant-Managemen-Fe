@@ -22,6 +22,7 @@ export default createStore({
         TOKEN_ADMIN : '',
         dataNguyenLieu:[],
         dataMaGiamGia:[],
+        dataTonKho:[],
     },
     getters: {
         toSlug: () => (str) => {
@@ -102,6 +103,9 @@ export default createStore({
         },
         fecthMaGiamGia(state, data) {
             state.dataMaGiamGia = data;
+        },
+        fecthTonKho(state, data) {
+            state.dataTonKho = data;
         },
     },
     actions: {
@@ -226,6 +230,14 @@ export default createStore({
                 commit("fecthMaGiamGia", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchMaGiamGia:", error);
+            }
+        },
+        onFetchTonKho: async ({ commit }) => {
+            try {
+                const response = await axios.get("admin/ton-kho/get-data");
+                commit("fecthTonKho", response.data.data);
+            } catch (error) {
+                console.error("Có lỗi xảy ra trong onFetchTonKho:", error);
             }
         },
     },

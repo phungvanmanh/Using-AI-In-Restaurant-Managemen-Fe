@@ -75,7 +75,7 @@
                                     {{ value.food_name }}
                                 </td>
                                 <td class="text-center align-middle text-nowrap">
-                                    {{ value.price }}
+                                    {{ formatToVN(value.price) }}
                                 </td>
                                 <td class="text-center align-middle text-nowrap">
                                     <img v-bind:src="value.image" height="50" alt="">
@@ -274,6 +274,10 @@ export default {
                 });
         }
         const dataMonAn = computed(() => store.state.dataMonAn);
+        function formatToVN (number) {
+            number = parseInt(number);
+            return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+        }
 
         onMounted(() => {
             store.dispatch("onFetchMonAn");
@@ -293,6 +297,7 @@ export default {
             deleteMonAn,
             searchMonAn,
             search,
+            formatToVN
         };
     },
 };

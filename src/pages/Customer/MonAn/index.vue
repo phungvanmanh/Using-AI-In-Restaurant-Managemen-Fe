@@ -1,13 +1,54 @@
 <template>
-<div class="row mt-4">
+    <div class="row mt-4">
     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Món Đã Gọi</button>
 </div>
-<div class="row mt-4">
-    <h5>Các Món Nổi Bậc</h5>
+    <div class="row mt-4 text-center">
+    <div class="col-12" style="margin-left: 20px;color: blue;"> <h5>Món Ăn Nổi Bậc</h5></div>
+   
 </div>
 <Menu>
     <template #content>
+        <hr>
+        <template v-for="(value, index) in dataMonNoiBac" :key="index">
 
+            <div class="col">
+
+                <div class="card" style="max-width: 300px; ">
+                    <div class="face face1">
+                        <div class="content">
+                            <div class="icon">
+                                <img style="
+                                            width: 100%;
+                                            height: 100%;
+                                        " :src="value.image" alt="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="face face2">
+                        <div class="content">
+                            <h3>{{ value.food_name }}</h3>
+                            <p>
+                                <b style="color: red;">{{ formatToVN(value.price) }}</b></p>
+                            <div class="col text-center">
+                                <button class="btn btn-primary" @click="themMonAn(value)">
+                                    Add
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </template>
+    </template>
+</Menu>
+
+<div class="row mt-4">
+    <div class="col-12 text-center" style="margin-left: 20px; color: blue;"> <h5>Menu</h5></div>
+   
+</div>
+<Menu>
+    <template #content>
         <hr>
         <template v-for="(value, index) in data" :key="index">
 
@@ -28,7 +69,7 @@
                         <div class="content">
                             <h3>{{ value.food_name }}</h3>
                             <p>
-                                <b style="color: red;">{{ value.price }}</b> đ</p>
+                                <b style="color: red;">{{ formatToVN(value.price) }}</b></p>
                             <div class="col text-center">
                                 <button class="btn btn-primary" @click="themMonAn(value)">
                                     Add
@@ -42,6 +83,8 @@
         </template>
     </template>
 </Menu>
+
+
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-xl">
@@ -72,7 +115,7 @@
                                     <input type="number" disabled v-model="value.so_luong" class="form-control">
                                 </td>
                                 <td>{{value.don_gia}}đ</td>
-                                <td>{{ value.thanh_tien }}đ</td>
+                                <td>{{ formatToVN(value.thanh_tien) }}</td>
                             </tr>
                             </template>
                            
@@ -81,7 +124,7 @@
                             <tr >
                                 <th colspan="4" class="text-end"> Tổng tiền</th>
                                 <td>
-                                   <b style="color: red">{{ tong_tien }} đ</b> 
+                                   <b style="color: red">{{ formatToVN(tong_tien) }}</b> 
                                 </td>
                             </tr>
 
@@ -122,7 +165,7 @@ export default {
         const list_chi_tiet_ban_hang = ref([]);
         const tong_tien = ref(0);
         const khach_hang = ref({});
-
+        const dataMonNoiBac =ref([]);
         // const token = router.query.token;
         const getMonAn = () => {
             axios
@@ -174,10 +217,26 @@ export default {
                     // Xử lý lỗi nếu cần
                 });
         };
-        
+        const getMonAnNoiBac = () => {
+            axios
+                .get('admin/mon-an/get-mon-an-pho-bien') 
+                .then(response => {
+                    dataMonNoiBac.value = response.data.data;
+                    console.log( response.data.data);
+                })
+            
+                .catch(error => {
+                    console.error('Error fetching reviews:', error);
+                });
+        };
+        function formatToVN (number) {
+            number = parseInt(number);
+            return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+        }
         onMounted(() => {
             getMonAn();
             getChiTietHoaDon();
+            getMonAnNoiBac();
         })
         return {
             data,
@@ -186,6 +245,9 @@ export default {
             getChiTietHoaDon,
             khach_hang,
             tong_tien,
+            dataMonNoiBac,
+            getMonAnNoiBac,
+            formatToVN
         }
     },
     // data() {
