@@ -107,7 +107,7 @@
                 <ul class="dropdown-menu">
                     <li>
                         <router-link to="/admin/ton-kho-nguyen-lieu">
-                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Tồn Kho Nguyên Liệu</a>
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Inventory</a>
 
                         </router-link>
                     </li>
@@ -126,29 +126,31 @@
 
                 </ul>
             </li>
+        
+            <li class="nav-item dropdown">
+                <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
+                    <div class="parent-icon">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                    <div class="menu-title">Event</div>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <router-link to="/admin/chuyen-muc-bai-viet">
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Article Categories</a>
 
-            
-            <li class="nav-item">
-                <router-link to="/admin/bai-viet">
-                    <a class="nav-link">
-                        <div class="parent-icon">
-                            <i class="fa-solid fa-book"></i>
-                        </div>
-                        <div class="menu-title">Article</div>
-                    </a>
-                </router-link>
-            </li>
-            <li class="nav-item">
-                <router-link to="/admin/chuyen-muc-bai-viet">
-                    <a class="nav-link">
-                        <div class="parent-icon">
-                            <i class="fa-solid fa-book-open-reader"></i>
-                        </div>
-                        <div class="menu-title">Article Categories</div>
-                    </a>
-                </router-link>
-            </li>
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/admin/bai-viet">
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Article</a>
 
+                        </router-link>
+                    </li>
+                    
+
+                </ul>
+            </li>
             <li class="nav-item dropdown">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                     <div class="parent-icon">
@@ -172,6 +174,7 @@
                     <li>
                         <router-link to="/admin/ma-giam-gia">
                             <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Code Voucher</a>
+                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Discount code</a>
 
                         </router-link>
                     </li>

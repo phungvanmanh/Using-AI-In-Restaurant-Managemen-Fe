@@ -90,6 +90,7 @@
 
                             </div>
                             <div class="col-3">
+                                <!-- <label style="margin-bottom: 10px;" for=""><b style="color: blue;">Gộp Bàn</b></label> -->
                                 <SelectComponent v-model="id_ban_chuyen" label="Gộp Bàn" :options="dataBanChuyen" />
                             </div>
                             <div class="col-3">
@@ -343,9 +344,13 @@ export default {
         );
 
         function updateQRCode() {
-            link_qr.value = `https://img.vietqr.io/image/${BANK_ID}-${ACCOUNT_NO}-compact2.png?amount=${tien_thuc_thu.value}&addInfo=${bill_id.value}&accountName=PHUNG_VAN_MANH`;
+            link_qr.value = `https://img.vietqr.io/image/${BANK_ID}-${ACCOUNT_NO}-compact2.png?amount=${tien_thuc_thu.value}&addInfo=${bill_id.value}`;
         }
 
+        // const storeCustomer = () => {
+        //     khach_hang.value.id_hoa_don = id_hoa_don_ban_hang.value;
+        //     axios.post("admin/khach-hang/store", khach_hang.value, "admin");
+        // };
         const storeCustomer = () => {
             khach_hang.value.id_hoa_don = id_hoa_don_ban_hang.value;
                 axios.post("admin/khach-hang/store", khach_hang.value)
@@ -650,6 +655,10 @@ export default {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         getIdHoaDon(hoa_don.value.id_ban);
+                    }
+                    else{
+                        Toast("error", res.data.message);
+                        
                     }
                 })
                 .catch((res) => {
