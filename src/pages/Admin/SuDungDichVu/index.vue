@@ -26,49 +26,97 @@
                 </li>
                 <template v-for="(value, key) in dataKhuVuc" :key="key">
                     <template v-if="value.status==1">
-                        <li class="nav-item" role="presentation" v-on:click="getBanTheoKhuVuc(value)">
-                        <a class="nav-link" data-bs-toggle="tab" v-bind:href="'#primaryhome' + key" role="tab" aria-selected="false" tabindex="-1">
-                            <div class="d-flex align-items-center">
-                                <div class="tab-icon">
-                                    <i class="bx bx-bookmark-alt font-18 me-1"></i>
-                                </div>
-                                <div class="tab-title">{{ value.name_area }}</div>
-                            </div>
-                        </a>
-                    </li></template>
-                  
+                        <template v-if="user.name_permission.toLowerCase() === 'admin'">
+                            <li class="nav-item" role="presentation" v-on:click="getBanTheoKhuVuc(value)">
+                                <a class="nav-link" data-bs-toggle="tab" v-bind:href="'#primaryhome' + key" role="tab" aria-selected="false" tabindex="-1">
+                                    <div class="d-flex align-items-center">
+                                        <div class="tab-icon">
+                                            <i class="bx bx-bookmark-alt font-18 me-1"></i>
+                                        </div>
+                                        <div class="tab-title">{{ value.name_area }}</div>
+                                    </div>
+                                </a>
+                            </li>
+                        </template>
+                        <template v-else>
+                            <template v-if="value.list_admin.split(',').includes(user.id.toString())">
+                                <li class="nav-item" role="presentation" v-on:click="getBanTheoKhuVuc(value)">
+                                    <a class="nav-link" data-bs-toggle="tab" v-bind:href="'#primaryhome' + key" role="tab" aria-selected="false" tabindex="-1">
+                                        <div class="d-flex align-items-center">
+                                            <div class="tab-icon">
+                                                <i class="bx bx-bookmark-alt font-18 me-1"></i>
+                                            </div>
+                                            <div class="tab-title">{{ value.name_area }}</div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </template>
+                        </template>
+                    </template>
                 </template>
             </ul>
             <div class="tab-content pt-3">
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4">
                     <template v-for="(value, key) in dataBan" :key="key">
                         <template v-if="value.status == 1">
-                            <div class="col">
-                                <div class="card radius-10">
-                                    <div class="card-body">
-                                        <div class="text-center">
-                                            <div class="widgets-icons rounded-circle mx-auto bg-light-primary text-primary mb-3">
-                                                <i class="fa-solid fa-couch"></i>
+                            <template v-if="user.name_permission.toLowerCase() === 'admin'">
+                                <div class="col">
+                                    <div class="card radius-10">
+                                        <div class="card-body">
+                                            <div class="text-center">
+                                                <div class="widgets-icons rounded-circle mx-auto bg-light-primary text-primary mb-3">
+                                                    <i class="fa-solid fa-couch"></i>
+                                                </div>
+                                                <h4 class="my-1">{{ value.name_table }}</h4>
+                                                <template v-if="value.is_open_table == 0">
+                                                    <button @click="activityView = true; openTable(value.id);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mobanModal">
+                                                        Open table
+                                                    </button>
+                                                </template>
+                                                <template v-else>
+                                                    <button class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#qrModal" @click="generateQRCode(value.id)">
+                                                        QR Login
+                                                    </button>
+                                                    <button class="btn btn-success me-2" @click="getIdHoaDon(value.id)" data-bs-toggle="modal" data-bs-target="#mobanModal">
+                                                        Payment
+                                                    </button>
+                                                    <button  v-on:click="closeTableId.id_ban=value.id;getIdHoaDon(value.id);"  class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#closeModal">Close Table</button>
+                                                </template>
                                             </div>
-                                            <h4 class="my-1">{{ value.name_table }}</h4>
-                                            <template v-if="value.is_open_table == 0">
-                                                <button @click="activityView = true; openTable(value.id);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mobanModal">
-                                                    Open table
-                                                </button>
-                                            </template>
-                                            <template v-else>
-                                                <button class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#qrModal" @click="generateQRCode(value.id)">
-                                                    QR Login
-                                                </button>
-                                                <button class="btn btn-success me-2" @click="getIdHoaDon(value.id)" data-bs-toggle="modal" data-bs-target="#mobanModal">
-                                                    Payment
-                                                </button>
-                                                <button  v-on:click="closeTableId.id_ban=value.id;getIdHoaDon(value.id);"  class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#closeModal">Close Table</button>
-                                            </template>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </template>
+                            <template v-else>
+                                <template v-if="user.list_khu.split(',').includes(value.id_area.toString())">
+                                    <div class="col">
+                                        <div class="card radius-10">
+                                            <div class="card-body">
+                                                <div class="text-center">
+                                                    <div class="widgets-icons rounded-circle mx-auto bg-light-primary text-primary mb-3">
+                                                        <i class="fa-solid fa-couch"></i>
+                                                    </div>
+                                                    <h4 class="my-1">{{ value.name_table }}</h4>
+                                                    <template v-if="value.is_open_table == 0">
+                                                        <button @click="activityView = true; openTable(value.id);" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mobanModal">
+                                                            Open table
+                                                        </button>
+                                                    </template>
+                                                    <template v-else>
+                                                        <button class="btn btn-secondary me-2" data-bs-toggle="modal" data-bs-target="#qrModal" @click="generateQRCode(value.id)">
+                                                            QR Login
+                                                        </button>
+                                                        <button class="btn btn-success me-2" @click="getIdHoaDon(value.id)" data-bs-toggle="modal" data-bs-target="#mobanModal">
+                                                            Payment
+                                                        </button>
+                                                        <button  v-on:click="closeTableId.id_ban=value.id;getIdHoaDon(value.id);"  class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#closeModal">Close Table</button>
+                                                    </template>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </template>
+                            </template>
                         </template>
                     </template>
                 </div>
@@ -314,15 +362,30 @@ export default {
     setup() {
         const store = useStore();
         const dataBan = computed(() => store.state.dataBan);
-        const dataKhuVuc = computed(() => store.state.dataKhuVuc);
+        const dataKhuVuc = computed(() => store.state.dataKhuVuc || []);
         const dataMonAn = computed(() => store.state.dataMonAn);
         const list_chi_tiet_ban_hang = ref([]);
         const loadDataBan = () => {
+            const list_khu = dataKhuVuc.value.map((item) => {
+                if (item.sub_items && Array.isArray(item.sub_items)) {
+                return {
+                    ...item,
+                    sub_items: item.sub_items.filter((item1) => {
+                    const adminList = item1.list_admin.split(",").map(admin => admin.trim());
+                    return adminList.includes(user.value.id.toString());
+                    })
+                };
+                }
+                return item;
+            });
             store.dispatch("onFetchBan");
+            console.log(list_khu);
+            // dataBan.value = dataBan.value.filter((item) => item.id_area.includes())
+            
         };
         const dataBanChuyen = ref([]);
         const search = ref({});
-
+        const user = computed(() => store.state.dataUser);
         const tong_tien = ref(0);
         const tien_thuc_thu = ref(0);
         const phan_tram_giam_hoa_don = ref(0);
@@ -339,6 +402,7 @@ export default {
         const bill_id = ref("");
         const khach_hang = ref({});
         const id_ban_chuyen = ref("");
+        const list_khu_user = ref([]);
         const link_qr = ref(
             "https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
         );
@@ -720,9 +784,11 @@ export default {
             store.dispatch("onFetchBan");
             store.dispatch("onFetchKhuVuc");
             store.dispatch("onFetchMonAn");
+            store.dispatch("onFetchUserLogin");
         });
 
         return {
+            user,
             store,
             dataBan,
             dataKhuVuc,
@@ -739,6 +805,7 @@ export default {
             id_ban_chuyen,
             activityView,
             khach_hang,
+            list_khu_user,
             loadDataBan,
             getBanTheoKhuVuc,
             openTable,
