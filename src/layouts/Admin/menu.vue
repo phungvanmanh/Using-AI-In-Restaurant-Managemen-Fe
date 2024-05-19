@@ -174,7 +174,6 @@
                     <li>
                         <router-link to="/admin/ma-giam-gia">
                             <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Code Voucher</a>
-                            <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Discount code</a>
 
                         </router-link>
                     </li>
