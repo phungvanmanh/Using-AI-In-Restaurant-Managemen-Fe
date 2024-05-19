@@ -219,7 +219,7 @@ export default {
         };
         const getMonAnNoiBac = () => {
             axios
-                .get('admin/mon-an/get-mon-an-pho-bien') 
+                .get('get-mon-an-pho-bien') 
                 .then(response => {
                     dataMonNoiBac.value = response.data.data;
                     console.log( response.data.data);

@@ -312,7 +312,7 @@ export default {
         const monAnList = ref([]);
 
         const getMonAnById = (id) => {
-            axios.post('admin/mon-an/get-mon-id', {
+            axios.post('khach-hang/mon-an/get-mon-id', {
                     id: id
                 })
                 .then(response => {
@@ -342,7 +342,7 @@ export default {
 
         function searchMonAn() {
             axios
-                .post('admin/mon-an/tim-mon', search.value)
+                .post('khach-hang/mon-an/tim-mon', search.value)
                 .then((res) => {
                     console.log(res.data.data);
                     store.commit('fecthMonAn', res.data.data);
@@ -380,7 +380,7 @@ export default {
         }
         const getReview = (id_mon_an) => {
             axios
-                .get(`review/${id_mon_an}`) // Sử dụng URL đúng theo định nghĩa route
+                .get(`khach-hang/review/${id_mon_an}`) // Sử dụng URL đúng theo định nghĩa route
                 .then(response => {
                     reviews.value = response.data.reviews;
                 })
@@ -398,7 +398,7 @@ export default {
                 id_mon_an: currentMonAnId.value,
             };
 
-            axios.post('review/tao-danh-gia', payload, "khach_hang")
+            axios.post('khach-hang/review/tao-danh-gia', payload, "khach_hang")
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
@@ -409,7 +409,7 @@ export default {
         }
         const deleteReview = (id_danh_gia) => {
             axios
-                .post("review/xoa-danh-gia", {
+                .post("khach-hang/review/xoa-danh-gia", {
                     id_danh_gia
                 }, "khach_hang")
                 .then((res) => {
