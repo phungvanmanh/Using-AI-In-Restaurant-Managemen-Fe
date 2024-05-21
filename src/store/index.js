@@ -25,7 +25,7 @@ export default createStore({
         dataNguyenLieu:[],
         dataMaGiamGia:[],
         dataTonKho:[],
-        
+        dataPemission : [],
     },
     getters: {
         toSlug: () => (str) => {
@@ -44,6 +44,10 @@ export default createStore({
             str = str.replace(/-+$/g, "");
             return str;
         },
+        hasPermission: (state) => (permissionId) => {
+            const permissionStrings = state.dataPemission.map(String);
+            return permissionStrings.includes(permissionId.toString());
+        }
     },
     mutations: {
         setTokenAdmin(state, data) {
@@ -126,6 +130,9 @@ export default createStore({
         },
         fecthTonKho(state, data) {
             state.dataTonKho = data;
+        },
+        FetchPemission(state, data) {
+            state.dataPemission = data;
         },
     },
     actions: {
@@ -272,6 +279,14 @@ export default createStore({
             try {
                 const response = await axios.get("admin/ton-kho/get-data");
                 commit("fecthTonKho", response.data.data);
+            } catch (error) {
+                console.error("Có lỗi xảy ra trong onFetchTonKho:", error);
+            }
+        },
+        onFetchPemission: async ({ commit }) => {
+            try {
+                const response = await axios.get('admin/get-pemission', 'admin');
+                commit("FetchPemission", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchTonKho:", error);
             }
