@@ -206,6 +206,11 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
     const adminToken = JSON.parse(localStorage.getItem("admin"))?.access_token;
 
+    if (adminToken && to.path === "/admin/login") {
+        next("/admin/lich-lam-viec");
+        return;
+    }
+
     // Redirect to admin login if not authenticated
     if (to.matched.some(record => record.meta.requiresAuth) && !adminToken) {
         next("/admin/login");
