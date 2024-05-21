@@ -130,7 +130,7 @@
             <li class="nav-item dropdown">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                     <div class="parent-icon">
-                        <i class="fa-solid fa-house"></i>
+                        <i class="fa-regular fa-calendar-days"></i>
                     </div>
                     <div class="menu-title">Event</div>
                 </a>
@@ -154,7 +154,7 @@
             <li class="nav-item dropdown">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                     <div class="parent-icon">
-                        <i class="fa-solid fa-house"></i>
+                        <i class="fa-solid fa-bell-concierge"></i>
                     </div>
                     <div class="menu-title">Sales Manager</div>
                 </a>
@@ -185,7 +185,7 @@
             <li class="nav-item dropdown">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                     <div class="parent-icon">
-                        <i class="fa-solid fa-house"></i>
+                        <i class="fa-solid fa-bowl-rice"></i>
                     </div>
                     <div class="menu-title">Food Management</div>
                 </a>
@@ -214,7 +214,7 @@
             <li class="nav-item dropdown">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                     <div class="parent-icon">
-                        <i class="fa-solid fa-house"></i>
+                        <i class="fa-solid fa-clock-rotate-left"></i>
                     </div>
                     <div class="menu-title">Log</div>
                 </a>
@@ -231,7 +231,7 @@
             <li class="nav-item dropdown">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                     <div class="parent-icon">
-                        <i class="fa-solid fa-house"></i>
+                        <i class="fa-solid fa-chart-line"></i>
                     </div>
                     <div class="menu-title">Statistics</div>
                 </a>

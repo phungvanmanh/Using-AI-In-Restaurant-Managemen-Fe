@@ -11,10 +11,10 @@
                             <thead>
                                 <tr>
                                     <th text-center align-middle text-nowrap>#</th>
-                                    <th text-center align-middle text-nowrap>Tên Nguyên Liệu</th>
-                                    <th text-center align-middle text-nowrap>Số Lượng Ban Đầu</th>
-                                    <th text-center align-middle text-nowrap>Số LượngTồn</th>
-                                    <th text-center align-middle text-nowrap>Ngày</th>
+                                    <th text-center align-middle text-nowrap>Name of raw materials</th>
+                                    <th text-center align-middle text-nowrap>Initial quantity</th>
+                                    <th text-center align-middle text-nowrap>QuantityInventory</th>
+                                    <th text-center align-middle text-nowrap>Date</th>
                                     <th text-center align-middle text-nowrap>Action</th>
     
                                 </tr>
@@ -30,7 +30,7 @@
                                     <td text-center align-middle text-nowrap>{{ value.so_luong_ton }}</td>
                                     <td text-center align-middle text-nowrap>{{ value.ngay }}</td>
                                     <td text-center align-middle text-nowrap>
-                                        <button v-on:click="Object.assign(editTonKho,value)" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Cập Nhật</button>
+                                        <button v-on:click="Object.assign(editTonKho,value)" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
                                     </td>
                                 </tr>
                                 </template>
@@ -43,11 +43,11 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Cập Nhật Số Lượng Tồn</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Update QuantityInventory</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <label for="">Số Lượng Tồn</label>
+                                        <label for="">Amount</label>
                                         <input  v-model="editTonKho.so_luong_ton" type="number" name="" id="" class="form-control">
                                     </div>
                                     <div class="modal-footer">

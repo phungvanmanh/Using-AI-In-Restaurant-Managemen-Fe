@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
             <div class="card">
-                <div class="card-header">Thêm Mới Admin {{ tokenAdmin }}</div>
+                <div class="card-header">Add New {{ tokenAdmin }}</div>
                 <div class="card-body">
                     <InputComponent
                         v-model="add.ho_va_ten"
@@ -52,7 +52,7 @@
                         class="btn btn-primary float-end"
                         @click="ThemMoi()"
                     >
-                        Thêm Mới
+                        Add New
                     </button>
                 </div>
             </div>

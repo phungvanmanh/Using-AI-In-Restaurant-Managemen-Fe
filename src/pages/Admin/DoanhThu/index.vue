@@ -79,9 +79,9 @@ export default {
         async function fetchData() {
             // Giả sử bạn nhận dữ liệu ở đây
             data.value = {
-                tong_tien_nhap_kho: '',
-                tong_tien_ban_hang: '',
-                loi_nhuan: ''
+                tong_tien_nhap_kho: '0',
+                tong_tien_ban_hang: '0',
+                loi_nhuan: '0'
             };
         }
 

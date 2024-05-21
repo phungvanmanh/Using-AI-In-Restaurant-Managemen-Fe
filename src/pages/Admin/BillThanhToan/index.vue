@@ -9,10 +9,10 @@
                 />
             </div>
             <div class="text-center border-top border-bottom my-5 py-3">
-                <h2 class="display-5 fw-bold">Hóa Đơn Thanh Toán</h2>
+                <h2 class="display-5 fw-bold">Invoice payment</h2>
                 <p class="m-0">
-                    Bàn : <b class="text-danger">{{ hoa_don.name_table }}</b
-                    >, Ngày: <b class="text-danger">{{ date }}</b>
+                    Table : <b class="text-danger">{{ hoa_don.name_table }}</b
+                    >, Date: <b class="text-danger">{{ date }}</b>
                 </p>
             </div>
             <div class="table-responsive">
@@ -20,11 +20,11 @@
                     <thead>
                         <tr class="bg-primary-subtle">
                             <th scope="col" class="text-center">#</th>
-                            <th scope="col">Tên Món</th>
-                            <th scope="col">Giá</th>
-                            <th scope="col">Số Lượng</th>
-                            <th scope="col">Phần Trăm Giảm</th>
-                            <th scope="col">Thành Tiền</th>
+                            <th scope="col">Name Food</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Percentage decrease</th>
+                            <th scope="col">Into Money</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -47,18 +47,18 @@
                     <tfoot>
                         <tr>
                             <td colspan="4"></td>
-                            <td class="">Tổng Tiền Hóa Đơn</td>
+                            <td class="">Total bill</td>
                             <td>{{ formatToVND(hoa_don.tong_tien_truoc_giam) }}</td>
                         </tr>
                         <tr>
                             <td colspan="4"></td>
-                            <td class="" style="max-width: 120px; min-width: 120px;">Phần Trăm Giảm</td>
+                            <td class="" style="max-width: 120px; min-width: 120px;">Percentage decrease</td>
                             <td>{{ hoa_don.phan_tram_giam }} %</td>
                         </tr>
                         <tr>
                             <td colspan="4"></td>
                             <td class="text-primary fw-bold">
-                                Tổng Tiền Thanh Toán
+                                Total Payment
                             </td>
                             <td class="text-primary fw-bold">
                                 {{ formatToVND(hoa_don.tien_thuc_nhan) }}
@@ -77,7 +77,7 @@
                                 icon="ic:baseline-email"
                                 style="vertical-align: text-bottom"
                             ></iconify-icon>
-                            Nhà Hàng Food
+                            Food Restaurant
                         </li>
                         <li>
                             <iconify-icon
@@ -106,7 +106,7 @@
                     </ul>
                 </div>
                 <div>
-                    <h5 class="fw-bold my-4">Thông Tin Thanh Toán</h5>
+                    <h5 class="fw-bold my-4">Payment Information</h5>
                     <ul class="list-unstyled">
                         <li>
                             <span class="fw-semibold">Account No: </span>
