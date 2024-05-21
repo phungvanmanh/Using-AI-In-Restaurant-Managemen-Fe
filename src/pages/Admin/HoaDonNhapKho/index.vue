@@ -217,6 +217,7 @@ export default {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
+                        "Authorization": `Bearer ${token}`,
                     },
                     body: JSON.stringify({
                         data: list.value.map((item) => ({

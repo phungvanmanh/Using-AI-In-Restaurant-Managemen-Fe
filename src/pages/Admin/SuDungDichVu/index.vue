@@ -39,7 +39,7 @@
                             </li>
                         </template>
                         <template v-else>
-                            <template v-if="value.list_admin.split(',').includes(user.id.toString())">
+                            <template v-if="value.list_admin?.split(',').includes(user.id.toString())">
                                 <li class="nav-item" role="presentation" v-on:click="getBanTheoKhuVuc(value)">
                                     <a class="nav-link" data-bs-toggle="tab" v-bind:href="'#primaryhome' + key" role="tab" aria-selected="false" tabindex="-1">
                                         <div class="d-flex align-items-center">
@@ -88,7 +88,7 @@
                                 </div>
                             </template>
                             <template v-else>
-                                <template v-if="user.list_khu.split(',').includes(value.id_area.toString())">
+                                <template v-if="user.list_khu?.split(',').includes(value.id_area.toString())">
                                     <div class="col">
                                         <div class="card radius-10">
                                             <div class="card-body">
@@ -371,7 +371,7 @@ export default {
                 return {
                     ...item,
                     sub_items: item.sub_items.filter((item1) => {
-                    const adminList = item1.list_admin.split(",").map(admin => admin.trim());
+                    const adminList = item1.list_admin?.split(",").map(admin => admin.trim());
                     return adminList.includes(user.value.id.toString());
                     })
                 };

@@ -226,7 +226,7 @@ export default createStore({
         },
         onFetchNhaCungCap: async ({ commit }) => {
             try {
-                const response = await axios.get("admin/nha-cung-cap/get-data");
+                const response = await axios.get("admin/nha-cung-cap/get-data", 'admin');
                 commit("fecthNhaCungCap", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchNhaCungCap:", error);
@@ -234,7 +234,7 @@ export default createStore({
         },
         onFetchChuyenMucBaiViet: async ({ commit }) => {
             try {
-                const response = await axios.get("admin/chuyen-muc-bai-viet/get-data");
+                const response = await axios.get("admin/chuyen-muc-bai-viet/get-data", 'admin');
                 commit("fecthChuyenMucBaiViet", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchChuyenMucBaiViet:", error);
@@ -242,7 +242,7 @@ export default createStore({
         },
         onFetchBaiViet: async ({ commit }) => {
             try {
-                const response = await axios.get("admin/bai-viet/get-data");
+                const response = await axios.get("admin/bai-viet/get-data", 'admin');
                 commit("fecthBaiViet", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchBaiViet:", error);
@@ -253,7 +253,7 @@ export default createStore({
         },
         onFetchNguyenLieu: async ({ commit }) => {
             try {
-                const response = await axios.get("admin/nguyen-lieu/get-nguyen-lieu");
+                const response = await axios.get("admin/nguyen-lieu/get-nguyen-lieu", 'admin');
                 commit("fecthNguyenLieu", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchNguyenLieu:", error);
@@ -261,7 +261,7 @@ export default createStore({
         },
         onFetchKhachHang: async ({ commit }) => {
             try {
-                const response = await axios.get("admin/khach-hang/get-data");
+                const response = await axios.get("admin/khach-hang/get-data", 'admin');
                 commit("fecthKhachHang", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchKhachHang:", error);
@@ -269,7 +269,7 @@ export default createStore({
         },
         onFetchMaGiamGia: async ({ commit }) => {
             try {
-                const response = await axios.get("admin/ma-giam-gia/lay-du-lieu");
+                const response = await axios.get("admin/ma-giam-gia/lay-du-lieu", 'admin');
                 commit("fecthMaGiamGia", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchMaGiamGia:", error);
@@ -277,7 +277,7 @@ export default createStore({
         },
         onFetchTonKho: async ({ commit }) => {
             try {
-                const response = await axios.get("admin/ton-kho/get-data");
+                const response = await axios.get("admin/ton-kho/get-data", 'admin');
                 commit("fecthTonKho", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchTonKho:", error);

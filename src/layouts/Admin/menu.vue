@@ -259,7 +259,7 @@ export default {
         const hasPermission = (permissionId) => {
             const permissionStrings = id_quyen.value.map(String);
             const result = permissionStrings?.includes(permissionId.toString());
-            console.log(`Checking permission for ${permissionId}: ${result}`);
+            // console.log(`Checking permission for ${permissionId}: ${result}`);
             return result;
         };
 
