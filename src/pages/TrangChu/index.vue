@@ -16,7 +16,7 @@
                 <input type="checkbox" id="showDrop_1" />
                 <label for="showDrop_1" class="mobile-item"> Menu</label>
                 <ul class="drop-menu" id="drop-menu_1">
-                    <template v-for="(value, key) in dataDanhMuc" :key="key">
+                    <template v-for="(value, key) in dataDanhMuc1" :key="key">
                         <li v-on:click="handleClickDanhMuc(value.id)">
                             <a href="#">{{ value.name_category }}</a>
                         </li>
@@ -130,7 +130,7 @@
             </div>
             <div class="container">
                 <div class="row mt-4">
-                    <template v-for="(value, index) in (isHomeSelected ? dataMonAn : monAnList)" :key="index">
+                    <template v-for="(value, index) in (isHomeSelected ? dataMonAn1 : monAnList)" :key="index">
                         <template v-if="value.status==1">
                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
                             <div class="card4321">
@@ -301,11 +301,11 @@ export default {
             return store.state.dataBaiViet;
         });
         const dataMonNoiBac = ref([]);
-        const dataMonAn = computed(() => {
-            return store.state.dataMonAn;
+        const dataMonAn1 = computed(() => {
+            return store.state.dataMonAn1;
         });
-        const dataDanhMuc = computed(() => {
-            return store.state.dataDanhMuc;
+        const dataDanhMuc1= computed(() => {
+            return store.state.dataDanhMuc1;
         });
         const isHomeSelected = ref(true); // Thêm biến này
 
@@ -329,7 +329,7 @@ export default {
         };
         const getMonAnNoiBac = () => {
             axios
-                .get('get-mon-an-pho-bien') 
+                .get('khach-hang/mon-an/get-mon-an-pho-bien') 
                 .then(response => {
                     dataMonNoiBac.value = response.data.data;
                     console.log( response.data.data);
@@ -345,7 +345,7 @@ export default {
                 .post('khach-hang/mon-an/tim-mon', search.value)
                 .then((res) => {
                     console.log(res.data.data);
-                    store.commit('fecthMonAn', res.data.data);
+                    store.commit('fecthMonAn1', res.data.data);
                 });
         }
         const handleClickDanhMuc = (id) => {
@@ -436,15 +436,15 @@ export default {
             document.body.style.alignItems = '';
             document.body.style.height = '';
             store.dispatch("onFetchBaiViet");
-            store.dispatch("onFetchMonAn");
-            store.dispatch("onFetchDanhMuc");
+            store.dispatch("onFetchMonAn1");
+            store.dispatch("onFetchDanhMuc1");
             checkLogin();
             getMonAnNoiBac();
         });
         return {
             dataBaiViet,
-            dataMonAn,
-            dataDanhMuc,
+            dataMonAn1,
+            dataDanhMuc1,
             getMonAnById,
             monAnList,
             handleClickDanhMuc,
