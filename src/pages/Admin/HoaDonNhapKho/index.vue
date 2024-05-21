@@ -180,6 +180,7 @@ export default {
             end: "",
         });
         const tong_tien = ref(0);
+        const token = JSON.parse(window.localStorage.getItem('admin'))?.access_token;
 
         function formatToVND(number) {
             number = parseInt(number);
@@ -191,7 +192,7 @@ export default {
 
         function loadData() {
             axios
-                .post("admin/nhap-kho/data-hoa-don-nhap-kho", tk.value)
+                .post("admin/nhap-kho/data-hoa-don-nhap-kho", tk.value,'admin')
                 .then((res) => {
                     list.value = res.data.data;
                     tong_tien.value = res.data.tong_tien;
@@ -205,7 +206,7 @@ export default {
 
         function chitietHoaDonNhapKho(payload) {
             axios
-                .post("admin/nhap-kho/data-chi-tiet-hoa-don-nhap-kho", payload)
+                .post("admin/nhap-kho/data-chi-tiet-hoa-don-nhap-kho", payload,'admin')
                 .then((res) => {
                     chi_tiet.value = res.data.data;
                 });
@@ -229,10 +230,20 @@ export default {
                         console.error("Response:", response);
                         throw new Error(`HTTP status ${response.status}`);
                     }
+                    const contentType = response.headers.get("content-type");
+                    if (contentType && contentType.indexOf("application/json") !== -1) {
+                        return response.json(); // Handle JSON response
+                    }
                     return response.blob();
                 })
-                .then((blob) => {
-                    const downloadUrl = window.URL.createObjectURL(blob);
+                // .then((blob) => {
+                    .then((data) => {
+                    // Check if the data is a JSON object with a status
+                    if (data && data.status === 0) {
+                        Toast("error", data.message);
+                        return; // Exit early if there is an error
+                    }
+                    const downloadUrl = window.URL.createObjectURL(data);
                     const link = document.createElement("a");
                     link.href = downloadUrl;
                     link.setAttribute("download", "hoadonnhapkho.xlsx");

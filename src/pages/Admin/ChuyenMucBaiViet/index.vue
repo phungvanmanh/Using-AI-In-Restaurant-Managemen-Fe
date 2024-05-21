@@ -206,12 +206,14 @@ export default {
 
         const addNew = () => {
             axios
-                .post("admin/chuyen-muc-bai-viet/create", addChuyenMucBaiViet.value)
+                .post("admin/chuyen-muc-bai-viet/create", addChuyenMucBaiViet.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         addChuyenMucBaiViet.value = {};
                         store.dispatch("onFetchChuyenMucBaiViet");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -223,13 +225,15 @@ export default {
         };
         const updateChuyenMucBaiViet = () => {
             axios
-                .post("admin/chuyen-muc-bai-viet/update", editChuyenMucBaiViet.value)
+                .post("admin/chuyen-muc-bai-viet/update", editChuyenMucBaiViet.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         // $("#edit_category").modal("hide");
                         editChuyenMucBaiViet.value = {};
                         store.dispatch("onFetchChuyenMucBaiViet");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -240,12 +244,14 @@ export default {
         };
         const changeStatus = (value) => {
             axios
-                .post("admin/chuyen-muc-bai-viet/status", value)
+                .post("admin/chuyen-muc-bai-viet/status", value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         addChuyenMucBaiViet.value = {};
                         store.dispatch("onFetchChuyenMucBaiViet");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -256,13 +262,15 @@ export default {
         };
         const delete_chuyenmucbaiviet = () => {
             axios
-                .post("admin/chuyen-muc-bai-viet/delete", deletechuyenmucbaiviet.value)
+                .post("admin/chuyen-muc-bai-viet/delete", deletechuyenmucbaiviet.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         // $("#delete_category").modal("hide");
                         deletechuyenmucbaiviet.value = {};
                         store.dispatch("onFetchChuyenMucBaiViet");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -274,7 +282,7 @@ export default {
 
         function searchChuyenMucBaiViet() {
             axios
-                .post('admin/chuyen-muc-bai-viet/tim-chuyen-muc-bai-viet', search.value)
+                .post('admin/chuyen-muc-bai-viet/tim-chuyen-muc-bai-viet', search.value,'admin')
                 .then((res) => {
                     console.log(res.data.data);
                     store.commit('fecthChuyenMucBaiViet', res.data.data);

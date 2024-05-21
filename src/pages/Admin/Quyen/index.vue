@@ -144,10 +144,12 @@ export default {
         const dataQuyen = computed(() => store.state.dataQuyen);
         const addNew = () => {
             axios
-                .post('admin/quyen/create', addQuyen.value)
+                .post('admin/quyen/create', addQuyen.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast('success', res.data.message);
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -159,11 +161,13 @@ export default {
         
         const updateQuyen = () => {
             axios
-                .post('admin/quyen/update', editQuyen.value)
+                .post('admin/quyen/update', editQuyen.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast('success', res.data.message);
                         $("#edit_quyen").modal("hide");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -175,11 +179,13 @@ export default {
 
         const deleteQuyen = () => {
             axios
-                .post('admin/quyen/delete', deletePermission.value)
+                .post('admin/quyen/delete', deletePermission.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast('success', res.data.message);
                         $("#delete_quyen").modal("hide");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {

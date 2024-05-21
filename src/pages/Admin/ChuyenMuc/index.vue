@@ -120,12 +120,14 @@ export default {
 
         function createChuyenMuc() {
             axios
-                .post('admin/chuyen-muc/create', addChuyenMuc.value)
+                .post('admin/chuyen-muc/create', addChuyenMuc.value,'admin')
                 .then((res) => {
                     if (res.data.status == true) {
                         Toast('success', res.data.message);
                         addChuyenMuc.value = {};
                         store.dispatch("onFetchChuyenMuc");//call api store == onFetchChuyenMuc
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -137,11 +139,13 @@ export default {
 
         function changeStatus(value) {
             axios
-                .post('admin/chuyen-muc/change-status', value)
+                .post('admin/chuyen-muc/change-status', value,'admin')
                 .then((res) => {
                     if (res.data.status == true) {
                         Toast('success', res.data.message);
                         store.dispatch("onFetchChuyenMuc");//call api store == onFetchChuyenMuc
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {

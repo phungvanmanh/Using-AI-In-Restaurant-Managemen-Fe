@@ -52,7 +52,7 @@ export default {
         const data = ref([]);
         const getDataHistoryBuill = () => {
             axios
-                .get('admin/log/lich-su-thanh-toan')
+                .get('admin/log/lich-su-thanh-toan','admin')
                 .then((res) => {
                     data.value = res.data.data;
                 });

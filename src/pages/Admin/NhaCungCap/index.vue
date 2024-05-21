@@ -317,12 +317,14 @@ export default {
 
         const addNew = () => {
             axios
-                .post("admin/nha-cung-cap/create", addNhaCungCap.value)
+                .post("admin/nha-cung-cap/create", addNhaCungCap.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         addNhaCungCap.value = {};
                         store.dispatch("onFetchNhaCungCap");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -334,13 +336,16 @@ export default {
         };
         const updateNhaCungCap = () => {
             axios
-                .post("admin/nha-cung-cap/update", editNhacungcap.value)
+                .post("admin/nha-cung-cap/update", editNhacungcap.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         $("#edit_category").modal("hide");
                         editNhacungcap.value = {};
                         store.dispatch("onFetchNhaCungCap");
+                    }
+                    else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -352,12 +357,15 @@ export default {
 
         const changeStatus = (value) => {
             axios
-                .post("admin/nha-cung-cap/change-status", value)
+                .post("admin/nha-cung-cap/change-status", value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         addNhaCungCap.value = {};
                         store.dispatch("onFetchNhaCungCap");
+                    }
+                    else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -368,13 +376,16 @@ export default {
         };
         const deleteNhaCungCap = () => {
             axios
-                .post("admin/nha-cung-cap/delete", delete_nhacungcap.value)
+                .post("admin/nha-cung-cap/delete", delete_nhacungcap.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         $("#delete_category").modal("hide");
                         addNhaCungCap.value = {};
                         store.dispatch("onFetchNhaCungCap");
+                    }
+                    else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -386,7 +397,7 @@ export default {
 
         function searchNhaCungCap() {
             axios
-                .post('admin/nha-cung-cap/tim-nha-cung-cap', search.value)
+                .post('admin/nha-cung-cap/tim-nha-cung-cap', search.value,'admin')
                 .then((res) => {
                     console.log(res.data.data);
                     store.commit('fecthNhaCungCap', res.data.data);
