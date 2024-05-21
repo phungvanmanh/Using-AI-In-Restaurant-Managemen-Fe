@@ -174,12 +174,14 @@ export default {
         };
         const addNew = () => {
             axios
-                .post("admin/danh-muc/create", addCotegory.value)
+                .post("admin/danh-muc/create", addCotegory.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         addCotegory.value = {};
                         store.dispatch("onFetchDanhMuc");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -191,12 +193,14 @@ export default {
 
         const changeStatus = (value) => {
             axios
-                .post("admin/danh-muc/change-status", value)
+                .post("admin/danh-muc/change-status", value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         addCotegory.value = {};
                         store.dispatch("onFetchDanhMuc");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -208,13 +212,15 @@ export default {
 
         const updateDanhMuc = () => {
             axios
-                .post("admin/danh-muc/update", editCotegory.value)
+                .post("admin/danh-muc/update", editCotegory.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         $("#edit_category").modal("hide");
                         addCotegory.value = {};
                         store.dispatch("onFetchDanhMuc");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -226,13 +232,15 @@ export default {
 
         const deleteDanhMuc = () => {
             axios
-                .post("admin/danh-muc/delete", deleteCotegory.value)
+                .post("admin/danh-muc/delete", deleteCotegory.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         $("#delete_category").modal("hide");
                         addCotegory.value = {};
                         store.dispatch("onFetchDanhMuc");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {

@@ -79,7 +79,7 @@ export default {
         const loadData = async () => {
             loaded.value = false;
             try {
-                const res = await axios.post('admin/thong-ke/data-thong-ke-1', thong_ke.value); 
+                const res = await axios.post('admin/thong-ke/data-thong-ke-1', thong_ke.value,'admin'); 
                 dataChart.value.labels = res.data.list_label;
                 dataChart.value.datasets[0].data = res.data.list_data;
                 loaded.value = true;

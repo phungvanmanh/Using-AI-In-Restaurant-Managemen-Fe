@@ -87,12 +87,14 @@
             });
             const updateTonKho = () => {
                 axios
-                    .post("admin/ton-kho/update-ton-kho", editTonKho.value)
+                    .post("admin/ton-kho/update-ton-kho", editTonKho.value,'admin')
                     .then((res) => {
                         if (res.data.status == 1) {
                             Toast("success", res.data.message);
                             store.dispatch("onFetchTonKho");
-                        }
+                        }else {
+                        Toast("error", res.data.message);
+                    }
                     })
                     .catch((res) => {
                         $.each(res.response.data.errors, function (k, v) {

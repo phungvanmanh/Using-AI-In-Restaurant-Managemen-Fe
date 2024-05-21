@@ -171,12 +171,15 @@ export default {
 
         const addNew = () => {
             axios
-                .post("admin/ban/create", addTable.value)
+                .post("admin/ban/create", addTable.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         addTable.value = {};
                         store.dispatch("onFetchBan");
+                    }
+                    else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -188,12 +191,14 @@ export default {
 
         const changeStatus = (value) => {
             axios
-                .post("admin/ban/change-status", value)
+                .post("admin/ban/change-status", value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         addTable.value = {};
                         store.dispatch("onFetchBan");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -205,13 +210,16 @@ export default {
 
         const updateBan = () => {
             axios
-                .post("admin/ban/update", editTable.value)
+                .post("admin/ban/update", editTable.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         $("#edit_table").modal("hide");
                         addTable.value = {};
                         store.dispatch("onFetchBan");
+                    }
+                    else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -223,13 +231,16 @@ export default {
 
         const deleteBan = () => {
             axios
-                .post("admin/ban/delete", deleteTable.value)
+                .post("admin/ban/delete", deleteTable.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         $("#delete_table").modal("hide");
                         addTable.value = {};
                         store.dispatch("onFetchBan");
+                    }
+                    else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -240,7 +251,7 @@ export default {
         };
         function searchBan() {
             axios
-                .post('admin/ban/tim-ban', search.value)
+                .post('admin/ban/tim-ban', search.value,'admin')
                 .then((res) => {
                     console.log(res.data.data);
                     store.commit('fecthBan', res.data.data);

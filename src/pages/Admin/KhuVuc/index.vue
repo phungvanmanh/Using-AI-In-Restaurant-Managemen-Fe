@@ -290,7 +290,7 @@ export default {
 
         const getDataStaff = (value) => {
             axios
-                .post('admin/khu-vuc/get-data-staff-area', value)
+                .post('admin/khu-vuc/get-data-staff-area', value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         if (res.data.data) {
@@ -311,12 +311,14 @@ export default {
 
         const addNew = () => {
             axios
-                .post("admin/khu-vuc/create", addArea.value)
+                .post("admin/khu-vuc/create", addArea.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         addArea.value = {};
                         store.dispatch("onFetchKhuVuc");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -328,12 +330,14 @@ export default {
 
         const changeStatus = (value) => {
             axios
-                .post("admin/khu-vuc/change-status", value)
+                .post("admin/khu-vuc/change-status", value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         addArea.value = {};
                         store.dispatch("onFetchKhuVuc");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -345,13 +349,16 @@ export default {
 
         const deleteKhuVuc = () => {
             axios
-                .post("admin/khu-vuc/delete", deleteArea.value)
+                .post("admin/khu-vuc/delete", deleteArea.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         $("#delete_area").modal("hide");
                         addArea.value = {};
                         store.dispatch("onFetchKhuVuc");
+                    }
+                    else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -385,13 +392,15 @@ export default {
                                         .map((admin) => admin.id_admin)
                                         .join(',');
             axios
-                .post("admin/khu-vuc/update", editArea.value)
+                .post("admin/khu-vuc/update", editArea.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         $("#edit_area").modal("hide");
                         addArea.value = {};
                         store.dispatch("onFetchKhuVuc");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
