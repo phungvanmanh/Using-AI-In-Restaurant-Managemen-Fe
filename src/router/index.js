@@ -31,7 +31,7 @@ import ChangePassword from "@/pages/Admin/ChangePassword"
 import LoginCustomer from "@/pages/Customer/Login"
 import ThongKe from "@/pages/Admin/ThongKe";
 import TonKhoNguyenLieu from "@/pages/Admin/TonKhoNguyenLieu";
-import Test123 from "@/pages/Admin/Test123";
+// import Test123 from "@/pages/Admin/Test123";
 import DoanhThu from "@/pages/Admin/DoanhThu";
 const routes = [
     {
@@ -75,106 +75,114 @@ const routes = [
             {
                 path: "",
                 component: Admin,
+                meta: { permissions: ['107'] },
             },
             {
                 path: "khach-hang",
                 component: KhachHang,
+                meta: { permissions: ['108'] },
             },
             {
                 path: "quyen",
                 component: Quyen,
+                meta: { permissions: ['109'] },
             },
             {
                 path: "danh-muc",
                 component: DanhMuc,
+                meta: { permissions: ['110'] },
             },
             {
                 path: "khu-vuc",
                 component: KhuVuc,
+                meta: { permissions: ['111'] },
             },
             {
                 path: "mon-an",
                 component: MonAn,
+                meta: { permissions: ['112'] },
             },
             {
                 path: "ban",
                 component: Ban,
+                meta: { permissions: ['113'] },
             },
             {
                 path: "nha-cung-cap",
                 component: NhaCungCap,
+                meta: { permissions: ['114'] },
             },
             {
                 path: "chuyen-muc-bai-viet",
                 component: ChuyenMucBaiViet,
+                meta: { permissions: ['115'] },
             },
             {
                 path: "bai-viet",
                 component: BaiViet,
+                meta: { permissions: ['116'] },
             },
             {
                 path: "lich-lam-viec",
                 component: LichLamViec,
+                meta: { permissions: ['117'] },
             },
             {
                 path: "su-dung-dich-vu",
                 component: SuDungDichVu,
+                meta: { permissions: ['128'] },
             },
             {
                 path: "hoa-don-ban-hang",
                 component: HoaDonBanHang,
+                meta: { permissions: ['118'] },
             },
             {
                 path: "nguyen-lieu",
                 component: NguyenLieu,
+                meta: { permissions: ['119'] },
             },
             {
                 path: "lich-su-thanh-toan",
                 component: LichSuThanhToan,
+                meta: { permissions: ['127'] },
             },
             {
                 path: "tinh-luong",
                 component: TinhLuong,
+                meta: { permissions: ['120'] },
             },
             {
                 path: "nhap-kho",
                 component: NhapKho,
+                meta: { permissions: ['121'] },
             },
             {
                 path: "hoa-don-nhap-kho",
                 component: HoaDonNhapKho,
+                meta: { permissions: ['122'] },
             },
             {
                 path:"ma-giam-gia",
                 component:MaGiamGia,
+                meta: { permissions: ['123'] },
             },
             {
                 path:"thong-ke",
                 component:ThongKe,
+                meta: { permissions: ['124'] },
             },
             {
                 path:"ton-kho-nguyen-lieu",
                 component:TonKhoNguyenLieu,
-            },
-            {
-                path:"test-123",
-                component:Test123,
+                meta: { permissions: ['125'] },
             },
             {
                 path:"doanh-thu",
                 component:DoanhThu,
+                meta: { permissions: ['126'] },
             },
           
-        ],
-    },
-    {
-        path: "/nhan-vien",
-        component: AdminMaster,
-        children: [
-            {
-                path: "lich-lam-viec",
-                component: LichLamViec,
-            },
         ],
     },
     {
@@ -195,24 +203,29 @@ const router = createRouter({
     routes,
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
     const adminToken = JSON.parse(localStorage.getItem("admin"))?.access_token;
 
-    // Kiểm tra nếu người dùng đã có token 'admin' và cố gắng truy cập vào /admin/login, chuyển hướng họ đến /admin
-    if (adminToken && to.path === "/admin/login") {
-        next("/admin");
-        return;
-    }
-
-    // Nếu một route yêu cầu xác thực và token 'admin' không tồn tại, chuyển hướng đến /admin/login
+    // Redirect to admin login if not authenticated
     if (to.matched.some(record => record.meta.requiresAuth) && !adminToken) {
         next("/admin/login");
         return;
     }
 
-    // Kiểm tra nếu người dùng đã đăng nhập và đang cố gắng truy cập một trang cần xác thực
-    if (adminToken && to.matched.some(record => record.meta.requiresAuth)) {
-        // Gọi hàm cập nhật token và tải thông tin người dùng
+    // Fetch permissions if route requires authentication
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        await store.dispatch("onFetchPemission");
+        const permissions = to.meta.permissions || [];
+        const hasPermission = permissions.every(permission => store.getters.hasPermission(permission));
+        
+        if (!hasPermission) {
+            next("/admin/lich-lam-viec");
+            return;
+        }
+    }
+
+    // Update token and fetch user information if authenticated
+    if (adminToken) {
         updateTokenAndFetchUser();
     }
 
