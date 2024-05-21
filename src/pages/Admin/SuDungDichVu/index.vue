@@ -417,7 +417,7 @@ export default {
         // };
         const storeCustomer = () => {
             khach_hang.value.id_hoa_don = id_hoa_don_ban_hang.value;
-                axios.post("admin/khach-hang/store", khach_hang.value)
+                axios.post("admin/khach-hang/store", khach_hang.value, 'admin')
                     .then(response => {
                         if(response.data.status==1){
                             activityView.value =false;
@@ -493,6 +493,8 @@ export default {
                                             $("#mobanModal").modal("hide");
                                             loadDataBan();
                                             Toast("success", data.message);
+                                        } else {
+                                            Toast("error", data.message);
                                         }
                                     })
                                     .catch((error) => {
@@ -737,8 +739,13 @@ export default {
                 const idBan = id_ban; // Thay thế bằng id_ban thực tế
                 const {
                     data
-                } = await axios.get(`admin/create-token/${idBan}`);
-                qrCodeData.value = apiQRcode + data.url;
+                } = await axios.get(`admin/create-token/${idBan}`, 'admin');
+                console.log(data);
+                if(data.status == 0) {
+                    Toast("error", data.message);
+                } else {
+                    qrCodeData.value = apiQRcode + data.url;
+                }
             } catch (error) {
                 console.error("Lỗi khi tạo QR Code:", error);
             }

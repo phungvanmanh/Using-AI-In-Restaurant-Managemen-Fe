@@ -512,6 +512,7 @@ export default {
                     tinh_trang: item.status,
                 }))
         );
+        const token = JSON.parse(window.localStorage.getItem('admin'))?.access_token;
         const dataAdmin = computed(() => store.state.dataAdmin.data);
 
         const DateFormat = (value) => {
@@ -531,7 +532,7 @@ export default {
 
         const addNew = () => {
             axios
-                .post("admin/create", addAmin.value)
+                .post("admin/create", addAmin.value, 'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
@@ -539,6 +540,8 @@ export default {
                         store.dispatch("onFetchQuyen");
                         store.dispatch("onFetchAdmin");
                         addAmin.value = {};
+                    } else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -550,13 +553,15 @@ export default {
 
         const changeStatus = (value) => {
             axios
-                .post("admin/change-status", value)
+                .post("admin/change-status", value, 'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         addAmin.value = {};
                         store.dispatch("onFetchQuyen");
                         store.dispatch("onFetchAdmin");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -567,15 +572,33 @@ export default {
         };
 
         const exportData = () => {
-            fetch(apiUrl + "api/admin/export")
+            fetch(apiUrl + "api/admin/export", {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
+                })
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error("Network response was not ok");
                     }
-                    return response.blob();
+                    // Check if the response is JSON
+                    const contentType = response.headers.get("content-type");
+                    if (contentType && contentType.indexOf("application/json") !== -1) {
+                        return response.json(); // Handle JSON response
+                    }
+                    return response.blob(); // Handle blob response
                 })
-                .then((blob) => {
-                    const downloadUrl = window.URL.createObjectURL(blob);
+                .then((data) => {
+                    // Check if the data is a JSON object with a status
+                    if (data && data.status === 0) {
+                        Toast("error", data.message);
+                        return; // Exit early if there is an error
+                    }
+
+                    // If data is a blob, proceed with the download
+                    const downloadUrl = window.URL.createObjectURL(data);
                     const link = document.createElement("a");
                     link.href = downloadUrl;
                     link.setAttribute("download", "admins.xlsx");
@@ -587,6 +610,7 @@ export default {
                 .catch((error) => {
                     console.error("Download error:", error);
                 });
+
             // có ssl thì dùng
             // axios
             //     .get("admin/export")
@@ -607,12 +631,14 @@ export default {
 
         const changPassword = () => {
             axios
-                .post("admin/change-password", user.value)
+                .post("admin/change-password", user.value, 'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         $("#passwordModal").modal("hide");
                         user.value.password = "";
                         Toast("success", res.data.message);
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -623,13 +649,15 @@ export default {
         };
         const updateUser = () => {
             axios
-                .post("admin/update-user", edit.value)
+                .post("admin/update-user", edit.value, 'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         $("#editModal").modal("hide");
                         Toast("success", res.data.message);
                         store.dispatch("onFetchQuyen");
                         store.dispatch("onFetchAdmin");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -641,13 +669,15 @@ export default {
         const deleteUser = () => {
             console.log(user.value);
             axios
-                .post("admin/delete-user", del.value)
+                .post("admin/delete-user", del.value, 'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         $("#deleteModal").modal("hide");
                         Toast("success", res.data.message);
                         store.dispatch("onFetchQuyen");
                         store.dispatch("onFetchAdmin");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {

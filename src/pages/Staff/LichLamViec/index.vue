@@ -63,11 +63,20 @@
                                                 >
                                                     <div class="row">
                                                         <div class="col-6">
-                                                            {{
-                                                                v_name?.split(
-                                                                    ","
-                                                                )[0]
-                                                            }}
+                                                            <span v-if="v_name?.split(',')[1] == 1" class="text-primary">
+                                                                {{
+                                                                    v_name?.split(
+                                                                        ","
+                                                                    )[0]
+                                                                }}
+                                                            </span>
+                                                            <span v-else class="text-white">
+                                                                {{
+                                                                    v_name?.split(
+                                                                        ","
+                                                                    )[0]
+                                                                }}
+                                                            </span>
                                                         </div>
                                                         <div
                                                             class="col-6"
@@ -121,11 +130,20 @@
                                                 >
                                                     <div class="row">
                                                         <div class="col-6">
-                                                            {{
-                                                                v_name?.split(
-                                                                    ","
-                                                                )[0]
-                                                            }}
+                                                            <span v-if="v_name?.split(',')[1] == 1" class="text-primary">
+                                                                {{
+                                                                    v_name?.split(
+                                                                        ","
+                                                                    )[0]
+                                                                }}
+                                                            </span>
+                                                            <span v-else class="text-dark">
+                                                                {{
+                                                                    v_name?.split(
+                                                                        ","
+                                                                    )[0]
+                                                                }}
+                                                            </span>
                                                         </div>
                                                         <div
                                                             class="col-6"
