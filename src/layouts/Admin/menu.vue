@@ -104,7 +104,7 @@
                     <div class="menu-title">Warehouse management</div>
                 </a>
                 <ul class="dropdown-menu">
-                    <li v-if="hasPermission('119')">
+                    <li v-if="hasPermission('125')">
                         <router-link to="/admin/ton-kho-nguyen-lieu">
                             <a class="dropdown-item"><i class="bx bx-right-arrow-alt"></i>Inventory</a>
 
