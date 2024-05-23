@@ -33,7 +33,7 @@
                                             <input  v-on:keyup.enter="searchDanhMuc()" v-model="search.abc"
                                                 type="text"
                                                 class="form-control"
-                                                placeholder="Nhập thông tin cần tìm"
+                                                placeholder="Enter what you're looking for"
                                             /><button v-on:click="searchNguyenLieu()"  class="btn btn-primary">
                                                 <i
                                                     class="fa-solid fa-magnifying-glass"
@@ -74,13 +74,13 @@
                                         <template v-if="value.status == 1">
                                             <button class="btn btn-outline-info" @click="changeStatus(value)"
                                                 style="width: 120px">
-                                                Hiển Thị
+                                                Display
                                             </button>
                                         </template>
                                         <template v-else>
                                             <button class="btn btn-outline-danger" @click="changeStatus(value)"
                                                 style="width: 120px">
-                                                Tạm Đóng
+                                                Pause
                                             </button>
                                         </template>
                                     </td>

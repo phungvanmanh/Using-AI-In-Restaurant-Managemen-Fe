@@ -25,9 +25,7 @@
                         <template #thead>
                             <tr>
                                 <th class="text-center align-middle text-nowrap">
-                                    <button class="btn btn-inverse-danger">
-                                        Delete
-                                    </button>
+                                    #
                                 </th>
                                 <th class="text-center align-middle text-nowrap">Name Permission</th>
                                 <th class="text-center align-middle text-nowrap">Saraly</th>
@@ -38,7 +36,7 @@
                             <template v-for="(value, key) in dataQuyen" :key="key">
                                 <tr>
                                     <td class="text-center align-middle text-nowrap">
-                                        <input type="checkbox" :id="'checkbox-' + key">
+                                     {{ key+1 }}
                                     </td>
                                     <td class="align-middle text-nowrap">{{ value.name_permission }}</td>
                                     <td class="align-middle text-nowrap">{{ fortmatNumber(value.amount) }} VND </td>

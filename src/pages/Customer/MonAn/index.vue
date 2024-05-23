@@ -90,7 +90,7 @@
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Món Đã Gọi</h1>
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Food</h1>
                 <button v-on:click="getChiTietHoaDon()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -99,10 +99,10 @@
                         <thead class="text-center">
                             <tr>
                                 <th>#</th>
-                                <th>Tên Món</th>
-                                <th>Số lượng</th>
-                                <th>Đơn Giá</th>
-                                <th>Thành Tiền</th>
+                                <th>Name Food</th>
+                                <th>Amount</th>
+                                <th>Price</th>
+                                <th>Into Money</th>
                                 
                             </tr>
                         </thead>
@@ -134,7 +134,7 @@
 
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

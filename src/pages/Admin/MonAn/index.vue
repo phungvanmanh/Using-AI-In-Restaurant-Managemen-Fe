@@ -55,7 +55,7 @@
                                 Image
                             </th>
                             <th class="text-center align-middle text-nowrap">
-                                Tình Trạng
+                                Status
                             </th>
                             <th class="text-center align-middle text-nowrap">
                                 Category
@@ -83,12 +83,12 @@
                                 <td class="text-center align-middle text-nowrap">
                                     <template v-if="value.status == 1">
                                         <button @click="changeStatus(value)" class="btn btn-success">
-                                            Hiển thị
+                                          Display
                                         </button>
                                     </template>
                                     <template v-else>
                                         <button @click="changeStatus(value)" class="btn btn-info">
-                                            Tạm Tắt
+                                            Pause
                                         </button>
                                     </template>
                                 </td>
@@ -99,7 +99,7 @@
                                     <ModalComponentVue titleId="edit_monan" color="info" label="Edit Dish" @click="
                                                 Object.assign(editMonAn, value)
                                             ">
-                                        <template #modal-header>Chỉnh Sửa</template>
+                                        <template #modal-header>Edit</template>
                                         <template #modal-body>
                                             <InputComponentVue label="Food's name" v-model="
                                                         editMonAn.food_name
@@ -127,13 +127,13 @@
                                                     value
                                                 )
                                             " color="danger" label="Delete Dish">
-                                        <template #modal-header>Xóa Món</template>
+                                        <template #modal-header>Delete Food</template>
                                         <template #modal-body>
-                                            Bạn có chắc chắn muốn xóa
+                                            Are you sure you want to delete
                                             <span><b><i class="text-danger">{{
                                                                 deletemonan.food_name
                                                             }}</i></b></span>
-                                            ra khỏi danh sách hay không?
+                                            off the list or not?
                                         </template>
                                         <template #modal-footer>
                                             <button class="btn btn-success" @click="deleteMonAn()">

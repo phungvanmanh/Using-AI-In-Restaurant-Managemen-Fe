@@ -1,11 +1,11 @@
 <template>
     <div class="payment-form">
-        <h2 class="text-nowrap">Form Thanh Toán VNPAY</h2>
-        <label for="">Tiền</label>
+        <h2 class="text-nowrap">VNPAY payment form</h2>
+        <label for="">Money</label>
         <input type="text" v-model="amount" class="form-control" />
-        <label for="">Nội dung</label>
+        <label for="">Content</label>
         <input type="text" v-model="bill_id" class="form-control" />
-        <button @click="thanhToan()">Thanh Toán</button>
+        <button @click="thanhToan()">Pay</button>
         <img style="width: 100%" v-bind:src="link_qr" alt="" />
     </div>
 </template>

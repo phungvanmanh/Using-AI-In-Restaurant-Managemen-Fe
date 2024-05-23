@@ -7,40 +7,40 @@
         <table class="table table-bordered">
             <thead>
                 <tr>
-                    <td class="align-middle">Từ Ngày</td>
+                    <td class="align-middle">Start Date</td>
                     <td class="align-middle">
                         <input v-on:change="loadData()" v-model="tk.begin" type="date" class="form-control" />
                     </td>
-                    <td class="align-middle">Đến Ngày</td>
+                    <td class="align-middle">End Date</td>
                     <td class="align-middle">
                         <input  v-on:change="loadData()" v-model="tk.end" type="date" class="form-control" />
                     </td>
                     <td class="align-middle text-center">
-                        <button  v-on:click="loadData()" class="btn btn-primary">Thống Kê</button>
+                        <button  v-on:click="loadData()" class="btn btn-primary">Statistics</button>
                     </td>
-                    <td class="align-middle" colspan="3"><b>Tổng Tiền Đã Nhận:</b> {{ formatToVND(tong_tien) }}</td>
+                    <td class="align-middle" colspan="3"><b>Total funds received:</b> {{ formatToVND(tong_tien) }}</td>
                     <td class="text-center">
                         <button @click="exportData" class="btn btn-success">ExportExcel</button>
                     </td>
                 </tr>
                 <tr>
                     <th class="align-middle text-center">#</th>
-                    <th class="align-middle text-center">Tên Bàn</th>
+                    <th class="align-middle text-center">Name Table</th>
                     <th class="align-middle text-center">
-                        Nhân Viên Thanh Toán
+                        Checkout staff
                     </th>
                     <th class="align-middle text-center">
-                        Tiền Trước Giảm
+                        Advance money decreases
                     </th>
-                    <th class="align-middle text-center">Phần Trăm Giảm</th>
+                    <th class="align-middle text-center">Percentage decrease</th>
                     <th class="align-middle text-center">
-                        Tổng Tiền Đã Giảm
+                        Total money has decreased
                     </th>
-                    <th class="align-middle text-center">Ghi Chú</th>
+                    <th class="align-middle text-center">Note</th>
                     <th class="align-middle text-center">
-                        Chi Tiết Hóa Đơn
+                        Invoice details
                     </th>
-                    <th  class="align-middle text-center">Tình Trạng Thanh Toán</th>
+                    <th  class="align-middle text-center">Payment Status</th>
                 </tr>
             </thead>
             <tbody>
@@ -94,19 +94,19 @@
                                         #
                                     </th>
                                     <th class="text-center align-middle">
-                                        Tên Món
+                                       Name Food
                                     </th>
                                     <th class="text-center align-middle">
-                                        Số Lượng
+                                       Amount
                                     </th>
                                     <th class="text-center align-middle">
-                                        Đơn Giá
+                                        Price
                                     </th>
                                     <th class="text-center align-middle">
-                                        Thành Tiền
+                                        Into Money
                                     </th>
                                     <th class="text-center align-middle">
-                                        Phần Trăm Giảm
+                                        Percentage decrease
                                     </th>
                                 </tr>
                             </thead>
@@ -128,7 +128,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Thoát
+                            Close
                         </button>
                     </div>
                 </div>
@@ -139,7 +139,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">
-                           Ghi Chú Hoá Đơn
+                            Invoice notes
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
@@ -148,7 +148,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Thoát
+                            Exit
                         </button>
                     </div>
                 </div>

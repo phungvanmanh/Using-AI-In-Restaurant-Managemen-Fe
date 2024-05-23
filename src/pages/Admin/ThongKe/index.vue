@@ -4,7 +4,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <h5>Thống Kê </h5>
+                        <h5>Statistical </h5>
                     </div>
                 </div>
             </div>
@@ -12,19 +12,19 @@
                 <div class="row">
                     <div class="col-lg-1"></div>
                     <div class="col-lg-1 text-end">
-                        <p class="mt-2">Từ Ngày:</p>
+                        <p class="mt-2">Start Date:</p>
                     </div>
                     <div class="col-lg-3">
                         <input v-model="thong_ke.begin" type="date" class="form-control">
                     </div>
                     <div class="col-lg-1 text-end">
-                        <p class="mt-2">Đến Ngày:</p>
+                        <p class="mt-2">End Date:</p>
                     </div>
                     <div class="col-lg-3">
                         <input v-model="thong_ke.end" type="date" class="form-control">
                     </div>
                     <div class="col-lg-2">
-                        <button @click="loadData" class="btn btn-primary">Thống Kê</button>
+                        <button @click="loadData" class="btn btn-primary">Statistical</button>
                     </div>
                 </div>
                 <div class="row">

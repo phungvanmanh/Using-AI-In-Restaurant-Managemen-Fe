@@ -2,7 +2,7 @@
 <nav id="nav_1">
     <div class="wrapper">
         <div class="logo">
-            <a href="#"><img style="width: 50px; height: 50px" src="https://idodesign.vn/wp-content/uploads/2023/04/nhung-mau-thiet-ke-logo-nha-hang-quan-an-sang-tao-1.jpg" alt="" /></a>
+            <a href="#"><img style="width: 50px; height: 50px" src="https://quantrinhahang.edu.vn/wp-content/uploads/2019/10/ca-bien-restaurant.jpg" alt="" /></a>
         </div>
         <input type="radio" name="slider" id="menu-btn_1" />
         <input type="radio" name="slider" id="close-btn_1" />
@@ -67,7 +67,7 @@
                     <div class="row mt-2">
                         <div class="col-3">
                             <h5 class="blinking text-danger">
-                                *Chương Trình Khuyến Mãi:
+                                *Promotions:
                             </h5>
                         </div>
                         <div class="col">
@@ -97,7 +97,7 @@
         </div>
         <div class="container mt-2  ">
             <div class="row text-center mt-2">
-                <h5  style="color: blueviolet;" class="blink-text">Món Ăn Nổi Bậc</h5>
+                <h5  style="color: blueviolet;" class="blink-text">Outstanding Food</h5>
             </div>
             <div class="row mt-4">
                 <template v-for="(value, index) in dataMonNoiBac" :key="index">
@@ -111,7 +111,7 @@
                             </div>
                             <div class="card-footer4321">
                                 <span class="text-title4321">
-                                    <b style="color: brown;">{{ formatToVN(value.price) }}</b> đ
+                                    <b style="color: brown;">{{ formatToVN(value.price) }}</b> 
                                 </span>
                                 <div class="card-button4321">
                                     <button @click="getReview(value.id);setMonAnId(value.id)" class="fa-solid fa-arrows-to-eye" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
@@ -126,7 +126,7 @@
         </div>
         <div class="container mt-3">
             <div class="row text-center mt-3">
-                <h5  style="color: blueviolet;" class="blink-text">Món Ăn Ngon</h5>
+                <h5  style="color: blueviolet;" class="blink-text">Good Food</h5>
             </div>
             <div class="container">
                 <div class="row mt-4">
@@ -158,7 +158,7 @@
             </div>
             <!-- Modal -->
             <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
+                <div class="modal-dialog modal-xl">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">
@@ -173,7 +173,7 @@
                                         <div v-for="(value,key) in reviews" :key="key">
                                             <li class="d-flex align-items-center border-bottom pb-2">
                                                 <h5>{{ value.ten_khach_hang }}</h5>
-                                                <div class="flex-grow-1 ms-3">
+                                                <div class="flex-grow-1 ms-3" style="margin-bottom: 10px;">
                                                     : {{ value.binh_luan }}
                                                 </div>
                                                 <div class="dropdown ms-auto">
@@ -193,11 +193,11 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                Đóng
+                                Close
                             </button>
                             <template v-if="isShow == true">
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#danhgiaModal">
-                                    Viết Đánh Giá
+                                    Create Review
                                 </button>
                             </template>
 
@@ -212,12 +212,12 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="exampleModalLabel">
-                            Viết Đánh Giá Của Bạn
+                            Write Your Review
                         </h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <input v-model="binhLuan" class="form-control" type="text" name="" id="" placeholder="Mời bạn viết đánh giá,lưu ý không có những hành động phá hoại" />
+                        <input v-model="binhLuan" class="form-control" type="text" name="" id="" placeholder="Express your feelings about the dish" />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">

@@ -43,7 +43,7 @@
                                 <th
                                     class="text-center align-middle text-nowrap"
                                 >
-                                    Tên Khách Hàng
+                                    Name Customer
                                 </th>
                                 <th
                                     class="text-center align-middle text-nowrap"
@@ -53,7 +53,7 @@
                                 <th
                                     class="text-center align-middle text-nowrap"
                                 >
-                                    Số điện thoại
+                                   Phone
                                 </th>
                                 <th
                                     class="text-center align-middle text-nowrap"
@@ -80,28 +80,7 @@
                                     <td class="align-middle text-nowrap">
                                         {{ value.so_dien_thoai }}
                                     </td>
-                                    <!-- <td
-                                        class="text-center align-middle text-nowrap"
-                                    >
-                                        <template v-if="value.status == 1">
-                                            <button
-                                                class="btn btn-outline-info"
-                                                @click="changeStatus(value)"
-                                                style="width: 120px"
-                                            >
-                                                Hiển Thị
-                                            </button>
-                                        </template>
-                                        <template v-else>
-                                            <button
-                                                class="btn btn-outline-danger"
-                                                @click="changeStatus(value)"
-                                                style="width: 120px"
-                                            >
-                                                Tạm Đóng
-                                            </button>
-                                        </template>
-                                    </td> -->
+                                    
                                     <td
                                         class="text-center align-middle text-nowrap"
                                     >

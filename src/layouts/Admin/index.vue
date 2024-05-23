@@ -4,8 +4,8 @@
             <headerVue></headerVue>
             <menuVue></menuVue>
         </div>
-        <div class="page-wrapper" style="background-color: bisque">
-            <div class="page-content">
+        <div class="page-wrapper" style="background-color: rgb(166, 163, 192)">
+            <div class="page-content" style="background-color:  rgb(166, 163, 192)">
                 <router-view></router-view>
             </div>
         </div>
@@ -55,12 +55,15 @@ export default {
 body {
     margin: 0;
     padding: 0;
-    background-color: bisque;
+    background-color: rgb(166, 163, 192);
 }
 
 .page-wrapper {
-    height: 100vh; /* Chiều cao của page-wrapper là 100% chiều cao của viewport */
+    height: auto; 
+    background-color: rgb(166, 163, 192);
+
 }
+
 
 table {
     font-family: arial !important;

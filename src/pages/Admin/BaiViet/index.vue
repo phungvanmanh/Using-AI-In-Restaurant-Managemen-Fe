@@ -18,12 +18,12 @@
                 <div class="modal-body">
                     <div class="row">
                         <div class="row">
-                            <div class="col-4"><label class="form-label">Headline</label><input v-model="addBaiViet.tieu_de_bai_viet" @keyup="convertToSlug(addBaiViet)" type="text" class="form-control" placeholder="Nhập Tiêu Đề"></div>
-                            <div class="col-4"><label class="form-label">Slug Headline</label><input v-model="addBaiViet.slug_bai_viet" type="text" disabled="" class="form-control" placeholder="Nhập Slug Tiêu Đề"></div>
-                            <div class="col-4"><label class="form-label">Image</label><input v-model="addBaiViet.hinh_anh_bai_viet" type="text" class="form-control" placeholder="Nhập Hình Ảnh"></div>
+                            <div class="col-4"><label class="form-label">Headline</label><input v-model="addBaiViet.tieu_de_bai_viet" @keyup="convertToSlug(addBaiViet)" type="text" class="form-control" placeholder="Enter a title"></div>
+                            <div class="col-4"><label class="form-label">Slug Headline</label><input v-model="addBaiViet.slug_bai_viet" type="text" disabled="" class="form-control" placeholder="Enter the title slug"></div>
+                            <div class="col-4"><label class="form-label">Image</label><input v-model="addBaiViet.hinh_anh_bai_viet" type="text" class="form-control" placeholder="Import images"></div>
                         </div>
                         <div class="row">
-                            <div class="col-6"><label class="form-label mt-3">Short description</label><input v-model="addBaiViet.mo_ta_ngan_bai_viet" type="text" class="form-control" placeholder="Nhập Mô Tả Ngắn"></div>
+                            <div class="col-6"><label class="form-label mt-3">Short description</label><input v-model="addBaiViet.mo_ta_ngan_bai_viet" type="text" class="form-control" placeholder="Enter a short description"></div>
                             <div class="col-6"><label class="form-label mt-3">Article Categories </label>
                                 <select v-model="addBaiViet.id_chuyen_muc_bai_viet" class="form-select mb-3">
                                     <template v-for="(value,key) in dataChuyenMucBaiViet" :key="key">
@@ -56,7 +56,7 @@
                         <thead>
                             <tr>
                                 <th colspan="100%">
-                                    <div class="input-group mb-3"><input  v-on:keyup.enter="searchBaiViet()" v-model="search.abc" type="text" class="form-control" placeholder="Nhập thông tin cần tìm"><button v-on:click="searchBaiViet()" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button></div>
+                                    <div class="input-group mb-3"><input  v-on:keyup.enter="searchBaiViet()" v-model="search.abc" type="text" class="form-control" placeholder="Enter what you're looking for"><button v-on:click="searchBaiViet()" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i></button></div>
                                 </th>
                             </tr>
                             <tr>
@@ -84,9 +84,8 @@
                                     <button v-else class="btn btn-warning">Pause</button>
                                 </td>
                                 <td class="text-center align-middle text-nowrap">
-                                    <button v-on:click="Object.assign(editBaiViet, value)" class="btn btn-info" style="width: 100px; margin-right: 4px;" data-bs-toggle="modal" data-bs-target="#capNhatModal">Cập
-                                        Nhật</button>
-                                    <button  v-on:click="Object.assign(deleteBaiViet, value)" class="btn btn-danger" style="width: 100px;" data-bs-toggle="modal" data-bs-target="#xoaModal">Xóa</button>
+                                    <button v-on:click="Object.assign(editBaiViet, value)" class="btn btn-info" style="width: 100px; margin-right: 4px;" data-bs-toggle="modal" data-bs-target="#capNhatModal">Updatet</button>
+                                    <button  v-on:click="Object.assign(deleteBaiViet, value)" class="btn btn-danger" style="width: 100px;" data-bs-toggle="modal" data-bs-target="#xoaModal">Delete</button>
                                 </td>
 
                             </tr>
@@ -103,12 +102,12 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="row">
-                                        <div class="col-4"><label class="form-label">Headline</label><input v-model="editBaiViet.tieu_de_bai_viet" @keyup="convertToSlug(editBaiViet)" type="text" class="form-control" placeholder="Nhập Tiêu Đề"></div>
-                                        <div class="col-4"><label class="form-label">Slug Headline</label><input v-model="editBaiViet.slug_bai_viet" type="text" disabled="" class="form-control" placeholder="Nhập Slug Tiêu Đề"></div>
-                                        <div class="col-4"><label class="form-label">Image</label><input v-model="editBaiViet.hinh_anh_bai_viet" type="text" class="form-control" placeholder="Nhập Hình Ảnh"></div>
+                                        <div class="col-4"><label class="form-label">Headline</label><input v-model="editBaiViet.tieu_de_bai_viet" @keyup="convertToSlug(editBaiViet)" type="text" class="form-control" placeholder="Enter a title"></div>
+                                        <div class="col-4"><label class="form-label">Slug Headline</label><input v-model="editBaiViet.slug_bai_viet" type="text" disabled="" class="form-control" placeholder="Enter the title slug"></div>
+                                        <div class="col-4"><label class="form-label">Image</label><input v-model="editBaiViet.hinh_anh_bai_viet" type="text" class="form-control" placeholder="Import images"></div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-6"><label class="form-label mt-3">Short description</label><input v-model="editBaiViet.mo_ta_ngan_bai_viet" type="text" class="form-control" placeholder="Nhập Mô Tả Ngắn"></div>
+                                        <div class="col-6"><label class="form-label mt-3">Short description</label><input v-model="editBaiViet.mo_ta_ngan_bai_viet" type="text" class="form-control" placeholder="Enter a short description"></div>
                                         <div class="col-6"><label class="form-label mt-3">Article Categories </label>
                                             <select v-model="editBaiViet.id_chuyen_muc_bai_viet" class="form-select mb-3">
                                                 <template v-for="(value,key) in dataChuyenMucBaiViet" :key="key">

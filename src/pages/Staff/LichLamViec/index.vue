@@ -4,11 +4,11 @@
             <div class="row">
                 <span><b>Calendar</b></span>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-xl-2 col-lg-2 col-md-3 col-sm-3">
                     <SelectComponent></SelectComponent>
                 </div>
-            </div>
+            </div> -->
         </template>
         <template #card-body>
             <TableComponent>
@@ -194,7 +194,7 @@
 <script>
 import CardComponent from "@/components/CardComponent.vue";
 import TableComponent from "@/components/TableComponent.vue";
-import SelectComponent from "@/components/SelectComponent.vue";
+// import SelectComponent from "@/components/SelectComponent.vue";
 import { computed, onMounted, onUnmounted, ref } from "vue";
 import axios from "@/axiosConfig";
 import moment from "moment";
@@ -208,7 +208,7 @@ export default {
     components: {
         CardComponent,
         TableComponent,
-        SelectComponent,
+        // SelectComponent,
     },
     setup() {
         const store = useStore();

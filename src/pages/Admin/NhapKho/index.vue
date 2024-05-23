@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-5">
                 <div class="card">
-                    <div class="card-header">Danh Sách Nguyên Liệu</div>
+                    <div class="card-header">List of ingredients</div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered">
@@ -15,7 +15,7 @@
                                                 v-on:keyup.enter="searchNguyenLieu()" v-model="search.abc"
                                                     type="text"
                                                     class="form-control"
-                                                    placeholder="Nhập thông tin cần tìm"
+                                                    placeholder="Enter what you're looking for"
                                                 /><button
                                                 @click="searchNguyenLieu()"
                                                     class="btn btn-primary"
@@ -36,7 +36,7 @@
                                         <th
                                             class="text-center align-middle text-nowrap"
                                         >
-                                            Tên Nguyên Liệu
+                                        Name of raw materials
                                         </th>
                                         <th
                                             class="text-center align-middle text-nowrap"
@@ -70,7 +70,7 @@
                                                     "
                                                     class="btn btn-primary"
                                                 >
-                                                    Thêm
+                                                    Add
                                                 </button>
                                             </th>
                                         </tr>
@@ -83,7 +83,7 @@
             </div>
             <div class="col-7">
                 <div class="card">
-                    <div class="card-header">Danh Sách Nhập Kho</div>
+                    <div class="card-header">Inventory List</div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table class="table table-bordered">
@@ -97,22 +97,22 @@
                                         <th
                                             class="text-center align-middle text-nowrap"
                                         >
-                                            Tên Nguyên Liệu
+                                        Name of raw materials
                                         </th>
                                         <th
                                             class="text-center align-middle text-nowrap"
                                         >
-                                            Số Lương
+                                            Amount
                                         </th>
                                         <th
                                             class="text-center align-middle text-nowrap"
                                         >
-                                            Đơn Giá
+                                            Price
                                         </th>
                                         <th
                                             class="text-center align-middle text-nowrap"
                                         >
-                                            Thành Tiền
+                                            Into Money
                                         </th>
                                         <th
                                             class="text-center align-middle text-nowrap"
@@ -185,7 +185,7 @@
                                     <tr>
                                         <td colspan="5">
                                             <label for="" class="mb-2"
-                                                >Chọn Nhà Cung Cấp</label
+                                                >Choose a provider</label
                                             ><select
                                                 v-model="
                                                     nhap_kho.id_nha_cung_cap
@@ -210,7 +210,7 @@
                                         </td>
                                         <td colspan="1">
                                             <label for="" class="mb-2"
-                                                ><b>Tổng Tiền</b></label
+                                                ><b>Total Money</b></label
                                             >
                                             <p class="text-danger">
                                                 {{
@@ -222,7 +222,7 @@
                                     <tr>
                                         <td colspan="6">
                                             <label for="" class="mb-2"
-                                                >Nhập Ghi Chú Nhập Kho</label
+                                                >Import Warehouse Notes</label
                                             ><textarea
                                                 v-model="nhap_kho.ghi_chu"
                                                 cols="30"
@@ -240,7 +240,7 @@
                                     v-on:click="createHoaDonNhapKho()"
                                     class="btn btn-primary"
                                 >
-                                    Nhập Kho
+                                Warehousing
                                 </button>
                             </div>
                         </div>
