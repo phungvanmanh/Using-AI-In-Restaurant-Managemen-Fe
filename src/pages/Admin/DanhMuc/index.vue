@@ -74,13 +74,13 @@
                                         <template v-if="value.status == 1">
                                             <button class="btn btn-outline-info" @click="changeStatus(value)"
                                                 style="width: 120px">
-                                                Hiển Thị
+                                                Display
                                             </button>
                                         </template>
                                         <template v-else>
                                             <button class="btn btn-outline-danger" @click="changeStatus(value)"
                                                 style="width: 120px">
-                                                Tạm Đóng
+                                                Pause
                                             </button>
                                         </template>
                                     </td>

@@ -25,7 +25,7 @@
                                             <input v-on:keyup.enter="searchKhachHang()" v-model="search.abc"
                                                 type="text"
                                                 class="form-control"
-                                                placeholder="Nhập thông tin cần tìm"
+                                                placeholder="Enter what you're looking for"
                                             /><button  v-on:click="searchKhachHang()" class="btn btn-primary">
                                                 <i
                                                     class="fa-solid fa-magnifying-glass"
@@ -43,7 +43,7 @@
                                 <th
                                     class="text-center align-middle text-nowrap"
                                 >
-                                    Tên Khách Hàng
+                                  Name Customer
                                 </th>
                                 <th
                                     class="text-center align-middle text-nowrap"
@@ -53,7 +53,7 @@
                                 <th
                                     class="text-center align-middle text-nowrap"
                                 >
-                                    Số điện thoại
+                                    Phone
                                 </th>
                                 <th
                                     class="text-center align-middle text-nowrap"

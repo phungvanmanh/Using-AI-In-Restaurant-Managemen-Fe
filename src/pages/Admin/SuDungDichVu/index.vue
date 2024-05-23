@@ -20,7 +20,7 @@
                             <div class="tab-icon">
                                 <i class="bx bx-comment-detail font-18 me-1"></i>
                             </div>
-                            <div class="tab-title">Tất Cả</div>
+                            <div class="tab-title">All</div>
                         </div>
                     </a>
                 </li>
@@ -139,7 +139,7 @@
                             </div>
                             <div class="col-3">
                                 <!-- <label style="margin-bottom: 10px;" for=""><b style="color: blue;">Gộp Bàn</b></label> -->
-                                <SelectComponent v-model="id_ban_chuyen" label="Gộp Bàn" :options="dataBanChuyen" />
+                                <SelectComponent v-model="id_ban_chuyen" label="Table pooling" :options="dataBanChuyen" />
                             </div>
                             <div class="col-3">
                                 <button v-on:click="gopBan()" style="margin-top: 30px;" class="btn btn-primary">Confirm</button>
@@ -250,7 +250,7 @@
                                         </div>
                                         <div class="row mt-3">
                                             <div class="col-lg-6">
-                                                <p><b>Tổng thanh toán:</b></p>
+                                                <p><b>Total payout:</b></p>
                                                 <input @change="updateHoaDon()" type="number" class="form-control" v-model="tong_tien" />
                                             </div>
                                             <div class="col-lg-6">
@@ -302,7 +302,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>

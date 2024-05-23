@@ -22,7 +22,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="row">
-                    <div class="col-md-6 col-sm-12 mb-2 mb-md-0">Danh Sách Hóa Đơn Nhập Kho</div>
+                    <div class="col-md-6 col-sm-12 mb-2 mb-md-0">List of warehousing invoices</div>
                     <div class="col-md-6 col-sm-12 text-md-end">
                         <button class="btn btn-success" @click="exportExcel()">
                             Export Excel
@@ -35,28 +35,28 @@
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <td class="align-middle">Từ Ngày</td>
+                                <td class="align-middle">Start Date</td>
                                 <td class="align-middle">
                                     <input v-model="tk.begin" type="date" class="form-control" />
                                 </td>
-                                <td class="align-middle">Đến Ngày</td>
+                                <td class="align-middle">End Date</td>
                                 <td class="align-middle">
                                     <input v-on:change="loadData()" v-model="tk.end" type="date" class="form-control" />
                                 </td>
                                 <td class="align-middle text-center" colspan="3">
                                     <button v-on:click="loadData()" class="btn btn-primary">
-                                        Thống Kê
+                                        Statistics
                                     </button>
                                 </td>
                             </tr>
                             <tr class="text-center align-middle">
                                 <th>#</th>
-                                <th>Mã Hóa Đơn</th>
-                                <th>Nhà Cung Cấp</th>
-                                <th>Ghi Chú</th>
-                                <th>Chi Tiết Hóa Đơn</th>
-                                <th>Nhân Viên</th>
-                                <th>Tổng Tiền</th>
+                                <th>Invoice code</th>
+                                <th>Suppliers</th>
+                                <th>Note</th>
+                                <th>Invoice details</th>
+                                <th>Staff</th>
+                                <th>Total Money</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -92,14 +92,14 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Ghi Chú</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Note</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 {{ ghi_chu }}
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
@@ -108,7 +108,7 @@
                     <div class="modal-dialog modal-xl">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Chi Tiết Hóa Đơn</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Invoice details</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -117,11 +117,11 @@
                                         <thead>
                                             <tr class="text-center">
                                                 <th>#</th>
-                                                <th>Tên Nguyên Liệu</th>
-                                                <th>Ngày</th>
-                                                <th>Số Lượng</th>
-                                                <th>Đơn Giá</th>
-                                                <th>Thành Tiền</th>
+                                                <th>Name of raw materials</th>
+                                                <th>Date</th>
+                                                <th>Amount</th>
+                                                <th>Price</th>
+                                                <th>Into Money</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -140,7 +140,7 @@
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>

@@ -97,7 +97,7 @@
         </div>
         <div class="container mt-2  ">
             <div class="row text-center mt-2">
-                <h5  style="color: blueviolet;" class="blink-text">Món Ăn Nổi Bậc</h5>
+                <h5  style="color: blueviolet;" class="blink-text">Notable dishes</h5>
             </div>
             <div class="row mt-4">
                 <template v-for="(value, index) in dataMonNoiBac" :key="index">
@@ -111,7 +111,7 @@
                             </div>
                             <div class="card-footer4321">
                                 <span class="text-title4321">
-                                    <b style="color: brown;">{{ formatToVN(value.price) }}</b> đ
+                                    <b style="color: brown;">{{ formatToVN(value.price) }}</b> 
                                 </span>
                                 <div class="card-button4321">
                                     <button @click="getReview(value.id);setMonAnId(value.id)" class="fa-solid fa-arrows-to-eye" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
@@ -126,7 +126,7 @@
         </div>
         <div class="container mt-3">
             <div class="row text-center mt-3">
-                <h5  style="color: blueviolet;" class="blink-text">Món Ăn Ngon</h5>
+                <h5  style="color: blueviolet;" class="blink-text">Delicious food</h5>
             </div>
             <div class="container">
                 <div class="row mt-4">

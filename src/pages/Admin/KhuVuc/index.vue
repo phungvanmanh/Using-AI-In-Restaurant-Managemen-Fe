@@ -101,7 +101,7 @@
                                                 @click="changeStatus(value)"
                                                 style="width: 120px"
                                             >
-                                                Hiển Thị
+                                                Display
                                             </button>
                                         </template>
                                         <template v-else>
@@ -110,7 +110,7 @@
                                                 @click="changeStatus(value)"
                                                 style="width: 120px"
                                             >
-                                                Tạm Đóng
+                                                Pause
                                             </button>
                                         </template>
                                     </td>

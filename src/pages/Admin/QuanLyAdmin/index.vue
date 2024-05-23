@@ -22,7 +22,7 @@
                                 class="btn btn-success me-2"
                                 @click="exportData"
                             >
-                                Xuất Excel
+                                Export Excel
                             </button>
                             <ModalComponent
                                 color="primary"
@@ -201,7 +201,7 @@
                                                 @click="changeStatus(value)"
                                                 style="width: 120px"
                                             >
-                                                Hiển Thị
+                                                Display
                                             </button>
                                         </template>
                                         <template v-else>
@@ -210,7 +210,7 @@
                                                 @click="changeStatus(value)"
                                                 style="width: 120px"
                                             >
-                                                Tạm Đóng
+                                                Pause
                                             </button>
                                         </template>
                                     </td>
@@ -239,7 +239,7 @@
                                                         @click="
                                                             user.id = value.id
                                                         "
-                                                        >Đổi mật khẩu</a
+                                                        >Change Password</a
                                                     >
                                                 </li>
                                                 <li>
@@ -253,7 +253,7 @@
                                                                 value
                                                             )
                                                         "
-                                                        >Cập Nhật</a
+                                                        >Update</a
                                                     >
                                                 </li>
                                                 <li>
@@ -267,7 +267,7 @@
                                                                 value
                                                             )
                                                         "
-                                                        >Xóa</a
+                                                        >Delete</a
                                                     >
                                                 </li>
                                             </ul>

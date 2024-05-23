@@ -3,7 +3,7 @@
     <div class="row mb-3">
         <div class="col-12 text-end">
             <button class="btn btn-outline-primary px-5 radius-30" data-bs-toggle="modal" data-bs-target="#themMoiModal">
-                <b>Thêm Mới</b>
+                <b>Add New</b>
             </button>
         </div>
     </div>
@@ -12,7 +12,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h1 class="modal-title fs-5" id="exampleModalLabel">
-                        Thêm Mới Nguyên Liệu
+                        Add new ingredients
                     </h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -20,26 +20,28 @@
                     <div class="row">
                         <div class="row">
                             <div class="col-6">
-                                <label class="form-label">Tên Nguyên Liệu</label><input v-model="addNguyenLieu.ten_nguyen_lieu" @keyup="convertToSlug(addNguyenLieu)" type="text" class="form-control" placeholder="Nhập tên nguyên liệu" />
+                                <label class="form-label">Name of raw materials</label><input v-model="addNguyenLieu.ten_nguyen_lieu" @keyup="convertToSlug(addNguyenLieu)" type="text" class="form-control" placeholder="Enter an ingredient name" />
                             </div>
                             <div class="col-6">
-                                <label class="form-label">Slug Nguyên Liệu</label><input v-model="addNguyenLieu.slug_nguyen_lieu" disabled type="text" class="form-control" placeholder="Nhập slug nguyên liệu" />
+                                <label class="form-label">Slug Raw Materials
+                                </label><input v-model="addNguyenLieu.slug_nguyen_lieu" disabled type="text" class="form-control" placeholder="Enter Slug Raw Materials
+" />
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-6">
-                                <label class="form-label mt-3">Giá</label><input v-model="addNguyenLieu.gia" type="number" class="form-control" placeholder="0" />
+                                <label class="form-label mt-3">Price</label><input v-model="addNguyenLieu.gia" type="number" class="form-control" placeholder="0" />
                             </div>
                             <div class="col-6">
-                                <label class="form-label mt-3">Đơn Vị Tính</label>
-                                <input v-model="addNguyenLieu.don_vi_tinh" type="text" class="form-control" placeholder="Đơn vị tính" />
+                                <label class="form-label mt-3">Units of calculation</label>
+                                <input v-model="addNguyenLieu.don_vi_tinh" type="text" class="form-control" placeholder="Units of calculation" />
                             </div>
 
                         </div>
                         <div class="row">
-                           
+
                             <div class="col-12">
-                                <label class="form-label mt-3">Tình Trạng</label><select v-model="addNguyenLieu.tinh_trang" class="form-control">
+                                <label class="form-label mt-3">Status</label><select v-model="addNguyenLieu.tinh_trang" class="form-control">
                                     <option value="1">Hoạt Động</option>
                                     <option value="0">Tạm Tắt</option>
                                 </select>
@@ -49,8 +51,8 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Thoát</button><button @:click="createNguyenLieu()" type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                        Thêm Mới
+                        Close</button><button @:click="createNguyenLieu()" type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                        Add New
                     </button>
                 </div>
             </div>
@@ -59,7 +61,7 @@
     <div class="row">
         <div class="card border-top border-0 border-4 border-primary">
             <div class="card-header">
-                <h5>Danh Sách Nguyên Liệu</h5>
+                <h5>List of ingredients</h5>
             </div>
             <div class="card-body">
                 <div class="table-responsive">
@@ -68,7 +70,7 @@
                             <tr>
                                 <th colspan="100%">
                                     <div class="input-group mb-3">
-                                        <input v-on:keyup.enter="searchNguyenLieu()" v-model="search.abc" type="text" class="form-control" placeholder="Nhập thông tin cần tìm" /><button v-on:click="searchNguyenLieu()" class="btn btn-primary">
+                                        <input v-on:keyup.enter="searchNguyenLieu()" v-model="search.abc" type="text" class="form-control" placeholder="Enter what you're looking for" /><button v-on:click="searchNguyenLieu()" class="btn btn-primary">
                                             <i class="fa-solid fa-magnifying-glass"></i>
                                         </button>
                                     </div>
@@ -79,20 +81,21 @@
                                     #
                                 </th>
                                 <th class="text-center align-middle text-nowrap">
-                                    Tên Nguyên Liệu
+                                    Name of raw materials
                                 </th>
                                 <th class="text-center align-middle text-nowrap">
-                                    Slug Nguyên Liệu
+                                    Slug Raw Materials
+
                                 </th>
                                 <th class="text-center align-middle text-nowrap">
-                                    Giá
+                                    Price
                                 </th>
-                               
+
                                 <th class="text-center align-middle text-nowrap">
-                                    Đơn Vị Tính
+                                    Units of calculation
                                 </th>
                                 <th class="text-center align-middle text-nowrap">
-                                    Tình Trạng
+                                    Status
                                 </th>
                                 <th class="text-center align-middle text-nowrap">
                                     Action
@@ -114,24 +117,24 @@
                                     <td class="text-end align-middle text-nowrap">
                                         {{ formatToVN(value.gia) }}
                                     </td>
-                                   
+
                                     <td class="text-center align-middle text-nowrap">
                                         {{ value.don_vi_tinh }}
                                     </td>
                                     <td class="text-center align-middle text-nowrap">
                                         <button @click="changeStatus(value)" v-if="value.tinh_trang == 1" class="btn btn-success" style="width: 100px">
-                                            Hiển Thị
+                                           Display
                                         </button>
                                         <button @click="changeStatus(value)" v-else class="btn btn-info" style="width: 100px">
-                                            Tạm Tắt
+                                            Pause
                                         </button>
                                     </td>
                                     <td class="text-center align-middle text-nowrap">
                                         <button @click="Object.assign(updateNguyenLieu, value)" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#capNhatModal" style="width: 100px; margin-right: 4px;">
-                                            Cập Nhật
+                                           Update
                                         </button>
                                         <button @click="Object.assign(detete_nguyen_lieu, value)" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#xoaModal" style="width: 100px">
-                                            Xóa
+                                            Delete
                                         </button>
                                     </td>
                                 </tr>
@@ -159,31 +162,33 @@
                                                         convertToSlug(
                                                             updateNguyenLieu
                                                         )
-                                                    " tosl type="text" class="form-control" placeholder="Nhập tên nguyên liệu" />
+                                                    " tosl type="text" class="form-control" placeholder="Enter an ingredient name" />
                                         </div>
                                         <div class="col-6">
-                                            <label class="form-label">Slug Nguyên Liệu</label><input v-model="
+                                            <label class="form-label">Slug Raw Materials
+                                            </label><input v-model="
                                                         updateNguyenLieu.slug_nguyen_lieu
-                                                    " type="text" disabled="" class="form-control" placeholder="Nhập slug nguyên liệu" />
+                                                    " type="text" disabled="" class="form-control" placeholder="Nhập Slug Raw Materials
+" />
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6">
-                                            <label class="form-label mt-3">Giá</label><input v-model="
+                                            <label class="form-label mt-3">Price</label><input v-model="
                                                         updateNguyenLieu.gia
                                                     " type="number" class="form-control" placeholder="0" />
                                         </div>
-                                       
+
                                         <div class="col-6">
-                                            <label class="form-label mt-3">Đơn Vị Tính</label><input v-model="
+                                            <label class="form-label mt-3">Units of calculation</label><input v-model="
                                                         updateNguyenLieu.don_vi_tinh
-                                                    " type="text" class="form-control" placeholder="Đơn vị tính" />
+                                                    " type="text" class="form-control" placeholder="Units of calculation" />
                                         </div>
                                     </div>
                                     <div class="row">
-                                       
+
                                         <div class="col-12">
-                                            <label class="form-label mt-3">Tình Trạng</label><select v-model="
+                                            <label class="form-label mt-3">Status</label><select v-model="
                                                         updateNguyenLieu.tinh_trang
                                                     " class="form-control">
                                                 <option value="1">
@@ -376,9 +381,13 @@ export default {
         onMounted(() => {
             store.dispatch("onFetchNguyenLieu");
         });
-        function formatToVN (number) {
+
+        function formatToVN(number) {
             number = parseInt(number);
-            return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+            return number.toLocaleString('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            });
         }
         return {
             addNguyenLieu,
