@@ -205,13 +205,16 @@ export default {
         });
         const addNew = () => {
             axios
-                .post("admin/bai-viet/tao-bai-viet", addBaiViet.value)
+                .post("admin/bai-viet/tao-bai-viet", addBaiViet.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         addBaiViet.value = {};
                         store.dispatch("onFetchBaiViet");
+                    }else {
+                        Toast("error", res.data.message);
                     }
+                    
                 })
                 .catch((res) => {
                     $.each(res.response.data.errors, function (k, v) {
@@ -223,13 +226,16 @@ export default {
 
         const updateBaiViet = () => {
             axios
-                .post("admin/bai-viet/update", editBaiViet.value)
+                .post("admin/bai-viet/update", editBaiViet.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         $("#edit_area").modal("hide");
                         editBaiViet.value = {};
                         store.dispatch("onFetchBaiViet");
+                    }
+                    else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -240,12 +246,15 @@ export default {
         };
         const delete_baiviet = () => {
             axios
-                .post("admin/bai-viet/delete", deleteBaiViet.value)
+                .post("admin/bai-viet/delete", deleteBaiViet.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         $("#delete_area").modal("hide");
                         store.dispatch("onFetchBaiViet");
+                    }
+                    else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -260,11 +269,12 @@ export default {
         };
         function searchBaiViet() {
             axios
-                .post('admin/bai-viet/tim-bai-viet', search.value)
+                .post('admin/bai-viet/tim-bai-viet', search.value,'admin')
                 .then((res) => {
                     console.log(res.data.data);
                     store.commit('fecthBaiViet', res.data.data);
                 });
+                
         }
         onMounted(() => {
             store.dispatch("onFetchBaiViet");

@@ -182,12 +182,13 @@ export default {
             begin: "",
             end: ""
         });
+        const token = JSON.parse(window.localStorage.getItem('admin'))?.access_token;
         const tong_tien = ref(0);
         const date = ref("");
 
         function loadData() {
             axios
-                .post("admin/hoa-don/hoa-don", tk.value)
+                .post("admin/hoa-don/hoa-don", tk.value,'admin')
                 .then((res) => {
                     list.value = res.data.data;
                     tong_tien.value = res.data.total;
@@ -202,7 +203,7 @@ export default {
         function chitietHoaDon(payload)
         {
             axios
-                .post("admin/hoa-don/chi-tiet-hoa-don", payload)
+                .post("admin/hoa-don/chi-tiet-hoa-don", payload,'admin')
                 .then((res) => {
                     chi_tiet.value = res.data.data;
                     
@@ -217,15 +218,32 @@ export default {
             });
         }
         const exportData = () => {
-            fetch(apiUrl + "api/admin/hoa-don/export")
+            // fetch(apiUrl + "api/admin/hoa-don/export")
+            fetch(apiUrl + "api/admin/hoa-don/export", {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
+                })
                 .then((response) => {
                     if (!response.ok) {
                         throw new Error("Network response was not ok");
                     }
+                    const contentType = response.headers.get("content-type");
+                    if (contentType && contentType.indexOf("application/json") !== -1) {
+                        return response.json(); // Handle JSON response
+                    }
                     return response.blob();
                 })
-                .then((blob) => {
-                    const downloadUrl = window.URL.createObjectURL(blob);
+                // .thdatablob) => {
+                    .then((data) => {
+                    // Check if the data is a JSON object with a status
+                    if (data && data.status === 0) {
+                        Toast("error", data.message);
+                        return; // Exit early if there is an error
+                    }
+                    const downloadUrl = window.URL.createObjectURL(data);
                     const link = document.createElement("a");
                     link.href = downloadUrl;
                     link.setAttribute("download", "hoa_don_ban_hangs.xlsx");

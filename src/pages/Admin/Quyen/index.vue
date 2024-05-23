@@ -15,7 +15,7 @@
                 </template>
             </CardComponent>
         </div>
-        <div class="col-xl-5 col-lg-5 col-md-5 col-sm-12">
+        <div class="col-xl-9 col-lg-9 col-md-9 col-sm-12">
             <CardComponent :required="false">
                 <template #card-header>
                     <span><b>List Of Permission</b></span>
@@ -43,7 +43,7 @@
                                     <td class="align-middle text-nowrap">{{ value.name_permission }}</td>
                                     <td class="align-middle text-nowrap">{{ fortmatNumber(value.amount) }} VND </td>
                                     <td class="text-center align-middle text-nowrap">
-                                        <button class="btn btn-success me-2">Grant of Permission</button>
+                                        <button class="btn btn-success me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="Object.assign(editQuyen, value); getPhanQuyenDetail(value.list_id_function)">Grant of Permission</button>
                                         <ModalComponent color="info" titleId="edit_quyen" label="Edit" @click="Object.assign(editQuyen, value)">
                                             <template #modal-header>
                                                 <span><b>Edit Permission</b></span>
@@ -88,27 +88,31 @@
                 </template>
             </CardComponent>
         </div>
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
-            <CardComponent>
-                <template #card-header>
-                    <span><b>Separation of Powers</b></span>
-                </template>
-                <template #card-body>
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Functions</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                     <div class="row">
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <CheckBoxComponent id="checkbox-1" label="Tạo mới tài khoản"/>
-                        </div>
-                        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                            <CheckBoxComponent id="checkbox-1" label="Xem danh sách"/>
-                        </div>
+                        <template v-for="(value, key) in list_phan_quyen" :key="key">
+                            <div class="col-md-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" v-model="array_quyen" type="checkbox" v-bind:value="value.id" v-bind:id="'quyen_' + value.id">
+                                    <label class="form-check-label" v-bind:for="'quyen_' +  value.id">{{ value.ten_chuc_nang }}</label>
+                                </div>
+                            </div>
+                        </template>
                     </div>
-                </template>
-                <template #card-footer>
-                    <div class="text-center">
-                        <button class="btn btn-inverse-primary" style="width: 95%;">Update Decentralization</button>
-                    </div>
-                </template>
-            </CardComponent>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" v-on:click="phanQuyen()">Save</button>
+                </div>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -116,7 +120,7 @@
 <script>
 import CardComponent from "@/components/CardComponent.vue";
 import InputComponent from "@/components/InputComponent.vue";
-import CheckBoxComponent from "@/components/CheckBoxComponent.vue";
+// import CheckBoxComponent from "@/components/CheckBoxComponent.vue";
 import TableComponent from "@/components/TableComponent.vue";
 import SelectComponent from "@/components/SelectComponent.vue";
 import ModalComponent from '@/components/ModalComponent.vue';
@@ -130,7 +134,7 @@ export default {
     components: {
         CardComponent,
         InputComponent,
-        CheckBoxComponent,
+        // CheckBoxComponent,
         TableComponent,
         SelectComponent,
         ModalComponent
@@ -142,12 +146,19 @@ export default {
         const editQuyen = ref({});
         const deletePermission = ref({});
         const dataQuyen = computed(() => store.state.dataQuyen);
+        const array_quyen = ref([]);
+        const list_phan_quyen = ref([]);
+
         const addNew = () => {
             axios
-                .post('admin/quyen/create', addQuyen.value)
+                .post('admin/quyen/create', addQuyen.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast('success', res.data.message);
+                        addQuyen.value = {};
+                        store.dispatch("onFetchQuyen");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -159,11 +170,14 @@ export default {
         
         const updateQuyen = () => {
             axios
-                .post('admin/quyen/update', editQuyen.value)
+                .post('admin/quyen/update', editQuyen.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast('success', res.data.message);
                         $("#edit_quyen").modal("hide");
+                        store.dispatch("onFetchQuyen");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -175,11 +189,14 @@ export default {
 
         const deleteQuyen = () => {
             axios
-                .post('admin/quyen/delete', deletePermission.value)
+                .post('admin/quyen/delete', deletePermission.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast('success', res.data.message);
                         $("#delete_quyen").modal("hide");
+                        store.dispatch("onFetchQuyen");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -194,12 +211,56 @@ export default {
                 number,
             )
         }
+
+        const loadDataQuyen = () => {
+            axios
+                .get('admin/quyen/get-data-chuc-nang')
+                .then((res) => {
+                    list_phan_quyen.value  =  res.data.data;
+                });
+        }
+
+        const getPhanQuyenDetail = (list_rule) => {
+            if (list_rule) {
+                if ( list_rule.indexOf(","))
+                    array_quyen.value = list_rule.split(",");
+                else {
+                    array_quyen.value.push(list_rule);
+                }
+            } else {
+                array_quyen.value = [];
+            }
+        }
+
+        const phanQuyen = () => {
+            var payload = {
+                'id_quyen'          : editQuyen.value.id,
+                'list_phan_quyen'   : array_quyen.value,
+            };
+            axios
+                .post('admin/quyen/phan-quyen', payload)
+                .then((res) => {
+                    if(res.data.status) {
+                        Toast("success", res.data.message);
+                        $('#exampleModal').modal('hide');
+                        store.dispatch("onFetchQuyen");
+                    } else {
+                        Toast("error", res.data.message);
+                    }
+                })
+                .catch((res) => {
+                    $.each(res.response.data.errors, function (k, v) {
+                        Toast("error", v[0]);
+                    });
+                });
+        }
  
         onMounted(() => {
             store.dispatch("onFetchQuyen");
+            loadDataQuyen();
         })
 
-        return { status, dataQuyen, addQuyen, editQuyen, deletePermission, addNew, updateQuyen, deleteQuyen,fortmatNumber };
+        return { status, dataQuyen, list_phan_quyen, addQuyen, editQuyen, array_quyen, deletePermission, addNew, updateQuyen, deleteQuyen,fortmatNumber, getPhanQuyenDetail, phanQuyen };
     },
 };
 </script>

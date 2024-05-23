@@ -58,9 +58,10 @@ export default {
 
         const fetchDoanhThu = async () => {
             try {
-                const response = await axios.post('admin/thong-ke/doanh-thu', {
+                const response = await axios.post('admin/thong-ke/doanh-thu','admin', {
                     ngay_bat_dau: ngayBatDau.value,
                     ngay_ket_thuc: ngayKetThuc.value,
+                
                 });
                 data.value = response.data.data;
             } catch (error) {

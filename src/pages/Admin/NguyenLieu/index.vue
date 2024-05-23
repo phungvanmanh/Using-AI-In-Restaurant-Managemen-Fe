@@ -293,12 +293,14 @@ export default {
 
         function createNguyenLieu() {
             axios
-                .post("admin/nguyen-lieu/tao-nguyen-lieu", addNguyenLieu.value)
+                .post("admin/nguyen-lieu/tao-nguyen-lieu", addNguyenLieu.value,'admin')
                 .then((res) => {
                     if (res.data.status == true) {
                         Toast("success", res.data.message);
                         addNguyenLieu.value = {};
                         store.dispatch("onFetchNguyenLieu"); //call api store == onFetchChuyenMuc
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -312,7 +314,7 @@ export default {
             axios
                 .post(
                     "admin/nguyen-lieu/cap-nhat-nguyen-lieu",
-                    updateNguyenLieu.value
+                    updateNguyenLieu.value,'admin'
                 )
                 .then((res) => {
                     if (res.data.status == true) {
@@ -320,6 +322,8 @@ export default {
                         $("#edit_monan").modal("toggle");
                         updateNguyenLieu.value = {};
                         store.dispatch("onFetchNguyenLieu"); //call api store == onFetchChuyenMuc
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -331,11 +335,13 @@ export default {
 
         function changeStatus(value) {
             axios
-                .post("admin/nguyen-lieu/doi-trang-thai", value)
+                .post("admin/nguyen-lieu/doi-trang-thai", value,'admin')
                 .then((res) => {
                     if (res.data.status == true) {
                         Toast("success", res.data.message);
                         store.dispatch("onFetchNguyenLieu"); //call api store == onFetchChuyenMuc
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -347,11 +353,13 @@ export default {
 
         function deleteNguyenLieu(value) {
             axios
-                .post("admin/nguyen-lieu/xoa-nguyen-lieu", value)
+                .post("admin/nguyen-lieu/xoa-nguyen-lieu", value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         store.dispatch("onFetchNguyenLieu"); // api store == onFetchChuyenMuc
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -363,7 +371,7 @@ export default {
 
         function searchNguyenLieu() {
             axios
-                .post('admin/nguyen-lieu/tim-nguyen-lieu', search.value)
+                .post('admin/nguyen-lieu/tim-nguyen-lieu', search.value,'admin')
                 .then((res) => {
                     console.log(res.data.data);
                     store.commit('fecthNguyenLieu', res.data.data);

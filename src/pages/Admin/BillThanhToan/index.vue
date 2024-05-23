@@ -193,12 +193,14 @@ export default {
                 id_hoa_don_ban_hang,
             };
             axios
-                .post('admin/hoa-don/data-bill', payload)
+                .post('admin/hoa-don/data-bill', payload,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         hoa_don.value = res.data.hoa_don;
                         console.log(hoa_don.value);
                         list_chi_tiet_ban_hang.value = res.data.data;
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {

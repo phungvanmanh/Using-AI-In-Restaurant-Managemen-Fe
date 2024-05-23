@@ -297,6 +297,8 @@ export default {
                     if (res.data.status == true) {
                         Toast("success", res.data.message);
                         getDataNhapKho();
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -307,7 +309,7 @@ export default {
         }
 
         function getDataNhapKho() {
-            axios.get("admin/nhap-kho/lay-du-lieu")
+            axios.get("admin/nhap-kho/lay-du-lieu",'admin')
                 .then((res) => {
                     dataNhapKho.value = res.data.data;
                     tong_tien.value = dataNhapKho.value.reduce((total, item) => {
@@ -330,6 +332,8 @@ export default {
                     if (res.data.status == true) {
                         Toast("success", res.data.message);
                         getDataNhapKho();
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -345,6 +349,8 @@ export default {
                     if (res.data.status == true) {
                         Toast("success", res.data.message);
                         getDataNhapKho();
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -383,7 +389,7 @@ export default {
         };
         function searchNguyenLieu() {
             axios
-                .post('admin/nguyen-lieu/tim-nguyen-lieu', search.value)
+                .post('admin/nguyen-lieu/tim-nguyen-lieu', search.value,'admin')
                 .then((res) => {
                     console.log(res.data.data);
                     store.commit('fecthNguyenLieu', res.data.data);

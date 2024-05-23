@@ -238,6 +238,8 @@ export default {
         const tinh_trang = computed(() => {
             return store.state.tinh_trang;
         });
+        const token = JSON.parse(window.localStorage.getItem('admin'))?.access_token;
+
         const search = ref({});
 
         const dataKhachHang = computed(() => {
@@ -247,11 +249,13 @@ export default {
 
         const changeStatus = (value) => {
             axios
-                .post("admin/khach-hang/change-status", value)
+                .post("admin/khach-hang/change-status", value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         store.dispatch("onFetchKhachHang");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -264,12 +268,14 @@ export default {
        
         const deleteUser = () => {
             axios
-                .post("admin/khach-hang/delete", deleteKhachHang.value)
+                .post("admin/khach-hang/delete", deleteKhachHang.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         $("#delete_KhachHang").modal("hide");
                         store.dispatch("onFetchKhachHang");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -281,12 +287,14 @@ export default {
 
         const updateKhachHang = () => {
             axios
-                .post("admin/khach-hang/update", editKhachHang.value)
+                .post("admin/khach-hang/update", editKhachHang.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         $("#edit_KhachHang").modal('hide');
                         store.dispatch("onFetchKhachHang");
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -297,17 +305,34 @@ export default {
         }
 
         const exportExcel = () => {
-            fetch(apiUrl + "api/admin/khach-hang/export")
+            // fetch(apiUrl + "api/admin/khach-hang/export")
+            fetch(apiUrl + "api/admin/khach-hang/export", {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`,
+                        "Content-Type": "application/json"
+                    }
+                })
                 .then((response) => {
                     if (!response.ok) {
                         // When the response is not ok, log the whole response for debugging
                         console.error("Response:", response);
                         throw new Error(`HTTP status ${response.status}`);
                     }
+                    const contentType = response.headers.get("content-type");
+                    if (contentType && contentType.indexOf("application/json") !== -1) {
+                        return response.json(); // Handle JSON response
+                    }
                     return response.blob();
                 })
-                .then((blob) => {
-                    const downloadUrl = window.URL.createObjectURL(blob);
+                // .then((blob) => {
+                    .then((data) => {
+                    // Check if the data is a JSON object with a status
+                    if (data && data.status === 0) {
+                        Toast("error", data.message);
+                        return; // Exit early if there is an error
+                    }
+                    const downloadUrl = window.URL.createObjectURL(data);
                     const link = document.createElement("a");
                     link.href = downloadUrl;
                     link.setAttribute("download", "khachhang.xlsx");
@@ -322,7 +347,7 @@ export default {
         };
         function searchKhachHang() {
             axios
-                .post('admin/khach-hang/search-khach-hang', search.value)
+                .post('admin/khach-hang/search-khach-hang', search.value,'admin')
                 .then((res) => {
                     console.log(res.data.data);
                     store.commit('fecthKhachHang', res.data.data);

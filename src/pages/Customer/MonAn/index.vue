@@ -202,7 +202,7 @@ export default {
                 'id_hoa_don': id_hoa_don,
             };
             axios
-                .post("admin/su-dung-dich-vu/get-chi-tiet", payload, "admin")
+                .post("admin/su-dung-dich-vu/get-chi-tiet", payload, )
                 .then((res) => {
                     list_chi_tiet_ban_hang.value = res.data.data;
                     console.log(list_chi_tiet_ban_hang.value)

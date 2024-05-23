@@ -154,7 +154,7 @@ export default {
         const dataDetal = ref({});
         const getDataLuong = () => {
             axios
-                .post('admin/tinh-luong/store', days.value)
+                .post('admin/tinh-luong/store', days.value,'admin')
                 .then((res) => {
                     if(res.data.status === true) {
                         dataLuong.value = res.data.data
@@ -171,10 +171,12 @@ export default {
 
         const updateRose = (value) => {
             axios
-                .post('admin/tinh-luong/update-rose', value)
+                .post('admin/tinh-luong/update-rose', value,'admin')
                 .then((res) => {
                     if(res.data.status === true) {
                         getDataLuong();
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -187,10 +189,12 @@ export default {
         const updateReceive = (value) => {
             value.check = !value.check
             axios
-                .post('admin/tinh-luong/update-receive', value)
+                .post('admin/tinh-luong/update-receive', value,'admin')
                 .then((res) => {
                     if(res.data.status === true) {
                         getDataLuong();
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -202,10 +206,12 @@ export default {
         
         const deTal = (value) => {
             axios
-                .post('admin/tinh-luong/detal', value)
+                .post('admin/tinh-luong/detal', value,'admin')
                 .then((res) => {
                     if(res.data.status === true) {
                         dataDetal.value = res.data.data
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {

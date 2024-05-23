@@ -200,12 +200,14 @@ export default {
 
         function createMonAn() {
             axios
-                .post("admin/mon-an/create", addMonAn.value)
+                .post("admin/mon-an/create", addMonAn.value,'admin')
                 .then((res) => {
                     if (res.data.status == true) {
                         Toast("success", res.data.message);
                         addMonAn.value = {};
                         store.dispatch("onFetchMonAn"); //call api store == onFetchChuyenMuc
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -217,13 +219,15 @@ export default {
 
         function updateMonAn() {
             axios
-                .post("admin/mon-an/update", editMonAn.value)
+                .post("admin/mon-an/update", editMonAn.value,'admin')
                 .then((res) => {
                     if (res.data.status == true) {
                         Toast("success", res.data.message);
                         $("#edit_monan").modal("toggle");
                         editMonAn.value = {};
                         store.dispatch("onFetchMonAn"); //call api store == onFetchChuyenMuc
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -235,11 +239,13 @@ export default {
 
         function changeStatus(value) {
             axios
-                .post("admin/mon-an/change-status", value)
+                .post("admin/mon-an/change-status", value,'admin')
                 .then((res) => {
                     if (res.data.status == true) {
                         Toast("success", res.data.message);
                         store.dispatch("onFetchMonAn"); //call api store == onFetchChuyenMuc
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -251,11 +257,13 @@ export default {
 
         function deleteMonAn(value) {
             axios
-                .post("admin/mon-an/delete", value)
+                .post("admin/mon-an/delete", value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         store.dispatch("onFetchMonAn"); //call api store == onFetchChuyenMuc
+                    }else {
+                        Toast("error", res.data.message);
                     }
                 })
                 .catch((res) => {
@@ -267,7 +275,7 @@ export default {
 
         function searchMonAn() {
             axios
-                .post('admin/mon-an/tim-mon', search.value)
+                .post('admin/mon-an/tim-mon', search.value,'admin')
                 .then((res) => {
                     console.log(res.data.data);
                     store.commit('fecthMonAn', res.data.data);
