@@ -129,7 +129,7 @@
             <li class="nav-item dropdown" v-if="checkIncludePermission(['115', '116'])">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                     <div class="parent-icon">
-                        <i class="fa-solid fa-house"></i>
+                        <i class="fa-solid fa-calendar-day"></i>
                     </div>
                     <div class="menu-title">Event</div>
                 </a>
@@ -150,7 +150,7 @@
             <li class="nav-item dropdown" v-if="checkIncludePermission(['128', '118', '123'])">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                     <div class="parent-icon">
-                        <i class="fa-solid fa-house"></i>
+                        <i class="fa-brands fa-salesforce"></i>
                     </div>
                     <div class="menu-title">Sales Manager</div>
                 </a>
@@ -179,7 +179,8 @@
             <li class="nav-item dropdown" v-if="checkIncludePermission(['119', '110', '112'])">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                     <div class="parent-icon">
-                        <i class="fa-solid fa-house"></i>
+                        <i class="fa-solid fa-bowl-food"></i>
+
                     </div>
                     <div class="menu-title">Food Management</div>
                 </a>
@@ -208,7 +209,7 @@
             <li class="nav-item dropdown" v-if="checkIncludePermission(['127'])">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                     <div class="parent-icon">
-                        <i class="fa-solid fa-house"></i>
+                        <i class="fa-solid fa-clock-rotate-left"></i>
                     </div>
                     <div class="menu-title">Log</div>
                 </a>
@@ -223,7 +224,7 @@
             <li class="nav-item dropdown" v-if="checkIncludePermission(['124','126'])">
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                     <div class="parent-icon">
-                        <i class="fa-solid fa-house"></i>
+                        <i class="fa-solid fa-chart-line"></i>
                     </div>
                     <div class="menu-title">Statistics</div>
                 </a>

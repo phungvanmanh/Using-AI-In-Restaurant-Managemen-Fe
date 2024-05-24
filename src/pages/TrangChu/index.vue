@@ -63,20 +63,27 @@
                 </div>
             </div>
             <marquee style="width: 100%; overflow: hidden;">
-                <div class="card mt-2" style="background-color: blanchedalmond">
-                    <div class="row mt-2">
-                        <div class="col-3">
+                <div class="card mt-2" style="background-color: blanchedalmond;width: 100%">
+                    <div class="row mt-2" style="width: 100%">
+                        <div class="row text center">
+                            <div class="col-3">
                             <h5 class="blinking text-danger">
                                 *Promotions:
                             </h5>
                         </div>
-                        <div class="col">
+                        <div class="row">
+                            <div class="col">
                             <template v-for="(value, key) in dataBaiViet" :key="key">
                                 <p>
                                     <b><span>*</span>{{ value.mo_ta_chi_tiet_bai_viet }}</b>
                                 </p>
                             </template>
                         </div>
+                        </div>
+
+                        </div>
+                        
+                       
                     </div>
                 </div>
             </marquee>
@@ -97,7 +104,7 @@
         </div>
         <div class="container mt-2  ">
             <div class="row text-center mt-2">
-                <h5  style="color: blueviolet;" class="blink-text">Outstanding Food</h5>
+                <h5 style="color: blueviolet;" class="blink-text">Outstanding Food</h5>
             </div>
             <div class="row mt-4">
                 <template v-for="(value, index) in dataMonNoiBac" :key="index">
@@ -111,7 +118,7 @@
                             </div>
                             <div class="card-footer4321">
                                 <span class="text-title4321">
-                                    <b style="color: brown;">{{ formatToVN(value.price) }}</b> 
+                                    <b style="color: brown;">{{ formatToVN(value.price) }}</b>
                                 </span>
                                 <div class="card-button4321">
                                     <button @click="getReview(value.id);setMonAnId(value.id)" class="fa-solid fa-arrows-to-eye" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
@@ -126,31 +133,31 @@
         </div>
         <div class="container mt-3">
             <div class="row text-center mt-3">
-                <h5  style="color: blueviolet;" class="blink-text">Good Food</h5>
+                <h5 style="color: blueviolet;" class="blink-text">Good Food</h5>
             </div>
             <div class="container">
                 <div class="row mt-4">
                     <template v-for="(value, index) in (isHomeSelected ? dataMonAn1 : monAnList)" :key="index">
                         <template v-if="value.status==1">
                             <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                            <div class="card4321">
-                                <div class="card-img4321">
-                                    <img style="height: 100%;width: 100%;" class="img-fluid" :src="value.image" alt="Hình ảnh món ăn" />
-                                </div>
-                                <div class="card-info4321">
-                                    <p class="text-title4321">{{ value.food_name }}</p>
-                                </div>
-                                <div class="card-footer4321">
-                                    <span class="text-title4321">
-                                        <b style="color: brown;">{{ formatToVN(value.price) }}</b> đ
-                                    </span>
-                                    <div class="card-button4321">
-                                        <button @click="getReview(value.id);setMonAnId(value.id)" class="fa-solid fa-arrows-to-eye" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+                                <div class="card4321">
+                                    <div class="card-img4321">
+                                        <img style="height: 100%;width: 100%;" class="img-fluid" :src="value.image" alt="Hình ảnh món ăn" />
+                                    </div>
+                                    <div class="card-info4321">
+                                        <p class="text-title4321">{{ value.food_name }}</p>
+                                    </div>
+                                    <div class="card-footer4321">
+                                        <span class="text-title4321">
+                                            <b style="color: brown;">{{ formatToVN(value.price) }}</b> đ
+                                        </span>
+                                        <div class="card-button4321">
+                                            <button @click="getReview(value.id);setMonAnId(value.id)" class="fa-solid fa-arrows-to-eye" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div></template>
-                        
+                        </template>
 
                     </template>
                 </div>
@@ -230,7 +237,7 @@
                 </div>
             </div>
         </div>
-      
+
     </template>
 </testMenu>
 </template>
@@ -304,7 +311,7 @@ export default {
         const dataMonAn1 = computed(() => {
             return store.state.dataMonAn1;
         });
-        const dataDanhMuc1= computed(() => {
+        const dataDanhMuc1 = computed(() => {
             return store.state.dataDanhMuc1;
         });
         const isHomeSelected = ref(true); // Thêm biến này
@@ -329,12 +336,12 @@ export default {
         };
         const getMonAnNoiBac = () => {
             axios
-                .get('khach-hang/mon-an/get-mon-an-pho-bien') 
+                .get('khach-hang/mon-an/get-mon-an-pho-bien')
                 .then(response => {
                     dataMonNoiBac.value = response.data.data;
-                    console.log( response.data.data);
+                    console.log(response.data.data);
                 })
-            
+
                 .catch(error => {
                     console.error('Error fetching reviews:', error);
                 });
@@ -422,9 +429,13 @@ export default {
                     Toast("error", error.response.data.message);
                 });
         };
-         function formatToVN (number) {
+
+        function formatToVN(number) {
             number = parseInt(number);
-            return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+            return number.toLocaleString('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            });
         }
         onMounted(() => {
             document.body.style.fontFamily = '';
@@ -888,19 +899,22 @@ export default {
     right: 0;
     /* Đặt dấu ba chấm ở bên phải cuối mỗi dòng */
 }
-@keyframes blink {
-            0% {
-                opacity: 1;
-            }
-            50% {
-                opacity: 0;
-            }
-            100% {
-                opacity: 1;
-            }
-        }
 
-        .blink-text {
-            animation: blink 1s infinite;
-        }
+@keyframes blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.blink-text {
+    animation: blink 1s infinite;
+}
 </style>
