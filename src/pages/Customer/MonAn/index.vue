@@ -256,17 +256,31 @@ export default {
     //         token: null,
     //     };
     // },
-    // mounted() {
-    //     // Lấy thông tin ID và token từ URL
-    //     const id = this.$route.params.id;
-    //     const token = this.$route.query.token;
+    mounted() {
+        console.log(this.$route.query.token);
+        var payload = {
+            token : this.$route.query.token
+        }
+        axios.post('check-availability', payload)
+            .then(res => {
+                console.log(res.data.isActive);
+                if(res.data.isActive == false) {
+                    window.location.href = "/"
+                }
+            })
+            .catch(error => {
+                console.error('API error:', error);
+            });
+        // // Lấy thông tin ID và token từ URL
+        // const id = this.$route.params.id;
+        // const token = this.$route.query.token;
 
-    //     // Lưu thông tin vào data
-    //     this.id = id;
-    //     this.token = token;
-    //     localStorage.setItem('customer', token)
-    //     // Kiểm tra xác thực token ở đây nếu cần
-    // },
+        // // Lưu thông tin vào data
+        // this.id = id;
+        // this.token = token;
+        // localStorage.setItem('customer', token)
+        // // Kiểm tra xác thực token ở đây nếu cần
+    },
 };
 </script>
 

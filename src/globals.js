@@ -2,6 +2,6 @@
 // export const apiSocket = "http://testfe.prodevecode.com:3000";
 // export const apiQRcode = "http://testfe.prodevecode.com";
 
-export const apiUrl = "http://192.168.1.126:8000/";
-export const apiSocket = "http://192.168.1.126:3000";
-export const apiQRcode = "http://192.168.1.126:8001";
+export const apiUrl = "http://192.168.7.106:8000/";
+export const apiSocket = "http://192.168.7.106:3000";
+export const apiQRcode = "http://192.168.7.106:8001";

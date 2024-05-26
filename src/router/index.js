@@ -33,6 +33,7 @@ import ThongKe from "@/pages/Admin/ThongKe";
 import TonKhoNguyenLieu from "@/pages/Admin/TonKhoNguyenLieu";
 // import Test123 from "@/pages/Admin/Test123";
 import DoanhThu from "@/pages/Admin/DoanhThu";
+// import axios from "@/axiosConfig";
 const routes = [
     {
         path: "/admin/login",
@@ -211,6 +212,10 @@ router.beforeEach(async (to, from, next) => {
         return;
     }
 
+    if(!checkTokenQR) {
+        next("/");
+    }
+
     // Redirect to admin login if not authenticated
     if (to.matched.some(record => record.meta.requiresAuth) && !adminToken) {
         next("/admin/login");
@@ -219,7 +224,10 @@ router.beforeEach(async (to, from, next) => {
 
     // Fetch permissions if route requires authentication
     if (to.matched.some(record => record.meta.requiresAuth)) {
-        await store.dispatch("onFetchPemission");
+        if (adminToken) {
+            updateTokenAndFetchUser();
+            await store.dispatch("onFetchPemission");
+        }
         const permissions = to.meta.permissions || [];
         const hasPermission = permissions.every(permission => store.getters.hasPermission(permission));
         
@@ -228,12 +236,6 @@ router.beforeEach(async (to, from, next) => {
             return;
         }
     }
-
-    // Update token and fetch user information if authenticated
-    if (adminToken) {
-        updateTokenAndFetchUser();
-    }
-
     next();
 });
 
@@ -241,6 +243,10 @@ function updateTokenAndFetchUser() {
     const token = JSON.parse(localStorage.getItem('admin'))?.access_token;
     store.dispatch('updateTokenAdmin', token);
     store.dispatch("onFetchUserLogin");
+}
+
+function checkTokenQR() {
+    console.log(window.location.href);
 }
 
 export default router;

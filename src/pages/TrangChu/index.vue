@@ -446,7 +446,7 @@ export default {
             document.body.style.justifyContent = '';
             document.body.style.alignItems = '';
             document.body.style.height = '';
-            store.dispatch("onFetchBaiViet");
+            store.dispatch("onFetchBaiVietCustumer");
             store.dispatch("onFetchMonAn1");
             store.dispatch("onFetchDanhMuc1");
             checkLogin();

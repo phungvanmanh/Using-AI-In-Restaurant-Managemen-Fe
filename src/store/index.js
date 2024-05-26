@@ -134,6 +134,9 @@ export default createStore({
         FetchPemission(state, data) {
             state.dataPemission = data;
         },
+        fecthBaiVietCustumer(state, data) {
+            state.dataBaiViet = data;
+        }
     },
     actions: {
         onFetchChuyenMuc: async ({ commit }) => {
@@ -244,6 +247,14 @@ export default createStore({
             try {
                 const response = await axios.get("admin/bai-viet/get-data", 'admin');
                 commit("fecthBaiViet", response.data.data);
+            } catch (error) {
+                console.error("Có lỗi xảy ra trong onFetchBaiViet:", error);
+            }
+        },
+        onFetchBaiVietCustumer: async ({ commit }) => {
+            try {
+                const response = await axios.get("khach-hang/bai-viet/get-data");
+                commit("fecthBaiVietCustumer", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchBaiViet:", error);
             }
