@@ -71,11 +71,11 @@
                                 *Promotions:
                             </h5>
                         </div>
-                        <div class="row">
-                            <div class="col">
+                        <div >
+                            <div class="col" style="margin-bottom: 50px;">
                             <template v-for="(value, key) in dataBaiViet" :key="key">
-                                <p>
-                                    <b><span>*</span>{{ value.mo_ta_chi_tiet_bai_viet }}</b>
+                                <p style="margin-bottom: 50px;">
+                                   * <b>{{ value.mo_ta_chi_tiet_bai_viet }}</b>
                                 </p>
                             </template>
                         </div>
@@ -149,7 +149,7 @@
                                     </div>
                                     <div class="card-footer4321">
                                         <span class="text-title4321">
-                                            <b style="color: brown;">{{ formatToVN(value.price) }}</b> đ
+                                            <b style="color: brown;">{{ formatToVN(value.price) }}</b> 
                                         </span>
                                         <div class="card-button4321">
                                             <button @click="getReview(value.id);setMonAnId(value.id)" class="fa-solid fa-arrows-to-eye" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>

@@ -52,7 +52,7 @@
                                     <template v-if="i == index_time">
                                         <template v-if="v.id">
                                             <td
-                                                class="text-white bg-secondary"
+                                                class="text-black" style="background-color: #FFFFE0;"
                                                 @click="updateBuoiLamViec(v.id)"
                                             >
                                                 <template
@@ -70,7 +70,7 @@
                                                                     )[0]
                                                                 }}
                                                             </span>
-                                                            <span v-else class="text-white">
+                                                            <span v-else class="text-black">
                                                                 {{
                                                                     v_name?.split(
                                                                         ","
