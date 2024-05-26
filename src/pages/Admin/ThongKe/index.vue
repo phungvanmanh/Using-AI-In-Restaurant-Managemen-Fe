@@ -4,7 +4,7 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col">
-                        <h5>Statistics </h5>
+                        <h5>Statistical </h5>
                     </div>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                         <input v-model="thong_ke.end" type="date" class="form-control">
                     </div>
                     <div class="col-lg-2">
-                        <button @click="loadData" class="btn btn-primary">Statistics</button>
+                        <button @click="loadData" class="btn btn-primary">Statistical</button>
                     </div>
                 </div>
                 <div class="row">

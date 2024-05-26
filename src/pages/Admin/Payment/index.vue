@@ -1,6 +1,6 @@
 <template>
     <div class="payment-form">
-        <h2 class="text-nowrap">Form Thanh Toán VNPAY</h2>
+        <h2 class="text-nowrap">VNPAY payment form</h2>
         <label for="">Money</label>
         <input type="text" v-model="amount" class="form-control" />
         <label for="">Content</label>

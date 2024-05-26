@@ -39,7 +39,7 @@
                                 <td class="align-middle">
                                     <input v-model="tk.begin" type="date" class="form-control" />
                                 </td>
-                                <td class="align-middle">End Date</td>
+                                <td class="align-middle">Start End</td>
                                 <td class="align-middle">
                                     <input v-on:change="loadData()" v-model="tk.end" type="date" class="form-control" />
                                 </td>
@@ -117,7 +117,7 @@
                                         <thead>
                                             <tr class="text-center">
                                                 <th>#</th>
-                                                <th>Name of raw materials</th>
+                                                <th>Name Material</th>
                                                 <th>Date</th>
                                                 <th>Amount</th>
                                                 <th>Price</th>

@@ -78,12 +78,12 @@
                                     {{ formatToVN(value.price) }}
                                 </td>
                                 <td class="text-center align-middle text-nowrap">
-                                    <img v-bind:src="value.image" height="50" alt="">
+                                    <img v-bind:src="value.image" height="50" width="50" alt="">
                                 </td>
                                 <td class="text-center align-middle text-nowrap">
                                     <template v-if="value.status == 1">
                                         <button @click="changeStatus(value)" class="btn btn-success">
-                                           Display
+                                          Display
                                         </button>
                                     </template>
                                     <template v-else>

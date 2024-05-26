@@ -36,7 +36,7 @@
                                         <th
                                             class="text-center align-middle text-nowrap"
                                         >
-                                            Name of raw materials
+                                        Name of raw materials
                                         </th>
                                         <th
                                             class="text-center align-middle text-nowrap"
@@ -97,7 +97,7 @@
                                         <th
                                             class="text-center align-middle text-nowrap"
                                         >
-                                            Name of raw materials
+                                        Name of raw materials
                                         </th>
                                         <th
                                             class="text-center align-middle text-nowrap"

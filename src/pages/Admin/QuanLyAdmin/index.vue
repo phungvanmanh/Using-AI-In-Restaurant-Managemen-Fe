@@ -210,7 +210,7 @@
                                                 @click="changeStatus(value)"
                                                 style="width: 120px"
                                             >
-                                                Pause
+                                                Pause 
                                             </button>
                                         </template>
                                     </td>

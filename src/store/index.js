@@ -80,7 +80,7 @@ export default createStore({
         fecthDanhMuc(state, data) {
             state.dataDanhMuc = data;
         },
-        fetchDanhMuc1(state, data) {
+        fecthDanhMuc1(state, data) {
             state.dataDanhMuc1 = data;
         },
 
@@ -156,7 +156,7 @@ export default createStore({
         onFetchDanhMuc1: async ({ commit }) => {
             try {
                 const response = await axios.get("khach-hang/danh-muc-get-data", 'admin');
-                commit("fecthChuyenMuc1", response.data.data);
+                commit("fecthDanhMuc1", response.data.data);
             } catch (error) {
                 console.error("Có lỗi xảy ra trong onFetchDanhMuc1:", error);
             }

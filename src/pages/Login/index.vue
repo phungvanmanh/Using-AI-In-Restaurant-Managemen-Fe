@@ -6,7 +6,8 @@
                 <div class="row row-cols-1 row-cols-lg-2 row-cols-xl-3">
                     <div class="col mx-auto">
                         <div class="mb-4 text-center">
-                            <!-- <img src="../../assets/images/logo-img.png" width="180" alt="" /> -->
+                            <img style="width: 120px; border-radius: 50%;" src="../../assets/images/bg1.jpg" class="logo-icon" alt="logo icon">
+
                             <h5>LOGIN</h5>
                         </div>
                         <div class="card">

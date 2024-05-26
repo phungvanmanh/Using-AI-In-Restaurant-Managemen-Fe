@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="bgr">
         <div class="container" id="step1">
             <h2>Enter Email</h2>
             <form @submit.prevent="verifyEmail">
@@ -107,6 +107,7 @@ export default {
 </script>
 
 <style scoped>
+
 h2 {
     display: block;
     font-size: 1.5em;
@@ -117,9 +118,8 @@ h2 {
     font-weight: bold;
     unicode-bidi: isolate;
 }
-
 .container {
-    background-color: #fff;
+    background-color: #a98a8a;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

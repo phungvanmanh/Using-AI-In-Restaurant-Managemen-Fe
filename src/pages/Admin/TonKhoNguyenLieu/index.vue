@@ -4,16 +4,16 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Tồn Kho</h5>
+                        <h5>Inventory</h5>
                     </div>
                     <div class="card-body text-center">
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th text-center align-middle text-nowrap>#</th>
-                                    <th text-center align-middle text-nowrap>Name of raw materials</th>
-                                    <th text-center align-middle text-nowrap>Initial quantity</th>
-                                    <th text-center align-middle text-nowrap>QuantityInventory</th>
+                                    <th text-center align-middle text-nowrap>Material name</th>
+                                    <th text-center align-middle text-nowrap>Original number</th>
+                                    <th text-center align-middle text-nowrap>Existing Quantity</th>
                                     <th text-center align-middle text-nowrap>Date</th>
                                     <th text-center align-middle text-nowrap>Action</th>
     
@@ -43,11 +43,11 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Update QuantityInventory</h1>
+                                        <h1 class="modal-title fs-5" id="exampleModalLabel">Update Existing Quantity</h1>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <label for="">Amount</label>
+                                        <label for="">Existing Quantity</label>
                                         <input  v-model="editTonKho.so_luong_ton" type="number" name="" id="" class="form-control">
                                     </div>
                                     <div class="modal-footer">

@@ -84,7 +84,7 @@
                                     <button v-else class="btn btn-warning">Pause</button>
                                 </td>
                                 <td class="text-center align-middle text-nowrap">
-                                    <button v-on:click="Object.assign(editBaiViet, value)" class="btn btn-info" style="width: 100px; margin-right: 4px;" data-bs-toggle="modal" data-bs-target="#capNhatModal">Update</button>
+                                    <button v-on:click="Object.assign(editBaiViet, value)" class="btn btn-info" style="width: 100px; margin-right: 4px;" data-bs-toggle="modal" data-bs-target="#capNhatModal">Updatet</button>
                                     <button  v-on:click="Object.assign(deleteBaiViet, value)" class="btn btn-danger" style="width: 100px;" data-bs-toggle="modal" data-bs-target="#xoaModal">Delete</button>
                                 </td>
 
@@ -102,7 +102,7 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="row">
-                                        <div class="col-4"><label class="form-label">Headline</label><input v-model="editBaiViet.tieu_de_bai_viet" @keyup="convertToSlug(editBaiViet)" type="text" class="form-control" placeholder="Nhập Tiêu Đề"></div>
+                                        <div class="col-4"><label class="form-label">Headline</label><input v-model="editBaiViet.tieu_de_bai_viet" @keyup="convertToSlug(editBaiViet)" type="text" class="form-control" placeholder="Enter a title"></div>
                                         <div class="col-4"><label class="form-label">Slug Headline</label><input v-model="editBaiViet.slug_bai_viet" type="text" disabled="" class="form-control" placeholder="Enter the title slug"></div>
                                         <div class="col-4"><label class="form-label">Image</label><input v-model="editBaiViet.hinh_anh_bai_viet" type="text" class="form-control" placeholder="Import images"></div>
                                     </div>

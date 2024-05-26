@@ -6,7 +6,7 @@
                     <span>Add a new category</span>
                 </template>
                 <template #card-body>
-                    <input-component label="Tên Chuyên Mục" @keyup="convertToSlug(addChuyenMuc)" v-model="addChuyenMuc.ten_chuyen_muc" placeholder="Enter the category name..."></input-component>
+                    <input-component label="Tên Chuyên Mục" @keyup="convertToSlug(addChuyenMuc)" v-model="addChuyenMuc.ten_chuyen_muc" placeholder="Enter name catrgory..."></input-component>
                     <input-component label="Slug Chuyên Mục" disabled="disabled" v-model="addChuyenMuc.slug_chuyen_muc"></input-component>
                     <div class="row">
                         <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -32,7 +32,7 @@
                                 <th class="text-center align-middle text-nowrap">#</th>
                                 <th class="text-center align-middle text-nowrap">Category Name</th>
                                 <th class="text-center align-middle text-nowrap">Directory</th>
-                                <th class="text-center align-middle text-nowrap">Condition</th>
+                                <th class="text-center align-middle text-nowrap">Status</th>
                                 <th class="text-center align-middle text-nowrap">Action</th>
                             </tr>
                         </template>
@@ -54,7 +54,7 @@
                                         <ModalComponent style="width: 100px" color="primary" label="Chỉnh Sửa" titleId="editChuyenMuc" @click="Object.assign(editChuyenMuc, value)">
                                             <template #modal-header>Edit</template>
                                             <template #modal-body>
-                                                <input-component label="Tên Chuyên Mục" @keyup="convertToSlug(editChuyenMuc)" v-model="editChuyenMuc.ten_chuyen_muc" placeholder="Enter a category name..."></input-component>
+                                                <input-component label="Tên Chuyên Mục" @keyup="convertToSlug(editChuyenMuc)" v-model="editChuyenMuc.ten_chuyen_muc" placeholder="Enter name category..."></input-component>
                                                 <input-component label="Slug Chuyên Mục" v-model="editChuyenMuc.slug_chuyen_muc" disabled></input-component>
                                                 <SelectComponent label="Danh Mục" :options="danhMuc" v-model="editChuyenMuc.id_chuyen_muc_cha"></SelectComponent>
                                             </template>

@@ -33,7 +33,7 @@
                                             <input  v-on:keyup.enter="searchDanhMuc()" v-model="search.abc"
                                                 type="text"
                                                 class="form-control"
-                                                placeholder="Nhập thông tin cần tìm"
+                                                placeholder="Enter what you're looking for"
                                             /><button v-on:click="searchNguyenLieu()"  class="btn btn-primary">
                                                 <i
                                                     class="fa-solid fa-magnifying-glass"

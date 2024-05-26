@@ -20,7 +20,7 @@
                     <thead>
                         <tr class="bg-primary-subtle">
                             <th scope="col" class="text-center">#</th>
-                            <th scope="col">Name Food</th>
+                            <th scope="col">Foof Name</th>
                             <th scope="col">Price</th>
                             <th scope="col">Amount</th>
                             <th scope="col">Percentage decrease</th>

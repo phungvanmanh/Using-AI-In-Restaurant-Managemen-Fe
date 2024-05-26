@@ -101,7 +101,7 @@
                                                 @click="changeStatus(value)"
                                                 style="width: 120px"
                                             >
-                                                Display
+                                              Display
                                             </button>
                                         </template>
                                         <template v-else>

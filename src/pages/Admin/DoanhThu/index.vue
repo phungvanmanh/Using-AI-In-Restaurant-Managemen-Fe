@@ -29,6 +29,7 @@
                     <div v-if="data">
                         <p :style="{ color: 'blue' }">Total Warehousing: <span style="color: brown;">{{ formatToVN(data.tong_tien_nhap_kho) }}</span> </p>
                         <p :style="{ color: 'blue' }">Total sales proceeds: <span style="color: brown;">{{ formatToVN(data.tong_tien_ban_hang) }}</span> </p>
+                        <p :style="{ color: 'blue' }">Total salary staff: <span style="color: brown;">{{ formatToVN(data.total_luong) }}</span> </p>
                         <p :style="{ color: 'blue' }">Profit: <span style="color: brown;">{{ formatToVN(data.loi_nhuan) }}</span> </p>
                     </div>
 
@@ -58,11 +59,11 @@ export default {
 
         const fetchDoanhThu = async () => {
             try {
-                const response = await axios.post('admin/thong-ke/doanh-thu','admin', {
+                const response = await axios.post('admin/thong-ke/doanh-thu', {
                     ngay_bat_dau: ngayBatDau.value,
                     ngay_ket_thuc: ngayKetThuc.value,
-                
-                });
+                    
+                },'admin');
                 data.value = response.data.data;
             } catch (error) {
                 console.error('Error fetching doanh thu:', error);
@@ -82,6 +83,7 @@ export default {
             data.value = {
                 tong_tien_nhap_kho: '0',
                 tong_tien_ban_hang: '0',
+                total_luong:'0',
                 loi_nhuan: '0'
             };
         }

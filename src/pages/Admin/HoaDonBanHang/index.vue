@@ -25,7 +25,7 @@
                 </tr>
                 <tr>
                     <th class="align-middle text-center">#</th>
-                    <th class="align-middle text-center">Table Name</th>
+                    <th class="align-middle text-center">Name Table</th>
                     <th class="align-middle text-center">
                         Checkout staff
                     </th>
@@ -94,10 +94,10 @@
                                         #
                                     </th>
                                     <th class="text-center align-middle">
-                                        Name Food
+                                       Name Food
                                     </th>
                                     <th class="text-center align-middle">
-                                        Amount
+                                       Amount
                                     </th>
                                     <th class="text-center align-middle">
                                         Price
@@ -128,7 +128,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Thoát
+                            Close
                         </button>
                     </div>
                 </div>
@@ -148,7 +148,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                            Close
+                            Exit
                         </button>
                     </div>
                 </div>

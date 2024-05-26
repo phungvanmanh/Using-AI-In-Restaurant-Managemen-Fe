@@ -23,9 +23,7 @@
                                 <label class="form-label">Name of raw materials</label><input v-model="addNguyenLieu.ten_nguyen_lieu" @keyup="convertToSlug(addNguyenLieu)" type="text" class="form-control" placeholder="Enter an ingredient name" />
                             </div>
                             <div class="col-6">
-                                <label class="form-label">Slug Raw Materials
-                                </label><input v-model="addNguyenLieu.slug_nguyen_lieu" disabled type="text" class="form-control" placeholder="Enter Slug Raw Materials
-" />
+                                <label class="form-label">Slug Raw Materials</label><input v-model="addNguyenLieu.slug_nguyen_lieu" disabled type="text" class="form-control" placeholder="Import slug raw materials" />
                             </div>
                         </div>
                         <div class="row">
@@ -33,8 +31,8 @@
                                 <label class="form-label mt-3">Price</label><input v-model="addNguyenLieu.gia" type="number" class="form-control" placeholder="0" />
                             </div>
                             <div class="col-6">
-                                <label class="form-label mt-3">Units of calculation</label>
-                                <input v-model="addNguyenLieu.don_vi_tinh" type="text" class="form-control" placeholder="Units of calculation" />
+                                <label class="form-label mt-3">Units</label>
+                                <input v-model="addNguyenLieu.don_vi_tinh" type="text" class="form-control" placeholder="Units of calculationh" />
                             </div>
 
                         </div>
@@ -42,8 +40,8 @@
 
                             <div class="col-12">
                                 <label class="form-label mt-3">Status</label><select v-model="addNguyenLieu.tinh_trang" class="form-control">
-                                    <option value="1">Hoạt Động</option>
-                                    <option value="0">Tạm Tắt</option>
+                                    <option value="1">Display</option>
+                                    <option value="0">Pause</option>
                                 </select>
                             </div>
                         </div>
@@ -85,17 +83,16 @@
                                 </th>
                                 <th class="text-center align-middle text-nowrap">
                                     Slug Raw Materials
+                                </th>
+                                <th class="text-center align-middle text-nowrap">
+                                  Pricer
+                                </th>
 
+                                <th class="text-center align-middle text-nowrap">
+                                    Units
                                 </th>
                                 <th class="text-center align-middle text-nowrap">
-                                    Price
-                                </th>
-
-                                <th class="text-center align-middle text-nowrap">
-                                    Units of calculation
-                                </th>
-                                <th class="text-center align-middle text-nowrap">
-                                    Status
+                                   Status
                                 </th>
                                 <th class="text-center align-middle text-nowrap">
                                     Action
@@ -123,7 +120,7 @@
                                     </td>
                                     <td class="text-center align-middle text-nowrap">
                                         <button @click="changeStatus(value)" v-if="value.tinh_trang == 1" class="btn btn-success" style="width: 100px">
-                                           Display
+                                         Display
                                         </button>
                                         <button @click="changeStatus(value)" v-else class="btn btn-info" style="width: 100px">
                                             Pause
@@ -148,7 +145,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                    Cập Nhật Nguyên Liệu
+                                    Update materials
                                 </h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
@@ -156,20 +153,18 @@
                                 <div class="row">
                                     <div class="row">
                                         <div class="col-6">
-                                            <label class="form-label">Tên Nguyên Liệu</label><input v-model="
+                                            <label class="form-label">Name of raw materials</label><input v-model="
                                                         updateNguyenLieu.ten_nguyen_lieu
                                                     " @keyup="
                                                         convertToSlug(
                                                             updateNguyenLieu
                                                         )
-                                                    " tosl type="text" class="form-control" placeholder="Enter an ingredient name" />
+                                                    " tosl type="text" class="form-control" placeholder="Enter Name of raw materials" />
                                         </div>
                                         <div class="col-6">
-                                            <label class="form-label">Slug Raw Materials
-                                            </label><input v-model="
+                                            <label class="form-label">Slug Raw Materials</label><input v-model="
                                                         updateNguyenLieu.slug_nguyen_lieu
-                                                    " type="text" disabled="" class="form-control" placeholder="Nhập Slug Raw Materials
-" />
+                                                    " type="text" disabled="" class="form-control" placeholder="Nhập Slug Raw Materials" />
                                         </div>
                                     </div>
                                     <div class="row">
@@ -180,9 +175,9 @@
                                         </div>
 
                                         <div class="col-6">
-                                            <label class="form-label mt-3">Units of calculation</label><input v-model="
+                                            <label class="form-label mt-3">Units</label><input v-model="
                                                         updateNguyenLieu.don_vi_tinh
-                                                    " type="text" class="form-control" placeholder="Units of calculation" />
+                                                    " type="text" class="form-control" placeholder="Units" />
                                         </div>
                                     </div>
                                     <div class="row">
@@ -192,10 +187,10 @@
                                                         updateNguyenLieu.tinh_trang
                                                     " class="form-control">
                                                 <option value="1">
-                                                    Hoạt Động
+                                                    Display
                                                 </option>
                                                 <option value="0">
-                                                    Tạm Tắt
+                                                    Pause
                                                 </option>
                                             </select>
                                         </div>
@@ -204,8 +199,8 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                    Thoát</button><button @click="capnhatNguyenLieu()" type="button" class="btn btn-primary" data-bs-dismiss="modal">
-                                    Cập Nhật
+                                    Close</button><button @click="capnhatNguyenLieu()" type="button" class="btn btn-primary" data-bs-dismiss="modal">
+                                   Update
                                 </button>
                             </div>
                         </div>
@@ -216,7 +211,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                    Xóa Nguyên Liệu
+                                    Remove materials
                                 </h1>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
@@ -232,15 +227,15 @@
                                             </h6>
                                             <div class="text-dark">
                                                 <p>
-                                                    Bạn có muốn xóa sản phẩm
+                                                    Do you want to delete the product
                                                     <b>{{
                                                             detete_nguyen_lieu.ten_nguyen_lieu
                                                         }}</b>
-                                                    này không?
+                                                    hey?
                                                 </p>
                                                 <p>
-                                                    <b>Lưu ý:</b> Điều này
-                                                    không thể hoàn tác!
+                                                    <b>Note:</b> This
+                                                    can't be undone!
                                                 </p>
                                             </div>
                                         </div>
@@ -249,10 +244,10 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                                    Thoát</button><button @click="
+                                    Close</button><button @click="
                                             deleteNguyenLieu(detete_nguyen_lieu)
                                         " type="button" class="btn btn-danger" data-bs-dismiss="modal">
-                                    Xóa
+                                    Delete
                                 </button>
                             </div>
                         </div>
