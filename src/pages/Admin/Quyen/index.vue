@@ -8,7 +8,7 @@
                 <template #card-body>
                     <InputComponent label="Name Permission" v-model="addQuyen.name_permission"/>
                     <SelectComponent label="Status" v-model="addQuyen.status" :options="status"/>
-                    <InputComponent label="Enter the amount" v-model="addQuyen.amount" type="number"/>
+                    <InputComponent label="Enter the salary" v-model="addQuyen.amount" type="number"/>
                 </template>
                 <template #card-footer>
                     <button class="btn btn-inverse-primary float-end" @click="addNew()">Add news</button>

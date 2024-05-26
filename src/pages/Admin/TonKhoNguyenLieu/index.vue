@@ -30,7 +30,7 @@
                                     <td text-center align-middle text-nowrap>{{ value.so_luong_ton }}</td>
                                     <td text-center align-middle text-nowrap>{{ value.ngay }}</td>
                                     <td text-center align-middle text-nowrap>
-                                        <button v-on:click="Object.assign(editTonKho,value)" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Cập Nhật</button>
+                                        <button v-on:click="Object.assign(editTonKho,value)" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#exampleModal">Update</button>
                                     </td>
                                 </tr>
                                 </template>

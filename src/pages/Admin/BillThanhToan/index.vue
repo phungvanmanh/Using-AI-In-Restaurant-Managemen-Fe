@@ -77,7 +77,7 @@
                                 icon="ic:baseline-email"
                                 style="vertical-align: text-bottom"
                             ></iconify-icon>
-                            Nhà Hàng Food
+                            Food Restaurant
                         </li>
                         <li>
                             <iconify-icon

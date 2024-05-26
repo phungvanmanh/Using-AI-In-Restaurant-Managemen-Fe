@@ -25,7 +25,7 @@
                                             <input v-on:keyup.enter="searchKhachHang()" v-model="search.abc"
                                                 type="text"
                                                 class="form-control"
-                                                placeholder="Nhập thông tin cần tìm"
+                                                placeholder="Enter what you're looking for"
                                             /><button  v-on:click="searchKhachHang()" class="btn btn-primary">
                                                 <i
                                                     class="fa-solid fa-magnifying-glass"

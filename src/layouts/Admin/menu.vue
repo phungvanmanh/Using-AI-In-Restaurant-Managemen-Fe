@@ -180,7 +180,6 @@
                 <a href="javascript:;" class="nav-link dropdown-toggle dropdown-toggle-nocaret" data-bs-toggle="dropdown">
                     <div class="parent-icon">
                         <i class="fa-solid fa-bowl-food"></i>
-
                     </div>
                     <div class="menu-title">Food Management</div>
                 </a>

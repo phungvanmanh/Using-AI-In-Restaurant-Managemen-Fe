@@ -1,9 +1,9 @@
 <template>
     <div class="row mt-4">
-    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Món Đã Gọi</button>
+    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Ordered</button>
 </div>
     <div class="row mt-4 text-center">
-    <div class="col-12" style="margin-left: 20px;color: blue;"> <h5>Món Ăn Nổi Bậc</h5></div>
+    <div class="col-12" style="margin-left: 20px;color: blue;"> <h5>Notable dishes</h5></div>
    
 </div>
 <Menu>

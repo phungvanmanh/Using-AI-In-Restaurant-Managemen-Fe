@@ -83,6 +83,7 @@
                                             <div class="card-header"><span><b>Update Code Voucher</b></span></div>
                                             <div class="card-body">
                                                 <div class="mb-2"><label class="form-label">Name Code Voucher</label><input v-model="editMaGiamGia.ma_giam_gia" type="text" class="form-control" name="" placeholder="Enter a code name..."></div>
+
                                                 <div class="mb-2"><label class="form-label">Discounted Food</label><select v-model="editMaGiamGia.id_mon" class="form-select" aria-label=".form-select-sm example">
                                                         <option disabled="" value="">Please choose...</option>
                                                         <template v-for="(value,key) in dataMonAn" :key="key">

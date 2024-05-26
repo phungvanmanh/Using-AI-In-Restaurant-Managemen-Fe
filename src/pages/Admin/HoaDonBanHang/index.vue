@@ -68,8 +68,8 @@
                                 </router-link> -->
                         </td>
                         <td>
-                           <p v-if="value.is_done==0"> <b class="text-info">Chưa Thanh Toán</b></p>
-                           <p v-else><b class="text-success">Đã Thanh Toán</b></p>
+                           <p v-if="value.is_done==0"> <b class="text-info">Unpaid</b></p>
+                           <p v-else><b class="text-success">Paid</b></p>
 
                         </td>
                     </tr>
@@ -82,7 +82,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">
-                            Chi Tiết Hóa Đơn
+                            Invoice details
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>

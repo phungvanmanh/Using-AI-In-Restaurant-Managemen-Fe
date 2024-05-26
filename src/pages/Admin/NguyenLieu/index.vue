@@ -37,7 +37,7 @@
 
                         </div>
                         <div class="row">
-                           
+
                             <div class="col-12">
                                 <label class="form-label mt-3">Status</label><select v-model="addNguyenLieu.tinh_trang" class="form-control">
                                     <option value="1">Display</option>
@@ -85,9 +85,9 @@
                                     Slug Raw Materials
                                 </th>
                                 <th class="text-center align-middle text-nowrap">
-                                  Price
+                                  Pricer
                                 </th>
-                               
+
                                 <th class="text-center align-middle text-nowrap">
                                     Units
                                 </th>
@@ -114,7 +114,7 @@
                                     <td class="text-end align-middle text-nowrap">
                                         {{ formatToVN(value.gia) }}
                                     </td>
-                                   
+
                                     <td class="text-center align-middle text-nowrap">
                                         {{ value.don_vi_tinh }}
                                     </td>
@@ -173,7 +173,7 @@
                                                         updateNguyenLieu.gia
                                                     " type="number" class="form-control" placeholder="0" />
                                         </div>
-                                       
+
                                         <div class="col-6">
                                             <label class="form-label mt-3">Units</label><input v-model="
                                                         updateNguyenLieu.don_vi_tinh
@@ -181,7 +181,7 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                       
+
                                         <div class="col-12">
                                             <label class="form-label mt-3">Status</label><select v-model="
                                                         updateNguyenLieu.tinh_trang
@@ -376,9 +376,13 @@ export default {
         onMounted(() => {
             store.dispatch("onFetchNguyenLieu");
         });
-        function formatToVN (number) {
+
+        function formatToVN(number) {
             number = parseInt(number);
-            return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
+            return number.toLocaleString('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            });
         }
         return {
             addNguyenLieu,

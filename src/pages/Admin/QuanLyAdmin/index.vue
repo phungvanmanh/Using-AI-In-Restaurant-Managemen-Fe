@@ -239,7 +239,7 @@
                                                         @click="
                                                             user.id = value.id
                                                         "
-                                                        >Đổi mật khẩu</a
+                                                        >Change Password</a
                                                     >
                                                 </li>
                                                 <li>

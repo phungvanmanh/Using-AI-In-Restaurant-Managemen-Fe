@@ -3,7 +3,7 @@
         <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12">
             <CardComponent>
                 <template #card-header>
-                    <span>Thêm Mới Chuyên Mục</span>
+                    <span>Add a new category</span>
                 </template>
                 <template #card-body>
                     <input-component label="Tên Chuyên Mục" @keyup="convertToSlug(addChuyenMuc)" v-model="addChuyenMuc.ten_chuyen_muc" placeholder="Enter name catrgory..."></input-component>
