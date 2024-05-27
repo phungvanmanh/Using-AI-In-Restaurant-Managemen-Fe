@@ -343,8 +343,11 @@ export default {
                 });
         }
         function deleteNguyenLieu(value) {
+            const payload={
+                id:value.id
+            }
             axios
-                .post("admin/nhap-kho/xoa-nhap-kho/" + value.id, 'admin') // Sửa lại dòng này
+                .post("admin/nhap-kho/xoa-nhap-kho", payload, 'admin') // Sửa lại dòng này
                 .then((res) => {
                     if (res.data.status == true) {
                         Toast("success", res.data.message);

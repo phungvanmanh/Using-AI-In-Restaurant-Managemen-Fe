@@ -72,10 +72,10 @@
                             </h5>
                         </div>
                         <div >
-                            <div class="col" style="margin-bottom: 50px;">
+                            <div class="col">
                             <template v-for="(value, key) in dataBaiViet" :key="key">
-                                <p style="margin-bottom: 50px;">
-                                   * <b>{{ value.mo_ta_chi_tiet_bai_viet }}</b>
+                                <p>
+                                   * <b> <span>{{ value.mo_ta_chi_tiet_bai_viet }}</span></b>
                                 </p>
                             </template>
                         </div>
