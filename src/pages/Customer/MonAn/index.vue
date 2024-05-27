@@ -202,7 +202,7 @@ export default {
                 'id_hoa_don': id_hoa_don,
             };
             axios
-                .post("admin/su-dung-dich-vu/get-chi-tiet", payload, )
+                .post("admin/su-dung-dich-vu/get-chi-tiet", payload )
                 .then((res) => {
                     list_chi_tiet_ban_hang.value = res.data.data;
                     console.log(list_chi_tiet_ban_hang.value)
@@ -234,6 +234,19 @@ export default {
             return number.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' });
         }
         onMounted(() => {
+            var payload = {
+                token
+            }
+            axios.post('check-availability', payload)
+            .then(res => {
+                console.log(res.data.isActive);
+                if(res.data.isActive == false) {
+                    window.location.href = "/"
+                }
+            })
+            .catch(error => {
+                console.error('API error:', error);
+            });
             getMonAn();
             getChiTietHoaDon();
             getMonAnNoiBac();
@@ -258,19 +271,8 @@ export default {
     // },
     mounted() {
         console.log(this.$route.query.token);
-        var payload = {
-            token : this.$route.query.token
-        }
-        axios.post('check-availability', payload)
-            .then(res => {
-                console.log(res.data.isActive);
-                if(res.data.isActive == false) {
-                    window.location.href = "/"
-                }
-            })
-            .catch(error => {
-                console.error('API error:', error);
-            });
+        
+       
         // // Lấy thông tin ID và token từ URL
         // const id = this.$route.params.id;
         // const token = this.$route.query.token;
