@@ -121,7 +121,7 @@
                                     <b style="color: brown;">{{ formatToVN(value.price) }}</b>
                                 </span>
                                 <div class="card-button4321">
-                                    <button @click="getReview(value.id);setMonAnId(value.id)" class="fa-solid fa-arrows-to-eye" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+                                    <button @click="getReview(value.id);setMonAnId(value.id); ten_mon = value.food_name" class="fa-solid fa-arrows-to-eye" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +152,7 @@
                                             <b style="color: brown;">{{ formatToVN(value.price) }}</b> 
                                         </span>
                                         <div class="card-button4321">
-                                            <button @click="getReview(value.id);setMonAnId(value.id)" class="fa-solid fa-arrows-to-eye" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
+                                            <button @click="getReview(value.id);setMonAnId(value.id), ten_mon = value.food_name" class="fa-solid fa-arrows-to-eye" data-bs-toggle="modal" data-bs-target="#exampleModal"></button>
                                         </div>
                                     </div>
                                 </div>
@@ -169,7 +169,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h1 class="modal-title fs-5" id="exampleModalLabel">
-                                Review
+                                Review {{ ten_mon }}
                             </h1>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -267,6 +267,7 @@ export default {
         const reviews = ref([]);
         const isShow = ref(false);
         const binhLuan = ref('');
+        const ten_mon = ref ('');
         document.addEventListener("DOMContentLoaded", function () {
             const menuBtn = document.getElementById("menu-btn_1");
             const closeBtn = document.getElementById("close-btn_1");
@@ -473,7 +474,8 @@ export default {
             delete_danhgia,
             dataMonNoiBac,
             getMonAnNoiBac,
-            formatToVN
+            formatToVN,
+            ten_mon
 
         };
     },
