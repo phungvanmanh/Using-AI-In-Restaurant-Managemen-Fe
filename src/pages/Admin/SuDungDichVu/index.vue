@@ -241,11 +241,16 @@
                                                 <InputComponentVue v-model="khach_hang.email" label="Email" type="email" />
                                                 <InputComponentVue v-model="khach_hang.so_dien_thoai" label="Phone Number" />
                                             </div>
-                                            <div class="col-lg-4">
+                                            <div class="col-lg-6">
                                                 <textarea @change="updateHoaDon()" v-model="ghi_chu_hoa_don" class="form-control" cols="30" rows="4"></textarea>
                                             </div>
-                                            <div class="col-lg-4">
-                                                <img style="width: 100%;" alt="" />
+                                            <div class="col-lg-2">
+                                                <label for="">Payment methods</label>
+                                                <select name="" id="" class="form-control" v-model="is_menthos_payment">
+                                                    <option value="">Please choose the method</option>
+                                                    <option value="0">Cash</option>
+                                                    <option value="1">Transfer</option>
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="row mt-3">
@@ -279,7 +284,12 @@
                         <router-link :to="'/admin/bill-thanh-toan/' + id_hoa_don_ban_hang" target="_blank">
                             <button type="button" class="btn btn-danger">Print an invoice</button>
                         </router-link>
-                        <button type="button" class="btn btn-primary" @click=" thanhToan();">Payment</button>
+                        <template v-if="is_menthos_payment == 0 || is_menthos_payment == ''">
+                            <button type="button" class="btn btn-primary" @click="thanhToanOff();">Payment</button>
+                        </template>
+                        <template v-else>
+                            <button type="button" class="btn btn-primary" @click="thanhToan();">Payment</button>
+                        </template>
                     </template>
                     <template v-else>
                         <button type="button" class="btn btn-primary" @click="activityView = true; updateCheckingTransaction();">Back</button>
@@ -365,6 +375,7 @@ export default {
         const dataKhuVuc = computed(() => store.state.dataKhuVuc || []);
         const dataMonAn = computed(() => store.state.dataMonAn);
         const list_chi_tiet_ban_hang = ref([]);
+        const is_menthos_payment = ref('');
         const loadDataBan = () => {
             const list_khu = dataKhuVuc.value.map((item) => {
                 if (item.sub_items && Array.isArray(item.sub_items)) {
@@ -403,6 +414,7 @@ export default {
         const khach_hang = ref({});
         const id_ban_chuyen = ref("");
         const list_khu_user = ref([]);
+        const is_pass = ref(false);
         const link_qr = ref(
             "https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"
         );
@@ -416,8 +428,8 @@ export default {
                     .then(response => {
                         if(response.data.status==1){
                             activityView.value =false;
+                            is_pass.value = true;
                         }
-                        console.log(response.data); // Hoặc thực hiện các hành động khác
                     })
                     .catch((res) => {
                     $.each(res.response.data.errors, function (k, v) {
@@ -425,6 +437,31 @@ export default {
                     });
                 });
         };
+
+        const thanhToanOff = () => {
+            storeCustomer();
+            if(is_pass.value == true) {
+                var payload = {
+                    "id_hoa_don_ban_hang" : id_hoa_don_ban_hang.value
+                }
+                axios
+                    .post('admin/change-status-hoa-don', payload)
+                    .then((res) => {
+                        if (res.data.status == 1) {
+                            $("#mobanModal").modal("hide");
+                            loadDataBan();
+                            Toast('success', res.data.message);
+                        } else {
+                            Toast('error', res.data.message);
+                        }
+                    })
+                    .catch((res) => {
+                        $.each(res.response.data.errors, function(k, v) {
+                            Toast('error', v[0]);
+                        });
+                    });
+            }
+        }
 
         const thanhToan = async () => {
             updateQRCode();
@@ -811,6 +848,7 @@ export default {
             activityView,
             khach_hang,
             list_khu_user,
+            is_menthos_payment,
             loadDataBan,
             getBanTheoKhuVuc,
             openTable,
@@ -828,7 +866,8 @@ export default {
             gopBan,
             formatToVN,
             closeTableId,
-            confirmCloseTable
+            confirmCloseTable,
+            thanhToanOff
         };
     },
 };

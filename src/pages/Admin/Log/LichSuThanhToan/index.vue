@@ -3,7 +3,7 @@
         <div class="col-12">
             <CardComponentVue :required="false">
                 <template #card-header>
-                    <h5><b>Payment history</b></h5>
+                    <h5><b>Online payment history</b></h5>
                 </template>
                 <template #card-body>
                     <TableComponentVue>

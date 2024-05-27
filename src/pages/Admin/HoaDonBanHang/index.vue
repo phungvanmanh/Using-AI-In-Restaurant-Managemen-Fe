@@ -1,7 +1,7 @@
 <template>
 <div class="card">
     <div class="card-body">
-        <h3>Hóa Đơn Bán Hàng</h3>
+        <h3>Bill of sale</h3>
         <hr />
         <div class="table-responsive">
         <table class="table table-bordered">
