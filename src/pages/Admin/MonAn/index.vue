@@ -255,13 +255,15 @@ export default {
                 });
         }
 
-        function deleteMonAn(value) {
+        function deleteMonAn() {
+            console.log(deletemonan.value);
             axios
-                .post("admin/mon-an/delete", value,'admin')
+                .post("admin/mon-an/delete", deletemonan.value,'admin')
                 .then((res) => {
                     if (res.data.status == 1) {
                         Toast("success", res.data.message);
                         store.dispatch("onFetchMonAn"); //call api store == onFetchChuyenMuc
+                        $("#xoa_mon_an").modal('hide');
                     }else {
                         Toast("error", res.data.message);
                     }

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 /*!
  * perfect-scrollbar v1.4.0
  * (c) 2018 Hyunje Jun

@@ -4,11 +4,14 @@ const http = require("http");
 const { Server } = require("socket.io");
 
 const app = express();
-app.use(cors);
+
+// Đảm bảo gọi cors() để nó có thể thực thi
+app.use(cors()); // Cấu hình CORS cho tất cả các route
+
 const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
-        origin: "*", // Cho phép tất cả các nguồn gốc, thay thế "*" bằng địa chỉ cụ thể của client để tăng cường bảo mật
+        origin: "*", // Cho phép tất cả các nguồn gốc, có thể thay "*" bằng một địa chỉ cụ thể để bảo mật hơn
         methods: ["GET", "POST"]
     }
 });

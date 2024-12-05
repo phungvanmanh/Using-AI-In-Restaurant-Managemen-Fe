@@ -101,7 +101,7 @@
                                 icon="ic:baseline-email"
                                 style="vertical-align: text-bottom"
                             ></iconify-icon>
-                            tronglinhluong@gmail.com
+                            phungvanmanh1303@gmail.com
                         </li>
                     </ul>
                 </div>
@@ -110,11 +110,11 @@
                     <ul class="list-unstyled">
                         <li>
                             <span class="fw-semibold">Account No: </span>
-                            0397757013
+                            0369368075
                         </li>
                         <li>
                             <span class="fw-semibold">Account Name: </span>
-                            Lương Trọng Linh
+                            Phùng Văn Mạnh
                         </li>
                         <li>
                             <span class="fw-semibold">Bank Name: </span> MB Bank
